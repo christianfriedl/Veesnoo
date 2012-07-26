@@ -43,6 +43,19 @@ void testAddString() {
     printf("ok -- ");
 }
 
+void testAddStringAt() {
+    printf("%s... ", __func__);
+    nvCursesWindow *win = nvCursesWindow__new(10, 10, 20, 20);
+    nvCursesWindow_addStringAt(win, 1, 1, "test");
+    nvCursesManager_refresh(nvCursesManager__getInstance());
+    getch();
+    nvCursesWindow_addStringAt(win, 1, 2, "and survive");
+    nvCursesManager_refresh(nvCursesManager__getInstance());
+    getch();
+
+    printf("ok -- ");
+}
+
 void testAttrOnOff() {
     printf("%s... ", __func__);
 
@@ -70,6 +83,7 @@ int main() {
     testNewDelete();
     testAddBorder();
     testAddString();
+    testAddStringAt();
     testAttrOnOff();
 
     nvCursesManager_uninitCurses(nvCursesManager__getInstance());

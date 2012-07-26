@@ -37,6 +37,18 @@ void nvCursesWindow_addCh(nvCursesWindow * this, int ch) {
     wnoutrefresh(this->window);
 }
 
+void nvCursesWindow_addStringAt(nvCursesWindow * this, int x, int y, cgString * text) {
+    /* TODO check constraints */
+    mvwaddstr(this->window, y, x, text);
+    wnoutrefresh(this->window);
+}
+
+void nvCursesWindow_addChAt(nvCursesWindow * this, int x, int y, int ch) {
+    /* TODO check constraints */
+    mvwaddch(this->window, y, x, ch);
+    wnoutrefresh(this->window);
+}
+
 void nvCursesWindow_attrOn(nvCursesWindow * this, int attr) {
     wattron(this->window, attr);
 }

@@ -10,3 +10,6 @@ target_link_libraries(0200_nvCursesWindow ${LIBS})
 
 add_executable(0300_nvColorManager 0300_nvColorManager.c)
 target_link_libraries(0300_nvColorManager ${LIBS})
+
+add_executable(0350_nvLabel 0350_nvLabel.c)
+target_link_libraries(0350_nvLabel ${LIBS})
