@@ -1,0 +1,15 @@
+Makefile.local
+*.o
+*.a
+*.e
+*.e.c
+.*.sw?
+*.i
+*.s
+src/test/0100_nvCursesManager
+src/test/0200_nvCursesWindow
+doc/
+tags
+/build*/
+CMakeCache.txt
+CMakeFiles/
