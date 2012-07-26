@@ -12,8 +12,8 @@ static nvCursesManager *nvCursesManager__new_() {
         this->maxY = 0;
     }
     else
-        CGAppState_THROW(CGAppState__getInstance(), Severity_fatal,
-                         CGExceptionID_CannotAllocate,
+        cgAppState_THROW(cgAppState__getInstance(), Severity_fatal,
+                         cgExceptionID_CannotAllocate,
                          "cannot allocate nvCursesManager");
     return this;
 }
@@ -63,7 +63,7 @@ void nvCursesManager_addBorder(nvCursesManager * this, WINDOW * win) {
 }
 
 void nvCursesManager_addString(nvCursesManager * this, WINDOW * win,
-                               CGString * text) {
+                               cgString * text) {
     waddstr(win, text);
     wnoutrefresh(win);
 }

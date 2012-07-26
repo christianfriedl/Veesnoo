@@ -3,8 +3,8 @@
 #include<stdlib.h>
 #include<time.h>
 #include<assert.h>
-#include<cgenerics/CGAppState.h>
-#include<cgenerics/CGString.h>
+#include<cgenerics/cgAppState.h>
+#include<cgenerics/cgString.h>
 #include"nvCursesManager.h"
 #include"nvColorManager.h"
 #include"nvCursesWindow.h"
@@ -45,13 +45,13 @@ void testNumOfColors() {
         last_color = color;
         color = nvColorManager_createColor(nvColorManager__getInstance(), COLOR_YELLOW, COLOR_BLACK);
     } while (color > 1);
-    addstr(CGString__newWithSprintf("max color: %i", last_color));
+    addstr(cgString__newWithSprintf("max color: %i", last_color));
     printf("ok -- ");
 }
 
 int main() {
     printf("=== %s ===\n", __FILE__);
-    CGAppState__init(__FILE__);
+    cgAppState__init(__FILE__);
     nvCursesManager_initCurses(nvCursesManager__getInstance());
 
     testCreateColors();

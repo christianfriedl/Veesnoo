@@ -3,7 +3,7 @@
 
 #include<ncurses.h>
 #include<stdlib.h>
-#include<cgenerics/CGAppState.h>
+#include<cgenerics/cgAppState.h>
 
 typedef struct {
     int nextPair;

@@ -9,8 +9,8 @@ static nvColorManager *nvColorManager__new_() {
         this->nextPair = 1;
     }
     else
-        CGAppState_THROW(CGAppState__getInstance(), Severity_fatal,
-                         CGExceptionID_CannotAllocate,
+        cgAppState_THROW(cgAppState__getInstance(), Severity_fatal,
+                         cgExceptionID_CannotAllocate,
                          "cannot allocate nvColorManager");
     return this;
 }
@@ -28,7 +28,7 @@ void nvColorManager_delete(nvColorManager * this) {
 
 int nvColorManager_createColor(nvColorManager* this, short fg, short bg) {
     if (this->nextPair > COLOR_PAIRS) {
-        CGAppState_THROW(CGAppState__getInstance(), Severity_error, CGExceptionID_GeneralNonfatalException, "cannot create a new color pair, starting over with first pair");
+        cgAppState_THROW(cgAppState__getInstance(), Severity_error, cgExceptionID_GeneralNonfatalException, "cannot create a new color pair, starting over with first pair");
         this->nextPair = 1;
     }
     init_pair(this->nextPair, fg, bg);

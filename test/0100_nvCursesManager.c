@@ -3,7 +3,7 @@
 #include<stdlib.h>
 #include<time.h>
 #include<assert.h>
-#include<cgenerics/CGAppState.h>
+#include<cgenerics/cgAppState.h>
 #include"nvCursesManager.h"
 
 void testInit() {
@@ -42,7 +42,7 @@ void testClearScreen() {
 
 int main() {
     printf("=== %s ===\n", __FILE__);
-    CGAppState__init(__FILE__);
+    cgAppState__init(__FILE__);
 
     testInit();
     testCreateDestroyWindow();

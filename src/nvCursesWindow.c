@@ -1,6 +1,6 @@
 #include<ncurses.h>
 #include<stdlib.h>
-#include<cgenerics/CGAppState.h>
+#include<cgenerics/cgAppState.h>
 #include"nvCursesWindow.h"
 
 nvCursesWindow *nvCursesWindow__new(int x, int y, int width, int height) {
@@ -12,8 +12,8 @@ nvCursesWindow *nvCursesWindow__new(int x, int y, int width, int height) {
                                          x, y, width, height);
     }
     else
-        CGAppState_THROW(CGAppState__getInstance(), Severity_fatal,
-                         CGExceptionID_CannotAllocate,
+        cgAppState_THROW(cgAppState__getInstance(), Severity_fatal,
+                         cgExceptionID_CannotAllocate,
                          "unable to allocate nvCursesWindow");
     return this;
 }
@@ -27,7 +27,7 @@ void nvCursesWindow_addBorder(nvCursesWindow * this) {
     nvCursesManager_refresh(nvCursesManager__getInstance());
 }
 
-void nvCursesWindow_addString(nvCursesWindow * this, CGString * text) {
+void nvCursesWindow_addString(nvCursesWindow * this, cgString * text) {
     waddstr(this->window, text);
     wnoutrefresh(this->window);
 }

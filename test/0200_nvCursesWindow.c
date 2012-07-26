@@ -3,7 +3,7 @@
 #include<stdlib.h>
 #include<time.h>
 #include<assert.h>
-#include<cgenerics/CGAppState.h>
+#include<cgenerics/cgAppState.h>
 #include"nvCursesManager.h"
 #include"nvCursesWindow.h"
 
@@ -64,7 +64,7 @@ void testAttrOnOff() {
 
 int main() {
     printf("=== %s ===\n", __FILE__);
-    CGAppState__init(__FILE__);
+    cgAppState__init(__FILE__);
     nvCursesManager_initCurses(nvCursesManager__getInstance());
 
     testNewDelete();
