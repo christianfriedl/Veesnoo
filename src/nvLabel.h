@@ -5,15 +5,16 @@
 #include<ncurses.h>
 #include<cgenerics/cgString.h>
 #include"nvCursesWindow.h"
+#include"nvWidget.h"
 
 typedef struct {
     nvCursesWindow* cw;
     cgString* text;
 } nvLabel;
 
-nvLabel* nvLabel__new(int x, int y, cgString* text);
-void nvLabel_delete(nvLabel* this);
-void nvLabel_refresh(nvLabel* this);
+nvWidget *nvLabel__new(int x, int y, cgString * text);
+void nvLabel_delete(nvWidget* this);
+void nvLabel_refresh(nvWidget* this);
 
 
 #endif

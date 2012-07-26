@@ -10,9 +10,9 @@
 
 void testNewDeleteRefresh() {
     printf("%s... ", __func__);
-    nvLabel* l = nvLabel__new(10, 10, cgString__new("test"));
+    nvWidget* l = nvLabel__new(10, 10, cgString__new("test"));
     getch();
-    nvLabel_refresh(l);
+    nvWidget_refresh(l);
     nvCursesManager_refresh(nvCursesManager__getInstance());
     getch();
     nvLabel_delete(l);

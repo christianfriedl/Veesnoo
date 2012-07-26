@@ -1,10 +1,9 @@
 #include"nvLabel.h"
 
-nvLabel *nvLabel__new(int x, int y, cgString * text) {
+static nvLabel *nvLabel__new_(int x, int y, cgString * text) {
     nvLabel *this = malloc(sizeof(*this));
 
     if (this != NULL) {
-        this->cw = nvCursesWindow__new(x, y, cgString_getSize(text), 1);
         this->text = text;
     }
     else
@@ -14,11 +13,19 @@ nvLabel *nvLabel__new(int x, int y, cgString * text) {
     return this;
 }
 
-void nvLabel_delete(nvLabel * this) {
-    nvCursesWindow_delete(this->cw);
-    cgString_delete(this->text);
+nvWidget *nvLabel__new(int x, int y, cgString * text) {
+    nvWidget *this =
+        nvWidget__new(nvWidgetType_label, x, y, cgString_getSize(text), 1,
+                      nvLabel__new_(x, y, text));
+    nvWidget_setRefresh(this, (void(*)(void*))nvLabel_refresh);
+    return this;
 }
 
-void nvLabel_refresh(nvLabel * this) {
-    nvCursesWindow_addString(this->cw, this->text);
+void nvLabel_delete(nvWidget * this) {
+    nvWidget_delete(this);
+    cgString_delete(((nvLabel*)(this->data))->text);
+}
+
+void nvLabel_refresh(nvWidget * this) {
+    nvCursesWindow_addString(this->cw, ((nvLabel*)(this->data))->text);
 }
