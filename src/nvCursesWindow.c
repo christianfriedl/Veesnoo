@@ -32,6 +32,11 @@ void nvCursesWindow_addString(nvCursesWindow * this, CGString * text) {
     wnoutrefresh(this->window);
 }
 
+void nvCursesWindow_addCh(nvCursesWindow * this, int ch) {
+    waddch(this->window, ch);
+    wnoutrefresh(this->window);
+}
+
 void nvCursesWindow_attrOn(nvCursesWindow * this, int attr) {
     wattron(this->window, attr);
 }

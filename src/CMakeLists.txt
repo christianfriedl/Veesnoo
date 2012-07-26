@@ -1,4 +1,4 @@
-set(LIB_SOURCES nvCursesManager.c nvCursesWindow.c)
+set(LIB_SOURCES nvCursesManager.c nvCursesWindow.c nvColorManager.c)
 
 add_library(nvwm STATIC ${LIB_SOURCES})
 link_directories(${CGENERICS_BIN_DIRECTORIES}/nvwm)
