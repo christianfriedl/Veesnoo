@@ -27,7 +27,15 @@ void nvCursesWindow_addBorder(nvCursesWindow * this) {
     nvCursesManager_refresh(nvCursesManager__getInstance());
 }
 
-void nvCursesWindow_addString(nvCursesWindow * this, CGString* text) {
-    nvCursesManager_addString(nvCursesManager__getInstance(), this->window, text);
-    nvCursesManager_refresh(nvCursesManager__getInstance());
+void nvCursesWindow_addString(nvCursesWindow * this, CGString * text) {
+    waddstr(this->window, text);
+    wnoutrefresh(this->window);
+}
+
+void nvCursesWindow_attrOn(nvCursesWindow * this, int attr) {
+    wattron(this->window, attr);
+}
+
+void nvCursesWindow_attrOff(nvCursesWindow * this, int attr) {
+    wattroff(this->window, attr);
 }

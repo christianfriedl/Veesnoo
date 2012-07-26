@@ -75,3 +75,8 @@ void nvCursesManager_addString(nvCursesManager* this, WINDOW* win, CGString* tex
 void nvCursesManager_refresh(nvCursesManager* this) {
     doupdate();
 }
+
+void nvCursesManager_clearScreen(nvCursesManager* this) {
+    erase();
+    refresh();
+}

@@ -26,12 +26,27 @@ void testCreateDestroyWindow() {
     printf("ok -- ");
 }
 
+void testClearScreen() {
+    printf("%s... ", __func__);
+    nvCursesManager_initCurses(nvCursesManager__getInstance());
+    addstr("visible now... push button to vanish");
+    nvCursesManager_refresh(nvCursesManager__getInstance());
+    getch();
+    nvCursesManager_clearScreen(nvCursesManager__getInstance());
+    nvCursesManager_refresh(nvCursesManager__getInstance());
+    getch();
+    nvCursesManager_uninitCurses(nvCursesManager__getInstance());
+    nvCursesManager_delete(nvCursesManager__getInstance());
+    printf("ok -- ");
+}
+
 int main() {
     printf("=== %s ===\n", __FILE__);
     CGAppState__init(__FILE__);
 
     testInit();
     testCreateDestroyWindow();
+    testClearScreen();
 
     printf("=== %s ok ===\n", __FILE__);
     return 0;

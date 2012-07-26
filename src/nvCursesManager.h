@@ -26,5 +26,6 @@ void nvCursesManager_destroyWindow(nvCursesManager* this, WINDOW* window);
 void nvCursesManager_addBorder(nvCursesManager* this, WINDOW* win);
 void nvCursesManager_refresh(nvCursesManager* this);
 void nvCursesManager_addString(nvCursesManager* this, WINDOW* win, CGString* text);
+void nvCursesManager_clearScreen(nvCursesManager* this);
 
 #endif
