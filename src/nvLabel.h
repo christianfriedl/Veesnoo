@@ -8,7 +8,6 @@
 #include"nvWidget.h"
 
 typedef struct {
-    nvCursesWindow* cw;
     cgString* text;
 } nvLabel;
 

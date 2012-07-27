@@ -10,15 +10,16 @@
 typedef enum { nvWidgetType_label = 1 } nvWidgetType;
 
 struct nvWidget_struct;
-
-typedef struct nvWidget_struct {
-    void (*refresh) (void *this);
-    void (*move) (void *this);
+typedef struct nvWidget_struct nvWidget;
+struct nvWidget_struct {
+    void (*refresh) (nvWidget *this);
+    void (*move) (nvWidget *this);
+    void (*receiveKey) (nvWidget *this, char ch);
     void *data;
     nvCursesWindow *cw;
     nvWidgetType type;
     int x, y, width, height;
-} nvWidget;
+} ;
 
 /* internal ("protected") methods */
 
@@ -34,7 +35,9 @@ void nvWidget_resize(nvWidget* this, int width, int height);
 
 /* method setters for subclasses */
 
-void nvWidget_setRefresh(nvWidget * this, void (*move) (void *));
+void nvWidget_setRefresh(nvWidget * this, void (*move) (nvWidget *));
 
-void nvWidget_setMove(nvWidget * this, void (*move) (void *));
+void nvWidget_setMove(nvWidget * this, void (*move) (nvWidget *));
+
+void nvWidget_setReceiveKey(nvWidget * this, void (*receiveKey) (nvWidget *, char));
 #endif

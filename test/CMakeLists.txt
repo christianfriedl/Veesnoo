@@ -13,3 +13,6 @@ target_link_libraries(0300_nvColorManager ${LIBS})
 
 add_executable(0350_nvLabel 0350_nvLabel.c)
 target_link_libraries(0350_nvLabel ${LIBS})
+
+add_executable(0360_nvTextbox 0360_nvTextbox.c)
+target_link_libraries(0360_nvTextbox ${LIBS})

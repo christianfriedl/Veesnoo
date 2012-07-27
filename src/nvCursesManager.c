@@ -8,13 +8,12 @@ static nvCursesManager *nvCursesManager__new_() {
     if (this != NULL) {
         this->bufferedMode = false;
         this->echo = false;
+        this->keypadAvailable = true;
         this->maxX = 0;
         this->maxY = 0;
-    }
-    else
+    } else
         cgAppState_THROW(cgAppState__getInstance(), Severity_fatal,
-                         cgExceptionID_CannotAllocate,
-                         "cannot allocate nvCursesManager");
+                         cgExceptionID_CannotAllocate, "cannot allocate nvCursesManager");
     return this;
 }
 
@@ -32,8 +31,6 @@ void nvCursesManager_delete(nvCursesManager * this) {
 void nvCursesManager_initCurses(nvCursesManager * this) {
     initscr();
     getmaxyx(stdscr, this->maxY, this->maxX);
-    keypad(stdscr, TRUE);
-    start_color();
     if (!this->bufferedMode) {
         raw();
         cbreak();
@@ -41,6 +38,14 @@ void nvCursesManager_initCurses(nvCursesManager * this) {
     if (!this->echo) {
         noecho();
     }
+    if (this->keypadAvailable) {
+        keypad(stdscr, TRUE);
+        set_escdelay(25); /* set ESC delay to a very low level so we can use the ESC key AND the function keys ('tis good enough for VIM, 'tis good enough for me) */
+    }
+    if (has_colors())
+        start_color();
+    else
+        cgAppState_THROW(cgAppState__getInstance(), Severity_warning, nvExceptionID_nonfatalException, "this terminal has no colors.");
     refresh();
 }
 
@@ -48,8 +53,7 @@ void nvCursesManager_uninitCurses(nvCursesManager * this) {
     endwin();
 }
 
-WINDOW *nvCursesManager_createWindow(nvCursesManager * this, int x, int y,
-                                     int width, int height) {
+WINDOW *nvCursesManager_createWindow(nvCursesManager * this, int x, int y, int width, int height) {
     return newwin(height, width, y, x);
 }
 
@@ -62,8 +66,7 @@ void nvCursesManager_addBorder(nvCursesManager * this, WINDOW * win) {
     wnoutrefresh(win);
 }
 
-void nvCursesManager_addString(nvCursesManager * this, WINDOW * win,
-                               cgString * text) {
+void nvCursesManager_addString(nvCursesManager * this, WINDOW * win, cgString * text) {
     waddstr(win, text);
     wnoutrefresh(win);
 }

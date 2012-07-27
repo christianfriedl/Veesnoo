@@ -12,6 +12,7 @@ nvWidget* nvWidget__new_(nvWidgetType type, int x, int y, int width, int height,
         this->type = type;
         this->refresh = NULL;
         this->move = NULL;
+        this->receiveKey = NULL;
     } else
         cgAppState_THROW(cgAppState__getInstance(), Severity_fatal, cgExceptionID_CannotAllocate, "cannot allocate nvWidget");
     return this;
@@ -26,12 +27,16 @@ void nvWidget_resize(nvWidget* this, int width, int height) {
     nvCursesWindow_resize(this->cw, width, height);
 }
 
-void nvWidget_setRefresh(nvWidget* this, void(*refresh)(void*)) {
+void nvWidget_setRefresh(nvWidget* this, void(*refresh)(nvWidget*)) {
     this->refresh = refresh;
 }
 
-void nvWidget_setMove(nvWidget* this, void(*move)(void*)) {
+void nvWidget_setMove(nvWidget* this, void(*move)(nvWidget*)) {
     this->move = move;
+}
+
+void nvWidget_setReceiveKey(nvWidget* this, void(*receiveKey)(nvWidget*, char)) {
+    this->receiveKey = receiveKey;
 }
 
 void nvWidget_refresh(nvWidget* this) {
