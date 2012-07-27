@@ -19,5 +19,7 @@ void nvCursesWindow_attrOn(nvCursesWindow * this, int attr);
 void nvCursesWindow_attrOff(nvCursesWindow * this, int attr);
 void nvCursesWindow_resize(nvCursesWindow* this, int width, int height);
 void nvCursesWindow_moveCursorTo(nvCursesWindow* this, int x, int y);
+int nvCursesWindow_getMaxX(nvCursesWindow* this);
+int nvCursesWindow_getMaxY(nvCursesWindow* this);
 
 #endif

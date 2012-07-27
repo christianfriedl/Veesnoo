@@ -9,6 +9,7 @@
 #include<cgenerics/cgenerics.h>
 #include"nvwm.h"
 
+
 /*
  * TODO halfdelay
  */

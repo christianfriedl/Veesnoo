@@ -6,5 +6,9 @@
 
 #define THIS(type) ((type*)(this->data))
 
-typedef enum { nvInputMode_command, nvInputMode_insert, nvInputMode_replace } nvInputMode;
+#define NV_ESC (27)
+#define NV_ENTER (10)
+#define NV_COMMANDMODE_I ('i')
+
+typedef enum { nvInputMode_none = 0, nvInputMode_command, nvInputMode_insert, nvInputMode_replace } nvInputMode;
 #endif

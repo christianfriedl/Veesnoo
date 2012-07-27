@@ -40,12 +40,13 @@ void nvCursesManager_initCurses(nvCursesManager * this) {
     }
     if (this->keypadAvailable) {
         keypad(stdscr, TRUE);
-        set_escdelay(25); /* set ESC delay to a very low level so we can use the ESC key AND the function keys ('tis good enough for VIM, 'tis good enough for me) */
+        set_escdelay(25);       /* set ESC delay to a very low level so we can use the ESC key AND the function keys ('tis good enough for VIM, 'tis good enough for me) */
     }
     if (has_colors())
         start_color();
     else
-        cgAppState_THROW(cgAppState__getInstance(), Severity_warning, nvExceptionID_nonfatalException, "this terminal has no colors.");
+        cgAppState_THROW(cgAppState__getInstance(), Severity_warning, nvExceptionID_nonfatalException,
+                         "this terminal has no colors.");
     refresh();
 }
 

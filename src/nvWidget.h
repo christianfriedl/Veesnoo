@@ -14,7 +14,7 @@ typedef struct nvWidget_struct nvWidget;
 struct nvWidget_struct {
     void (*refresh) (nvWidget *this);
     void (*move) (nvWidget *this);
-    void (*receiveKey) (nvWidget *this, char ch);
+    bool (*receiveKey) (nvWidget *this, int ch);
     void *data;
     nvCursesWindow *cw;
     nvWidgetType type;
@@ -39,5 +39,5 @@ void nvWidget_setRefresh(nvWidget * this, void (*move) (nvWidget *));
 
 void nvWidget_setMove(nvWidget * this, void (*move) (nvWidget *));
 
-void nvWidget_setReceiveKey(nvWidget * this, void (*receiveKey) (nvWidget *, char));
+void nvWidget_setReceiveKey(nvWidget * this, bool (*receiveKey) (nvWidget *, int));
 #endif

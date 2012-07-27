@@ -1,6 +1,7 @@
 #include<ncurses.h>
 #include<stdlib.h>
 #include<cgenerics/cgAppState.h>
+#include<cgenerics/cgenerics.h>
 #include"nvwm.h"
 #include"nvCursesWindow.h"
 
@@ -29,19 +30,34 @@ void nvCursesWindow_addBorder(nvCursesWindow * this) {
 }
 
 void nvCursesWindow_addString(nvCursesWindow * this, cgString * text) {
-    waddstr(this->window, text);
-    wnoutrefresh(this->window);
+    int x, y;
+    getyx(this->window, y, x);
+    nvCursesWindow_addStringAt(this, x, y, text);
 }
 
 void nvCursesWindow_addCh(nvCursesWindow * this, int ch) {
-    waddch(this->window, ch);
-    wnoutrefresh(this->window);
+    int x, y;
+    getyx(this->window, y, x);
+    nvCursesWindow_addChAt(this, x, y, ch);
 }
 
 void nvCursesWindow_addStringAt(nvCursesWindow * this, int x, int y, cgString * text) {
-    /* TODO check constraints */
-    mvwaddstr(this->window, y, x, text);
+    int maxX, maxY;
+    getmaxyx(this->window, maxY, maxX);
+    mvwaddnstr(this->window, y, x, text, min(cgString_getSize(text), maxX - x));
     wnoutrefresh(this->window);
+}
+
+int nvCursesWindow_getMaxX(nvCursesWindow* this) {
+    int maxX, maxY;
+    getmaxyx(this->window, maxY, maxX);
+    return maxX;
+}
+
+int nvCursesWindow_getMaxY(nvCursesWindow* this) {
+    int maxX, maxY;
+    getmaxyx(this->window, maxY, maxX);
+    return maxY;
 }
 
 void nvCursesWindow_addChAt(nvCursesWindow * this, int x, int y, int ch) {
@@ -64,6 +80,12 @@ void nvCursesWindow_resize(nvCursesWindow* this, int width, int height) {
 }
 
 void nvCursesWindow_moveCursorTo(nvCursesWindow* this, int x, int y) {
+    mvaddstr(30, 30, cgString__newWithSprintf("cursor to %u %u", x, y));
+    refresh();
+    wmove(this->window, y, x);
+        /*
     if ((wmove(this->window, y, x)) == ERR)
-        cgAppState_THROW(cgAppState__getInstance(), Severity_error, nvExceptionID_nonfatalException, "unable to resize window");
+        cgAppState_THROW(cgAppState__getInstance(), Severity_error, nvExceptionID_nonfatalException, "unable to move cursor");
+        */
+    wnoutrefresh(this->window);
 }
