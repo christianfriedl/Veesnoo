@@ -3,6 +3,7 @@
 #define _NV_LABEL_H
 
 #include<stdlib.h>
+#include<ctype.h>
 #include<ncurses.h>
 #include<cgenerics/cgString.h>
 #include"nvwm.h"

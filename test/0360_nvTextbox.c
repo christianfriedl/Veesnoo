@@ -57,7 +57,7 @@ void testInputChar() {
 
 void testGeneralBehaviour() {
     printf("%s... ", __func__);
-    nvWidget *tb = nvTextbox__new(10, 10, cgString__new("old text"), 10);
+    nvWidget *tb = nvTextbox__new(10, 10, cgString__new(""), 10);
 
     int ch;
 

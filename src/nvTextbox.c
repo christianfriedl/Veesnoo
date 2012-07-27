@@ -59,19 +59,22 @@ void nvTextbox_refresh(nvWidget * this) {
     if (THIS(nvTextbox)->inputMode == nvInputMode_command)
         nvCursesWindow_attrOn(this->cw, A_REVERSE);
 
+    cgString *text = cgString__newFromLengthAndPreset(THIS(nvTextbox)->displaySize, ' ');
+
     if (THIS(nvTextbox)->cursorPos > THIS(nvTextbox)->displaySize)
-        nvCursesWindow_addStringAt(this->cw, 0, 0,
-                                   THIS(nvTextbox)->text + (THIS(nvTextbox)->cursorPos - THIS(nvTextbox)->displaySize));
+        text = cgString_replaceN_I(text, 0, THIS(nvTextbox)->displaySize, THIS(nvTextbox)->text + (THIS(nvTextbox)->cursorPos - THIS(nvTextbox)->displaySize));
     else
-        nvCursesWindow_addStringAt(this->cw, 0, 0, THIS(nvTextbox)->text);
+        text = cgString_replaceN_I(text, 0, THIS(nvTextbox)->displaySize, THIS(nvTextbox)->text);
+    nvCursesWindow_addStringAt(this->cw, 0, 0, text);
+
+    if (THIS(nvTextbox)->inputMode != nvInputMode_none)
+        nvCursesWindow_moveCursorTo(this->cw, min(THIS(nvTextbox)->displaySize - 1, THIS(nvTextbox)->cursorPos), 0);
+    else
+        wmove(stdscr, 0, 0);    /* TODO this is hackery */
 
     if (THIS(nvTextbox)->inputMode == nvInputMode_command)
         nvCursesWindow_attrOff(this->cw, A_REVERSE);
 
-    if (THIS(nvTextbox)->inputMode == nvInputMode_insert || THIS(nvTextbox)->inputMode == nvInputMode_replace)
-        nvCursesWindow_moveCursorTo(this->cw, min(THIS(nvTextbox)->displaySize - 1, THIS(nvTextbox)->cursorPos), 0);
-    else
-        wmove(stdscr, 0, 0);    /* TODO this is hackery */
 }
 
 bool nvTextbox_receiveKey(nvWidget * this, int ch) {
@@ -80,24 +83,47 @@ bool nvTextbox_receiveKey(nvWidget * this, int ch) {
     mvaddstr(39, 0, cgString__newWithSprintf("---> mode, ch: %i,%i        ", THIS(nvTextbox)->inputMode, ch));
     if (THIS(nvTextbox)->inputMode == nvInputMode_insert) {
         mvaddstr(40, 0, cgString__newWithSprintf("---> insert mode: %i,%i        ", THIS(nvTextbox)->inputMode, ch));
+        rv = true;
         if (ch == NV_ESC) {
             THIS(nvTextbox)->inputMode = nvInputMode_command;
             nvTextbox_revertChanges_(this);
         } else if (ch == NV_ENTER) {
             THIS(nvTextbox)->inputMode = nvInputMode_command;
             nvTextbox_commitChanges_(this);
-        } else
+        } else if (ch == KEY_RIGHT) {
+            THIS(nvTextbox)->cursorPos = min(THIS(nvTextbox)->cursorPos + 1, THIS(nvTextbox)->displaySize);
+        } else if (ch == KEY_LEFT) {
+            THIS(nvTextbox)->cursorPos = max((int)(THIS(nvTextbox)->cursorPos) - 1, 0);
+        } else if (isprint(ch))
             nvTextbox_insertChar_(this, ch);
-        rv = true;
+        else
+            rv = false;
     } else if (THIS(nvTextbox)->inputMode == nvInputMode_replace) {
         cgAppState_THROW(cgAppState__getInstance(), Severity_notice, cgExceptionID_GeneralNonfatalException,
                          "input mode replace not implemented yet");
         rv = false;
     } else if (THIS(nvTextbox)->inputMode == nvInputMode_command) {
         switch (ch) {
-        case NV_COMMANDMODE_I:
+        case 'i':
             THIS(nvTextbox)->inputMode = nvInputMode_insert;
             rv = true;
+            break;
+        case 'r':
+            THIS(nvTextbox)->inputMode = nvInputMode_replace;
+            rv = true;
+            break;
+        case KEY_RIGHT:
+        case 'l':
+            THIS(nvTextbox)->cursorPos = min(THIS(nvTextbox)->cursorPos + 1, THIS(nvTextbox)->displaySize);
+            break;
+        case KEY_LEFT:
+        case 'h':
+            THIS(nvTextbox)->cursorPos = max((int)(THIS(nvTextbox)->cursorPos) - 1, 0);
+            break;
+        case 'x':
+            /*
+             * TODO 
+             */
             break;
         default:
             rv = false;
