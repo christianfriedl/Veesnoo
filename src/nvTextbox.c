@@ -1,4 +1,6 @@
 #include"nvTextbox.h"
+static void nvTextbox_deleteCharAfter_(nvWidget* this);
+
 static nvTextbox *nvTextbox__new_(int x, int y, cgString * text, unsigned int displaySize);
 
 static void nvTextbox_insertChar_(nvWidget * this, char ch);
@@ -91,9 +93,11 @@ bool nvTextbox_receiveKey(nvWidget * this, int ch) {
             THIS(nvTextbox)->inputMode = nvInputMode_command;
             nvTextbox_commitChanges_(this);
         } else if (ch == KEY_RIGHT) {
-            THIS(nvTextbox)->cursorPos = min(THIS(nvTextbox)->cursorPos + 1, THIS(nvTextbox)->displaySize);
+            THIS(nvTextbox)->cursorPos = min(THIS(nvTextbox)->cursorPos + 1, cgString_getSize(THIS(nvTextbox)->text));
         } else if (ch == KEY_LEFT) {
             THIS(nvTextbox)->cursorPos = max((int)(THIS(nvTextbox)->cursorPos) - 1, 0);
+        } else if (ch == KEY_DC) {
+            nvTextbox_deleteCharAfter_(this);
         } else if (isprint(ch))
             nvTextbox_insertChar_(this, ch);
         else
@@ -108,22 +112,20 @@ bool nvTextbox_receiveKey(nvWidget * this, int ch) {
             THIS(nvTextbox)->inputMode = nvInputMode_insert;
             rv = true;
             break;
+        case 'x':
+            nvTextbox_deleteCharAfter_(this);
+            break;
         case 'r':
             THIS(nvTextbox)->inputMode = nvInputMode_replace;
             rv = true;
             break;
         case KEY_RIGHT:
         case 'l':
-            THIS(nvTextbox)->cursorPos = min(THIS(nvTextbox)->cursorPos + 1, THIS(nvTextbox)->displaySize);
+            THIS(nvTextbox)->cursorPos = min(THIS(nvTextbox)->cursorPos + 1, cgString_getSize(THIS(nvTextbox)->text));
             break;
         case KEY_LEFT:
         case 'h':
             THIS(nvTextbox)->cursorPos = max((int)(THIS(nvTextbox)->cursorPos) - 1, 0);
-            break;
-        case 'x':
-            /*
-             * TODO 
-             */
             break;
         default:
             rv = false;
@@ -135,6 +137,10 @@ bool nvTextbox_receiveKey(nvWidget * this, int ch) {
 
 cgString *nvTextbox_getText(nvWidget * this) {
     return THIS(nvTextbox)->text;
+}
+
+static void nvTextbox_deleteCharAfter_(nvWidget* this) {
+    THIS(nvTextbox)->text = cgString_removeN_I(THIS(nvTextbox)->text, THIS(nvTextbox)->cursorPos, 1);
 }
 
 static void nvTextbox_revertChanges_(nvWidget * this) {
