@@ -17,5 +17,7 @@ void nvCursesWindow_addStringAt(nvCursesWindow* this, int x, int y, cgString* te
 void nvCursesWindow_addChAt(nvCursesWindow * this, int x, int y, int ch);
 void nvCursesWindow_attrOn(nvCursesWindow * this, int attr);
 void nvCursesWindow_attrOff(nvCursesWindow * this, int attr);
+void nvCursesWindow_resize(nvCursesWindow* this, int width, int height);
+void nvCursesWindow_setCursorTo(nvCursesWindow* this, int x, int y);
 
 #endif

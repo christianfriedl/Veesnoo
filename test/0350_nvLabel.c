@@ -21,12 +21,28 @@ void testNewDeleteRefresh() {
     printf("ok -- ");
 }
 
+void testSetText() {
+    printf("%s... ", __func__);
+    nvWidget* l = nvLabel__new(10, 10, cgString__new("old text"));
+    nvWidget_refresh(l);
+    nvCursesManager_refresh(nvCursesManager__getInstance());
+    getch();
+    nvLabel_setText(l, cgString__new("new text"));
+    nvCursesManager_refresh(nvCursesManager__getInstance());
+    getch();
+    nvLabel_delete(l);
+    nvCursesManager_uninitCurses(nvCursesManager__getInstance());
+    nvCursesManager_delete(nvCursesManager__getInstance());
+    printf("ok -- ");
+}
+
 int main() {
     printf("=== %s ===\n", __FILE__);
     cgAppState__init(__FILE__);
     nvCursesManager_initCurses(nvCursesManager__getInstance());
 
     testNewDeleteRefresh();
+    testSetText();
 
     nvCursesManager_uninitCurses(nvCursesManager__getInstance());
     nvCursesManager_delete(nvCursesManager__getInstance());

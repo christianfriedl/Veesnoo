@@ -15,6 +15,7 @@ typedef struct {
 nvWidget *nvLabel__new(int x, int y, cgString * text);
 void nvLabel_delete(nvWidget* this);
 void nvLabel_refresh(nvWidget* this);
+void nvLabel_setText(nvWidget* this, cgString* text);
 
 
 #endif
