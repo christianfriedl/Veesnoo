@@ -22,7 +22,7 @@ void nvWidget_delete_(nvWidget* this) {
 }
 
 void nvWidget_resize(nvWidget* this, int width, int height) {
-    nvCursesWindow_setCursorTo(this->cw, 0, 0);
+    nvCursesWindow_moveCursorTo(this->cw, 0, 0);
     nvCursesWindow_resize(this->cw, width, height);
 }
 

@@ -75,6 +75,25 @@ void testAttrOnOff() {
     printf("ok -- ");
 }
 
+void testMoveCursor() {
+    printf("%s... ", __func__);
+
+    nvCursesWindow *win = nvCursesWindow__new(10, 10, 20, 20);
+    nvCursesWindow_addString(win, "test");
+    nvCursesWindow_moveCursorTo(win, 0,1);
+    nvCursesWindow_addString(win, "below test");
+
+    nvCursesManager_refresh(nvCursesManager__getInstance());
+    getch();
+
+    nvCursesWindow_addString(win, " and survive");
+
+    nvCursesManager_refresh(nvCursesManager__getInstance());
+    getch();
+
+    printf("ok -- ");
+}
+
 int main() {
     printf("=== %s ===\n", __FILE__);
     cgAppState__init(__FILE__);
@@ -85,6 +104,7 @@ int main() {
     testAddString();
     testAddStringAt();
     testAttrOnOff();
+    testMoveCursor();
 
     nvCursesManager_uninitCurses(nvCursesManager__getInstance());
     nvCursesManager_delete(nvCursesManager__getInstance());

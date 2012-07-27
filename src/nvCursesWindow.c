@@ -63,7 +63,7 @@ void nvCursesWindow_resize(nvCursesWindow* this, int width, int height) {
         cgAppState_THROW(cgAppState__getInstance(), Severity_error, bbExceptionID_ncursesException, "unable to resize window");
 }
 
-void nvCursesWindow_setCursorTo(nvCursesWindow* this, int x, int y) {
+void nvCursesWindow_moveCursorTo(nvCursesWindow* this, int x, int y) {
     if ((wmove(this->window, y, x)) == ERR)
         cgAppState_THROW(cgAppState__getInstance(), Severity_error, bbExceptionID_ncursesException, "unable to resize window");
 }
