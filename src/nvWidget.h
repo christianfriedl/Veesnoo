@@ -7,7 +7,7 @@
 #include<cgenerics/cgAppState.h>
 #include"nvCursesWindow.h"
 
-typedef enum { nvWidgetType_label = 1 } nvWidgetType;
+typedef enum { nvWidgetType_label = 1, nvWidgetType_textbox, nvWidgetType_checkbox } nvWidgetType;
 
 struct nvWidget_struct;
 typedef struct nvWidget_struct nvWidget;

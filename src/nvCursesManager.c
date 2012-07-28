@@ -9,8 +9,8 @@ static nvCursesManager *nvCursesManager__new_() {
         this->bufferedMode = false;
         this->echo = false;
         this->keypadAvailable = true;
-        this->maxX = 0;
-        this->maxY = 0;
+        this->width = 0;
+        this->height = 0;
     } else
         cgAppState_THROW(cgAppState__getInstance(), Severity_fatal,
                          cgExceptionID_CannotAllocate, "cannot allocate nvCursesManager");
@@ -30,7 +30,7 @@ void nvCursesManager_delete(nvCursesManager * this) {
 
 void nvCursesManager_initCurses(nvCursesManager * this) {
     initscr();
-    getmaxyx(stdscr, this->maxY, this->maxX);
+    getmaxyx(stdscr, this->height, this->width);
     if (!this->bufferedMode) {
         raw();
         cbreak();
@@ -79,4 +79,12 @@ void nvCursesManager_refresh(nvCursesManager * this) {
 void nvCursesManager_clearScreen(nvCursesManager * this) {
     erase();
     refresh();
+}
+
+int nvCursesManager_getWidth(nvCursesManager* this) {
+    return this->width;
+}
+
+int nvCursesManager_getHeight(nvCursesManager* this) {
+    return this->height;
 }

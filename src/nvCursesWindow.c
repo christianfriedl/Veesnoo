@@ -42,22 +42,22 @@ void nvCursesWindow_addCh(nvCursesWindow * this, int ch) {
 }
 
 void nvCursesWindow_addStringAt(nvCursesWindow * this, int x, int y, cgString * text) {
-    int maxX, maxY;
-    getmaxyx(this->window, maxY, maxX);
-    mvwaddnstr(this->window, y, x, text, min(cgString_getSize(text), maxX - x));
+    int width, height;
+    getmaxyx(this->window, height, width);
+    mvwaddnstr(this->window, y, x, text, min(cgString_getSize(text), width - x));
     wnoutrefresh(this->window);
 }
 
-int nvCursesWindow_getMaxX(nvCursesWindow* this) {
-    int maxX, maxY;
-    getmaxyx(this->window, maxY, maxX);
-    return maxX;
+int nvCursesWindow_getWidth(nvCursesWindow* this) {
+    int width, height;
+    getmaxyx(this->window, height, width);
+    return width;
 }
 
-int nvCursesWindow_getMaxY(nvCursesWindow* this) {
-    int maxX, maxY;
-    getmaxyx(this->window, maxY, maxX);
-    return maxY;
+int nvCursesWindow_getHeight(nvCursesWindow* this) {
+    int width, height;
+    getmaxyx(this->window, height, width);
+    return height;
 }
 
 void nvCursesWindow_addChAt(nvCursesWindow * this, int x, int y, int ch) {

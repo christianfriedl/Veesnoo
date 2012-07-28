@@ -18,7 +18,7 @@ typedef struct {
     bool bufferedMode;
     bool echo;
     bool keypadAvailable;
-    int maxX, maxY;
+    int width, height;
 } nvCursesManager;
 
 nvCursesManager *nvCursesManager__getInstance();
@@ -40,4 +40,8 @@ void nvCursesManager_refresh(nvCursesManager * this);
 void nvCursesManager_addString(nvCursesManager * this, WINDOW * win, cgString * text);
 
 void nvCursesManager_clearScreen(nvCursesManager * this);
+
+int nvCursesManager_getWidth(nvCursesManager* this);
+
+int nvCursesManager_getHeight(nvCursesManager* this);
 #endif

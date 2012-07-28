@@ -86,7 +86,7 @@ bool nvTextbox_receiveKey(nvWidget * this, int ch) {
     if (THIS(nvTextbox)->inputMode == nvInputMode_insert) {
         mvaddstr(40, 0, cgString__newWithSprintf("---> insert mode: %i,%i        ", THIS(nvTextbox)->inputMode, ch));
         rv = true;
-        if (ch == NV_ESC) {
+        if (ch == NV_ESC) { /* TODO switch'ize the ifs */
             THIS(nvTextbox)->inputMode = nvInputMode_command;
             nvTextbox_revertChanges_(this);
         } else if (ch == NV_ENTER) {
