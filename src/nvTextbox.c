@@ -1,5 +1,6 @@
 #include"nvTextbox.h"
-static void nvTextbox_deleteCharAfter_(nvWidget* this);
+
+static void nvTextbox_deleteChar_(nvWidget* this);
 
 static nvTextbox *nvTextbox__new_(int x, int y, cgString * text, unsigned int displaySize);
 
@@ -76,7 +77,6 @@ void nvTextbox_refresh(nvWidget * this) {
 
     if (THIS(nvTextbox)->inputMode == nvInputMode_command)
         nvCursesWindow_attrOff(this->cw, A_REVERSE);
-
 }
 
 bool nvTextbox_receiveKey(nvWidget * this, int ch) {
@@ -97,7 +97,12 @@ bool nvTextbox_receiveKey(nvWidget * this, int ch) {
         } else if (ch == KEY_LEFT) {
             THIS(nvTextbox)->cursorPos = max((int)(THIS(nvTextbox)->cursorPos) - 1, 0);
         } else if (ch == KEY_DC) {
-            nvTextbox_deleteCharAfter_(this);
+            nvTextbox_deleteChar_(this);
+        } else if (ch == NV_BACKSPACE) {
+            if (THIS(nvTextbox)->cursorPos > 0) {
+                THIS(nvTextbox)->cursorPos--;
+                nvTextbox_deleteChar_(this);
+            }
         } else if (isprint(ch))
             nvTextbox_insertChar_(this, ch);
         else
@@ -113,7 +118,7 @@ bool nvTextbox_receiveKey(nvWidget * this, int ch) {
             rv = true;
             break;
         case 'x':
-            nvTextbox_deleteCharAfter_(this);
+            nvTextbox_deleteChar_(this);
             break;
         case 'r':
             THIS(nvTextbox)->inputMode = nvInputMode_replace;
@@ -139,7 +144,7 @@ cgString *nvTextbox_getText(nvWidget * this) {
     return THIS(nvTextbox)->text;
 }
 
-static void nvTextbox_deleteCharAfter_(nvWidget* this) {
+static void nvTextbox_deleteChar_(nvWidget* this) {
     THIS(nvTextbox)->text = cgString_removeN_I(THIS(nvTextbox)->text, THIS(nvTextbox)->cursorPos, 1);
 }
 
