@@ -68,7 +68,7 @@ void testGeneralBehaviour() {
         nvWidget_refresh(tb);
         ch = getch();
         nvTextbox_receiveKey(tb, ch);
-    } while (ch != KEY_F(1));                /* can out-C-C anyway */
+    } while (ch != KEY_F(1));
 
     cgString *s = nvTextbox_getText(tb);
 
