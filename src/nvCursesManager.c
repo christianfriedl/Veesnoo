@@ -47,7 +47,6 @@ void nvCursesManager_initCurses(nvCursesManager * this) {
     else
         cgAppState_THROW(cgAppState__getInstance(), Severity_warning, nvExceptionID_nonfatalException,
                          "this terminal has no colors.");
-    refresh();
 }
 
 void nvCursesManager_uninitCurses(nvCursesManager * this) {
@@ -62,16 +61,6 @@ void nvCursesManager_destroyWindow(nvCursesManager * this, WINDOW * window) {
     delwin(window);
 }
 
-void nvCursesManager_addBorder(nvCursesManager * this, WINDOW * win) {
-    box(win, 0, 0);
-    wnoutrefresh(win);
-}
-
-void nvCursesManager_addString(nvCursesManager * this, WINDOW * win, cgString * text) {
-    waddstr(win, text);
-    wnoutrefresh(win);
-}
-
 void nvCursesManager_refresh(nvCursesManager * this) {
     doupdate();
 }
@@ -81,10 +70,10 @@ void nvCursesManager_clearScreen(nvCursesManager * this) {
     refresh();
 }
 
-int nvCursesManager_getWidth(nvCursesManager* this) {
+int nvCursesManager_getScreenWidth(nvCursesManager * this) {
     return this->width;
 }
 
-int nvCursesManager_getHeight(nvCursesManager* this) {
+int nvCursesManager_getScreenHeight(nvCursesManager * this) {
     return this->height;
 }

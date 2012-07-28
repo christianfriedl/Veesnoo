@@ -25,7 +25,8 @@ void nvCursesWindow_delete(nvCursesWindow * this) {
 }
 
 void nvCursesWindow_addBorder(nvCursesWindow * this) {
-    nvCursesManager_addBorder(nvCursesManager__getInstance(), this->window);
+    box(this->window, 0, 0);
+    wnoutrefresh(this->window);
     nvCursesManager_refresh(nvCursesManager__getInstance());
 }
 

@@ -8,7 +8,7 @@ void printStatus(cgString* msg, ...) {
     char * text;
     vasprintf(&text, msg, ap);
     va_end(ap);
-    maxx = nvCursesManager_getWidth(nvCursesManager__getInstance());
+    maxx = nvCursesManager_getScreenWidth(nvCursesManager__getInstance());
     wattron(stdscr, A_REVERSE);
     for (x=0; x < maxx; ++x)
         mvwaddch(stdscr, 0, x, ' ');
@@ -25,8 +25,8 @@ void printMessage(cgString* msg, ...) {
     char * text;
     vasprintf(&text, msg, ap);
     va_end(ap);
-    y = nvCursesManager_getHeight(nvCursesManager__getInstance()) - 1;
-    maxx = nvCursesManager_getWidth(nvCursesManager__getInstance());
+    y = nvCursesManager_getScreenHeight(nvCursesManager__getInstance()) - 1;
+    maxx = nvCursesManager_getScreenWidth(nvCursesManager__getInstance());
     wattron(stdscr, A_REVERSE);
     for (x=0; x < maxx; ++x)
         mvwaddch(stdscr, y, x, ' ');
