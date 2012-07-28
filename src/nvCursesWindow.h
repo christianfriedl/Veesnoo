@@ -21,5 +21,6 @@ void nvCursesWindow_resize(nvCursesWindow* this, int width, int height);
 void nvCursesWindow_moveCursorTo(nvCursesWindow* this, int x, int y);
 int nvCursesWindow_getWidth(nvCursesWindow* this);
 int nvCursesWindow_getHeight(nvCursesWindow* this);
+void nvCursesWindow_refresh(nvCursesWindow* this);
 
 #endif

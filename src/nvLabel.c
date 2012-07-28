@@ -35,4 +35,5 @@ void nvLabel_delete(nvWidget * this) {
 
 void nvLabel_refresh(nvWidget * this) {
     nvCursesWindow_addStringAt(this->cw, 0, 0, ((nvLabel*)(this->data))->text);
+    nvCursesWindow_refresh(this->cw);
 }

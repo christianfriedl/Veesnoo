@@ -77,14 +77,14 @@ void nvTextbox_refresh(nvWidget * this) {
 
     if (THIS(nvTextbox)->inputMode == nvInputMode_command)
         nvCursesWindow_attrOff(this->cw, A_REVERSE);
+
+    nvCursesWindow_refresh(this->cw);
 }
 
 bool nvTextbox_receiveKey(nvWidget * this, int ch) {
     bool rv;
 
-    mvaddstr(39, 0, cgString__newWithSprintf("---> mode, ch: %i,%i        ", THIS(nvTextbox)->inputMode, ch));
     if (THIS(nvTextbox)->inputMode == nvInputMode_insert) {
-        mvaddstr(40, 0, cgString__newWithSprintf("---> insert mode: %i,%i        ", THIS(nvTextbox)->inputMode, ch));
         rv = true;
         if (ch == NV_ESC) { /* TODO switch'ize the ifs */
             THIS(nvTextbox)->inputMode = nvInputMode_command;

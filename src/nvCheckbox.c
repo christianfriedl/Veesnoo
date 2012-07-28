@@ -51,6 +51,7 @@ void nvCheckbox_refresh(nvWidget * this) {
         nvCursesWindow_attrOff(this->cw, A_REVERSE);
     
     nvCursesWindow_moveCursorTo(this->cw, 1, 0);
+    nvCursesWindow_refresh(this->cw);
 }
 
 bool nvCheckbox_receiveKey(nvWidget * this, int ch) {

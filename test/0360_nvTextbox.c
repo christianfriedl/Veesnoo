@@ -7,6 +7,7 @@
 #include"nvCursesManager.h"
 #include"nvCursesWindow.h"
 #include"nvTextbox.h"
+#include"debug.h"
 
 void testNewDeleteRefresh() {
     printf("%s... ", __func__);
@@ -56,23 +57,23 @@ void testInputChar() {
 }
 
 void testGeneralBehaviour() {
-    printf("%s... ", __func__);
+    printStatus("%s... ", __func__);
     nvWidget *tb = nvTextbox__new(10, 10, cgString__new(""), 10);
 
     int ch;
 
+    printMessage("end with F1");
+
     do {
         nvWidget_refresh(tb);
-        nvCursesManager_refresh(nvCursesManager__getInstance());
         ch = getch();
         nvTextbox_receiveKey(tb, ch);
-        mvaddstr(20, 1, cgString__newFromLengthAndPreset(100, ' ')); /* leaks memory! */
-        mvaddstr(20, 1, cgString__newWithSprintf("current text: '%s'", nvTextbox_getText(tb))); /* leaks memory! */
-    } while (1);                /* can out-C-C anyway */
+    } while (ch != KEY_F(1));                /* can out-C-C anyway */
 
     cgString *s = nvTextbox_getText(tb);
 
-    mvwaddstr(stdscr, 20, 1, s);
+    printMessage("text is '%s'", s);
+    getch();
     nvTextbox_delete(tb);
     nvCursesManager_uninitCurses(nvCursesManager__getInstance());
     nvCursesManager_delete(nvCursesManager__getInstance());

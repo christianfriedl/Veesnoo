@@ -81,12 +81,20 @@ void nvCursesWindow_resize(nvCursesWindow* this, int width, int height) {
 }
 
 void nvCursesWindow_moveCursorTo(nvCursesWindow* this, int x, int y) {
-    mvaddstr(30, 30, cgString__newWithSprintf("cursor to %u %u", x, y));
-    refresh();
     wmove(this->window, y, x);
         /*
     if ((wmove(this->window, y, x)) == ERR)
         cgAppState_THROW(cgAppState__getInstance(), Severity_error, nvExceptionID_nonfatalException, "unable to move cursor");
         */
     wnoutrefresh(this->window);
+}
+
+void nvCursesWindow_refresh(nvCursesWindow* this) {
+    /* prepare code for later on, for more effectivity:
+     * if (nvWindowManager__hasInstance())
+     *     nvWindowManager_setRefreshNecessary();
+     * else
+     *     doupdate();
+     */
+    doupdate();
 }
