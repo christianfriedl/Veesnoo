@@ -63,3 +63,7 @@ bool nvFocusManager_receiveKey(nvFocusManager * this, int ch) {
 void nvFocusManager_addWidget(nvFocusManager * this, nvWidget * widget) {
     cgArray_add(nvWidget, this->widgets, widget);
 }
+
+nvWidget *nvFocusManager_getFocusedWidget(nvFocusManager * this) {
+    return this->focusedWidget;
+}

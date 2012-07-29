@@ -13,8 +13,8 @@
 DECLARE_ARRAY(nvWidget)
 
 typedef struct {
-    cgArray(nvWidget)* widgets;
-    nvWidget* focusedWidget;
+    cgArray(nvWidget) * widgets;
+    nvWidget *focusedWidget;
 } nvFocusManager;
 
 nvFocusManager *nvFocusManager__new();
@@ -23,5 +23,7 @@ void nvFocusManager_delete(nvFocusManager * this);
 
 bool nvFocusManager_receiveKey(nvFocusManager * this, int ch);
 
-void nvFocusManager_addWidget(nvFocusManager* this, nvWidget * widget);
+void nvFocusManager_addWidget(nvFocusManager * this, nvWidget * widget);
+
+nvWidget *nvFocusManager_getFocusedWidget(nvFocusManager * this);
 #endif

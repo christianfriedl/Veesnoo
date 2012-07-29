@@ -92,6 +92,9 @@ void testGeneralBehaviour() {
     do {
         nvWidget_refresh(tb);
         nvWidget_refresh(tb2);
+        nvWidget* focusedWidget = nvFocusManager_getFocusedWidget(fm);
+        if (focusedWidget != NULL)
+            nvWidget_refresh(focusedWidget);
         nvCursesManager_refresh(nvCursesManager__getInstance());
         ch = getch();
         nvFocusManager_receiveKey(fm, ch);
