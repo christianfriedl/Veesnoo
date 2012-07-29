@@ -19,3 +19,6 @@ target_link_libraries(0360_nvTextbox ${LIBS})
 
 add_executable(0370_nvCheckbox 0370_nvCheckbox.c debug.c)
 target_link_libraries(0370_nvCheckbox ${LIBS})
+
+add_executable(0400_nvFocusManager 0400_nvFocusManager.c debug.c)
+target_link_libraries(0400_nvFocusManager ${LIBS})

@@ -1,5 +1,8 @@
 #include"nvWidget.h"
 
+/*
+ * "abstract base class", new_ should only be called from derived class
+ */
 nvWidget *nvWidget__new_(nvWidgetType type, int x, int y, int width, int height, void *data) {
     nvWidget *this = malloc(sizeof(*this));
 
@@ -14,11 +17,21 @@ nvWidget *nvWidget__new_(nvWidgetType type, int x, int y, int width, int height,
         this->refresh = NULL;
         this->move = NULL;
         this->receiveKey = NULL;
+        this->funcSetInputMode = NULL;
     } else
         cgAppState_THROW(cgAppState__getInstance(), Severity_fatal, cgExceptionID_CannotAllocate, "cannot allocate nvWidget");
     return this;
 }
 
+nvWidget *nvWidget_clone(const nvWidget * this) {
+    cgAppState_THROW(cgAppState__getInstance(), Severity_fatal, cgExceptionID_GeneralFatalException,
+                     "widget cannot be cloned by design.");
+}
+
+void nvWidget_delete(nvWidget * this) {
+    cgAppState_THROW(cgAppState__getInstance(), Severity_fatal, cgExceptionID_GeneralFatalException,
+                     "widget cannot be deleted publically by design.");
+}
 void nvWidget_delete_(nvWidget * this) {
     free(this);
 }
@@ -40,6 +53,17 @@ void nvWidget_setReceiveKey(nvWidget * this, bool(*receiveKey) (nvWidget *, int)
     this->receiveKey = receiveKey;
 }
 
+bool nvWidget_receiveKey(nvWidget * this, int ch) {
+    return (this->receiveKey)(this, ch);
+}
+
 void nvWidget_refresh(nvWidget * this) {
     (this->refresh) (this);
+}
+
+void nvWidget_setInputMode(nvWidget* this, nvInputMode mode) {
+    if (this->funcSetInputMode != NULL)
+        (this->funcSetInputMode) (this, mode);
+    else
+        cgAppState_THROW(cgAppState__getInstance(), Severity_fatal, nvExceptionID_fatalException, "cannot set input mode because funcSetInputMode is not set");
 }

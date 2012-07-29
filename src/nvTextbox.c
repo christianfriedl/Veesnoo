@@ -30,6 +30,7 @@ nvWidget *nvTextbox__new(int x, int y, cgString * text, unsigned int displaySize
 
     nvWidget_setRefresh(this, (void (*)(nvWidget *))nvTextbox_refresh);
     nvWidget_setReceiveKey(this, (bool(*)(nvWidget *, int))nvTextbox_receiveKey);
+    this->funcSetInputMode = nvTextbox_setInputMode;
     return this;
 }
 
@@ -82,9 +83,7 @@ void nvTextbox_refresh(nvWidget * this) {
 bool nvTextbox_receiveKey(nvWidget * this, int ch) {
     bool rv;
 
-    mvaddstr(39, 0, cgString__newWithSprintf("---> mode, ch: %i,%i        ", THIS(nvTextbox)->inputMode, ch));
     if (THIS(nvTextbox)->inputMode == nvInputMode_insert) {
-        mvaddstr(40, 0, cgString__newWithSprintf("---> insert mode: %i,%i        ", THIS(nvTextbox)->inputMode, ch));
         rv = true;
         if (ch == NV_ESC) { /* TODO switch'ize the ifs */
             THIS(nvTextbox)->inputMode = nvInputMode_command;
