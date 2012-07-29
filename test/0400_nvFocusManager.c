@@ -113,7 +113,7 @@ int main() {
 
     testNewDeleteRefresh();
     testRelayToOneTextbox();
-    //testRelayToTwoTextboxes();
+    testRelayToTwoTextboxes();
     testGeneralBehaviour();
 
     nvCursesManager_uninitCurses(nvCursesManager__getInstance());

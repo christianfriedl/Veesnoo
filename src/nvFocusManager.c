@@ -45,16 +45,17 @@ bool nvFocusManager_receiveKey(nvFocusManager * this, int ch) {
             this->focusedWidget = cgArray_getValueAt(nvWidget, this->widgets, 0);
 
     if (this->focusedWidget != NULL) {
+        bool rv = nvWidget_receiveKey(this->focusedWidget, ch);
 
-        switch (ch) {
-        case NV_TAB:
-            nvWidget_setInputMode(this->focusedWidget, nvInputMode_none);
-            this->focusedWidget = nvFocusManager_findNextWidget_(this);
-            nvWidget_setInputMode(this->focusedWidget, nvInputMode_command);
-
-            break;
-        default:
-            return nvWidget_receiveKey(this->focusedWidget, ch);
+        if (rv == false) {
+            switch (ch) {
+            case NV_TAB:
+                nvWidget_setInputMode(this->focusedWidget, nvInputMode_none);
+                this->focusedWidget = nvFocusManager_findNextWidget_(this);
+                nvWidget_setInputMode(this->focusedWidget, nvInputMode_command);
+                return true;
+                break;
+            }
         }
     } else
         return false;
