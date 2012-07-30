@@ -1,5 +1,5 @@
 set(LIB_SOURCES nvCursesManager.c nvCursesWindow.c nvColorManager.c
-    nvWidget.c nvLabel.c nvTextbox.c nvCheckbox.c)
+    nvWidget.c nvFocusManager.c nvLabel.c nvTextbox.c nvCheckbox.c)
 
 add_library(nvwm STATIC ${LIB_SOURCES})
 link_directories(${CGENERICS_BIN_DIRECTORIES}/nvwm)

@@ -30,6 +30,7 @@ nvWidget *nvTextbox__new(int x, int y, cgString * text, unsigned int displaySize
 
     nvWidget_setRefresh(this, (void (*)(nvWidget *))nvTextbox_refresh);
     nvWidget_setReceiveKey(this, (bool(*)(nvWidget *, int))nvTextbox_receiveKey);
+    this->funcSetInputMode = nvTextbox_setInputMode;
     return this;
 }
 

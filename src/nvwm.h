@@ -1,3 +1,4 @@
+
 #ifndef _NVWM_H
 #define _NVWM_H
 
@@ -6,10 +7,10 @@
 
 #define THIS(type) ((type*)(this->data))
 
-#define NV_ESC (27)
-#define NV_ENTER (10)
-#define NV_BACKSPACE (127)
-#define NV_COMMANDMODE_I ('i')
+#define NV_TAB                                  (9)
+#define NV_ESC                                  (27)
+#define NV_ENTER                                (10)
+#define NV_BACKSPACE                            (127)
 
 typedef enum { nvInputMode_none = 0, nvInputMode_command, nvInputMode_insert, nvInputMode_replace } nvInputMode;
 #endif
