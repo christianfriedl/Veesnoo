@@ -14,10 +14,10 @@ nvWidget *nvWidget__new_(nvWidgetType type, int x, int y, int width, int height,
         this->cw = nvCursesWindow__new(x, y, width, height);
         this->data = data;
         this->type = type;
-        this->refresh = NULL;
-        this->move = NULL;
-        this->receiveKey = NULL;
-        this->funcSetInputMode = NULL;
+        this->refreshMethod = NULL;
+        this->moveMethod = NULL;
+        this->receiveKeyMethod = NULL;
+        this->setInputModeMethod = NULL;
     } else
         cgAppState_THROW(cgAppState__getInstance(), Severity_fatal, cgExceptionID_CannotAllocate, "cannot allocate nvWidget");
     return this;
@@ -41,29 +41,29 @@ void nvWidget_resize(nvWidget * this, int width, int height) {
     nvCursesWindow_resize(this->cw, width, height);
 }
 
-void nvWidget_setRefresh(nvWidget * this, void (*refresh) (nvWidget *)) {
-    this->refresh = refresh;
+void nvWidget_setRefreshMethod(nvWidget * this, void (*refreshMethod) (nvWidget *)) {
+    this->refreshMethod = refreshMethod;
 }
 
-void nvWidget_setMove(nvWidget * this, void (*move) (nvWidget *)) {
-    this->move = move;
+void nvWidget_setMoveMethod(nvWidget * this, void (*moveMethod) (nvWidget *)) {
+    this->moveMethod = moveMethod;
 }
 
-void nvWidget_setReceiveKey(nvWidget * this, bool(*receiveKey) (nvWidget *, int)) {
-    this->receiveKey = receiveKey;
+void nvWidget_setReceiveKeyMethod(nvWidget * this, bool(*receiveKeyMethod) (nvWidget *, int)) {
+    this->receiveKeyMethod = receiveKeyMethod;
 }
 
 bool nvWidget_receiveKey(nvWidget * this, int ch) {
-    return (this->receiveKey)(this, ch);
+    return (this->receiveKeyMethod)(this, ch);
 }
 
 void nvWidget_refresh(nvWidget * this) {
-    (this->refresh) (this);
+    (this->refreshMethod) (this);
 }
 
 void nvWidget_setInputMode(nvWidget* this, nvInputMode mode) {
-    if (this->funcSetInputMode != NULL)
-        (this->funcSetInputMode) (this, mode);
+    if (this->setInputModeMethod != NULL)
+        (this->setInputModeMethod) (this, mode);
     else
-        cgAppState_THROW(cgAppState__getInstance(), Severity_fatal, nvExceptionID_fatalException, "cannot set input mode because funcSetInputMode is not set");
+        cgAppState_THROW(cgAppState__getInstance(), Severity_fatal, nvExceptionID_fatalException, "cannot set input mode because setInputModeMethod is not set");
 }

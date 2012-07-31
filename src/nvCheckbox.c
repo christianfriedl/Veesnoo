@@ -17,9 +17,9 @@ nvWidget *nvCheckbox__new(int x, int y, bool value) {
     nvWidget *this = nvWidget__new_(nvWidgetType_checkbox, x, y, 3, 1,
                                     nvCheckbox__new_(value));
 
-    nvWidget_setRefresh(this, (void (*)(nvWidget *))nvCheckbox_refresh);
-    nvWidget_setReceiveKey(this, (bool(*)(nvWidget *, int))nvCheckbox_receiveKey);
-    this->funcSetInputMode = nvCheckbox_setInputMode;
+    nvWidget_setRefreshMethod(this, (void (*)(nvWidget *))nvCheckbox_refresh);
+    nvWidget_setReceiveKeyMethod(this, (bool(*)(nvWidget *, int))nvCheckbox_receiveKey);
+    this->setInputModeMethod = nvCheckbox_setInputMode;
     return this;
 }
 

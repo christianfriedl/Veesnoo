@@ -17,7 +17,7 @@ nvWidget *nvLabel__new(int x, int y, cgString * text) {
     nvWidget *this =
         nvWidget__new_(nvWidgetType_label, x, y, cgString_getSize(text), 1,
                       nvLabel__new_(x, y, text));
-    nvWidget_setRefresh(this, (void(*)(void*))nvLabel_refresh);
+    nvWidget_setRefreshMethod(this, (void(*)(void*))nvLabel_refresh);
     return this;
 }
 

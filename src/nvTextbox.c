@@ -28,9 +28,9 @@ nvWidget *nvTextbox__new(int x, int y, cgString * text, unsigned int displaySize
     nvWidget *this = nvWidget__new_(nvWidgetType_label, x, y, displaySize, 1,
                                     nvTextbox__new_(x, y, text, displaySize));
 
-    nvWidget_setRefresh(this, (void (*)(nvWidget *))nvTextbox_refresh);
-    nvWidget_setReceiveKey(this, (bool(*)(nvWidget *, int))nvTextbox_receiveKey);
-    this->funcSetInputMode = nvTextbox_setInputMode;
+    nvWidget_setRefreshMethod(this, (void (*)(nvWidget *))nvTextbox_refresh);
+    nvWidget_setReceiveKeyMethod(this, (bool(*)(nvWidget *, int))nvTextbox_receiveKey);
+    this->setInputModeMethod = nvTextbox_setInputMode;
     return this;
 }
 

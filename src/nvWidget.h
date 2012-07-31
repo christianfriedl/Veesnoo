@@ -14,10 +14,10 @@ struct nvWidget_struct;
 typedef struct nvWidget_struct nvWidget;
 
 struct nvWidget_struct {
-    void (*refresh) (nvWidget * this);
-    void (*move) (nvWidget * this);
-     bool(*receiveKey) (nvWidget * this, int ch);
-    void (*funcSetInputMode) (nvWidget * this, nvInputMode mode);
+    void (*refreshMethod) (nvWidget * this);
+    void (*moveMethod) (nvWidget * this);
+     bool(*receiveKeyMethod) (nvWidget * this, int ch);
+    void (*setInputModeMethod) (nvWidget * this, nvInputMode mode);
     void *data;
     nvCursesWindow *cw;
     nvWidgetType type;
@@ -45,11 +45,11 @@ bool nvWidget_receiveKey(nvWidget * this, int ch);
 
 /* method setters for subclasses */
 
-void nvWidget_setRefresh(nvWidget * this, void (*move) (nvWidget *));
+void nvWidget_setRefreshMethod(nvWidget * this, void (*moveMethod) (nvWidget *));
 
-void nvWidget_setMove(nvWidget * this, void (*move) (nvWidget *));
+void nvWidget_setMoveMethod(nvWidget * this, void (*moveMethod) (nvWidget *));
 
-void nvWidget_setReceiveKey(nvWidget * this, bool(*receiveKey) (nvWidget *, int));
+void nvWidget_setReceiveKeyMethod(nvWidget * this, bool(*receiveKeyMethod) (nvWidget *, int));
 
 void nvWidget_setInputMode(nvWidget* this, nvInputMode mode);
 #endif
