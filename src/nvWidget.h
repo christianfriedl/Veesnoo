@@ -24,6 +24,10 @@ struct nvWidget_struct {
     int x, y, width, height;
 };
 
+DECLARE_ARRAY(nvWidget)
+DECLARE_ARRAY_ITERATOR(nvWidget)
+
+
 /* internal ("protected") methods */
 
 nvWidget *nvWidget__new_(nvWidgetType type, int x, int y, int width, int height, void *data);

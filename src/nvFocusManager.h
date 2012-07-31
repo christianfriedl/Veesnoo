@@ -10,8 +10,6 @@
 #include"nvCursesWindow.h"
 #include"nvWidget.h"
 
-DECLARE_ARRAY(nvWidget)
-
 typedef struct {
     cgArray(nvWidget) * widgets;
     nvWidget *focusedWidget;

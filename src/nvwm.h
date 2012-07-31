@@ -2,6 +2,10 @@
 #ifndef _NVWM_H
 #define _NVWM_H
 
+#include<cgenerics/cgArray.h>
+#include<cgenerics/cgArrayIterator.h>
+
+
 #define nvExceptionID_nonfatalException          (2000)
 #define nvExceptionID_fatalException             (2001)
 
