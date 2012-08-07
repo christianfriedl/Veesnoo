@@ -11,6 +11,7 @@ static nvCursesManager *nvCursesManager__new_() {
         this->keypadAvailable = true;
         this->width = 0;
         this->height = 0;
+        this->focusedWidget = NULL;
     } else
         cgAppState_THROW(cgAppState__getInstance(), Severity_fatal,
                          cgExceptionID_CannotAllocate, "cannot allocate nvCursesManager");
@@ -76,4 +77,12 @@ int nvCursesManager_getScreenWidth(nvCursesManager * this) {
 
 int nvCursesManager_getScreenHeight(nvCursesManager * this) {
     return this->height;
+}
+
+void nvCursesManager_setFocusedWidget(nvCursesManager * this, nvWidget * widget) {
+    this->focusedWidget = widget;
+}
+
+nvWidget *nvCursesManager_getFocusedWidget(nvCursesManager * this) {
+    return this->focusedWidget;
 }

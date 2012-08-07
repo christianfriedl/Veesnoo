@@ -2,11 +2,14 @@
 #ifndef _NV_CURSES_WINDOW_H
 #define _NV_CURSES_WINDOW_H
 
+struct nvCursesWindow_struct;
+typedef struct nvCursesWindow_struct nvCursesWindow;
+
 #include"nvCursesManager.h"
 
-typedef struct {
+struct nvCursesWindow_struct {
   WINDOW *window;
-} nvCursesWindow;
+};
 
 nvCursesWindow *nvCursesWindow__new(int x, int y, int width, int height);
 void nvCursesWindow_delete(nvCursesWindow * this);

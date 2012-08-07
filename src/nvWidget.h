@@ -5,13 +5,14 @@
 #include<ncurses.h>
 #include<stdlib.h>
 #include<cgenerics/cgAppState.h>
-#include"nvCursesWindow.h"
-
-typedef enum { nvWidgetType_label = 1, nvWidgetType_textbox, nvWidgetType_checkbox } nvWidgetType;
 
 struct nvWidget_struct;
-
 typedef struct nvWidget_struct nvWidget;
+
+#include"nvCursesWindow.h"
+
+typedef enum { nvWidgetType_label = 1, nvWidgetType_textbox, nvWidgetType_checkbox, nvWidgetType_window } nvWidgetType;
+
 
 struct nvWidget_struct {
     void (*refreshMethod) (nvWidget * this);

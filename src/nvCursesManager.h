@@ -8,7 +8,7 @@
 #include<cgenerics/cgString.h>
 #include<cgenerics/cgenerics.h>
 #include"nvwm.h"
-
+#include"nvWidget.h"
 
 /*
  * TODO halfdelay
@@ -19,6 +19,8 @@ typedef struct {
     bool echo;
     bool keypadAvailable;
     int width, height;
+    nvWidget *focusedWidget;
+
 } nvCursesManager;
 
 nvCursesManager *nvCursesManager__getInstance();
@@ -37,7 +39,11 @@ void nvCursesManager_refresh(nvCursesManager * this);
 
 void nvCursesManager_clearScreen(nvCursesManager * this);
 
-int nvCursesManager_getScreenWidth(nvCursesManager* this);
+int nvCursesManager_getScreenWidth(nvCursesManager * this);
 
-int nvCursesManager_getScreenHeight(nvCursesManager* this);
+int nvCursesManager_getScreenHeight(nvCursesManager * this);
+
+void nvCursesManager_setFocusedWidget(nvCursesManager * this, nvWidget * widget);
+
+nvWidget *nvCursesManager_getFocusedWidget(nvCursesManager * this);
 #endif

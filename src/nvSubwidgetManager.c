@@ -24,12 +24,10 @@ void nvSubwidgetManager_addWidget(nvSubwidgetManager* this, nvWidget* widget) {
 void nvSubwidgetManager_refresh(nvSubwidgetManager* this) {
     cgArrayIterator(nvWidget)* iter = cgArrayIterator__new(nvWidget, this->subWidgets);
     nvWidget* widget = NULL;
-    nvWidget* focusedWidget = NULL; /* = nvCursesManager_getFocusedWidget(nvCursesManager__getInstance()); */
+    nvWidget* focusedWidget = nvCursesManager_getFocusedWidget(nvCursesManager__getInstance());
     while  ((widget = cgArrayIterator_fetch(nvWidget, iter)) != NULL) {
-        /* TODO:
-         * if (widget != focusedWidget)
-         */      
-        nvWidget_refresh(widget);
+         if (widget != focusedWidget)
+            nvWidget_refresh(widget);
     }
     if (focusedWidget != NULL)
         nvWidget_refresh(focusedWidget);
