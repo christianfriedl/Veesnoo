@@ -1,7 +1,5 @@
 #include"nvFocusManager.h"
 
-DEFINE_ARRAY_FUNCS(nvWidget)
-
 static nvWidget *nvFocusManager_findNextWidget_(nvFocusManager * this);
 
 nvFocusManager *nvFocusManager__new() {

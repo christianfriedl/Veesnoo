@@ -36,9 +36,34 @@ void nvWidget_delete_(nvWidget * this) {
     free(this);
 }
 
+int nvWidget_getX(nvWidget * this) {
+    return this->x;
+}
+
+int nvWidget_getY(nvWidget * this) {
+    return this->y;
+}
+
+int nvWidget_getWidth(nvWidget * this) {
+    return this->width;
+}
+
+int nvWidget_getHeight(nvWidget * this) {
+    return this->height;
+}
+
 void nvWidget_resize(nvWidget * this, int width, int height) {
     nvCursesWindow_moveCursorTo(this->cw, 0, 0);
     nvCursesWindow_resize(this->cw, width, height);
+    this->width = width;
+    this->height = height;
+}
+
+void nvWidget_move(nvWidget * this, int x, int y) {
+    if (this->moveMethod != NULL)
+        (this->moveMethod) (this, x, y);
+    else
+        nvCursesWindow_move(this->cw, x, y);
 }
 
 void nvWidget_setRefreshMethod(nvWidget * this, void (*refreshMethod) (nvWidget *)) {
@@ -54,16 +79,17 @@ void nvWidget_setReceiveKeyMethod(nvWidget * this, bool(*receiveKeyMethod) (nvWi
 }
 
 bool nvWidget_receiveKey(nvWidget * this, int ch) {
-    return (this->receiveKeyMethod)(this, ch);
+    return (this->receiveKeyMethod) (this, ch);
 }
 
 void nvWidget_refresh(nvWidget * this) {
     (this->refreshMethod) (this);
 }
 
-void nvWidget_setInputMode(nvWidget* this, nvInputMode mode) {
+void nvWidget_setInputMode(nvWidget * this, nvInputMode mode) {
     if (this->setInputModeMethod != NULL)
         (this->setInputModeMethod) (this, mode);
     else
-        cgAppState_THROW(cgAppState__getInstance(), Severity_fatal, nvExceptionID_fatalException, "cannot set input mode because setInputModeMethod is not set");
+        cgAppState_THROW(cgAppState__getInstance(), Severity_fatal, nvExceptionID_fatalException,
+                         "cannot set input mode because setInputModeMethod is not set");
 }

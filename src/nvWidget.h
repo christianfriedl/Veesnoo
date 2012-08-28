@@ -7,16 +7,17 @@
 #include<cgenerics/cgAppState.h>
 
 struct nvWidget_struct;
+
 typedef struct nvWidget_struct nvWidget;
+#include"nvCollections.h"
 
 #include"nvCursesWindow.h"
 
 typedef enum { nvWidgetType_label = 1, nvWidgetType_textbox, nvWidgetType_checkbox, nvWidgetType_window } nvWidgetType;
 
-
 struct nvWidget_struct {
     void (*refreshMethod) (nvWidget * this);
-    void (*moveMethod) (nvWidget * this);
+    void (*moveMethod) (nvWidget * this, int x, int y);
      bool(*receiveKeyMethod) (nvWidget * this, int ch);
     void (*setInputModeMethod) (nvWidget * this, nvInputMode mode);
     void *data;
@@ -25,12 +26,7 @@ struct nvWidget_struct {
     int x, y, width, height;
 };
 
-DECLARE_ARRAY(nvWidget)
-DECLARE_ARRAY_ITERATOR(nvWidget)
-
-
 /* internal ("protected") methods */
-
 nvWidget *nvWidget__new_(nvWidgetType type, int x, int y, int width, int height, void *data);
 
 nvWidget *nvWidget_clone(const nvWidget * this);
@@ -42,9 +38,21 @@ void nvWidget_delete_(nvWidget * this);
 
 /* public methods */
 
+void nvWidget_delete_(nvWidget * this);
+
+int nvWidget_getX(nvWidget * this);
+
+int nvWidget_getY(nvWidget * this);
+
+int nvWidget_getWidth(nvWidget * this);
+
+int nvWidget_getHeight(nvWidget * this);
+
 void nvWidget_refresh(nvWidget * this);
 
 void nvWidget_resize(nvWidget * this, int width, int height);
+
+void nvWidget_move(nvWidget * this, int x, int y);
 
 bool nvWidget_receiveKey(nvWidget * this, int ch);
 
@@ -56,5 +64,5 @@ void nvWidget_setMoveMethod(nvWidget * this, void (*moveMethod) (nvWidget *));
 
 void nvWidget_setReceiveKeyMethod(nvWidget * this, bool(*receiveKeyMethod) (nvWidget *, int));
 
-void nvWidget_setInputMode(nvWidget* this, nvInputMode mode);
+void nvWidget_setInputMode(nvWidget * this, nvInputMode mode);
 #endif

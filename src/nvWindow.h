@@ -15,7 +15,7 @@ nvWidget *nvWindow__new(int x, int y, int width, int height);
 
 void nvWindow_delete(nvWidget * this);
 
-void nvWindow_addWidget(nvWidget * this);
+void nvWindow_addWidget(nvWidget * this, nvWidget* widget);
 
 bool nvWindow_receiveKey(nvWidget * this, int ch);
 

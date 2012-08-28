@@ -1,9 +1,5 @@
 #include"nvSubwidgetManager.h"
 
-DEFINE_ARRAY_FUNCS(nvWidget)
-DEFINE_ARRAY_ITERATOR_FUNCS(nvWidget)
-
-
 nvSubwidgetManager* nvSubwidgetManager__new() {
     nvSubwidgetManager* this = malloc(sizeof(*this));
     if (this != NULL) {

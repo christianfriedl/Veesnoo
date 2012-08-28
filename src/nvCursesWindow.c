@@ -98,3 +98,8 @@ void nvCursesWindow_refresh(nvCursesWindow* this) {
      */
     doupdate();
 }
+
+void nvCursesWindow_move(nvCursesWindow* this, int x, int y) {
+    if ((mvwin(this->window, y, x)) != OK)
+        cgAppState_THROW(cgAppState__getInstance(), Severity_error, nvExceptionID_nonfatalException, "unable to move window");
+}

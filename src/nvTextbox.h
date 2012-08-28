@@ -1,6 +1,6 @@
 
-#ifndef _NV_LABEL_H
-#define _NV_LABEL_H
+#ifndef _NV_TEXTBOX_H
+#define _NV_TEXTBOX_H
 
 #include<stdlib.h>
 #include<ctype.h>
@@ -33,4 +33,5 @@ void nvTextbox_setText(nvWidget * this, cgString * text);
 cgString *nvTextbox_getText(nvWidget * this);
 
 void nvTextbox_setInputMode(nvWidget * this, nvInputMode mode);
+
 #endif
