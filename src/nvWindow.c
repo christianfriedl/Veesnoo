@@ -55,7 +55,7 @@ void nvWindow_refresh(nvWidget * this) {
 }
 
 bool nvWindow_doesOverlapClientRect(nvWidget* this, nvWidget* that) {
-    cgRectangle* rThis = cgRectangle__new(this->x, this->y, this->width, this->height);
+    cgRectangle* rThis = cgRectangle__new(this->x + 1, this->y + 1, this->width - 1, this->height - 1);
     cgRectangle* rThat = cgRectangle__new(that->x, that->y, that->width, that->height);
     bool rv = cgRectangle_doesOverlap(rThis, rThat);
     cgRectangle_delete(rThis);
