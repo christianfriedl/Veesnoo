@@ -1,4 +1,5 @@
 #include"nvSubwidgetManager.h"
+static bool nvSubwidgetManager_widgetShouldBeDisplayed_(nvSubwidgetManager* this, nvWidget* widget);
 
 nvSubwidgetManager* nvSubwidgetManager__new() {
     nvSubwidgetManager* this = malloc(sizeof(*this));
@@ -17,15 +18,18 @@ void nvSubwidgetManager_addWidget(nvSubwidgetManager* this, nvWidget* widget) {
     cgArray_add(nvWidget, this->subWidgets, widget);
 }
 
+static bool nvSubwidgetManager_widgetShouldBeDisplayed_(nvSubwidgetManager* this, nvWidget* widget) {
+    return (nvWidget_getIsVisible(widget) && nvWidget_doesOverlapClientRect(nvWidget_getParent(widget), widget));
+}
 void nvSubwidgetManager_refresh(nvSubwidgetManager* this) {
     cgArrayIterator(nvWidget)* iter = cgArrayIterator__new(nvWidget, this->subWidgets);
     nvWidget* widget = NULL;
     nvWidget* focusedWidget = nvCursesManager_getFocusedWidget(nvCursesManager__getInstance());
     while  ((widget = cgArrayIterator_fetch(nvWidget, iter)) != NULL) {
-         if (widget != focusedWidget)
+         if (widget != focusedWidget && nvSubwidgetManager_widgetShouldBeDisplayed_(this, widget))
             nvWidget_refresh(widget);
     }
-    if (focusedWidget != NULL)
+    if (focusedWidget != NULL && nvSubwidgetManager_widgetShouldBeDisplayed_(this, focusedWidget))
         nvWidget_refresh(focusedWidget);
     nvCursesManager_refresh(nvCursesManager__getInstance());
 }

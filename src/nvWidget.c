@@ -1,4 +1,7 @@
+#include<cgenerics/cgRectangle.h>
 #include"nvWidget.h"
+
+static bool nvWidget_doesOverlapClientRect_(nvWidget* this, nvWidget* that);
 
 /*
  * "abstract base class", new_ should only be called from derived class
@@ -18,6 +21,8 @@ nvWidget *nvWidget__new_(nvWidgetType type, int x, int y, int width, int height,
         this->moveMethod = NULL;
         this->receiveKeyMethod = NULL;
         this->setInputModeMethod = NULL;
+        this->isVisible = true;
+        this->doesOverlapClientRectMethod = nvWidget_doesOverlapClientRect_;
     } else
         cgAppState_THROW(cgAppState__getInstance(), Severity_fatal, cgExceptionID_CannotAllocate, "cannot allocate nvWidget");
     return this;
@@ -36,6 +41,7 @@ void nvWidget_delete_(nvWidget * this) {
     free(this);
 }
 
+/* getters'n'setters */
 int nvWidget_getX(nvWidget * this) {
     return this->x;
 }
@@ -52,6 +58,41 @@ int nvWidget_getHeight(nvWidget * this) {
     return this->height;
 }
 
+bool nvWidget_getIsVisible(nvWidget * this) {
+    return this->isVisible;
+}
+
+void nvWidget_setIsVisible(nvWidget * this, bool isVisible) {
+    this->isVisible = isVisible;
+}
+
+nvWidget *nvWidget_getParent(nvWidget * this) {
+    return this->parent;
+}
+
+void nvWidget_setParent(nvWidget * this, nvWidget * parent) {
+    this->parent = parent;
+}
+
+/* setters for methods */
+void nvWidget_setRefreshMethod(nvWidget * this, void (*refreshMethod) (nvWidget *)) {
+    this->refreshMethod = refreshMethod;
+}
+
+void nvWidget_setMoveMethod(nvWidget * this, void (*moveMethod) (nvWidget * this, int x, int y)) {
+    this->moveMethod = moveMethod;
+}
+
+void nvWidget_setReceiveKeyMethod(nvWidget * this, bool(*receiveKeyMethod) (nvWidget *, int)) {
+    this->receiveKeyMethod = receiveKeyMethod;
+}
+
+void nvWidget_setDoesOverlapClientRectMethod(nvWidget * this, bool(*doesOverlapClientRectMethod) (nvWidget *, nvWidget *)) {
+    this->doesOverlapClientRectMethod = doesOverlapClientRectMethod;
+}
+
+/* methods */
+
 void nvWidget_resize(nvWidget * this, int width, int height) {
     nvCursesWindow_moveCursorTo(this->cw, 0, 0);
     nvCursesWindow_resize(this->cw, width, height);
@@ -62,20 +103,11 @@ void nvWidget_resize(nvWidget * this, int width, int height) {
 void nvWidget_move(nvWidget * this, int x, int y) {
     if (this->moveMethod != NULL)
         (this->moveMethod) (this, x, y);
-    else
+    else {
         nvCursesWindow_move(this->cw, x, y);
-}
-
-void nvWidget_setRefreshMethod(nvWidget * this, void (*refreshMethod) (nvWidget *)) {
-    this->refreshMethod = refreshMethod;
-}
-
-void nvWidget_setMoveMethod(nvWidget * this, void (*moveMethod) (nvWidget *)) {
-    this->moveMethod = moveMethod;
-}
-
-void nvWidget_setReceiveKeyMethod(nvWidget * this, bool(*receiveKeyMethod) (nvWidget *, int)) {
-    this->receiveKeyMethod = receiveKeyMethod;
+        this->x = x;
+        this->y = y;
+    }
 }
 
 bool nvWidget_receiveKey(nvWidget * this, int ch) {
@@ -86,6 +118,22 @@ void nvWidget_refresh(nvWidget * this) {
     (this->refreshMethod) (this);
 }
 
+bool nvWidget_doesOverlapClientRect(nvWidget * this, nvWidget * that) {
+    return (this->doesOverlapClientRectMethod) (this, that);
+}
+
+/* default implementation
+ * TODO the name stinks
+ */
+static bool nvWidget_doesOverlapClientRect_(nvWidget* this, nvWidget* that) {
+    cgRectangle* rThis = cgRectangle__new(this->x, this->y, this->width, this->height);
+    cgRectangle* rThat = cgRectangle__new(that->x, that->y, that->width, that->height);
+    bool rv = cgRectangle_doesOverlap(rThis, rThat);
+    cgRectangle_delete(rThis);
+    cgRectangle_delete(rThat);
+    return rv;
+}
+
 void nvWidget_setInputMode(nvWidget * this, nvInputMode mode) {
     if (this->setInputModeMethod != NULL)
         (this->setInputModeMethod) (this, mode);
@@ -93,3 +141,4 @@ void nvWidget_setInputMode(nvWidget * this, nvInputMode mode) {
         cgAppState_THROW(cgAppState__getInstance(), Severity_fatal, nvExceptionID_fatalException,
                          "cannot set input mode because setInputModeMethod is not set");
 }
+

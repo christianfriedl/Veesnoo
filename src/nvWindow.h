@@ -20,4 +20,6 @@ void nvWindow_addWidget(nvWidget * this, nvWidget* widget);
 bool nvWindow_receiveKey(nvWidget * this, int ch);
 
 void nvWindow_refresh(nvWidget * this);
+
+bool nvWindow_doesOverlapClientRect(nvWidget* this, nvWidget* that);
 #endif
