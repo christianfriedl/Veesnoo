@@ -33,7 +33,9 @@ void i3Pushed(nvWidget* widget) {
     refresh();
 }
 void testThreeItems() {
+    nvCursesManager_clearScreen(nvCursesManager__getInstance());
     printStatus("%s... ", __func__);
+    mvaddstr( 10, 0,"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     nvWidget *w = nvHorizontalMenu__new(0, 10);
     nvWidget *i1 = nvActionLabel__new(0, 0, cgString__new("item1"));
     nvActionLabel_setOnPushMethod(i1, i1Pushed);

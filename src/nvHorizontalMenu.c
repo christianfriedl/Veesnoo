@@ -67,6 +67,7 @@ bool nvHorizontalMenu_receiveKey(nvWidget * this, int ch) {
 }
 
 void nvHorizontalMenu_refresh(nvWidget * this) {
+    nvCursesWindow_fillBackground(this->cw, ' ');
     nvSubwidgetManager_refresh(THIS(nvHorizontalMenu)->subwidgetManager);
     nvCursesWindow_refresh(this->cw);
 }
