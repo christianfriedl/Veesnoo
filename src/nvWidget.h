@@ -14,7 +14,7 @@ typedef struct nvWidget_struct nvWidget;
 
 #include"nvCursesWindow.h"
 
-typedef enum { nvWidgetType_label = 1, nvWidgetType_textbox, nvWidgetType_checkbox, nvWidgetType_window } nvWidgetType;
+typedef enum { nvWidgetType_label = 1, nvWidgetType_textbox, nvWidgetType_checkbox, nvWidgetType_window, nvWidgetType_actionLabel } nvWidgetType;
 
 struct nvWidget_struct {
     void (*refreshMethod) (nvWidget * this);
@@ -22,6 +22,8 @@ struct nvWidget_struct {
      bool(*receiveKeyMethod) (nvWidget * this, int ch);
     void (*setInputModeMethod) (nvWidget * this, nvInputMode mode);
      bool(*doesOverlapClientRectMethod) (nvWidget * this, nvWidget * that);
+     bool(*focusMethod) (nvWidget * this);
+     bool(*defocusMethod) (nvWidget * this);
     void *data;
     nvCursesWindow *cw;
     nvWidgetType type;
@@ -76,6 +78,10 @@ void nvWidget_setInputMode(nvWidget * this, nvInputMode mode);
 
 bool nvWidget_doesOverlapClientRect(nvWidget * this, nvWidget * that);
 
+bool nvWidget_focus(nvWidget * this);
+
+bool nvWidget_deFocus(nvWidget * this);
+
 /* method setters for subclasses */
 
 void nvWidget_setRefreshMethod(nvWidget * this, void (*moveMethod) (nvWidget *));
@@ -85,4 +91,8 @@ void nvWidget_setMoveMethod(nvWidget * this, void (*moveMethod) (nvWidget * this
 void nvWidget_setReceiveKeyMethod(nvWidget * this, bool(*receiveKeyMethod) (nvWidget *, int));
 
 void nvWidget_setDoesOverlapClientRectMethod(nvWidget * this, bool(*doesOverlapClientRectMethod) (nvWidget *, nvWidget *));
+
+void nvWidget_setFocusMethod(nvWidget * this, bool(*method) (nvWidget *));
+
+void nvWidget_setDefocusMethod(nvWidget * this, bool(*method) (nvWidget *));
 #endif

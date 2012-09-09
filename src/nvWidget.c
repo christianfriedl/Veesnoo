@@ -1,7 +1,7 @@
 #include<cgenerics/cgRectangle.h>
 #include"nvWidget.h"
 
-static bool nvWidget_doesOverlapClientRect_(nvWidget* this, nvWidget* that);
+static bool nvWidget_doesOverlapClientRect_(nvWidget * this, nvWidget * that);
 
 /*
  * "abstract base class", new_ should only be called from derived class
@@ -17,12 +17,14 @@ nvWidget *nvWidget__new_(nvWidgetType type, int x, int y, int width, int height,
         this->cw = nvCursesWindow__new(x, y, width, height);
         this->data = data;
         this->type = type;
+        this->isVisible = true;
         this->refreshMethod = NULL;
         this->moveMethod = NULL;
         this->receiveKeyMethod = NULL;
         this->setInputModeMethod = NULL;
-        this->isVisible = true;
         this->doesOverlapClientRectMethod = nvWidget_doesOverlapClientRect_;
+        this->focusMethod = NULL;
+        this->defocusMethod = NULL;
     } else
         cgAppState_THROW(cgAppState__getInstance(), Severity_fatal, cgExceptionID_CannotAllocate, "cannot allocate nvWidget");
     return this;
@@ -91,6 +93,14 @@ void nvWidget_setDoesOverlapClientRectMethod(nvWidget * this, bool(*doesOverlapC
     this->doesOverlapClientRectMethod = doesOverlapClientRectMethod;
 }
 
+void nvWidget_setFocusMethod(nvWidget * this, bool(*method) (nvWidget *)) {
+    this->focusMethod = method;
+}
+
+void nvWidget_setDefocusMethod(nvWidget * this, bool(*method) (nvWidget *)) {
+    this->defocusMethod = method;
+}
+
 /* methods */
 
 void nvWidget_resize(nvWidget * this, int width, int height) {
@@ -125,10 +135,13 @@ bool nvWidget_doesOverlapClientRect(nvWidget * this, nvWidget * that) {
 /* default implementation
  * TODO the name stinks
  */
-static bool nvWidget_doesOverlapClientRect_(nvWidget* this, nvWidget* that) {
-    cgRectangle* rThis = cgRectangle__new(this->x, this->y, this->width, this->height);
-    cgRectangle* rThat = cgRectangle__new(that->x, that->y, that->width, that->height);
+static bool nvWidget_doesOverlapClientRect_(nvWidget * this, nvWidget * that) {
+    cgRectangle *rThis = cgRectangle__new(this->x, this->y, this->width, this->height);
+
+    cgRectangle *rThat = cgRectangle__new(that->x, that->y, that->width, that->height);
+
     bool rv = cgRectangle_doesOverlap(rThis, rThat);
+
     cgRectangle_delete(rThis);
     cgRectangle_delete(rThat);
     return rv;
@@ -142,3 +155,20 @@ void nvWidget_setInputMode(nvWidget * this, nvInputMode mode) {
                          "cannot set input mode because setInputModeMethod is not set");
 }
 
+bool nvWidget_focus(nvWidget * this) {
+    if (this->focusMethod != NULL)
+        return (this->focusMethod) (this);
+    else {
+        cgAppState_THROW(cgAppState__getInstance(), Severity_warning, cgExceptionID_NoSuchMethod, "%s called on raw nvWidget of class %i", __func__, this->type);
+        return false;
+    }
+}
+
+bool nvWidget_deFocus(nvWidget * this) {
+    if (this->defocusMethod != NULL)
+        return (this->defocusMethod) (this);
+    else {
+        cgAppState_THROW(cgAppState__getInstance(), Severity_warning, cgExceptionID_NoSuchMethod, "%s called on raw nvWidget of class %i", __func__, this->type);
+        return false;
+    }
+}
