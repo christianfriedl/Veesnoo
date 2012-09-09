@@ -49,8 +49,10 @@ bool nvFocusManager_receiveKey(nvFocusManager * this, int ch) {
             switch (ch) {
             case NV_TAB:
                 nvWidget_setInputMode(this->focusedWidget, nvInputMode_none);
+                nvWidget_deFocus(this->focusedWidget);
                 this->focusedWidget = nvFocusManager_findNextWidget_(this);
                 nvWidget_setInputMode(this->focusedWidget, nvInputMode_command);
+                nvWidget_focus(this->focusedWidget);
                 return true;
                 break;
             }
@@ -65,4 +67,21 @@ void nvFocusManager_addWidget(nvFocusManager * this, nvWidget * widget) {
 
 nvWidget *nvFocusManager_getFocusedWidget(nvFocusManager * this) {
     return this->focusedWidget;
+}
+
+bool nvFocusManager_focus(nvFocusManager * this) {
+    if (cgArray_getSize(nvWidget, this->widgets) > 0) {
+        this->focusedWidget = cgArray_getValueAt(nvWidget, this->widgets, 0);
+        nvWidget_focus(this->focusedWidget);
+    } else
+        this->focusedWidget = NULL;
+    return true;
+}
+
+bool nvFocusManager_deFocus(nvFocusManager * this) {
+    if (this->focusedWidget != NULL) {
+        nvWidget_deFocus(this->focusedWidget);
+        this->focusedWidget = NULL;
+    }
+    return true;
 }

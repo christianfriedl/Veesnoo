@@ -31,3 +31,6 @@ target_link_libraries(0410_nvSubwidgetManager ${LIBS})
 
 add_executable(0500_nvWindow 0500_nvWindow.c debug.c)
 target_link_libraries(0500_nvWindow ${LIBS})
+
+add_executable(0600_nvHorizontalMenu 0600_nvHorizontalMenu.c debug.c)
+target_link_libraries(0600_nvHorizontalMenu ${LIBS})

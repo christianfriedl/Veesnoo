@@ -23,6 +23,7 @@ nvWidget *nvActionLabel__new(int x, int y, cgString * text) {
     nvWidget_setReceiveKeyMethod(this, nvActionLabel_receiveKey);
     nvWidget_setFocusMethod(this, nvActionLabel_focus);
     nvWidget_setDefocusMethod(this, nvActionLabel_deFocus);
+    this->setInputModeMethod = nvActionLabel_setInputMode;
 
     return this;
 }
@@ -63,7 +64,8 @@ bool nvActionLabel_receiveKey(nvWidget * this, int ch) {
         default:
             rv = false;
         }
-    }
+    } else
+        rv = false;
     nvActionLabel_refresh(this);
     return rv;
 }
@@ -93,4 +95,7 @@ void nvActionLabel_setOnPushMethod(nvWidget* this, void(*method)(nvWidget*)) {
 void nvActionLabel_push(nvWidget * this) {
     if (THIS(nvActionLabel)->onPushMethod != NULL)
         (THIS(nvActionLabel)->onPushMethod)(this);
+}
+/* DUMMY */
+void nvActionLabel_setInputMode(nvWidget * this, nvInputMode mode) {
 }

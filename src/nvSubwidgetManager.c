@@ -33,3 +33,7 @@ void nvSubwidgetManager_refresh(nvSubwidgetManager* this) {
         nvWidget_refresh(focusedWidget);
     nvCursesManager_refresh(nvCursesManager__getInstance());
 }
+
+cgArray(nvWidget) * nvSubwidgetManager_getSubWidgets(nvSubwidgetManager * this) {
+    return this->subWidgets;
+}

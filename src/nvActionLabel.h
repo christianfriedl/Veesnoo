@@ -1,6 +1,6 @@
 
-#ifndef _NV_TEXTBOX_H
-#define _NV_TEXTBOX_H
+#ifndef _NV_ACTIION_LABEL_H
+#define _NV_ACTIION_LABEL_H
 
 #include<stdlib.h>
 #include<ctype.h>
@@ -38,4 +38,5 @@ void nvActionLabel_setOnPushMethod(nvWidget* this, void(*method)(nvWidget*));
 
 void nvActionLabel_push(nvWidget * this);
 
+void nvActionLabel_setInputMode(nvWidget * this, nvInputMode mode);
 #endif

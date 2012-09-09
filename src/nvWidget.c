@@ -156,6 +156,7 @@ void nvWidget_setInputMode(nvWidget * this, nvInputMode mode) {
 }
 
 bool nvWidget_focus(nvWidget * this) {
+    nvCursesManager_setFocusedWidget(nvCursesManager__getInstance(), this);
     if (this->focusMethod != NULL)
         return (this->focusMethod) (this);
     else {

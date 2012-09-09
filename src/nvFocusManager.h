@@ -24,4 +24,8 @@ bool nvFocusManager_receiveKey(nvFocusManager * this, int ch);
 void nvFocusManager_addWidget(nvFocusManager * this, nvWidget * widget);
 
 nvWidget *nvFocusManager_getFocusedWidget(nvFocusManager * this);
+
+bool nvFocusManager_deFocus(nvFocusManager * this);
+
+bool nvFocusManager_focus(nvFocusManager * this);
 #endif
