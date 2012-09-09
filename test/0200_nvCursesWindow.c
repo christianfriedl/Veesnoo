@@ -94,6 +94,20 @@ void testMoveCursor() {
     printf("ok -- ");
 }
 
+void testFillBackground() {
+    printf("%s... ", __func__);
+
+    nvCursesManager_clearScreen(nvCursesManager__getInstance());
+    nvCursesWindow *win = nvCursesWindow__new(10, 10, 20, 20);
+    nvCursesWindow_fillBackground(win, 'x');
+    nvCursesWindow_refresh(win);
+
+    nvCursesManager_refresh(nvCursesManager__getInstance());
+    getch();
+
+    printf("ok -- ");
+}
+
 int main() {
     printf("=== %s ===\n", __FILE__);
     cgAppState__init(__FILE__);
@@ -105,6 +119,7 @@ int main() {
     testAddStringAt();
     testAttrOnOff();
     testMoveCursor();
+    testFillBackground();
 
     nvCursesManager_uninitCurses(nvCursesManager__getInstance());
     nvCursesManager_delete(nvCursesManager__getInstance());

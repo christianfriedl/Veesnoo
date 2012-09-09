@@ -41,4 +41,6 @@ int nvCursesWindow_getHeight(nvCursesWindow * this);
 void nvCursesWindow_refresh(nvCursesWindow * this);
 
 void nvCursesWindow_move(nvCursesWindow * this, int x, int y);
+
+void nvCursesWindow_fillBackground(nvCursesWindow * this, int ch);
 #endif
