@@ -99,9 +99,11 @@ bool nvWindow_receiveKey(nvWidget * this, int ch) {
 }
 
 void nvWindow_refresh(nvWidget * this) {
-    nvCursesWindow_addBorder(this->cw);
-    nvSubwidgetManager_refresh(THIS(nvWindow)->subwidgetManager);
-    nvCursesWindow_refresh(this->cw);
+    if (this->isVisible == true) {
+        nvCursesWindow_addBorder(this->cw);
+        nvSubwidgetManager_refresh(THIS(nvWindow)->subwidgetManager);
+        nvCursesWindow_refresh(this->cw);
+    }
 }
 
 bool nvWindow_doesOverlapClientRect(nvWidget * this, nvWidget * that) {
@@ -130,4 +132,12 @@ bool nvWindow_deFocus(nvWidget * this) {
     THIS(nvWindow)->isFocused = false;
     nvFocusManager_deFocus(THIS(nvWindow)->focusManager);
     return true;
+}
+
+void nvWindow_show(nvWidget * this) {
+    nvWidget_setIsVisible(this, true);
+}
+
+void nvWindow_hide(nvWidget * this) {
+    nvWidget_setIsVisible(this, false);
 }

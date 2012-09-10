@@ -161,7 +161,7 @@ void nvWidget_setInputMode(nvWidget * this, nvInputMode mode) {
                          "cannot set input mode because setInputModeMethod is not set");
 }
 
-/* @Virtual @Abstract
+/* @Virtual @Implemented
  * NOTE: this sets the global focused widget in the curses manager before calling the derived method
  */
 bool nvWidget_focus(nvWidget * this) {
@@ -172,6 +172,7 @@ bool nvWidget_focus(nvWidget * this) {
         return true;
 }
 
+/* @Virtual @Implemented */
 bool nvWidget_deFocus(nvWidget * this) {
     nvCursesManager_setFocusedWidget(nvCursesManager__getInstance(), NULL);
     if (this->defocusMethod != NULL)

@@ -140,6 +140,37 @@ void testOutsideOfBox() {
     printStatus("ok -- ");
 }
 
+void testHideShow() {
+    printStatus("%s... ", __func__);
+
+    nvWidget *l = nvLabel__new(0, 0, cgString__new("visible!!!"));
+    nvWidget *w = nvWindow__new(0, 1, 1, 1);
+    nvWindow_setResizeMode(w, nvWindowResizeMode_fromChildren);
+    nvWindow_addWidget(w, l);
+    nvCursesManager_clearScreen(nvCursesManager__getInstance());
+    printStatus("%s... ", __func__);
+    nvWidget_refresh(w);
+    printMessage("window should be visible now.");
+    getch();
+    nvWindow_hide(w);
+    nvCursesManager_clearScreen(nvCursesManager__getInstance());
+    printStatus("%s... ", __func__);
+    nvWidget_refresh(w);
+    printMessage("window should be hidden now.");
+    getch();
+    nvWindow_show(w);
+    nvCursesManager_clearScreen(nvCursesManager__getInstance());
+    printStatus("%s... ", __func__);
+    nvWidget_refresh(w);
+    printMessage("window should be visible now.");
+    getch();
+
+    nvWindow_delete(w);
+    nvLabel_delete(l);
+
+    printStatus("ok -- ");
+}
+
 int main() {
     printf("=== %s ===\n", __FILE__);
     cgAppState__init(__FILE__);
@@ -154,6 +185,8 @@ int main() {
     testOutsideOfBox();
     nvCursesManager_clearScreen(nvCursesManager__getInstance());
     testImplicitResize();
+    nvCursesManager_clearScreen(nvCursesManager__getInstance());
+    testHideShow();
     nvCursesManager_clearScreen(nvCursesManager__getInstance());
 
     nvCursesManager_uninitCurses(nvCursesManager__getInstance());
