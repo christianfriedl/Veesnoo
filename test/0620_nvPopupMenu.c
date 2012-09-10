@@ -49,7 +49,7 @@ void testThreeItems() {
     nvPopupMenu_refresh(w);
     printMessage("no item should be highlighted");
     getch();
-    nvPopupMenu_focus(w);
+    nvWidget_focus(w);
     nvPopupMenu_refresh(w);
     nvPopupMenu_receiveKey(w, NV_ENTER);
     printMessage("1st item should be highlighted");
@@ -69,7 +69,7 @@ void testThreeItems() {
     nvPopupMenu_receiveKey(w, NV_ENTER);
     printMessage("1st item should be highlighted");
     getch();
-    nvPopupMenu_deFocus(w);
+    nvWidget_deFocus(w);
     nvPopupMenu_refresh(w);
     printMessage("no item should be highlighted");
     getch();

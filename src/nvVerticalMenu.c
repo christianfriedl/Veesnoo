@@ -19,7 +19,7 @@ static nvVerticalMenu *nvVerticalMenu__new_(int x, int y) {
 nvWidget *nvVerticalMenu__new(int x, int y) {
     nvVerticalMenu *menu = nvVerticalMenu__new_(x, y);
 
-    nvWidget *this = nvWidget__new_(nvWidgetType_verticalMenu, x, y, 0, 1, (void *)menu);
+    nvWidget *this = nvWidget__new_(nvWidgetType_verticalMenu, x, y, 1, 1, (void *)menu);
 
     nvWidget_setRefreshMethod(this, nvVerticalMenu_refresh);
     nvWidget_setReceiveKeyMethod(this, nvVerticalMenu_receiveKey);

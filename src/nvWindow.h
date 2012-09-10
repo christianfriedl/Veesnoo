@@ -13,6 +13,7 @@ typedef struct {
     nvFocusManager *focusManager;
     nvSubwidgetManager *subwidgetManager;
     nvWindowResizeMode resizeMode;
+    bool isFocused;
 } nvWindow;
 
 nvWidget *nvWindow__new(int x, int y, int width, int height);
@@ -30,4 +31,8 @@ bool nvWindow_doesOverlapClientRect(nvWidget * this, nvWidget * that);
 void nvWindow_pack(nvWidget * this);
 
 void nvWindow_setResizeMode(nvWidget * this, nvWindowResizeMode mode);
+
+bool nvWindow_focus(nvWidget * this);
+
+bool nvWindow_deFocus(nvWidget * this);
 #endif

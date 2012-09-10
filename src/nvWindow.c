@@ -12,6 +12,7 @@ static nvWindow *nvWindow__new_(int x, int y, int width, int height) {
         this->focusManager = nvFocusManager__new();
         this->subwidgetManager = nvSubwidgetManager__new();
         this->resizeMode = nvWindowResizeMode_fromWindow;
+        this->isFocused = false;
     } else
         cgAppState_THROW(cgAppState__getInstance(), Severity_fatal, cgExceptionID_CannotAllocate, "cannot allocate nvWindow");
     return this;
@@ -25,6 +26,8 @@ nvWidget *nvWindow__new(int x, int y, int width, int height) {
     nvWidget_setRefreshMethod(this, nvWindow_refresh);
     nvWidget_setReceiveKeyMethod(this, nvWindow_receiveKey);
     nvWidget_setDoesOverlapClientRectMethod(this, nvWindow_doesOverlapClientRect);
+    nvWidget_setFocusMethod(this, nvWindow_focus);
+    nvWidget_setDefocusMethod(this, nvWindow_deFocus);
 
     return this;
 }
@@ -62,7 +65,7 @@ void nvWindow_pack(nvWidget * this) {
 static void nvWindow_packWidget_(nvWidget * this, nvWidget * widget) {
     if (THIS(nvWindow)->resizeMode == nvWindowResizeMode_fromWindow) {  /* resize widget to fit in window */
         if (nvWindow_doesOverlapClientRect(this, widget) != true)
-                return;
+            return;
         if (nvWidget_getWidth(widget) + nvWidget_getX(widget) - nvWidget_getX(this) > nvWidget_getWidth(this) - 1)
             nvWidget_resize(widget, nvWidget_getWidth(this) - (nvWidget_getX(widget) - nvWidget_getX(this)) - 1,
                             nvWidget_getHeight(widget));
@@ -75,6 +78,7 @@ static void nvWindow_packWidget_(nvWidget * this, nvWidget * widget) {
         int maxY = nvWidget_getY(widget) + nvWidget_getHeight(widget) - nvWidget_getY(this);
 
         int newWidth = this->width;
+
         int newHeight = this->height;
 
         if (maxX > nvWidget_getWidth(this) - 1)
@@ -114,4 +118,16 @@ bool nvWindow_doesOverlapClientRect(nvWidget * this, nvWidget * that) {
 
 void nvWindow_setResizeMode(nvWidget * this, nvWindowResizeMode mode) {
     THIS(nvWindow)->resizeMode = mode;
+}
+
+bool nvWindow_focus(nvWidget * this) {
+    THIS(nvWindow)->isFocused = true;
+    nvFocusManager_focus(THIS(nvWindow)->focusManager);
+    return true;
+}
+
+bool nvWindow_deFocus(nvWidget * this) {
+    THIS(nvWindow)->isFocused = false;
+    nvFocusManager_deFocus(THIS(nvWindow)->focusManager);
+    return true;
 }

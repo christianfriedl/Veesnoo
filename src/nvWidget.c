@@ -25,6 +25,7 @@ nvWidget *nvWidget__new_(nvWidgetType type, int x, int y, int width, int height,
         this->doesOverlapClientRectMethod = nvWidget_doesOverlapClientRect_;
         this->focusMethod = NULL;
         this->defocusMethod = NULL;
+        this->parent = NULL;
     } else
         cgAppState_THROW(cgAppState__getInstance(), Severity_fatal, cgExceptionID_CannotAllocate, "cannot allocate nvWidget");
     return this;
@@ -167,17 +168,14 @@ bool nvWidget_focus(nvWidget * this) {
     nvCursesManager_setFocusedWidget(nvCursesManager__getInstance(), this);
     if (this->focusMethod != NULL)
         return (this->focusMethod) (this);
-    else {
-        cgAppState_THROW(cgAppState__getInstance(), Severity_warning, cgExceptionID_NoSuchMethod, "%s called on raw nvWidget of class %i", __func__, this->type);
-        return false;
-    }
+    else 
+        return true;
 }
 
 bool nvWidget_deFocus(nvWidget * this) {
+    nvCursesManager_setFocusedWidget(nvCursesManager__getInstance(), NULL);
     if (this->defocusMethod != NULL)
         return (this->defocusMethod) (this);
-    else {
-        cgAppState_THROW(cgAppState__getInstance(), Severity_warning, cgExceptionID_NoSuchMethod, "%s called on raw nvWidget of class %i", __func__, this->type);
-        return false;
-    }
+    else 
+        return true;
 }

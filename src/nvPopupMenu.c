@@ -7,7 +7,8 @@ static nvPopupMenu *nvPopupMenu__new_(int x, int y) {
     nvPopupMenu *this = malloc(sizeof(*this));
 
     if (this != NULL) {
-        this->window = nvWindow__new(x, y, 0, 0);
+        this->window = nvWindow__new(x, y, 1, 1);
+        nvWindow_setResizeMode(this->window, nvWindowResizeMode_fromChildren);
         this->menu = nvVerticalMenu__new(0, 0);
         nvWindow_addWidget(this->window, this->menu);
     } else
@@ -56,10 +57,10 @@ bool nvPopupMenu_doesOverlapClientRect(nvWidget* this, nvWidget* that) {
 }
 
 bool nvPopupMenu_focus(nvWidget* this) {
-    return nvWidget_focus(THIS(nvPopupMenu)->window);
+    nvWidget_focus(THIS(nvPopupMenu)->window);
 }
 
 bool nvPopupMenu_deFocus(nvWidget* this) {
-    return nvWidget_deFocus(THIS(nvPopupMenu)->window);
+    nvWidget_deFocus(THIS(nvPopupMenu)->window);
 }
 
