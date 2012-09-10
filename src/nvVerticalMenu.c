@@ -37,6 +37,9 @@ void nvVerticalMenu_delete(nvWidget * this) {
 }
 
 void nvVerticalMenu_addWidget(nvWidget * this, nvWidget * widget) {
+    /*
+     * move subwidget to after last existing subwidget
+     */
     cgArray(nvWidget) * sw = nvSubwidgetManager_getSubWidgets(THIS(nvVerticalMenu)->subwidgetManager);
     int y = cgArray_getSize(nvWidget, sw);
 
