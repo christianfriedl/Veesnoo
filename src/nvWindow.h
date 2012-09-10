@@ -3,23 +3,31 @@
 #define _NV_WINDOW_H
 
 #include"nvwm.h"
+#include"nvWidget.h"
 #include"nvFocusManager.h"
 #include"nvSubwidgetManager.h"
+
+typedef enum { nvWindowResizeMode_fromWindow = 0, nvWindowResizeMode_fromChildren } nvWindowResizeMode;
 
 typedef struct {
     nvFocusManager *focusManager;
     nvSubwidgetManager *subwidgetManager;
+    nvWindowResizeMode resizeMode;
 } nvWindow;
 
 nvWidget *nvWindow__new(int x, int y, int width, int height);
 
 void nvWindow_delete(nvWidget * this);
 
-void nvWindow_addWidget(nvWidget * this, nvWidget* widget);
+void nvWindow_addWidget(nvWidget * this, nvWidget * widget);
 
 bool nvWindow_receiveKey(nvWidget * this, int ch);
 
 void nvWindow_refresh(nvWidget * this);
 
-bool nvWindow_doesOverlapClientRect(nvWidget* this, nvWidget* that);
+bool nvWindow_doesOverlapClientRect(nvWidget * this, nvWidget * that);
+
+void nvWindow_pack(nvWidget * this);
+
+void nvWindow_setResizeMode(nvWidget * this, nvWindowResizeMode mode);
 #endif

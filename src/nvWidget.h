@@ -15,7 +15,7 @@ typedef struct nvWidget_struct nvWidget;
 #include"nvCursesWindow.h"
 
 typedef enum { nvWidgetType_label = 1, nvWidgetType_textbox, nvWidgetType_checkbox, nvWidgetType_window, nvWidgetType_actionLabel,
-    nvWidgetType_horizontalMenu, nvWidgetType_verticalMenu
+    nvWidgetType_horizontalMenu, nvWidgetType_verticalMenu, nvWidgetType_popupMenu
 } nvWidgetType;
 
 struct nvWidget_struct {

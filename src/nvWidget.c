@@ -103,6 +103,7 @@ void nvWidget_setDefocusMethod(nvWidget * this, bool(*method) (nvWidget *)) {
 
 /* methods */
 
+/* @NonVirtual */
 void nvWidget_resize(nvWidget * this, int width, int height) {
     nvCursesWindow_moveCursorTo(this->cw, 0, 0);
     nvCursesWindow_resize(this->cw, width, height);
@@ -110,6 +111,7 @@ void nvWidget_resize(nvWidget * this, int width, int height) {
     this->height = height;
 }
 
+/* @Virtual @Implemented */
 void nvWidget_move(nvWidget * this, int x, int y) {
     if (this->moveMethod != NULL)
         (this->moveMethod) (this, x, y);
@@ -120,14 +122,17 @@ void nvWidget_move(nvWidget * this, int x, int y) {
     }
 }
 
+/* @Virtual @Abstract */
 bool nvWidget_receiveKey(nvWidget * this, int ch) {
     return (this->receiveKeyMethod) (this, ch);
 }
 
+/* @Virtual, @Abstract */
 void nvWidget_refresh(nvWidget * this) {
     (this->refreshMethod) (this);
 }
 
+/* @Virtual @Implemented */
 bool nvWidget_doesOverlapClientRect(nvWidget * this, nvWidget * that) {
     return (this->doesOverlapClientRectMethod) (this, that);
 }
@@ -155,6 +160,9 @@ void nvWidget_setInputMode(nvWidget * this, nvInputMode mode) {
                          "cannot set input mode because setInputModeMethod is not set");
 }
 
+/* @Virtual @Abstract
+ * NOTE: this sets the global focused widget in the curses manager before calling the derived method
+ */
 bool nvWidget_focus(nvWidget * this) {
     nvCursesManager_setFocusedWidget(nvCursesManager__getInstance(), this);
     if (this->focusMethod != NULL)

@@ -66,16 +66,47 @@ void testImplicitResize() {
     printStatus("%s... ", __func__);
 
     nvWidget *l1 = nvLabel__new(0, 0, cgString__new("test1 is much too long"));
+    nvWidget *l2 = nvLabel__new(0, 0, cgString__new("test2 is much too long"));
 
     nvWidget *w = nvWindow__new(0, 1, 12, 3);
+    nvWidget *w2 = nvWindow__new(0, 4, 10, 2);
+    nvWindow_setResizeMode(w2, nvWindowResizeMode_fromChildren);
+
+    nvWidget *w3 = nvWindow__new(0, 7, 0, 0);
+    nvWindow_setResizeMode(w3, nvWindowResizeMode_fromChildren);
+    nvWidget *l3 = nvLabel__new(0, 0, cgString__new("test3 is much too long"));
+
+    nvWidget *w4 = nvWindow__new(0, 10, 7, 0);
+    nvWindow_setResizeMode(w4, nvWindowResizeMode_fromChildren);
+    nvWidget *l4 = nvLabel__new(0, 0, cgString__new("test4"));
+
+    nvWidget *w5 = nvWindow__new(0, 13, 6, 0);
+    nvWindow_setResizeMode(w5, nvWindowResizeMode_fromChildren);
+    nvWidget *l5 = nvLabel__new(0, 0, cgString__new("test5"));
 
     nvWindow_addWidget(w, l1);
+    nvWindow_addWidget(w2, l2);
+    nvWindow_addWidget(w3, l3);
+    nvWindow_addWidget(w4, l4);
+    nvWindow_addWidget(w5, l5);
 
     nvWindow_refresh(w);
-    printMessage("label should be cut to window size");
+    nvWindow_refresh(w2);
+    nvWindow_refresh(w3);
+    nvWindow_refresh(w4);
+    nvWindow_refresh(w5);
+    printMessage("label in first window should be cut to window size; other windows should be resized to fit label");
     getch();
     nvLabel_delete(l1);
+    nvLabel_delete(l2);
+    nvLabel_delete(l3);
+    nvLabel_delete(l4);
+    nvLabel_delete(l5);
     nvWindow_delete(w);
+    nvWindow_delete(w2);
+    nvWindow_delete(w3);
+    nvWindow_delete(w4);
+    nvWindow_delete(w5);
 
     printStatus("ok -- ");
 }
@@ -119,6 +150,8 @@ int main() {
     testRelayToOneTextbox();
     nvCursesManager_clearScreen(nvCursesManager__getInstance());
     testRefreshTwoLabels();
+    nvCursesManager_clearScreen(nvCursesManager__getInstance());
+    testOutsideOfBox();
     nvCursesManager_clearScreen(nvCursesManager__getInstance());
     testImplicitResize();
     nvCursesManager_clearScreen(nvCursesManager__getInstance());

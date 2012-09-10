@@ -87,6 +87,10 @@ bool nvVerticalMenu_deFocus(nvWidget * this) {
     return true;
 }
 
+nvSubwidgetManager* nvVerticalMenu_getSubwidgetManager(nvWidget* this) {
+    return THIS(nvVerticalMenu)->subwidgetManager;
+}
+
 /* DUMMY */
 void nvVerticalMenu_setInputMode(nvWidget * this, nvInputMode mode) {
 }

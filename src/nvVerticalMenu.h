@@ -26,7 +26,9 @@ bool nvVerticalMenu_doesOverlapClientRect(nvWidget * this, nvWidget * that);
 
 void nvVerticalMenu_setInputMode(nvWidget * this, nvInputMode mode);
 
-bool nvVerticalMenu_focus(nvWidget* this);
+bool nvVerticalMenu_focus(nvWidget * this);
 
-bool nvVerticalMenu_deFocus(nvWidget* this);
+bool nvVerticalMenu_deFocus(nvWidget * this);
+
+nvSubwidgetManager *nvVerticalMenu_getSubwidgetManager(nvWidget * this);
 #endif
