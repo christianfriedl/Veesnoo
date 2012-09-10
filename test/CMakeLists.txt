@@ -37,3 +37,6 @@ target_link_libraries(0600_nvHorizontalMenu ${LIBS})
 
 add_executable(0610_nvVerticalMenu 0610_nvVerticalMenu.c debug.c)
 target_link_libraries(0610_nvVerticalMenu ${LIBS})
+
+add_executable(0620_nvPopupMenu 0620_nvPopupMenu.c debug.c)
+target_link_libraries(0620_nvPopupMenu ${LIBS})
