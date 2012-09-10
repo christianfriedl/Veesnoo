@@ -13,6 +13,8 @@ nvSubwidgetManager *nvSubwidgetManager__new();
 
 void nvSubwidgetManager_delete(nvSubwidgetManager * this);
 
+void nvSubwidgetManager_deleteSubwidgets(nvSubwidgetManager * this);
+
 void nvSubwidgetManager_addWidget(nvSubwidgetManager * this, nvWidget * widget);
 
 void nvSubwidgetManager_refresh(nvSubwidgetManager * this);

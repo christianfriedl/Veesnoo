@@ -26,7 +26,11 @@ bool nvHorizontalMenu_doesOverlapClientRect(nvWidget * this, nvWidget * that);
 
 void nvHorizontalMenu_setInputMode(nvWidget * this, nvInputMode mode);
 
-bool nvHorizontalMenu_focus(nvWidget* this);
+bool nvHorizontalMenu_focus(nvWidget * this);
 
-bool nvHorizontalMenu_deFocus(nvWidget* this);
+bool nvHorizontalMenu_deFocus(nvWidget * this);
+
+nvWidget *nvHorizontalMenu_createMenuItem(nvWidget * this, cgString * text);
+
+void nvHorizontalMenu_deleteMenuItems(nvWidget * this);
 #endif

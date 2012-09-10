@@ -1,4 +1,5 @@
 #include<cgenerics/cgRectangle.h>
+#include"nvActionLabel.h"
 #include"nvVerticalMenu.h"
 
 static nvVerticalMenu *nvVerticalMenu__new_(int x, int y);
@@ -89,6 +90,16 @@ bool nvVerticalMenu_deFocus(nvWidget * this) {
 
 nvSubwidgetManager* nvVerticalMenu_getSubwidgetManager(nvWidget* this) {
     return THIS(nvVerticalMenu)->subwidgetManager;
+}
+
+nvWidget *nvVerticalMenu_createMenuItem(nvWidget * this, cgString * text) {
+    nvWidget *item = nvActionLabel__new(0, 0, text);
+    nvVerticalMenu_addWidget(this, item);
+    return item;
+}
+
+void nvVerticalMenu_deleteMenuItems(nvWidget * this) {
+    nvSubwidgetManager_deleteSubwidgets(THIS(nvVerticalMenu)->subwidgetManager);
 }
 
 /* DUMMY */

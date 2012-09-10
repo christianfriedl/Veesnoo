@@ -1,4 +1,5 @@
 #include<cgenerics/cgRectangle.h>
+#include"nvActionLabel.h"
 #include"nvHorizontalMenu.h"
 
 static nvHorizontalMenu *nvHorizontalMenu__new_(int x, int y);
@@ -83,6 +84,17 @@ bool nvHorizontalMenu_deFocus(nvWidget* this) {
     nvFocusManager_deFocus(THIS(nvHorizontalMenu)->focusManager);
     return true;
 }
+
+nvWidget *nvHorizontalMenu_createMenuItem(nvWidget * this, cgString * text) {
+    nvWidget *item = nvActionLabel__new(0, 0, text);
+    nvHorizontalMenu_addWidget(this, item);
+    return item;
+}
+
+void nvHorizontalMenu_deleteMenuItems(nvWidget * this) {
+    nvSubwidgetManager_deleteSubwidgets(THIS(nvHorizontalMenu)->subwidgetManager);
+}
+
 
 /* DUMMY */
 void nvHorizontalMenu_setInputMode(nvWidget * this, nvInputMode mode) {

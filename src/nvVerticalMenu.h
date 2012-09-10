@@ -31,4 +31,8 @@ bool nvVerticalMenu_focus(nvWidget * this);
 bool nvVerticalMenu_deFocus(nvWidget * this);
 
 nvSubwidgetManager *nvVerticalMenu_getSubwidgetManager(nvWidget * this);
+
+nvWidget *nvVerticalMenu_createMenuItem(nvWidget * this, cgString * text);
+
+void nvVerticalMenu_deleteMenuItems(nvWidget * this);
 #endif
