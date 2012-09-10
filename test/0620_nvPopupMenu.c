@@ -47,6 +47,10 @@ void testThreeItems() {
     nvPopupMenu_addWidget(w, i2);
     nvPopupMenu_addWidget(w, i3);
     nvPopupMenu_refresh(w);
+    printMessage("no window should be visible");
+    getch();
+    nvPopupMenu_show(w);
+    nvPopupMenu_refresh(w);
     printMessage("no item should be highlighted");
     getch();
     nvWidget_focus(w);

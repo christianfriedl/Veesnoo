@@ -26,4 +26,8 @@ bool nvPopupMenu_doesOverlapClientRect(nvWidget * this, nvWidget * that);
 bool nvPopupMenu_focus(nvWidget * this);
 
 bool nvPopupMenu_deFocus(nvWidget * this);
+
+void nvPopupMenu_show(nvWidget * this);
+
+void nvPopupMenu_hide(nvWidget * this);
 #endif
