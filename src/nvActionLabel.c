@@ -36,7 +36,6 @@ void nvActionLabel_delete(nvWidget * this) {
 void nvActionLabel_setText(nvWidget * this, cgString * text) {
     cgString_delete(THIS(nvActionLabel)->text);
     THIS(nvActionLabel)->text = text;
-    nvActionLabel_refresh(this);
 }
 
 void nvActionLabel_refresh(nvWidget * this) {

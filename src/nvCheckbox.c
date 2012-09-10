@@ -8,6 +8,7 @@ static nvCheckbox *nvCheckbox__new_(bool value) {
     if (this != NULL) {
         this->value = value;
         this->inputMode = nvInputMode_command;
+        this->isFocused = false;
     } else
         cgAppState_THROW(cgAppState__getInstance(), Severity_fatal, cgExceptionID_CannotAllocate, "cannot allocate nvCheckbox");
     return this;
@@ -39,7 +40,7 @@ void nvCheckbox_setValue(nvWidget * this, bool value) {
 }
 
 void nvCheckbox_refresh(nvWidget * this) {
-    if (THIS(nvCheckbox)->inputMode == nvInputMode_command)
+    if (THIS(nvCheckbox)->inputMode == nvInputMode_command || THIS(nvCheckbox)->isFocused == true)
         nvCursesWindow_attrOn(this->cw, A_REVERSE);
 
     cgString *text = cgString__newWithSprintf("[%c]", (THIS(nvCheckbox)->value ? 'x' : ' '));
@@ -48,7 +49,7 @@ void nvCheckbox_refresh(nvWidget * this) {
     
     cgString_delete(text);
 
-    if (THIS(nvCheckbox)->inputMode == nvInputMode_command)
+    if (THIS(nvCheckbox)->inputMode == nvInputMode_command || THIS(nvCheckbox)->isFocused == true)
         nvCursesWindow_attrOff(this->cw, A_REVERSE);
     
     nvCursesWindow_moveCursorTo(this->cw, 1, 0);
@@ -76,4 +77,14 @@ bool nvCheckbox_receiveKey(nvWidget * this, int ch) {
 
 bool nvCheckbox_getValue(nvWidget * this) {
     return THIS(nvCheckbox)->value;
+}
+
+bool nvCheckbox_focus(nvWidget * this) {
+    THIS(nvCheckbox)->isFocused = true;
+    return true;
+}
+
+bool nvCheckbox_deFocus(nvWidget * this) {
+    THIS(nvCheckbox)->isFocused = false;
+    return true;
 }

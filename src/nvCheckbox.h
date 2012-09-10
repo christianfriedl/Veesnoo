@@ -13,6 +13,7 @@
 typedef struct {
     bool value;
     nvInputMode inputMode;
+    bool isFocused;
 } nvCheckbox;
 
 nvWidget *nvCheckbox__new(int x, int y, bool value);
@@ -29,4 +30,7 @@ void nvCheckbox_setValue(nvWidget * this, bool value);
 
 bool nvCheckbox_getValue(nvWidget * this);
 
+bool nvCheckbox_focus(nvWidget * this);
+
+bool nvCheckbox_deFocus(nvWidget * this);
 #endif
