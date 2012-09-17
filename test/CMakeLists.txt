@@ -43,3 +43,6 @@ target_link_libraries(0620_nvPopupMenu ${LIBS})
 
 add_executable(0700_nvButton 0700_nvButton.c debug.c)
 target_link_libraries(0700_nvButton ${LIBS})
+
+add_executable(0750_nvSelectbox 0750_nvSelectbox.c debug.c)
+target_link_libraries(0750_nvSelectbox ${LIBS})

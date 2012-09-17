@@ -70,6 +70,10 @@ bool nvPopupMenu_deFocus(nvWidget * this) {
     nvWidget_deFocus(THIS(nvPopupMenu)->window);
 }
 
+bool nvPopupMenu_getIsFocused(nvWidget * this) {
+    return nvWindow_getIsFocused(THIS(nvPopupMenu)->window);
+}
+
 void nvPopupMenu_show(nvWidget * this) {
     nvWindow_show(THIS(nvPopupMenu)->window);
 }

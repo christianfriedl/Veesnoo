@@ -30,6 +30,8 @@ bool nvHorizontalMenu_focus(nvWidget * this);
 
 bool nvHorizontalMenu_deFocus(nvWidget * this);
 
+bool nvHorizontalMenu_getIsFocused(nvWidget * this);
+
 nvWidget *nvHorizontalMenu_createMenuItem(nvWidget * this, cgString * text);
 
 void nvHorizontalMenu_deleteMenuItems(nvWidget * this);

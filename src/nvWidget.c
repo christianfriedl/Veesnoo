@@ -180,3 +180,10 @@ bool nvWidget_deFocus(nvWidget * this) {
     else 
         return true;
 }
+
+int nvWidget__compareForArray(const nvWidget ** first, const nvWidget ** second) {
+    const nvWidget * firstP = *first;
+    const nvWidget * secondP = *second;
+
+    return (secondP - firstP);
+}

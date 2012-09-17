@@ -20,15 +20,15 @@ void testNewDeleteRefresh() {
     printStatus("ok -- ");
 }
 
-void i1Pushed(nvWidget* widget) {
+void i1Pushed(nvWidget* widget, void * userData) {
     mvaddstr(15, 0, "item1 pushed!");
     refresh();
 }
-void i2Pushed(nvWidget* widget) {
+void i2Pushed(nvWidget* widget, void * userData) {
     mvaddstr(15, 0, "item2 pushed!");
     refresh();
 }
-void i3Pushed(nvWidget* widget) {
+void i3Pushed(nvWidget* widget, void * userData) {
     mvaddstr(15, 0, "item3 pushed!");
     refresh();
 }
@@ -36,11 +36,11 @@ void testThreeItems() {
     printStatus("%s... ", __func__);
     nvWidget *w = nvPopupMenu__new(0, 10);
     nvWidget *i1 = nvActionLabel__new(0, 0, cgString__new("item1"));
-    nvActionLabel_setOnPushMethod(i1, i1Pushed);
+    nvActionLabel_setOnPushMethod(i1, i1Pushed, NULL);
     nvWidget *i2 = nvActionLabel__new(0, 0, cgString__new("item2"));
-    nvActionLabel_setOnPushMethod(i2, i2Pushed);
+    nvActionLabel_setOnPushMethod(i2, i2Pushed, NULL);
     nvWidget *i3 = nvActionLabel__new(0, 0, cgString__new("item3"));
-    nvActionLabel_setOnPushMethod(i3, i3Pushed);
+    nvActionLabel_setOnPushMethod(i3, i3Pushed, NULL);
 
 
     nvPopupMenu_addWidget(w, i1);

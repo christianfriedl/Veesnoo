@@ -133,11 +133,16 @@ bool nvWindow_deFocus(nvWidget * this) {
     nvFocusManager_deFocus(THIS(nvWindow)->focusManager);
     return true;
 }
+bool nvWindow_getIsFocused(nvWidget * this) {
+    return THIS(nvWindow)->isFocused;
+}
+
 
 void nvWindow_show(nvWidget * this) {
     nvWidget_setIsVisible(this, true);
 }
 
 void nvWindow_hide(nvWidget * this) {
+    nvCursesWindow_fillBackground(this->cw, ' ');
     nvWidget_setIsVisible(this, false);
 }

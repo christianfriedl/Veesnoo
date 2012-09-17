@@ -36,6 +36,8 @@ bool nvWindow_focus(nvWidget * this);
 
 bool nvWindow_deFocus(nvWidget * this);
 
+bool nvWindow_getIsFocused(nvWidget * this);
+
 void nvWindow_show(nvWidget * this);
 
 void nvWindow_hide(nvWidget * this);

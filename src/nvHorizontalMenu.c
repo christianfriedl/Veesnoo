@@ -79,6 +79,10 @@ bool nvHorizontalMenu_focus(nvWidget* this) {
     return true;
 }
 
+bool nvHorizontalMenu_getIsFocused(nvWidget * this) {
+    return THIS(nvHorizontalMenu)->isFocused;
+}
+
 bool nvHorizontalMenu_deFocus(nvWidget* this) {
     THIS(nvHorizontalMenu)->isFocused = false;
     nvFocusManager_deFocus(THIS(nvHorizontalMenu)->focusManager);

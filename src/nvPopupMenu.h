@@ -27,6 +27,8 @@ bool nvPopupMenu_focus(nvWidget * this);
 
 bool nvPopupMenu_deFocus(nvWidget * this);
 
+bool nvPopupMenu_getIsFocused(nvWidget * this);
+
 void nvPopupMenu_show(nvWidget * this);
 
 void nvPopupMenu_hide(nvWidget * this);

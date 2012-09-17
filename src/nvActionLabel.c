@@ -9,6 +9,7 @@ static nvActionLabel *nvActionLabel__new_(int x, int y, cgString * text) {
         this->text = text;
         this->isFocused = false;
         this->onPushMethod = NULL;
+        this->onPushUserData = NULL;
     } else
         cgAppState_THROW(cgAppState__getInstance(), Severity_fatal, cgExceptionID_CannotAllocate,
                          "cannot allocate nvActionLabel");
@@ -27,6 +28,9 @@ nvWidget *nvActionLabel__new(int x, int y, cgString * text) {
 
     return this;
 }
+
+/* dummy for cgArray */
+nvActionLabel* nvActionLabel_clone(nvActionLabel *this) { return NULL; }
 
 void nvActionLabel_delete(nvWidget * this) {
     nvWidget_delete_(this);
@@ -87,13 +91,14 @@ bool nvActionLabel_deFocus(nvWidget * this) {
     return true;
 }
 
-void nvActionLabel_setOnPushMethod(nvWidget* this, void(*method)(nvWidget*)) {
+void nvActionLabel_setOnPushMethod(nvWidget* this, void(*method)(nvWidget*, void*), void * userData) {
     THIS(nvActionLabel)->onPushMethod = method;
+    THIS(nvActionLabel)->onPushUserData = userData;
 }
 
 void nvActionLabel_push(nvWidget * this) {
     if (THIS(nvActionLabel)->onPushMethod != NULL)
-        (THIS(nvActionLabel)->onPushMethod)(this);
+        (THIS(nvActionLabel)->onPushMethod)(this, THIS(nvActionLabel)->onPushUserData);
 }
 /* DUMMY */
 void nvActionLabel_setInputMode(nvWidget * this, nvInputMode mode) {

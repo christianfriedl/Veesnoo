@@ -69,6 +69,9 @@ nvWidget *nvFocusManager_getFocusedWidget(nvFocusManager * this) {
     return this->focusedWidget;
 }
 
+int nvFocusManager_getWidgetIndex(nvFocusManager * this, nvWidget * widget) {
+    cgArray_findIndex(nvWidget, this->widgets, widget, nvWidget__compareForArray);
+}
 bool nvFocusManager_focus(nvFocusManager * this) {
     if (cgArray_getSize(nvWidget, this->widgets) > 0) {
         this->focusedWidget = cgArray_getValueAt(nvWidget, this->widgets, 0);

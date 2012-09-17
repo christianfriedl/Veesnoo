@@ -35,4 +35,10 @@ nvSubwidgetManager *nvVerticalMenu_getSubwidgetManager(nvWidget * this);
 nvWidget *nvVerticalMenu_createMenuItem(nvWidget * this, cgString * text);
 
 void nvVerticalMenu_deleteMenuItems(nvWidget * this);
+
+int nvVerticalMenu_getSelectedIndex(nvWidget * this);
+
+nvWidget *nvVerticalMenu_getSelectedWidget(nvWidget * this);
+
+bool nvVerticalMenu_getIsFocused(nvWidget * this);
 #endif

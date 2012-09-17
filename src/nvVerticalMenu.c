@@ -88,6 +88,10 @@ bool nvVerticalMenu_deFocus(nvWidget * this) {
     return true;
 }
 
+bool nvVerticalMenu_getIsFocused(nvWidget * this) {
+    return THIS(nvVerticalMenu)->isFocused;
+}
+
 nvSubwidgetManager* nvVerticalMenu_getSubwidgetManager(nvWidget* this) {
     return THIS(nvVerticalMenu)->subwidgetManager;
 }
@@ -100,6 +104,22 @@ nvWidget *nvVerticalMenu_createMenuItem(nvWidget * this, cgString * text) {
 
 void nvVerticalMenu_deleteMenuItems(nvWidget * this) {
     nvSubwidgetManager_deleteSubwidgets(THIS(nvVerticalMenu)->subwidgetManager);
+}
+
+void nvVerticalMenu_selectItemByIndex(nvWidget * this, int index) {
+}
+
+int nvVerticalMenu_getSelectedIndex(nvWidget * this) {
+    nvWidget * widget = nvVerticalMenu_getSelectedWidget(this);
+    if (widget == NULL) {
+        cgAppState_THROW(cgAppState__getInstance(), Severity_notice, nvExceptionID_menuNoItemSelected, "no item selected.");
+        return NV_MENU_NO_SELECTED_ITEM;
+    } else
+        return nvFocusManager_getWidgetIndex(THIS(nvVerticalMenu)->focusManager, widget);
+}
+
+nvWidget * nvVerticalMenu_getSelectedWidget(nvWidget * this) {
+    return nvFocusManager_getFocusedWidget(THIS(nvVerticalMenu)->focusManager);
 }
 
 /* DUMMY */

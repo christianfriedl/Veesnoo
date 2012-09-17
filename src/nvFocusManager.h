@@ -25,7 +25,11 @@ void nvFocusManager_addWidget(nvFocusManager * this, nvWidget * widget);
 
 nvWidget *nvFocusManager_getFocusedWidget(nvFocusManager * this);
 
+int nvFocusManager_getFocusedIndex(nvFocusManager * this);
+
 bool nvFocusManager_deFocus(nvFocusManager * this);
 
 bool nvFocusManager_focus(nvFocusManager * this);
+
+int nvFocusManager_getWidgetIndex(nvFocusManager * this, nvWidget * widget);
 #endif

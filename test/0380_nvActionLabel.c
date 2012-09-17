@@ -67,7 +67,7 @@ void testFocus() {
     printStatus("ok -- ");
 }
 
-static void pushMethod(nvWidget* label) {
+static void pushMethod(nvWidget* label, void * userData) {
     mvaddstr(12, 10, "has been pushed");
     refresh();
 }
@@ -76,7 +76,7 @@ void testInputChar() {
     printStatus("%s... ", __func__);
     cgString* text = cgString__new("test");
     nvWidget *l = nvActionLabel__new(10, 10, text);
-    nvActionLabel_setOnPushMethod(l, pushMethod);
+    nvActionLabel_setOnPushMethod(l, pushMethod, NULL);
 
     nvWidget_refresh(l);
     nvCursesManager_refresh(nvCursesManager__getInstance());
