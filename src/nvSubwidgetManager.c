@@ -37,11 +37,14 @@ void nvSubwidgetManager_refresh(nvSubwidgetManager * this) {
         if (widget != focusedWidget && nvSubwidgetManager_widgetShouldBeDisplayed_(this, widget))
             nvWidget_refresh(widget);
     }
+    
     cgArrayIterator_reset(nvWidget, iter);
+    
     while ((widget = cgArrayIterator_fetch(nvWidget, iter)) != NULL) {
         if (focusedWidget == widget && nvSubwidgetManager_widgetShouldBeDisplayed_(this, widget))
             nvWidget_refresh(focusedWidget);
     }
+    
     nvCursesManager_refresh(nvCursesManager__getInstance());
 }
 
