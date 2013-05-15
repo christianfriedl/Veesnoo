@@ -1,4 +1,7 @@
+#include<assert.h>
+#include<cgenerics/cgAppState.h>
 #include"nvSubwidgetManager.h"
+
 static bool nvSubwidgetManager_widgetShouldBeDisplayed_(nvSubwidgetManager * this, nvWidget * widget);
 
 nvSubwidgetManager *nvSubwidgetManager__new() {
@@ -25,8 +28,10 @@ void nvSubwidgetManager_addWidget(nvSubwidgetManager * this, nvWidget * widget) 
 }
 
 static bool nvSubwidgetManager_widgetShouldBeDisplayed_(nvSubwidgetManager * this, nvWidget * widget) {
+    cgAppState_ASSERT(cgAppState__getInstance(), nvWidget_getParent(widget) != NULL, Severity_fatal, cgExceptionID_GeneralFatalException, "widget has no parent");
     return (nvWidget_getIsVisible(widget) && nvWidget_doesOverlapClientRect(nvWidget_getParent(widget), widget));
 }
+
 void nvSubwidgetManager_refresh(nvSubwidgetManager * this) {
     cgArrayIterator(nvWidget) * iter = cgArrayIterator__new(nvWidget, this->subWidgets);
     nvWidget *widget = NULL;
