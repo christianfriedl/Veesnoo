@@ -39,10 +39,6 @@ void nvWindow_delete(nvWidget * this) {
 }
 
 void nvWindow_addWidget(nvWidget * this, nvWidget * widget) {
-    /*
-     * move relative to absolute coordinates 
-     */
-    nvWidget_move(widget, nvWidget_getX(widget) + nvWidget_getX(this) + 1, nvWidget_getY(widget) + nvWidget_getY(this) + 1);
     nvWindow_packWidget_(this, widget);
     nvFocusManager_addWidget(THIS(nvWindow)->focusManager, widget);
     nvWidget_setParent(widget, this);
@@ -106,8 +102,13 @@ void nvWindow_refresh(nvWidget * this) {
     }
 }
 
+static cgRectangle* nvWindow_createClientRect_(nvWidget * this);
+static cgRectangle* nvWindow_createClientRect_(nvWidget * this) {
+    return cgRectangle__new(this->x + 1, this->y + 1, this->width - 2, this->height - 2);
+}
+
 bool nvWindow_doesOverlapClientRect(nvWidget * this, nvWidget * that) {
-    cgRectangle *rThis = cgRectangle__new(this->x + 1, this->y + 1, this->width - 2, this->height - 2);
+    cgRectangle *rThis = nvWindow_createClientRect_(this);
 
     cgRectangle *rThat = cgRectangle__new(that->x, that->y, that->width, that->height);
 
