@@ -86,8 +86,8 @@
 -(void) calculateAbsolutePosition {
     if (parent == nil)
         return;
-    [absRect setX: [[self.parent rect] x]];
-    [absRect setY: [[self.parent rect] y]];
+    [absRect setX: [[self.parent rect] x] + [[self rect] x]];
+    [absRect setY: [[self.parent rect] y] + [[self rect] y]];
 }
 
 -(void) setCWPosition {
