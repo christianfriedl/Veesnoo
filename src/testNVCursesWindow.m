@@ -30,6 +30,9 @@ int main() {
     getch();
     [b refresh];
     getch();
+    [b receiveKey: 13];
+    [b refresh];
+    getch();
     [hm refresh];
     getch();
     [[NVCursesManager sharedInstance] uninitCurses];

@@ -1,13 +1,17 @@
+#import<unistd.h>
 #import"NVButton.h"
 
 @implementation NVButton
 
 @synthesize text;
+@synthesize state;
 
 -(id) initWithParent: (NVWidget *) aparent Text: (NSString *) atext X: (int)ax Y: (int)ay {
     self = [super initWithParent: aparent Rect: [[NVRect alloc] initWithX: ax Y: ay Width: [atext length] + 4 Height: 1]];
-    if (self)
-        self.text = atext;
+    if (self) {
+        text = atext;
+        state = NVButtonState_normal;
+    }
     return self;
 }
 
@@ -17,9 +21,30 @@
 }
 
 -(void) refresh {
+    if (state == NVButtonState_pushed)
+        [[self cw] attrOn: A_REVERSE];
     [self addString: [NSString stringWithFormat: @"[ %@ ]", self.text] atX: 0 Y: 0];
+    if (state == NVButtonState_pushed)
+        [[self cw] attrOff: A_REVERSE];
     [super refresh];
-    [super refresh];
+}
+
+-(void) switchState {
+    if (state == NVButtonState_pushed)
+        state = NVButtonState_normal;
+    else
+        state = NVButtonState_pushed;
+    [self refresh];
+}
+
+-(BOOL) receiveKey: (int)ch {
+    if (ch == ' ' || ch == 13) {
+        [self switchState];
+        // Todo do stuff
+        [self switchState];
+        return true;
+    }
+    return false;
 }
 
 @end
