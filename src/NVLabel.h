@@ -4,12 +4,13 @@
 
 @interface NVLabel: NVWidget {
 }
-@property NSString* text;
 
--(id) initWithX: (int)x Y:(int)y Text: (NSString*)text;
+@property (retain) NSString *text;
+
+-(id) initWithText: (NSString *)atext X: (int)ax Y:(int)ay;
+-(id) initWithParent: (NVWidget *)aparent Text: (NSString *)atext X: (int)ax Y:(int)ay;
 -(void)dealloc;
 -(void)refresh;
--(void)setText: (NSString*)text;
 
 @end
 

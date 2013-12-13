@@ -2,21 +2,25 @@
 
 @implementation NVButton
 
-@synthesize label;
+@synthesize text;
 
--(NVButton*) initWithText: (NSString*) text {
-    self = [super init];
-    if (self) {
-        self.label = [[NVLabel alloc] initWithX: 2 Y: 0 Text: text];
-        self.width = [text length] + 4;
-        self.height = 1;
-    }
+-(id) initWithParent: (NVWidget *) aparent Text: (NSString *) atext X: (int)ax Y: (int)ay {
+    self = [super initWithParent: aparent Rect: [[NVRect alloc] initWithX: ax Y: ay Width: [atext length] + 4 Height: 1]];
+    if (self)
+        self.text = atext;
     return self;
 }
 
--(void) refresh {
-    [self.cw addCh: '[' atX: 0 Y: 0];
-    [self.cw addCh: '[' atX: 0 Y: self.width - 1];
-    [self.label refresh];
+-(void) dealloc {
+    [self.text release];
+    [super dealloc];
 }
+
+-(void) refresh {
+    [self addString: [NSString stringWithFormat: @"[ %@ ]", self.text] atX: 0 Y: 0];
+    [super refresh];
+    [super refresh];
+}
+
+@end
 

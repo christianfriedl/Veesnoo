@@ -47,7 +47,9 @@
 }
 
 -(void)dealloc {
+    [self.cw release];
     [self.rect release];
+    [self.absRect release];
     [super dealloc];
 }
 

@@ -1,7 +1,7 @@
 CC=clang
 CFLAGS+=-ggdb 
 LDFLAGS=-lncurses -framework Foundation
-OBJECTS=NVRect.o NVCursesManager.o NVCursesWindow.o NVWidget.o NVCheckbox.o $(TESTOBJ)
+OBJECTS=NVRect.o NVCursesManager.o NVCursesWindow.o NVWidget.o NVCheckbox.o NVButton.o NVLabel.o $(TESTOBJ)
 TESTOBJ=testNVCursesWindow.o
 
 .SUFFIXES: .o .m
