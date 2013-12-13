@@ -3,6 +3,8 @@
 #import"NVCheckbox.h"
 #import"NVButton.h"
 #import"NVLabel.h"
+#import"NVMenuItem.h"
+#import"NVHorizontalMenu.h"
 
 int main() {
     id pool = [[NSAutoreleasePool alloc] init];
@@ -12,6 +14,11 @@ int main() {
     NVWidget *w = [[NVWidget alloc] initWithParent: win Rect: [[NVRect alloc] initWithX: 0 Y: 0 Width: 20 Height: 1]];
     NVCheckbox *c = [[NVCheckbox alloc] initWithParent: win Rect: [[NVRect alloc] initWithX: 0 Y: 1 Width: 3 Height: 1]];
     NVButton *b = [[NVButton alloc] initWithParent: win Text: @"button" X: 0 Y: 2];
+    NVMenuItem *m1 = [[NVMenuItem alloc] initWithParent: win Text: @"item1" X: 0 Y: 0];
+    NVMenuItem *m2 = [[NVMenuItem alloc] initWithParent: win Text: @"item2" X: 0 Y: 0];
+    NVHorizontalMenu *hm = [[NVHorizontalMenu alloc] initWithParent: win X: 0 Y: 4];
+    [hm addWidget: m1];
+    [hm addWidget: m2];
     [w addString: @"abcde"];
     getch();
     [w refresh];
@@ -22,6 +29,8 @@ int main() {
     [c refresh];
     getch();
     [b refresh];
+    getch();
+    [hm refresh];
     getch();
     [[NVCursesManager sharedInstance] uninitCurses];
     [pool drain];

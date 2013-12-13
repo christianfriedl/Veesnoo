@@ -27,4 +27,7 @@
 -(void) focus;
 -(void) deFocus;
 
+-(void) calculateAbsolutePosition;
+-(void) setCWPosition;
+
 @end
