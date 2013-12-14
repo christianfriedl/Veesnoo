@@ -1,7 +1,7 @@
 #pragma clang diagnostic ignored "-Wprotocol"
-#import"NVHorizontalMenu.h"
+#import"NVVerticalMenu.h"
 
-@implementation NVHorizontalMenu
+@implementation NVVerticalMenu
 
 @synthesize subWidgets;
 @synthesize focusManager;
@@ -14,20 +14,21 @@
     }
     return self;
 }
+
 -(void) dealloc {
     [subWidgets release];
     [focusManager release];
     [super dealloc];
 }
+
 -(void) refresh {
     int i, width = 0;
     int count = [subWidgets count];
 
     for (i=0; i < count; ++i) {
-        if (i > 0)
-            width += 1;
-        [[[subWidgets objectAtIndex: i] rect] setX: width];
-        width += [[[subWidgets objectAtIndex: i] rect] width];
+        if ([[[subWidgets objectAtIndex: i] rect] width] > width)
+            width = [[[subWidgets objectAtIndex: i] rect] width];
+        [[[subWidgets objectAtIndex: i] rect] setY: i];
     }
     [[self rect] setWidth: width];
 

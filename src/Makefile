@@ -2,7 +2,7 @@ CC=clang
 CFLAGS+=-ggdb 
 LDFLAGS=-lncurses -framework Foundation
 OBJECTS=NVRect.o NVCursesManager.o NVCursesWindow.o NVWidget.o NVCheckbox.o \
-		NVButton.o NVLabel.o NVMenuItem.o NVHorizontalMenu.o \
+		NVButton.o NVLabel.o NVMenuItem.o NVHorizontalMenu.o NVVerticalMenu.o \
 		NVSimpleFocusManager.o \
 		$(TESTOBJ)
 
