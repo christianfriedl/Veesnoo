@@ -1,16 +1,20 @@
 #import<unistd.h>
 #import"NVButton.h"
 
+#pragma clang diagnostic ignored "-Wprotocol"
+
 @implementation NVButton
 
 @synthesize text;
 @synthesize state;
+@synthesize focusManager;
 
 -(id) initWithParent: (NVWidget *) aparent Text: (NSString *) atext X: (int)ax Y: (int)ay {
     self = [super initWithParent: aparent Rect: [[NVRect alloc] initWithX: ax Y: ay Width: [atext length] + 4 Height: 1]];
     if (self) {
         text = atext;
         state = NVButtonState_normal;
+        focusManager = [[NVSimpleFocusManager alloc] initWithWidget: self];
     }
     return self;
 }
@@ -45,6 +49,13 @@
         return true;
     }
     return false;
+}
+
+- (void)forwardInvocation:(NSInvocation *)anInvocation {
+    if ([focusManager respondsToSelector: [anInvocation selector]])
+        [anInvocation invokeWithTarget:focusManager];
+    else
+        [super forwardInvocation:anInvocation];
 }
 
 @end

@@ -77,14 +77,6 @@
     [self.rect moveToX: ax Y: ay];
 }
 
--(void)focus {
-    // [[NVCursesManager sharedInstance] setFocusedWidget: self];
-}
-
--(void)deFocus {
-    // [[NVCursesManager sharedInstance] setFocusedWidget: nil];
-}
-
 -(void) calculateAbsolutePosition {
     if (parent == nil)
         return;

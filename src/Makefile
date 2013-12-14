@@ -3,19 +3,24 @@ CFLAGS+=-ggdb
 LDFLAGS=-lncurses -framework Foundation
 OBJECTS=NVRect.o NVCursesManager.o NVCursesWindow.o NVWidget.o NVCheckbox.o \
 		NVButton.o NVLabel.o NVMenuItem.o NVHorizontalMenu.o \
+		NVSimpleFocusManager.o \
 		$(TESTOBJ)
-TESTOBJ=testNVCursesWindow.o
+
+# TESTOBJ=testNVCursesWindow.o
+TESTOBJ=testFocus.o
 
 .SUFFIXES: .o .m
 
-.m.o:
-	$(CC) $(CFLAGS) -c $<
+test: testnvwm
+
+clean-test: clean test
 
 testnvwm: $(OBJECTS)
 	clang -o testnvwm $(OBJECTS) $(LDFLAGS)
 
-NVCursesManager.o: NVCursesManager.m NVCursesManager.h
-NVCursesWindow.o: NVCursesWindow.m NVCursesWindow.h
+.m.o: $<.m $<.h
+	$(CC) $(CFLAGS) -c $<
+
 
 clean:
-	rm *.o
+	rm -f *.o testnvwm

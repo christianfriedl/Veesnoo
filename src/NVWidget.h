@@ -24,8 +24,6 @@
 -(void)addCh: (int)ch atX:(int)ax Y:(int)ay;
 // -(BOOL) receiveKey: (int)ch;
 // -(void) setInputMode: (NVInputMode)mode;
--(void) focus;
--(void) deFocus;
 
 -(void) calculateAbsolutePosition;
 -(void) setCWPosition;
