@@ -1,17 +1,12 @@
 #import<ncurses.h>
 #import"Foundation/Foundation.h"
 #import "NVWidget.h"
-#import "NVContaining.h"
-#import "NVSimpleFocusManager.h"
+#import "NVContainer.h"
 
-@interface NVVerticalMenu : NVWidget <NVContaining, NVKeyReceiving> { }
-
-@property (retain) NSMutableArray *subWidgets;
-@property (retain) NVSimpleFocusManager *focusManager;
+@interface NVVerticalMenu : NVContainer { }
 
 -(id) initWithParent: (NVWidget *) aparent X: (int)ax Y: (int)ay;
--(void) dealloc;
--(void) refresh;
+-(void) pack;
 -(void) addWidget: (NVWidget *)awidget;
 -(void) forwardInvocation: (NSInvocation *)anInvocation;
 

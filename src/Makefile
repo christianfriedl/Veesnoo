@@ -4,23 +4,22 @@ LDFLAGS=-lncurses -framework Foundation
 OBJECTS=NVRect.o NVCursesManager.o NVCursesWindow.o NVWidget.o NVCheckbox.o \
 		NVButton.o NVLabel.o NVMenuItem.o NVHorizontalMenu.o NVVerticalMenu.o \
 		NVSimpleFocusManager.o \
-		$(TESTOBJ)
-
-# TESTOBJ=testNVCursesWindow.o
-TESTOBJ=testFocus.o
+		NVContainer.o
+STATICLIB=libnvwm.a
 
 .SUFFIXES: .o .m
 
-test: testnvwm
+all: libnvwm.a
 
-clean-test: clean test
+test: all
+	cd test/; make test
 
-testnvwm: $(OBJECTS)
-	clang -o testnvwm $(OBJECTS) $(LDFLAGS)
+libnvwm.a: $(OBJECTS)
+	ar -rs libnvwm.a $(OBJECTS)
 
 .m.o: $<.m $<.h
 	$(CC) $(CFLAGS) -c $<
 
 
 clean:
-	rm -f *.o testnvwm
+	rm -f *.o
