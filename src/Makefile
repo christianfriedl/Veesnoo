@@ -2,9 +2,11 @@ CC=clang
 CFLAGS+=-ggdb 
 LDFLAGS=-lncurses -framework Foundation
 OBJECTS=NVRect.o NVCursesManager.o NVCursesWindow.o NVWidget.o NVCheckbox.o \
+		NVTextfield.o \
 		NVButton.o NVLabel.o NVMenuItem.o NVHorizontalMenu.o NVVerticalMenu.o \
 		NVSimpleFocusManager.o \
 		NVContainer.o
+
 STATICLIB=libnvwm.a
 
 .SUFFIXES: .o .m

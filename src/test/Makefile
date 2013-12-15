@@ -1,20 +1,23 @@
 CC=clang
 CFLAGS+=-ggdb -I../
 LDFLAGS=-lncurses -framework Foundation $(STATICLIB)
-OBJECTS=testFocus.o
+OBJECTS=testFocus.o testTextfield.o
 STATICLIB=../libnvwm.a
-TESTBINARIES=testFocus
+TESTBINARIES=testFocus testTextfield
 
 .SUFFIXES: .o .m
 
-test: $(TESTBINARIES)
+test: clean $(TESTBINARIES)
 
 testFocus: $(OBJECTS)
 	clang $(LDFLAGS) testFocus.o -o testFocus
+
+testTextfield: $(OBJECTS)
+	clang $(LDFLAGS) testTextfield.o -o testTextfield
 
 .m.o: $<.m $<.h
 	$(CC) $(CFLAGS) -c $<
 
 
 clean:
-	rm -f *.o
+	rm -f $(TESTBINARIES)
