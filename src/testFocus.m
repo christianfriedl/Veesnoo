@@ -21,7 +21,10 @@ int main() {
     NVVerticalMenu *vm = [[NVVerticalMenu alloc] initWithParent: win X: 0 Y: 2];
     [vm addWidget: m3];
     [vm addWidget: m4];
+    [hm focus];
     [hm refresh];
+    getch();
+    [vm focus];
     [vm refresh];
     getch();
     [hm receiveKey: ' '];

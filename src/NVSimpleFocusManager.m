@@ -52,6 +52,12 @@
 }
 
 -(void) focusThis: (NVWidget<NVKeyReceiver>*) awidget {
+    int i = 0, count = [subWidgets count];
+    for (i=0; i < count; ++i) {
+        NVWidget<NVKeyReceiver>* focusable = [subWidgets objectAtIndex: i];
+        if (![focusable isEqual: awidget] && [focusable isFocused])
+            [focusable deFocus];
+    }
     [awidget focus];
     focusedWidget = awidget;
 }

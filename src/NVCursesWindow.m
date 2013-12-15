@@ -45,10 +45,9 @@
 }
 
 -(void) refresh {
-    wnoutrefresh(self.window);
     [[NVCursesManager sharedInstance] refresh];
+    wrefresh(self.window);
 }
-
 
 -(void) addBorder {
     box(self.window, 0, 0);

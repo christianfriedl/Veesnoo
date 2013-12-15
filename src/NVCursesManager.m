@@ -62,7 +62,7 @@ static NVCursesManager* instance = nil;
 }
 
 -(void)refresh {
-    doupdate();
+    refresh();
 }
 
 @end
