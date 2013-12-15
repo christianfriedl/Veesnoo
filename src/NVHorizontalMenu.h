@@ -1,10 +1,10 @@
 #import<ncurses.h>
 #import"Foundation/Foundation.h"
 #import "NVWidget.h"
-#import "NVContainer.h"
+#import "NVContaining.h"
 #import "NVSimpleFocusManager.h"
 
-@interface NVHorizontalMenu : NVWidget <NVContainer, NVKeyReceiver> { }
+@interface NVHorizontalMenu : NVWidget <NVContaining, NVKeyReceiving> { }
 
 @property (retain) NSMutableArray *subWidgets;
 @property (retain) NVSimpleFocusManager *focusManager;

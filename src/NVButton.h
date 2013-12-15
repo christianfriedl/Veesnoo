@@ -1,12 +1,12 @@
 #import<ncurses.h>
 #import"Foundation/Foundation.h"
 #import "NVWidget.h"
-#import "NVKeyReceiver.h"
+#import "NVKeyReceiving.h"
 #import "NVSimpleFocusManager.h"
 
 typedef enum { NVButtonState_normal, NVButtonState_pushed } NVButtonState;
 
-@interface NVButton : NVWidget <NVKeyReceiver> { }
+@interface NVButton : NVWidget <NVKeyReceiving> { }
 
 @property (retain) NSString *text;
 @property NVButtonState state;

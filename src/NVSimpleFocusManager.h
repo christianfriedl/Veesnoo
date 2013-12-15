@@ -1,11 +1,11 @@
 #import<ncurses.h>
 #import"Foundation/Foundation.h"
 #import "NVWidget.h"
-#import "NVFocusManager.h"
+#import "NVFocusManaging.h"
 
-@interface NVSimpleFocusManager : NSObject <NVFocusManager> { }
+@interface NVSimpleFocusManager : NSObject <NVFocusManaging> { }
 
-@property (retain) NVWidget<NVKeyReceiver> *widget;
+@property (retain) NVWidget<NVKeyReceiving> *widget;
 @property (retain) NVWidget *focusedWidget;
 @property (retain) NSMutableArray *subWidgets;
 @property BOOL isFocused;

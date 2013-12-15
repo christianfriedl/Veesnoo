@@ -1,9 +1,9 @@
 #import"NVWidget.h"
-#import"NVKeyReceiver.h"
+#import"NVKeyReceiving.h"
 #import"NVSimpleFocusManager.h"
 #pragma clang diagnostic ignored "-Wprotocol"
 
-@interface NVCheckbox: NVWidget <NVKeyReceiver> { }
+@interface NVCheckbox: NVWidget <NVKeyReceiving> { }
 
 @property BOOL state;
 @property (retain) NVSimpleFocusManager* focusManager;

@@ -7,7 +7,7 @@
 @synthesize subWidgets;
 @synthesize isFocused;
 
--(id) initWithWidget: (NVWidget<NVKeyReceiver> *)awidget {
+-(id) initWithWidget: (NVWidget<NVKeyReceiving> *)awidget {
     self = [super init];
     if (self) {
         widget = awidget;
@@ -15,11 +15,11 @@
         isFocused = NO;
         subWidgets = [[NSMutableArray alloc] initWithCapacity: 10];
         if ([widget respondsToSelector: @selector(subWidgets)]) {
-            NVWidget<NVContainer> *container = (NVWidget<NVContainer> *) widget;
+            NVWidget<NVContaining> *container = (NVWidget<NVContaining> *) widget;
             NSMutableArray *wsw = [container subWidgets];
             int i, count = [wsw count];
             for (i=0; i < count; ++i)
-                if ([[wsw objectAtIndex: i] conformsToProtocol: @protocol(NVKeyReceiver)]) {
+                if ([[wsw objectAtIndex: i] conformsToProtocol: @protocol(NVKeyReceiving)]) {
                     id focusable = [wsw objectAtIndex: i];
                     [focusable setIsFocused: NO];
                     [subWidgets addObject: focusable];
@@ -30,8 +30,8 @@
 }
 
 -(void) addWidget: (NVWidget *)awidget {
-    if ([awidget conformsToProtocol: @protocol(NVKeyReceiver)]) {
-        NVWidget<NVKeyReceiver> *focusable = (NVWidget<NVKeyReceiver> *) widget;
+    if ([awidget conformsToProtocol: @protocol(NVKeyReceiving)]) {
+        NVWidget<NVKeyReceiving> *focusable = (NVWidget<NVKeyReceiving> *) widget;
         [focusable setIsFocused: NO];
         [subWidgets addObject: awidget];
     }
@@ -51,10 +51,10 @@
     return NO;
 }
 
--(void) focusThis: (NVWidget<NVKeyReceiver>*) awidget {
+-(void) focusThis: (NVWidget<NVKeyReceiving>*) awidget {
     int i = 0, count = [subWidgets count];
     for (i=0; i < count; ++i) {
-        NVWidget<NVKeyReceiver>* focusable = [subWidgets objectAtIndex: i];
+        NVWidget<NVKeyReceiving>* focusable = [subWidgets objectAtIndex: i];
         if (![focusable isEqual: awidget] && [focusable isFocused])
             [focusable deFocus];
     }

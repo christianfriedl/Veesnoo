@@ -3,7 +3,7 @@
 #import "NVWidget.h"
 #import "NVSimpleFocusManager.h"
 
-@interface NVMenuItem: NVWidget <NVKeyReceiver> { }
+@interface NVMenuItem: NVWidget <NVKeyReceiving> { }
 
 @property (retain) NSString *text;
 @property (retain) NVSimpleFocusManager *focusManager;
