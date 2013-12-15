@@ -3,6 +3,12 @@
 #ifndef min
 #define min( a, b ) ( ((a) < (b)) ? (a) : (b) )
 #endif
+#ifndef max
+#define max( a, b ) ( ((a) > (b)) ? (a) : (b) )
+#endif
+
+#define NVKEY_ENTER (10)
+
 @interface NVCursesManager: NSObject { }
 
 @property BOOL bufferedMode;
