@@ -11,7 +11,6 @@
 @property BOOL isFocused;
 
 -(id) initWithWidget: (NVWidget *)awidget;
--(void) dealloc;
 -(BOOL) receiveKey: (int) ch;
 -(void) focus;
 -(void) deFocus;

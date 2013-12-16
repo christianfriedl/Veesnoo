@@ -9,7 +9,6 @@
 
 -(id) initWithText: (NSString *)atext X: (int)ax Y:(int)ay;
 -(id) initWithParent: (NVWidget *)aparent Text: (NSString *)atext X: (int)ax Y:(int)ay;
--(void)dealloc;
 -(void)refresh;
 
 @end

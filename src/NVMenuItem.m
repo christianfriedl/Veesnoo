@@ -21,9 +21,6 @@
     }
     return self;
 }
--(void) dealloc {
-    [self.text release];
-}
 -(void) refresh {
     if ([focusManager isFocused])
         [[self cw] attrOn: A_REVERSE];

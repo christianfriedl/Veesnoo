@@ -18,9 +18,6 @@
     }
     return self;
 }
--(void) dealloc {
-    [self.text release];
-}
 -(void) refresh {
     [self addString: text atX: 0 Y: 0];
     [super refresh];

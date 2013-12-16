@@ -13,10 +13,6 @@
     return self;
 }
 
--(void)dealloc {
-    [[NVCursesManager sharedInstance] destroyWindow: self.window];
-}
-
 -(void)addString: (NSString*)text {
     int x, y;
 

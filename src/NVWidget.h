@@ -14,7 +14,6 @@
 -(id)initWithParent: (NVWidget*)aparent X:(int)ax Y:(int)ay Width:(int)awidth Height:(int)aheight;
 -(id)initWithRect: (NVRect *) rect;
 -(id)initWithParent: (NVWidget*)aparent Rect: (NVRect *)arect;
--(void)dealloc;
 -(void) refresh;
 -(void)resizeToWidth: (int)awidth Height:(int)aheight;
 -(void) moveToX: (int)x Y:(int)y;

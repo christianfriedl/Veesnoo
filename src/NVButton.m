@@ -19,11 +19,6 @@
     return self;
 }
 
--(void) dealloc {
-    [self.text release];
-    [super dealloc];
-}
-
 -(void) refresh {
     if (state == NVButtonState_pushed)
         [[self cw] attrOn: A_REVERSE];

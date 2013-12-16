@@ -1,6 +1,6 @@
 CC=clang
 CFLAGS+=-ggdb -I../
-LDFLAGS=-lncurses -framework Foundation $(STATICLIB)
+LDFLAGS=-lncurses -fobjc-arc -framework Foundation $(STATICLIB)
 OBJECTS=testFocus.o testTextfield.o
 STATICLIB=../libnvwm.a
 TESTBINARIES=testFocus testTextfield

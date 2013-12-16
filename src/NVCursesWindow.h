@@ -8,7 +8,6 @@
 @property (assign) WINDOW *window;
 
 -(id)initWithRect: (NVRect *) rect;
--(void)dealloc;
 -(void)addString: (NSString*)text;
 -(void)addString: (NSString *)text atX: (int)x Y:(int)y;
 -(void)addCh: (int)ch atX:(int)x Y:(int)y;

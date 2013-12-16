@@ -13,7 +13,6 @@ typedef enum { NVButtonState_normal, NVButtonState_pushed } NVButtonState;
 @property (retain) NVSimpleFocusManager *focusManager;
 
 -(id) initWithParent: (NVWidget *) aparent Text: (NSString *) atext X: (int)ax Y: (int)ay;
--(void) dealloc;
 -(void) refresh;
 -(BOOL) receiveKey: (int)ch;
 -(void) forwardInvocation: (NSInvocation *) anInvocation;

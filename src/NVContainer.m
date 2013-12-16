@@ -15,12 +15,6 @@
     return self;
 }
 
--(void) dealloc {
-    [subWidgets release];
-    [focusManager release];
-    [super dealloc];
-}
-
 -(void) refresh {
     int i, width = 0;
     int count = [subWidgets count];

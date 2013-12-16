@@ -37,12 +37,6 @@
     }
 }
 
--(void) dealloc {
-    [widget release];
-    [subWidgets release];
-    [super dealloc];
-}
-
 -(BOOL) receiveKey: (int) ch {
     if (ch == ' ') {
         [self focusNext];

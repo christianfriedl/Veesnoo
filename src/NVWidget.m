@@ -46,13 +46,6 @@
     return self;
 }
 
--(void)dealloc {
-    [self.cw release];
-    [self.rect release];
-    [self.absRect release];
-    [super dealloc];
-}
-
 -(id)initWithX:(int)ax Y:(int)ay Width:(int)awidth Height:(int)aheight {
     self = [super init];
 

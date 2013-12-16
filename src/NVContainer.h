@@ -15,7 +15,6 @@
 @property (retain) NVSimpleFocusManager *focusManager;
 
 -(id) initWithParent: (NVWidget *)aparent Rect: (NVRect *)arect;
--(void) dealloc;
 -(void) refresh;
 -(void) addWidget: (NVWidget *)awidget;
 -(void) forwardInvocation: (NSInvocation *)anInvocation;
