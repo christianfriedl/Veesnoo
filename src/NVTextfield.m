@@ -39,6 +39,10 @@
     [self addString: [self.text substringWithRange: NSMakeRange(startX, lenX)] atX: 0 Y: 0];
     if ([self isFocused])
         [[self cw] attrOff: A_REVERSE];
+    if (startX > 0)
+        [self addCh: '<' atX: 0 Y: 0];
+    if ([[self text] length] - startX > [[self rect] width])
+        [self addCh: '>' atX: [[self rect] width] Y: 0];
     [[self cw] moveCursorToX: cursorX Y: 0];
     [super refresh];
 }
