@@ -31,9 +31,9 @@
 
 -(void) addWidget: (NVWidget *)awidget {
     if ([awidget conformsToProtocol: @protocol(NVKeyReceiving)]) {
-        NVWidget<NVKeyReceiving> *focusable = (NVWidget<NVKeyReceiving> *) widget;
+        NVWidget<NVKeyReceiving> *focusable = (NVWidget<NVKeyReceiving> *) awidget;
         [focusable setIsFocused: NO];
-        [subWidgets addObject: awidget];
+        [subWidgets addObject: focusable];
     }
 }
 
