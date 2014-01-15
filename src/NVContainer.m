@@ -36,8 +36,15 @@
         [super forwardInvocation:anInvocation];
 }
 
+// default implementation for pack
 -(void) pack {
-     [self doesNotRecognizeSelector:_cmd];
+    int i, width = 0;
+    int count = [[self subWidgets] count];
+
+    for (i=0; i < count; ++i) {
+        if ([[self.subWidgets objectAtIndex: i] respondsToSelector: @selector(pack)])
+            [[self.subWidgets objectAtIndex: i] pack];
+    }
 }
 
 @end

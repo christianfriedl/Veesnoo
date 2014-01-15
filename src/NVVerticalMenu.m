@@ -18,6 +18,7 @@
         [[[[self subWidgets] objectAtIndex: i] rect] setY: i];
     }
     [[self rect] setWidth: width];
+    [[self rect] setHeight: count];
 }
 
 -(void) addWidget: (NVWidget *)awidget {

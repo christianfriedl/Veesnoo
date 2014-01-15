@@ -3,16 +3,16 @@
 @implementation NVWidget
 
 @synthesize cw;
-@synthesize rect;
+@synthesize rect; 
+@synthesize contentRect;
 @synthesize isVisible;
 @synthesize parent;
-@synthesize absRect;
 
 -(id)initWithRect: (NVRect *) arect {
     self = [super init];
     if (self) {
         self.rect = arect;
-        self.absRect = [arect copy];
+        self.contentRect = [arect copy];
         self.cw = [[NVCursesWindow alloc] initWithRect: self.rect];
         self.isVisible = YES;
     }
@@ -24,7 +24,7 @@
 
     if (self != nil) {
         self.rect = arect;
-        self.absRect = [arect copy];
+        self.contentRect = [arect copy];
         self.cw = [[NVCursesWindow alloc] initWithRect: self.rect];
         self.isVisible = YES;
         self.parent = aparent;
@@ -38,6 +38,7 @@
 
     if (self != nil) {
         self.rect = [[NVRect alloc] initWithX: ax Y: ay Width: awidth Height: aheight];
+        self.contentRect = [rect copy];
         self.cw = [[NVCursesWindow alloc] initWithRect: [[NVRect alloc] initWithX:ax Y:ay Width:awidth Height:aheight]];
         self.isVisible = YES;
         self.parent = aparent;
@@ -51,6 +52,7 @@
 
     if (self != nil) {
         self.rect = [[NVRect alloc] initWithX: ax Y: ay Width: awidth Height: aheight];
+        self.contentRect = [rect copy];
         self.cw = [[NVCursesWindow alloc] initWithRect: [[NVRect alloc] initWithX:ax Y:ay Width:awidth Height:aheight]];
         self.isVisible = YES;
         self.parent = nil;
@@ -70,20 +72,21 @@
     [self.rect moveToX: ax Y: ay];
 }
 
--(void) calculateAbsolutePosition {
+-(NVRect *) absContRect {
     if (parent == nil)
-        return;
-    [parent calculateAbsolutePosition];
-    [absRect setX: [[self.parent absRect] x] + [[self rect] x]];
-    [absRect setY: [[self.parent absRect] y] + [[self rect] y]];
+        return [contentRect copy];
+    NVRect *acr = [self.parent absContRect];
+    [acr setX: [acr x] + [[self contentRect] x]];
+    [acr setY: [acr y] + [[self contentRect] y]];
+    return acr;
 }
 
 -(void) setCWPosition {
-    [self.cw moveToX: [self.absRect x] Y: [self.absRect y]];
+    NVRect *acr = [self absContRect];
+    [self.cw moveToX: [acr x] Y: [acr y]];
 }
 
 -(void) refresh {
-    [self calculateAbsolutePosition];
     [self setCWPosition];
     [cw refresh];
 }
