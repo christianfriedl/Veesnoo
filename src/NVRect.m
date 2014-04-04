@@ -24,4 +24,8 @@
     self.width = awidth;
     self.height = aheight;
 }
+-(void) setOriginRelativeTo: (NVRect *) otherRect {
+    self.x += otherRect.x;
+    self.y += otherRect.y;
+}
 @end

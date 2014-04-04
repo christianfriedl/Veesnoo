@@ -84,6 +84,11 @@
 }
 
 -(void)moveToX:(int)x Y:(int)y {
+    /*
+    const char *s = [[NSString stringWithFormat: @"move curses window %ld to x=%i, y=%i", self.window, x, y] UTF8String];
+    mvaddstr(1,30, s);
+    getch();
+    */
     if ((mvwin(self.window, y, x)) != OK)
         @throw [NSException exceptionWithName: @"CursesWindowException" reason: [NSString stringWithFormat: @"unable to move window %ld to x=%i, y=%i", self.window, x, y] userInfo: nil];
 }

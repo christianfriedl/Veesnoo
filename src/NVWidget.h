@@ -6,8 +6,8 @@
 @interface NVWidget: NSObject { }
 
 @property(retain) NVCursesWindow *cw;
-@property(retain) NVRect *rect;
-@property(retain) NVRect *absRect;
+@property(retain) NVRect *rect; // the original rect
+@property(retain) NVRect *contentRect; // the rect clients can paint on
 @property BOOL isVisible;
 @property(retain) NVWidget *parent;
 
@@ -17,14 +17,11 @@
 -(void) refresh;
 -(void)resizeToWidth: (int)awidth Height:(int)aheight;
 -(void) moveToX: (int)x Y:(int)y;
+-(void) _moveRectToX: (int)ax Y: (int)ay;
 -(void)addString: (NSString*)text;
 -(void)addString: (NSString *)text atX: (int)ax Y:(int)ay;
 -(void)addCh: (int)ch;
 -(void)addCh: (int)ch atX:(int)ax Y:(int)ay;
-// -(BOOL) receiveKey: (int)ch;
-// -(void) setInputMode: (NVInputMode)mode;
-
--(void) calculateAbsolutePosition;
 -(void) setCWPosition;
 
 @end

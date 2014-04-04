@@ -1,9 +1,9 @@
 CC=clang
-CFLAGS+=-ggdb 
+CFLAGS+=-ggdb -fobjc-arc
 LDFLAGS=-lncurses -framework Foundation
 OBJECTS=NVRect.o NVCursesManager.o NVCursesWindow.o NVWidget.o NVCheckbox.o \
 		NVTextfield.o \
-		NVButton.o NVLabel.o NVMenuItem.o NVHorizontalMenu.o NVVerticalMenu.o \
+		NVButton.o NVLabel.o NVMenuItem.o NVHorizontalMenu.o NVVerticalMenu.o NVPopupMenu.o \
 		NVSimpleFocusManager.o \
 		NVContainer.o
 

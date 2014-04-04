@@ -3,16 +3,16 @@
 @implementation NVWidget
 
 @synthesize cw;
-@synthesize rect;
+@synthesize rect; 
+@synthesize contentRect;
 @synthesize isVisible;
 @synthesize parent;
-@synthesize absRect;
 
 -(id)initWithRect: (NVRect *) arect {
     self = [super init];
     if (self) {
         self.rect = arect;
-        self.absRect = [arect copy];
+        self.contentRect = [arect copy];
         self.cw = [[NVCursesWindow alloc] initWithRect: self.rect];
         self.isVisible = YES;
     }
@@ -24,7 +24,7 @@
 
     if (self != nil) {
         self.rect = arect;
-        self.absRect = [arect copy];
+        self.contentRect = [arect copy];
         self.cw = [[NVCursesWindow alloc] initWithRect: self.rect];
         self.isVisible = YES;
         self.parent = aparent;
@@ -38,6 +38,7 @@
 
     if (self != nil) {
         self.rect = [[NVRect alloc] initWithX: ax Y: ay Width: awidth Height: aheight];
+        self.contentRect = [rect copy];
         self.cw = [[NVCursesWindow alloc] initWithRect: [[NVRect alloc] initWithX:ax Y:ay Width:awidth Height:aheight]];
         self.isVisible = YES;
         self.parent = aparent;
@@ -51,6 +52,7 @@
 
     if (self != nil) {
         self.rect = [[NVRect alloc] initWithX: ax Y: ay Width: awidth Height: aheight];
+        self.contentRect = [rect copy];
         self.cw = [[NVCursesWindow alloc] initWithRect: [[NVRect alloc] initWithX:ax Y:ay Width:awidth Height:aheight]];
         self.isVisible = YES;
         self.parent = nil;
@@ -66,24 +68,36 @@
 }
 
 -(void)moveToX: (int)ax Y: (int)ay {
-    [self.cw moveToX: ax Y: ay];
-    [self.rect moveToX: ax Y: ay];
+    [self _moveRectToX: ax Y: ay];
 }
 
--(void) calculateAbsolutePosition {
+-(void)_moveRectToX: (int)ax Y: (int)ay {
+    int dx = ax - [rect x];
+    int dy = ay - [rect y];
+    [self.rect moveToX: ax Y: ay];
+    [self.contentRect moveToX: [self.contentRect x] + dx Y: [self.contentRect y] + dy];
+}
+
+-(NVRect *) absContRect {
     if (parent == nil)
-        return;
-    [parent calculateAbsolutePosition];
-    [absRect setX: [[self.parent absRect] x] + [[self rect] x]];
-    [absRect setY: [[self.parent absRect] y] + [[self rect] y]];
+        return [contentRect copy];
+    NVRect *acr = [self.parent absContRect];
+    /*
+    const char *s = [[NSString stringWithFormat: @"absContRect x=%i, y=%i", [[self contentRect] x], [[self contentRect] y]] UTF8String];
+    mvaddstr(1,29, s);
+    getch();
+    */
+    [acr setX: [acr x] + [[self contentRect] x]];
+    [acr setY: [acr y] + [[self contentRect] y]];
+    return acr;
 }
 
 -(void) setCWPosition {
-    [self.cw moveToX: [self.absRect x] Y: [self.absRect y]];
+    NVRect *acr = [self absContRect];
+    [self.cw moveToX: [acr x] Y: [acr y]];
 }
 
 -(void) refresh {
-    [self calculateAbsolutePosition];
     [self setCWPosition];
     [cw refresh];
 }

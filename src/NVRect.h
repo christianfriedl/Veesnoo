@@ -8,6 +8,7 @@
 -(NVRect*) copy;
 -(void) moveToX: (int)ax Y: (int)ay;
 -(void) resizeToWidth: (int)awidth Height: (int)aheight;
+-(void) setOriginRelativeTo: (NVRect *) otherRect;
 // -(CGRect *) CGRect;
 
 @end

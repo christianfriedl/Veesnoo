@@ -15,9 +15,11 @@
     for (i=0; i < count; ++i) {
         if ([[[[self subWidgets] objectAtIndex: i] rect] width] > width)
             width = [[[[self subWidgets] objectAtIndex: i] rect] width];
-        [[[[self subWidgets] objectAtIndex: i] rect] setY: i];
+        NVWidget *w = [[self subWidgets] objectAtIndex: i];
+        [w moveToX: [[w rect] x] Y: i];
     }
     [[self rect] setWidth: width];
+    [[self rect] setHeight: count];
 }
 
 -(void) addWidget: (NVWidget *)awidget {
