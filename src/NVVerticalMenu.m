@@ -16,7 +16,7 @@
         if ([[[[self subWidgets] objectAtIndex: i] rect] width] > width)
             width = [[[[self subWidgets] objectAtIndex: i] rect] width];
         NVWidget *w = [[self subWidgets] objectAtIndex: i];
-        [w moveToX: [[w rect] x] Y: i];
+        [w moveToX: 0 Y: i];
     }
     [[self rect] setWidth: width];
     [[self rect] setHeight: count];
