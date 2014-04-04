@@ -1,7 +1,7 @@
 CC=clang
 CFLAGS+=-ggdb -I../
 LDFLAGS=-lncurses -fobjc-arc -framework Foundation $(STATICLIB)
-OBJECTS=testFocus.o testTextfield.o testHorizVertMenus.o testPopupMenu.o testWidget.o
+OBJECTS=testTextfield.o testHorizVertMenus.o testPopupMenu.o testWidget.o
 STATICLIB=../libnvwm.a
 TESTBINARIES=testWidget testHorizVertMenus testTextfield testPopupMenu
 

@@ -5,7 +5,8 @@ OBJECTS=NVRect.o NVCursesManager.o NVCursesWindow.o NVWidget.o NVCheckbox.o \
 		NVTextfield.o \
 		NVButton.o NVLabel.o NVMenuItem.o NVHorizontalMenu.o NVVerticalMenu.o NVPopupMenu.o \
 		NVSimpleFocusManager.o \
-		NVContainer.o
+		NVContainer.o \
+		NVDumper.o
 
 STATICLIB=libnvwm.a
 

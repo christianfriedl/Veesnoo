@@ -2,6 +2,8 @@
 #import <Foundation/Foundation.h>
 #import "NVCursesManager.h"
 #import "NVRect.h"
+#import "NVDumper.h"
+
 
 @interface NVCursesWindow: NSObject { }
 

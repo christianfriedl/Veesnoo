@@ -21,6 +21,10 @@
     [[self rect] setWidth: width];
     [[self rect] setHeight: count];
 }
+-(void) refresh {
+    [NVDumper dumpRects: self Text: @"NVVerticalMenu refresh: " StartLine: 10 Interrupt: YES];
+    [super refresh];
+}
 
 -(void) addWidget: (NVWidget *)awidget {
     [awidget setParent: self];

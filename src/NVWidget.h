@@ -3,6 +3,8 @@
 #import "NVCursesWindow.h"
 #import "NVRect.h"
 
+@class NVCursesWindow;
+
 @interface NVWidget: NSObject { }
 
 @property(retain) NVCursesWindow *cw;
@@ -23,5 +25,8 @@
 -(void)addCh: (int)ch;
 -(void)addCh: (int)ch atX:(int)ax Y:(int)ay;
 -(void) setCWPosition;
+-(void) setCWSize;
+-(NVRect *) absContRect;
+-(NVRect *) absRect;
 
 @end

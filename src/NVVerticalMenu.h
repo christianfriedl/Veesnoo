@@ -9,5 +9,6 @@
 -(void) pack;
 -(void) addWidget: (NVWidget *)awidget;
 -(void) forwardInvocation: (NSInvocation *)anInvocation;
+-(void) refresh;
 
 @end

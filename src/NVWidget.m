@@ -81,20 +81,33 @@
 -(NVRect *) absContRect {
     if (parent == nil)
         return [contentRect copy];
-    NVRect *acr = [self.parent absContRect];
-    /*
-    const char *s = [[NSString stringWithFormat: @"absContRect x=%i, y=%i", [[self contentRect] x], [[self contentRect] y]] UTF8String];
-    mvaddstr(1,29, s);
-    getch();
-    */
+    NVRect *acr = [parent absContRect];
     [acr setX: [acr x] + [[self contentRect] x]];
     [acr setY: [acr y] + [[self contentRect] y]];
+    [acr setWidth: [contentRect width]];
+    [acr setHeight: [contentRect height]];
+    return acr;
+}
+
+-(NVRect *) absRect {
+    if (parent == nil)
+        return [rect copy];
+    NVRect *acr = [parent absContRect];
+    [acr setX: [acr x] + [[self rect] x]];
+    [acr setY: [acr y] + [[self rect] y]];
+    [acr setWidth: [rect width]];
+    [acr setHeight: [rect height]];
     return acr;
 }
 
 -(void) setCWPosition {
-    NVRect *acr = [self absContRect];
-    [self.cw moveToX: [acr x] Y: [acr y]];
+    NVRect *ar = [self absRect];
+    [self.cw moveToX: [ar x] Y: [ar y]];
+}
+
+-(void) setCWSize {
+    NVRect *ar = [self absRect];
+    [self.cw resizeToWidth: [ar width] Height: [ar height]];
 }
 
 -(void) refresh {
