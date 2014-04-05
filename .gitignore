@@ -9,5 +9,4 @@ Makefile.local
 doc/
 tags
 nbproject/
-src/test/testFocus
-src/test/testTextfield
+src/test/test*[^.m][^.o][^.h]
