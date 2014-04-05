@@ -19,16 +19,20 @@ int main() {
         [win addWidget: tf1];
         NVTextfield *tf2 = [[NVTextfield alloc] initWithParent: win Text: @"efgh" X: 1 Y: 2 Width: 10];
         [win addWidget: tf2];
+        NVTextfield *tf3 = [[NVTextfield alloc] initWithParent: win Text: @"ijkl" X: 1 Y: 3 Width: 10];
+        [win addWidget: tf3];
 
         [app setMainWindow: win];
         [app focus];
         [tf1 refresh];
         [tf2 refresh];
+        [tf3 refresh];
         while (1) {
             int ch = getch();
             [app receiveKey: ch];
             [tf1 refresh];
             [tf2 refresh];
+            [tf3 refresh];
         }
         [[NVCursesManager sharedInstance] uninitCurses];
     }

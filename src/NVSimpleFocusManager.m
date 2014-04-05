@@ -52,8 +52,12 @@
 #ifdef DEBUG
     [NVLogger logText: [NSString stringWithFormat: @"NVSimpleFocusManager receiveKey: widget class=%@ @ %ld, key='%c' (%i)", NSStringFromClass([self.widget class]), self.widget, ch, ch]];
 #endif
-    if (ch == ' ') {
+    if (ch == ' ' || ch == '\t') {
         [self focusNext];
+        return YES;
+    }
+    else if (ch == KEY_BACKSPACE || ch == KEY_BTAB) {
+        [self focusPrev];
         return YES;
     }
     return NO;
