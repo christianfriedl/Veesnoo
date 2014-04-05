@@ -50,7 +50,7 @@
 
 -(BOOL) receiveKey: (int) ch {
 #ifdef DEBUG
-    [NVLogger logText: [NSString stringWithFormat: @"NVSimpleFocusManager receiveKey: widget class=%@, key='%c' (%i)", NSStringFromClass([self.widget class]), ch, ch]];
+    [NVLogger logText: [NSString stringWithFormat: @"NVSimpleFocusManager receiveKey: widget class=%@ @ %ld, key='%c' (%i)", NSStringFromClass([self.widget class]), self.widget, ch, ch]];
 #endif
     if (ch == ' ') {
         [self focusNext];
@@ -71,6 +71,9 @@
 }
 
 -(void) focus {
+#ifdef DEBUG
+    [NVLogger logText: [NSString stringWithFormat: @"NVSimpleFocusManager::focus for widget %@ @ %ld", NSStringFromClass([self.widget class]), self.widget]];
+#endif
     isFocused = YES;
     [app setFocusedWidget: widget];
     [self focusFirst];
@@ -96,7 +99,6 @@
         i = 0;
     else
         ++i;
-    NSLog(@"focusing %i", i);
     [self focusThis: [subWidgets objectAtIndex: i]];
 }
 

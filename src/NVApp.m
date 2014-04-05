@@ -40,14 +40,23 @@ static NVApp* instance = nil;
 -(BOOL) sendKey: (int) ch toWidget: (NVWidget<NVKeyReceiving>*) aWidget {
     BOOL accepted = false;
     do {
+#ifdef DEBUG
+        [NVLogger logText: [NSString stringWithFormat: @"NVApp::sendKey: sending key '%c' to %@ @ %ld", ch, NSStringFromClass([self.focusedWidget class]), self.focusedWidget]];
+#endif
         accepted = [aWidget receiveKey: ch];
+#ifdef DEBUG
+        [NVLogger logText: [NSString stringWithFormat: @"NVApp::sendKey: receive key accepted=%i", accepted]];
+#endif
         if (!accepted) {
             NVWidget *pWidget = [aWidget parent];
-            if ([pWidget respondsToSelector: @selector(receiveKey)])
+            if ([[pWidget class] conformsToProtocol: @protocol(NVKeyReceiving)])
                 aWidget = (NVWidget<NVKeyReceiving>*)pWidget;
             else
                 aWidget = nil;
         }
+#ifdef DEBUG
+        [NVLogger logText: [NSString stringWithFormat: @"NVApp::sendKey: aWidget=%ld, accepted=%i", aWidget, accepted]];
+#endif
     } while (aWidget && !accepted);
     return accepted;
 }
@@ -55,9 +64,6 @@ static NVApp* instance = nil;
 -(void) receiveKey: (int) ch {
     if (!self.focusedWidget)
         @throw [NSException exceptionWithName: @"NoFocusedWidgetException" reason: @"no focused widget set." userInfo: nil];
-#ifdef DEBUG
-    [NVLogger logText: [NSString stringWithFormat: @"NVApp: sending key '%c' to %@ @ %ld", ch, NSStringFromClass([self.focusedWidget class]), self.focusedWidget]];
-#endif
     BOOL accepted = [self sendKey: ch toWidget: self.focusedWidget];
     /*
     if (!accepted) {

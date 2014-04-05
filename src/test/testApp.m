@@ -8,22 +8,27 @@
 #import"NVHorizontalMenu.h"
 #import"NVPopupMenu.h"
 #import"NVApp.h"
+#import"NVWindow.h"
 
 int main() {
     @autoreleasepool {
         [[NVCursesManager sharedInstance] initCurses];
         NVApp *app = [NVApp sharedInstance];
-        NVWidget *win = [[NVWidget alloc] initWithRect: [[NVRect alloc] initWithX: 2 Y: 2 Width: 100 Height: 30]];
-        NVTextfield *tf = [[NVTextfield alloc] initWithParent: win Text: @"abcd" X: 1 Y: 1 Width: 10];
+        NVWindow *win = [[NVWindow alloc] initWithParent: nil X: 2 Y: 2 Width: 100 Height: 50];
+        NVTextfield *tf1 = [[NVTextfield alloc] initWithParent: win Text: @"abcd" X: 1 Y: 1 Width: 10];
+        [win addWidget: tf1];
+        NVTextfield *tf2 = [[NVTextfield alloc] initWithParent: win Text: @"efgh" X: 1 Y: 2 Width: 10];
+        [win addWidget: tf2];
 
-        [app setMainWindow: tf];
+        [app setMainWindow: win];
         [app focus];
-        [tf refresh];
-        int ch = getch();
-        while (ch != 'q') {
+        [tf1 refresh];
+        [tf2 refresh];
+        while (1) {
+            int ch = getch();
             [app receiveKey: ch];
-            [tf refresh];
-            ch = getch();
+            [tf1 refresh];
+            [tf2 refresh];
         }
         [[NVCursesManager sharedInstance] uninitCurses];
     }
