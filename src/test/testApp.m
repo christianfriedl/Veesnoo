@@ -16,7 +16,8 @@ int main() {
         NVWidget *win = [[NVWidget alloc] initWithRect: [[NVRect alloc] initWithX: 2 Y: 2 Width: 100 Height: 30]];
         NVTextfield *tf = [[NVTextfield alloc] initWithParent: win Text: @"abcd" X: 1 Y: 1 Width: 10];
 
-        [tf focus];
+        [app setMainWindow: tf];
+        [app focus];
         [tf refresh];
         int ch = getch();
         while (ch != 'q') {

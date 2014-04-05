@@ -5,6 +5,7 @@
 @implementation NVApp
 
 @synthesize focusedWidget;
+@synthesize mainWindow;
 
 static NVApp* instance = nil;
 
@@ -21,6 +22,12 @@ static NVApp* instance = nil;
         self.focusedWidget = nil;
     }
     return self;
+}
+
+-(void) focus {
+    if (! self.mainWindow)
+        @throw [NSException exceptionWithName: @"NoMainWindowException" reason: @"no main window set." userInfo: nil];
+    [self.mainWindow focus];
 }
 
 -(void) receiveKey: (int) ch {
