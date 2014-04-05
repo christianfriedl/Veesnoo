@@ -8,6 +8,9 @@
 @synthesize isFocused;
 
 -(id) initWithWidget: (NVWidget<NVKeyReceiving> *)awidget {
+#ifdef DEBUG
+    NSLog(@"NVSimpleFocusManager init: widget class=%@", NSStringFromClass([awidget class]));
+#endif
     self = [super init];
     if (self) {
         widget = awidget;
@@ -80,6 +83,7 @@
         i = 0;
     else
         ++i;
+    NSLog(@"focusing %i", i);
     [self focusThis: [subWidgets objectAtIndex: i]];
 }
 

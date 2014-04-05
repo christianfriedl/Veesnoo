@@ -10,3 +10,4 @@ doc/
 tags
 nbproject/
 src/test/test*[^.m][^.o][^.h]
+*.log

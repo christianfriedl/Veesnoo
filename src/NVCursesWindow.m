@@ -74,7 +74,9 @@
 }
 
 -(void)resizeToWidth:(int)width Height:(int)height {
+#ifdef DEBUG
     [NVDumper dumpText: [NSString stringWithFormat: @"cw resize w=%i, h=%i", width, height] Line: 10 Interrupt: YES];
+#endif
     if ((wresize(self.window, height, width)) != OK)
         @throw [NSException exceptionWithName: @"CursesWindowException" reason: @"unable to resize window" userInfo: nil];
 }

@@ -7,9 +7,15 @@
 @synthesize focusManager;
 
 -(id) initWithParent: (NVWidget *)aparent Rect: (NVRect *)arect {
+#ifdef DEBUG
+    [NVLogger logText: @"NVContainer::init called"];
+#endif
     self = [super initWithParent: aparent Rect: arect];
     if (self) {
         subWidgets = [[NSMutableArray alloc] initWithCapacity: 2];
+#ifdef DEBUG
+        [NVLogger logText: [NSString stringWithFormat: @"NVContainer::init creates focusManager for class %@", NSStringFromClass([self class])]];
+#endif
         focusManager = [[NVSimpleFocusManager alloc] initWithWidget: self];
     }
     return self;

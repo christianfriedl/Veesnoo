@@ -22,7 +22,9 @@
     [[self rect] setHeight: count];
 }
 -(void) refresh {
+#ifdef DEBUG
     [NVDumper dumpRects: self Text: @"NVVerticalMenu refresh: " StartLine: 10 Interrupt: YES];
+#endif
     [super refresh];
 }
 

@@ -5,3 +5,4 @@
 #import "NVCursesWindow.h"
 #import "NVWidget.h"
 #import "NVDumper.h"
+#import "NVLogger.h"

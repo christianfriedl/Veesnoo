@@ -24,7 +24,9 @@
 }
 
 -(void) refresh {
-    [NVDumper dumpRects: self Text: @"NVPopupMenu refresh: " StartLine: 10 Interrupt: YES];
+    #ifdef DEBUG
+        [NVDumper dumpRects: self Text: @"NVPopupMenu refresh: " StartLine: 10 Interrupt: YES];
+    #endif
     [self setCWPosition];
     [self setCWSize];
     [self.cw addBorder];
