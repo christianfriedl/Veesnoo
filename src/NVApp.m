@@ -2,12 +2,19 @@
 #import"NVKeyReceiving.h"
 #import"NVWidget.h"
 
+@interface NVApp(Private)
+
+-(BOOL) sendKey: (int) ch toWidget: (NVWidget<NVKeyReceiving>*) aWidget;
+
+@end
+
 @implementation NVApp
 
 @synthesize focusedWidget;
 @synthesize mainWindow;
 
 static NVApp* instance = nil;
+
 
 +(NVApp *)sharedInstance {
     if (instance == nil)
@@ -30,13 +37,34 @@ static NVApp* instance = nil;
     [self.mainWindow focus];
 }
 
+-(BOOL) sendKey: (int) ch toWidget: (NVWidget<NVKeyReceiving>*) aWidget {
+    BOOL accepted = false;
+    do {
+        accepted = [aWidget receiveKey: ch];
+        if (!accepted) {
+            NVWidget *pWidget = [aWidget parent];
+            if ([pWidget respondsToSelector: @selector(receiveKey)])
+                aWidget = (NVWidget<NVKeyReceiving>*)pWidget;
+            else
+                aWidget = nil;
+        }
+    } while (aWidget && !accepted);
+    return accepted;
+}
+
 -(void) receiveKey: (int) ch {
     if (!self.focusedWidget)
         @throw [NSException exceptionWithName: @"NoFocusedWidgetException" reason: @"no focused widget set." userInfo: nil];
 #ifdef DEBUG
     [NVLogger logText: [NSString stringWithFormat: @"NVApp: sending key '%c' to %@ @ %ld", ch, NSStringFromClass([self.focusedWidget class]), self.focusedWidget]];
 #endif
-    [self.focusedWidget receiveKey: ch];
+    BOOL accepted = [self sendKey: ch toWidget: self.focusedWidget];
+    /*
+    if (!accepted) {
+            @throw [NSException exceptionWithName: @"KeyNotAcceptedException" reason: @"no focused widget found to accept our key." userInfo: nil];
+    }
+    */
+    // currently, if the key is not accepted, we simply throw it away...
 }
 
 @end
