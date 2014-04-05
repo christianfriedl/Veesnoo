@@ -6,13 +6,15 @@
 @synthesize focusedWidget;
 @synthesize subWidgets;
 @synthesize isFocused;
+@synthesize app;
 
 -(id) initWithWidget: (NVWidget<NVKeyReceiving> *)awidget {
 #ifdef DEBUG
-    NSLog(@"NVSimpleFocusManager init: widget class=%@", NSStringFromClass([awidget class]));
+    [NVLogger logText: [NSString stringWithFormat: @"NVSimpleFocusManager init: widget class=%@", NSStringFromClass([awidget class])]];
 #endif
     self = [super init];
     if (self) {
+        app = [NVApp sharedInstance];
         widget = awidget;
         focusedWidget = nil;
         isFocused = NO;
@@ -33,7 +35,13 @@
 }
 
 -(void) addWidget: (NVWidget *)awidget {
+#ifdef DEBUG
+    [NVLogger logText: [NSString stringWithFormat: @"NVSimpleFocusManager for %@ add widget of class: %@", NSStringFromClass([self.widget class]), NSStringFromClass([awidget class])]];
+#endif
     if ([awidget conformsToProtocol: @protocol(NVKeyReceiving)]) {
+#ifdef DEBUG
+        [NVLogger logText: [NSString stringWithFormat: @"...is NVKeyReceiving!"]];
+#endif
         NVWidget<NVKeyReceiving> *focusable = (NVWidget<NVKeyReceiving> *) awidget;
         [focusable setIsFocused: NO];
         [subWidgets addObject: focusable];
@@ -41,6 +49,9 @@
 }
 
 -(BOOL) receiveKey: (int) ch {
+#ifdef DEBUG
+    [NVLogger logText: [NSString stringWithFormat: @"NVSimpleFocusManager receiveKey: widget class=%@, key='%c' (%i)", NSStringFromClass([self.widget class]), ch, ch]];
+#endif
     if (ch == ' ') {
         [self focusNext];
         return YES;
@@ -61,10 +72,12 @@
 
 -(void) focus {
     isFocused = YES;
+    [app setFocusedWidget: widget];
     [self focusFirst];
 }
 
 -(void) deFocus {
+    [app setFocusedWidget: nil];
     isFocused = NO;
 }
 
@@ -97,7 +110,7 @@
         i = count - 1;
     else
         --i;
-    focusedWidget = [subWidgets objectAtIndex: i];
+    [self focusThis: [subWidgets objectAtIndex: i]];
 }
 
 @end

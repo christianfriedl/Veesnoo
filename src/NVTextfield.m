@@ -48,11 +48,9 @@
 }
 
 -(BOOL) receiveKey: (int)ch {
-    /*
-    char x[100];
-    sprintf(x, "/%i/ /%u/ %c %u", ch, ch, ch, NVKEY_ENTER);
-    mvaddstr(20, 4, x);
-    */
+#ifdef DEBUG
+    [NVLogger logText: [NSString stringWithFormat: @"NVTextfield receiveKey: ch='%c'", ch]];
+#endif
     if ([self editState] == NVEditState_none) {
         switch (ch) {
             case NVKEY_ENTER:
