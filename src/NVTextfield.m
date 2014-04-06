@@ -34,6 +34,7 @@
 -(void) refresh {
     if ([self isFocused])
         [[self cw] attrOn: A_REVERSE];
+    [self.cw fillBackground: ' '];
     int startX = max(0, cursorX - [[self rect] width]);
     int lenX = min([[self text] length] - startX, [[self rect] width] - startX);
     [self addString: [self.text substringWithRange: NSMakeRange(startX, lenX)] atX: 0 Y: 0];

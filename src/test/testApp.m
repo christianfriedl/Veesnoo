@@ -17,24 +17,19 @@ int main() {
         NVWindow *win = [[NVWindow alloc] initWithX: 0 Y: 0 Width: 100 Height: 30];
         [win setTitle: @"Main Window"];
         [win maximize];
-        NVTextfield *tf1 = [[NVTextfield alloc] initWithX: 1 Y: 1 Width: 10];
+        NVTextfield *tf1 = [[NVTextfield alloc] initWithX: 0 Y: 0 Width: 10];
         [win addWidget: tf1];
-        NVTextfield *tf2 = [[NVTextfield alloc] initWithX: 1 Y: 2 Width: 10];
+        NVTextfield *tf2 = [[NVTextfield alloc] initWithX: 0 Y: 1 Width: 10];
         [win addWidget: tf2];
-        NVTextfield *tf3 = [[NVTextfield alloc] initWithX: 1 Y: 3 Width: 10];
+        NVTextfield *tf3 = [[NVTextfield alloc] initWithX: 0 Y: 2 Width: 10];
         [win addWidget: tf3];
 
         [win pack];
 
         [app setMainWindow: win];
         [app focus];
-        [win refresh];
+        [app run];
 
-        while (1) {
-            int ch = getch();
-            [app receiveKey: ch];
-            [win refresh];
-        }
         [[NVCursesManager sharedInstance] uninitCurses];
     }
 }

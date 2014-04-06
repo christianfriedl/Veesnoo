@@ -73,4 +73,12 @@ static NVApp* instance = nil;
     // currently, if the key is not accepted, we simply throw it away...
 }
 
+-(void) run {
+    while (1) {
+        [mainWindow refresh];
+        int ch = getch();
+        [self receiveKey: ch];
+    }
+}
+
 @end

@@ -10,5 +10,6 @@
 +(NVApp *) sharedInstance;
 -(void) receiveKey: (int) ch;
 -(void) focus;
+-(void) run;
 
 @end
