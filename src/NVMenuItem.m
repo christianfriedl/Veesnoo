@@ -10,6 +10,7 @@
     self = [super initWithX: ax Y: ay Width: [atext length] Height: 1];
     if (self) {
         text = atext;
+        focusManager = [[NVSingleFocusManager alloc] initWithWidget: self];
     }
     return self;
 }
