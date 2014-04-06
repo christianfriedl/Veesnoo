@@ -67,4 +67,10 @@ static NVCursesManager* instance = nil;
     refresh();
 }
 
+-(NVRect *) getMaxScreenRect {
+    int x, y;
+    getmaxyx(stdscr, y, x);
+    return [[NVRect alloc] initWithX: 0 Y: 0 Width: x Height: y];
+}
+
 @end

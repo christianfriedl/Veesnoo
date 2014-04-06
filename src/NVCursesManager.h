@@ -1,5 +1,7 @@
 #include<ncurses.h>
 #import"Foundation/Foundation.h"
+#import "NVRect.h"
+
 #ifndef min
 #define min( a, b ) ( ((a) < (b)) ? (a) : (b) )
 #endif
@@ -22,5 +24,6 @@
 -(WINDOW *)createWindowWithX: (int)x Y:(int)y Width:(int)aWidth Height:(int)aHeight;
 -(void)destroyWindow: (WINDOW *)window;
 -(void)refresh;
+-(NVRect *) getMaxScreenRect;
 
 @end

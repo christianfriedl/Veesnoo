@@ -15,6 +15,8 @@ int main() {
         [[NVCursesManager sharedInstance] initCurses];
         NVApp *app = [NVApp sharedInstance];
         NVWindow *win = [[NVWindow alloc] initWithX: 0 Y: 0 Width: 100 Height: 30];
+        [win setTitle: @"Main Window"];
+        [win maximize];
         NVTextfield *tf1 = [[NVTextfield alloc] initWithX: 1 Y: 1 Width: 10];
         [win addWidget: tf1];
         NVTextfield *tf2 = [[NVTextfield alloc] initWithX: 1 Y: 2 Width: 10];
