@@ -1,3 +1,4 @@
+#include <ncurses.h>
 #include <stdlib.h>
 #import"NVLogger.h"
 @implementation NVLogger

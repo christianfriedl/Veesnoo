@@ -13,9 +13,7 @@
 @property BOOL isVisible;
 @property(retain) NVWidget *parent;
 
--(id)initWithParent: (NVWidget*)aparent X:(int)ax Y:(int)ay Width:(int)awidth Height:(int)aheight;
--(id)initWithRect: (NVRect *) rect;
--(id)initWithParent: (NVWidget*)aparent Rect: (NVRect *)arect;
+-(id)initWithX:(int)ax Y:(int)ay Width:(int)awidth Height:(int)aheight;
 -(void) refresh;
 -(void)resizeToWidth: (int)awidth Height:(int)aheight;
 -(void) moveToX: (int)x Y:(int)y;

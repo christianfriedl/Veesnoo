@@ -3,8 +3,8 @@
 
 @implementation NVHorizontalMenu
 
--(id) initWithParent: (NVWidget *) aparent X: (int)ax Y: (int)ay {
-    self = [super initWithParent: aparent Rect: [[NVRect alloc] initWithX: ax Y: ay Width: 1 Height: 1]];
+-(id) initWithX: (int)ax Y: (int)ay {
+    self = [super initWithX: ax Y: ay Width: 1 Height: 1];
     return self;
 }
 

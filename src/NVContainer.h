@@ -14,7 +14,7 @@
 @property (retain) NSMutableArray *subWidgets;
 @property (retain) NVContainerFocusManager *focusManager;
 
--(id) initWithParent: (NVWidget *)aparent Rect: (NVRect *)arect;
+-(id)initWithX:(int)ax Y:(int)ay Width:(int)awidth Height:(int)aheight;
 -(void) refresh;
 -(void) addWidget: (NVWidget *)awidget;
 -(void) forwardInvocation: (NSInvocation *)anInvocation;

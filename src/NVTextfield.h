@@ -13,8 +13,8 @@ typedef enum { NVEditState_none, NVEditState_insert, NVEditState_replace } NVEdi
 @property (retain) NVSingleFocusManager *focusManager;
 @property int cursorX;
 
--(id) initWithParent: (NVWidget *) aparent Text: (NSString *) atext X: (int)ax Y: (int)ay Width: (int)awidth;
--(id) initWithParent: (NVWidget *) aparent X: (int)ax Y: (int)ay Width: (int)awidth;
+-(id) initWithText: (NSString *) atext X: (int)ax Y: (int)ay Width: (int)awidth;
+-(id) initWithX: (int)ax Y: (int)ay Width: (int)awidth;
 -(void) refresh;
 -(BOOL) receiveKey: (int)ch;
 -(void) forwardInvocation: (NSInvocation *) anInvocation;

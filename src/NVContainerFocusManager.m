@@ -26,7 +26,6 @@
             for (i=0; i < count; ++i)
                 if ([[wsw objectAtIndex: i] conformsToProtocol: @protocol(NVKeyReceiving)]) {
                     id focusable = [wsw objectAtIndex: i];
-                    [focusable setIsFocused: NO];
                     [subWidgets addObject: focusable];
                 }
         }
@@ -43,7 +42,6 @@
         [NVLogger logText: [NSString stringWithFormat: @"...is NVKeyReceiving!"]];
 #endif
         NVWidget<NVKeyReceiving> *focusable = (NVWidget<NVKeyReceiving> *) awidget;
-        [focusable setIsFocused: NO];
         [subWidgets addObject: focusable];
     }
 }

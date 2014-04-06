@@ -16,8 +16,8 @@
 @synthesize cursorX;
 
 
--(id) initWithParent: (NVWidget *) aparent Text: (NSString *) atext X: (int)ax Y: (int)ay Width: (int)awidth {
-    self = [super initWithParent: aparent Rect: [[NVRect alloc] initWithX: ax Y: ay Width: awidth Height: 1]];
+-(id) initWithText: (NSString *) atext X: (int)ax Y: (int)ay Width: (int)awidth {
+    self = [super initWithX: ax Y: ay Width: awidth Height: 1];
     if (self) {
         text = [[NSMutableString alloc] initWithString: atext];
         editState = NVEditState_none;
@@ -27,8 +27,8 @@
     return self;
 }
 
--(id) initWithParent: (NVWidget *) aparent X: (int)ax Y: (int)ay Width: (int)awidth {
-    return [self initWithParent: aparent Text: @"" X: ax Y: ay Width: awidth];
+-(id) initWithX: (int)ax Y: (int)ay Width: (int)awidth {
+    return [self initWithText: @"" X: ax Y: ay Width: awidth];
 }
 
 -(void) refresh {

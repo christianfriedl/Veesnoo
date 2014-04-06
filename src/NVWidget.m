@@ -8,51 +8,12 @@
 @synthesize isVisible;
 @synthesize parent;
 
--(id)initWithRect: (NVRect *) arect {
-    self = [super init];
-    if (self) {
-        self.rect = arect;
-        self.contentRect = [arect copy];
-        self.cw = [[NVCursesWindow alloc] initWithRect: self.rect];
-        self.isVisible = YES;
-    }
-    return self;
-}
-
--(id)initWithParent: (NVWidget*)aparent Rect: (NVRect *)arect {
-   self = [super init];
-
-    if (self != nil) {
-        self.rect = arect;
-        self.contentRect = [arect copy];
-        self.cw = [[NVCursesWindow alloc] initWithRect: self.rect];
-        self.isVisible = YES;
-        self.parent = aparent;
-    }
-
-    return self;
-}
-
--(id)initWithParent: (NVWidget*)aparent X:(int)ax Y:(int)ay Width:(int)awidth Height:(int)aheight {
-   self = [super init];
-
-    if (self != nil) {
-        self.rect = [[NVRect alloc] initWithX: ax Y: ay Width: awidth Height: aheight];
-        self.contentRect = [rect copy];
-        self.cw = [[NVCursesWindow alloc] initWithRect: [[NVRect alloc] initWithX:ax Y:ay Width:awidth Height:aheight]];
-        self.isVisible = YES;
-        self.parent = aparent;
-    }
-
-    return self;
-}
-
 -(id)initWithX:(int)ax Y:(int)ay Width:(int)awidth Height:(int)aheight {
     self = [super init];
 
     if (self != nil) {
         self.rect = [[NVRect alloc] initWithX: ax Y: ay Width: awidth Height: aheight];
-        self.contentRect = [rect copy];
+        self.contentRect = [self.rect copy];
         self.cw = [[NVCursesWindow alloc] initWithRect: [[NVRect alloc] initWithX:ax Y:ay Width:awidth Height:aheight]];
         self.isVisible = YES;
         self.parent = nil;

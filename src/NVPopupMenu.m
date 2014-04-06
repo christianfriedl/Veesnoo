@@ -4,10 +4,10 @@
 
 @synthesize menu;
 
--(id)initWithParent: (NVWidget *) parent X: (int) ax Y: (int) ay {
-    self = [super initWithParent: parent Rect: [[NVRect alloc] initWithX: ax Y: ay Width: 1 Height: 1]];
+-(id)initWithX: (int) ax Y: (int) ay {
+    self = [super initWithX: ax Y: ay Width: 1 Height: 1];
     if (self) {
-        self.menu = [[NVVerticalMenu alloc] initWithParent: self X: 0 Y: 0];
+        self.menu = [[NVVerticalMenu alloc] initWithX: 0 Y: 0];
         [self addWidget: self.menu];
         self.isVisible = YES;
     }

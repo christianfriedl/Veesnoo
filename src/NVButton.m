@@ -9,8 +9,8 @@
 @synthesize state;
 @synthesize focusManager;
 
--(id) initWithParent: (NVWidget *) aparent Text: (NSString *) atext X: (int)ax Y: (int)ay {
-    self = [super initWithParent: aparent Rect: [[NVRect alloc] initWithX: ax Y: ay Width: [atext length] + 4 Height: 1]];
+-(id) initWithText: (NSString *) atext X: (int)ax Y: (int)ay {
+    self = [super initWithX: ax Y: ay Width: [atext length] + 4 Height: 1];
     if (self) {
         text = atext;
         state = NVButtonState_normal;

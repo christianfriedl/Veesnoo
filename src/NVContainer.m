@@ -6,11 +6,11 @@
 @synthesize subWidgets;
 @synthesize focusManager;
 
--(id) initWithParent: (NVWidget *)aparent Rect: (NVRect *)arect {
+-(id)initWithX:(int)ax Y:(int)ay Width:(int)awidth Height:(int)aheight {
 #ifdef DEBUG
     [NVLogger logText: @"NVContainer::init called"];
 #endif
-    self = [super initWithParent: aparent Rect: arect];
+    self = [super initWithX: ax Y: ay Width: awidth Height: aheight];
     if (self) {
         subWidgets = [[NSMutableArray alloc] initWithCapacity: 2];
 #ifdef DEBUG

@@ -5,7 +5,7 @@
 
 @interface NVVerticalMenu : NVContainer { }
 
--(id) initWithParent: (NVWidget *) aparent X: (int)ax Y: (int)ay;
+-(id) initWithX: (int)ax Y: (int)ay;
 -(void) pack;
 -(void) addWidget: (NVWidget *)awidget;
 -(void) forwardInvocation: (NSInvocation *)anInvocation;
