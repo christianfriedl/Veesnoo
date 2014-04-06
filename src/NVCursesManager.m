@@ -45,8 +45,10 @@ static NVCursesManager* instance = nil;
     }
     if (has_colors())
         start_color();
+    /*
     else
         @throw [NSException exceptionWithName: @"NoColorsException" reason: @"this terminal has no colors." userInfo: nil];
+        */
 }
 
 -(void)uninitCurses {
