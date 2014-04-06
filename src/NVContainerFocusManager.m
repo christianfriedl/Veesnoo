@@ -1,6 +1,6 @@
-#import"NVSimpleFocusManager.h"
+#import"NVContainerFocusManager.h"
 
-@implementation NVSimpleFocusManager
+@implementation NVContainerFocusManager
 
 @synthesize widget;
 @synthesize focusedWidget;
@@ -10,7 +10,7 @@
 
 -(id) initWithWidget: (NVWidget<NVKeyReceiving> *)awidget {
 #ifdef DEBUG
-    [NVLogger logText: [NSString stringWithFormat: @"NVSimpleFocusManager init: widget class=%@", NSStringFromClass([awidget class])]];
+    [NVLogger logText: [NSString stringWithFormat: @"NVContainerFocusManager init: widget class=%@", NSStringFromClass([awidget class])]];
 #endif
     self = [super init];
     if (self) {
@@ -36,7 +36,7 @@
 
 -(void) addWidget: (NVWidget *)awidget {
 #ifdef DEBUG
-    [NVLogger logText: [NSString stringWithFormat: @"NVSimpleFocusManager for %@ add widget of class: %@", NSStringFromClass([self.widget class]), NSStringFromClass([awidget class])]];
+    [NVLogger logText: [NSString stringWithFormat: @"NVContainerFocusManager for %@ add widget of class: %@", NSStringFromClass([self.widget class]), NSStringFromClass([awidget class])]];
 #endif
     if ([awidget conformsToProtocol: @protocol(NVKeyReceiving)]) {
 #ifdef DEBUG
@@ -50,7 +50,7 @@
 
 -(BOOL) receiveKey: (int) ch {
 #ifdef DEBUG
-    [NVLogger logText: [NSString stringWithFormat: @"NVSimpleFocusManager receiveKey: widget class=%@ @ %ld, key='%c' (%i)", NSStringFromClass([self.widget class]), self.widget, ch, ch]];
+    [NVLogger logText: [NSString stringWithFormat: @"NVContainerFocusManager receiveKey: widget class=%@ @ %ld, key='%c' (%i)", NSStringFromClass([self.widget class]), self.widget, ch, ch]];
 #endif
     if (ch == ' ' || ch == '\t' || ch == KEY_STAB || ch == KEY_DOWN || ch == KEY_RIGHT || ch == 'j' || ch == 'l') {
         [self focusNext];
@@ -76,7 +76,7 @@
 
 -(void) focus {
 #ifdef DEBUG
-    [NVLogger logText: [NSString stringWithFormat: @"NVSimpleFocusManager::focus for widget %@ @ %ld", NSStringFromClass([self.widget class]), self.widget]];
+    [NVLogger logText: [NSString stringWithFormat: @"NVContainerFocusManager::focus for widget %@ @ %ld", NSStringFromClass([self.widget class]), self.widget]];
 #endif
     isFocused = YES;
     [app setFocusedWidget: widget];

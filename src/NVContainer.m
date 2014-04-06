@@ -16,7 +16,7 @@
 #ifdef DEBUG
         [NVLogger logText: [NSString stringWithFormat: @"NVContainer::init creates focusManager for class %@", NSStringFromClass([self class])]];
 #endif
-        focusManager = [[NVSimpleFocusManager alloc] initWithWidget: self];
+        focusManager = [[NVContainerFocusManager alloc] initWithWidget: self];
     }
     return self;
 }

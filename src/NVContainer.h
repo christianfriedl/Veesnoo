@@ -2,7 +2,7 @@
 #import"Foundation/Foundation.h"
 #import "NVWidget.h"
 #import "NVContaining.h"
-#import "NVSimpleFocusManager.h"
+#import "NVContainerFocusManager.h"
 
 /*
  * NVContainer is a Container of widgets that will also be focusable and pass on the focus
@@ -12,7 +12,7 @@
 @interface NVContainer : NVWidget <NVContaining, NVKeyReceiving> { }
 
 @property (retain) NSMutableArray *subWidgets;
-@property (retain) NVSimpleFocusManager *focusManager;
+@property (retain) NVContainerFocusManager *focusManager;
 
 -(id) initWithParent: (NVWidget *)aparent Rect: (NVRect *)arect;
 -(void) refresh;

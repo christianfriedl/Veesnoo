@@ -21,7 +21,7 @@
     if (self) {
         text = [[NSMutableString alloc] initWithString: atext];
         editState = NVEditState_none;
-        focusManager = [[NVSimpleFocusManager alloc] initWithWidget: self];
+        focusManager = [[NVSingleFocusManager alloc] initWithWidget: self];
         cursorX = [atext length];
     }
     return self;

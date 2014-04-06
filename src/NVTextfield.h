@@ -2,7 +2,7 @@
 #import"Foundation/Foundation.h"
 #import "NVWidget.h"
 #import "NVKeyReceiving.h"
-#import "NVSimpleFocusManager.h"
+#import "NVSingleFocusManager.h"
 
 typedef enum { NVEditState_none, NVEditState_insert, NVEditState_replace } NVEditState;
 
@@ -10,7 +10,7 @@ typedef enum { NVEditState_none, NVEditState_insert, NVEditState_replace } NVEdi
 
 @property (retain) NSMutableString *text;
 @property NVEditState editState;
-@property (retain) NVSimpleFocusManager *focusManager;
+@property (retain) NVSingleFocusManager *focusManager;
 @property int cursorX;
 
 -(id) initWithParent: (NVWidget *) aparent Text: (NSString *) atext X: (int)ax Y: (int)ay Width: (int)awidth;

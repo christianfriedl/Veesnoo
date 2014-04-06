@@ -4,7 +4,7 @@
 #import "NVFocusManaging.h"
 #import "NVApp.h"
 
-@interface NVSimpleFocusManager : NSObject <NVFocusManaging> { }
+@interface NVContainerFocusManager : NSObject <NVFocusManaging> { }
 
 @property (weak) NVWidget<NVKeyReceiving> *widget;
 @property (weak) NVWidget *focusedWidget;

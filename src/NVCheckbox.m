@@ -11,7 +11,7 @@
     self = [super init];
     if (self) {
         state = NO;
-        focusManager = [[NVSimpleFocusManager alloc] initWithWidget: self];
+        focusManager = [[NVSingleFocusManager alloc] initWithWidget: self];
     }
     return self;
 }

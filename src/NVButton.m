@@ -14,7 +14,7 @@
     if (self) {
         text = atext;
         state = NVButtonState_normal;
-        focusManager = [[NVSimpleFocusManager alloc] initWithWidget: self];
+        focusManager = [[NVSingleFocusManager alloc] initWithWidget: self];
     }
     return self;
 }
