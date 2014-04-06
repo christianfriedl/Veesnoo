@@ -52,11 +52,11 @@
 #ifdef DEBUG
     [NVLogger logText: [NSString stringWithFormat: @"NVSimpleFocusManager receiveKey: widget class=%@ @ %ld, key='%c' (%i)", NSStringFromClass([self.widget class]), self.widget, ch, ch]];
 #endif
-    if (ch == ' ' || ch == '\t') {
+    if (ch == ' ' || ch == '\t' || ch == KEY_STAB || ch == KEY_DOWN || ch == KEY_RIGHT || ch == 'j' || ch == 'l') {
         [self focusNext];
         return YES;
     }
-    else if (ch == KEY_BACKSPACE || ch == KEY_BTAB) {
+    else if (ch == KEY_BACKSPACE || ch == KEY_BTAB || ch == KEY_UP || ch == KEY_LEFT || ch == 'k' || ch == 'h') {
         [self focusPrev];
         return YES;
     }

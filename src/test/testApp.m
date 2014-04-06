@@ -14,13 +14,15 @@ int main() {
     @autoreleasepool {
         [[NVCursesManager sharedInstance] initCurses];
         NVApp *app = [NVApp sharedInstance];
-        NVWindow *win = [[NVWindow alloc] initWithParent: nil X: 2 Y: 2 Width: 100 Height: 50];
+        NVWindow *win = [[NVWindow alloc] initWithParent: nil X: 0 Y: 0 Width: 100 Height: 50];
         NVTextfield *tf1 = [[NVTextfield alloc] initWithParent: win Text: @"abcd" X: 1 Y: 1 Width: 10];
         [win addWidget: tf1];
         NVTextfield *tf2 = [[NVTextfield alloc] initWithParent: win Text: @"efgh" X: 1 Y: 2 Width: 10];
         [win addWidget: tf2];
         NVTextfield *tf3 = [[NVTextfield alloc] initWithParent: win Text: @"ijkl" X: 1 Y: 3 Width: 10];
         [win addWidget: tf3];
+
+        [win pack];
 
         [app setMainWindow: win];
         [app focus];

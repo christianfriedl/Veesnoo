@@ -6,5 +6,7 @@
 @protocol NVFocusManaging <NVKeyReceiving>
 
 -(id) initWithWidget: (NVWidget<NVKeyReceiving> *)awidget;
+-(void) focus;
+-(void) deFocus;
 
 @end

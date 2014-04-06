@@ -6,11 +6,11 @@
 
 @interface NVSimpleFocusManager : NSObject <NVFocusManaging> { }
 
-@property (retain) NVWidget<NVKeyReceiving> *widget;
-@property (retain) NVWidget *focusedWidget;
-@property (retain) NSMutableArray *subWidgets;
+@property (weak) NVWidget<NVKeyReceiving> *widget;
+@property (weak) NVWidget *focusedWidget;
+@property (strong) NSMutableArray *subWidgets;
 @property BOOL isFocused;
-@property (retain) NVApp *app;
+@property (weak) NVApp *app;
 
 -(id) initWithWidget: (NVWidget *)awidget;
 -(BOOL) receiveKey: (int) ch;
