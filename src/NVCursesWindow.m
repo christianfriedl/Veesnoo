@@ -92,8 +92,10 @@
     mvaddstr(1,30, s);
     getch();
     */
-    if ((mvwin(self.window, y, x)) != OK)
+    if ((mvwin(self.window, y, x)) != OK) {
+        [NVLogger logText: [NSString stringWithFormat: @"unable to move window %ld to x=%i, y=%i", self.window, x, y]];
         @throw [NSException exceptionWithName: @"CursesWindowException" reason: [NSString stringWithFormat: @"unable to move window %ld to x=%i, y=%i", self.window, x, y] userInfo: nil];
+    }
 }
 
 -(void)fillBackground:(int)ch {

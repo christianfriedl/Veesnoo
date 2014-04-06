@@ -10,4 +10,16 @@
 
     return self;
 }
+
+-(void) pack {
+    int i;
+    [super pack];
+    self.contentRect = [[NVRect alloc] initWithX: 1 Y: 1 Width: [self.rect width] -2 Height: [self.rect height] -2];
+}
+
+-(void) refresh {
+    [self.cw addBorder];
+    [super refresh];
+}
+
 @end

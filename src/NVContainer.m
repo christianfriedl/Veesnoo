@@ -25,6 +25,8 @@
     int i, width = 0;
     int count = [subWidgets count];
 
+    [super refresh];
+
     for (i=0; i < count; ++i)
         [[subWidgets objectAtIndex: i] refresh];
 }

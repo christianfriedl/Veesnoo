@@ -14,7 +14,7 @@ int main() {
     @autoreleasepool {
         [[NVCursesManager sharedInstance] initCurses];
         NVApp *app = [NVApp sharedInstance];
-        NVWindow *win = [[NVWindow alloc] initWithX: 0 Y: 0 Width: 100 Height: 50];
+        NVWindow *win = [[NVWindow alloc] initWithX: 0 Y: 0 Width: 100 Height: 30];
         NVTextfield *tf1 = [[NVTextfield alloc] initWithX: 1 Y: 1 Width: 10];
         [win addWidget: tf1];
         NVTextfield *tf2 = [[NVTextfield alloc] initWithX: 1 Y: 2 Width: 10];
@@ -26,15 +26,12 @@ int main() {
 
         [app setMainWindow: win];
         [app focus];
-        [tf1 refresh];
-        [tf2 refresh];
-        [tf3 refresh];
+        [win refresh];
+
         while (1) {
             int ch = getch();
             [app receiveKey: ch];
-            [tf1 refresh];
-            [tf2 refresh];
-            [tf3 refresh];
+            [win refresh];
         }
         [[NVCursesManager sharedInstance] uninitCurses];
     }
