@@ -7,6 +7,7 @@
 @synthesize keypadAvailable;
 @synthesize width;
 @synthesize height;
+@synthesize nextPair;
 
 static NVCursesManager* instance = nil;
 
@@ -25,6 +26,7 @@ static NVCursesManager* instance = nil;
         self.keypadAvailable = true;
         self.width = 0;
         self.height = 0;
+        self.nextPair = 1;
     }
     return self;
 }
@@ -45,10 +47,6 @@ static NVCursesManager* instance = nil;
     }
     if (has_colors())
         start_color();
-    /* temp. disabled, we currently don't use colors
-    else
-        @throw [NSException exceptionWithName: @"NoColorsException" reason: @"this terminal has no colors." userInfo: nil];
-        */
 }
 
 -(void)uninitCurses {
@@ -71,6 +69,15 @@ static NVCursesManager* instance = nil;
     int x, y;
     getmaxyx(stdscr, y, x);
     return [[NVRect alloc] initWithX: 0 Y: 0 Width: x Height: y];
+}
+
+-(int) colorPairWithFg: (int) afg Bg: (int) abg {
+    int pair = self.nextPair++;
+    if (!has_colors())
+        @throw [NSException exceptionWithName: @"NoColorsException" reason: @"this terminal has no colors." userInfo: nil];
+    if (init_pair(pair, afg, abg) != OK)
+        @throw [NSException exceptionWithName: @"ColorInitializationException" reason: @"could not init color." userInfo: nil];
+    return pair;
 }
 
 @end

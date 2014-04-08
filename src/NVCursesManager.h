@@ -17,6 +17,7 @@
 @property BOOL echo;
 @property BOOL keypadAvailable;
 @property int width, height;
+@property int nextPair;
 
 +(NVCursesManager *)sharedInstance;
 -(void)initCurses;
@@ -25,5 +26,6 @@
 -(void)destroyWindow: (WINDOW *)window;
 -(void)refresh;
 -(NVRect *) getMaxScreenRect;
+-(int) colorPairWithFg: (int) afg Bg: (int) abg;
 
 @end

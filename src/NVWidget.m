@@ -1,4 +1,6 @@
 #import"NVWidget.h"
+#import "NVColorAttribute.h"
+#import "NVApp.h"
 
 @implementation NVWidget
 
@@ -7,6 +9,13 @@
 @synthesize contentRect;
 @synthesize isVisible;
 @synthesize parent;
+
+@synthesize contentColAttr;
+@synthesize borderColAttr;
+@synthesize focusedColAttr;
+@synthesize focusedBorderColAttr;
+@synthesize activeColAttr;
+
 
 -(id)initWithX:(int)ax Y:(int)ay Width:(int)awidth Height:(int)aheight {
     self = [super init];
@@ -17,6 +26,14 @@
         self.cw = [[NVCursesWindow alloc] initWithRect: [[NVRect alloc] initWithX:ax Y:ay Width:awidth Height:aheight]];
         self.isVisible = YES;
         self.parent = nil;
+
+        NVApp *app = [NVApp sharedInstance];
+
+        self.contentColAttr = [app contentColAttr];
+        self.borderColAttr = [app borderColAttr];
+        self.focusedColAttr = [app focusedColAttr];
+        self.focusedBorderColAttr = [app focusedBorderColAttr];
+        self.activeColAttr = [app activeColAttr];
     }
 
     return self;

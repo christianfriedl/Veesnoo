@@ -1,5 +1,6 @@
 #include <wctype.h>
 #import"NVTextfield.h"
+#import"NVColorAttribute.h"
 
 #pragma clang diagnostic ignored "-Wprotocol"
 
@@ -32,14 +33,18 @@
 }
 
 -(void) refresh {
-    if ([self isFocused])
-        [[self cw] attrOn: A_REVERSE];
+    if ([self isFocused]) {
+        if ([self editState] == NVEditState_none) {
+            [self.focusedColAttr onCw: self.cw];
+        } else {
+            [self.activeColAttr onCw: self.cw];
+        }
+    }
     [self.cw fillBackground: ' '];
     int startX = max(0, cursorX - [[self rect] width]);
     int lenX = min([[self text] length] - startX, [[self rect] width] - startX);
     [self addString: [self.text substringWithRange: NSMakeRange(startX, lenX)] atX: 0 Y: 0];
-    if ([self isFocused])
-        [[self cw] attrOff: A_REVERSE];
+    [self.cw resetColors];
     if (startX > 0)
         [self addCh: '<' atX: 0 Y: 0];
     if ([[self text] length] - startX > [[self rect] width])

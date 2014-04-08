@@ -1,6 +1,7 @@
 #import "NVApp.h"
 #import"NVKeyReceiving.h"
 #import"NVWidget.h"
+#import"NVColorAttribute.h"
 
 @interface NVApp(Private)
 
@@ -12,6 +13,11 @@
 
 @synthesize focusedWidget;
 @synthesize mainWindow;
+@synthesize contentColAttr;
+@synthesize borderColAttr;
+@synthesize focusedColAttr;
+@synthesize focusedBorderColAttr;
+@synthesize activeColAttr;
 
 static NVApp* instance = nil;
 
@@ -22,11 +28,15 @@ static NVApp* instance = nil;
     return instance;
 }
 
-
 -(id)init {
     self = [super init];
     if (self) {
         self.focusedWidget = nil;
+        self.contentColAttr = [[NVColorAttribute alloc] initWithFg: COLOR_WHITE Bg: COLOR_BLACK Attr: A_NORMAL];
+        self.borderColAttr = [[NVColorAttribute alloc] initWithFg: COLOR_BLACK Bg: COLOR_CYAN Attr: A_NORMAL];
+        self.focusedColAttr = [[NVColorAttribute alloc] initWithFg: COLOR_BLACK Bg: COLOR_WHITE Attr: A_NORMAL];
+        self.focusedBorderColAttr = [[NVColorAttribute alloc] initWithFg: COLOR_WHITE Bg: COLOR_CYAN Attr: A_NORMAL];
+        self.activeColAttr = [[NVColorAttribute alloc] initWithFg: COLOR_BLACK Bg: COLOR_YELLOW Attr: A_NORMAL];
     }
     return self;
 }

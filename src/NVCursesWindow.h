@@ -20,6 +20,9 @@
 -(int)height;
 -(void)attrOn:(int)attr;
 -(void)attrOff:(int)attr;
+-(void)pairOn:(int)apair;
+-(void)pairOff:(int)apair;
+-(void)resetColors;
 -(void)resizeToWidth:(int)width Height:(int)height;
 -(void)moveCursorToX:(int)x Y:(int)y;
 -(void)moveToX:(int)x Y:(int)y;

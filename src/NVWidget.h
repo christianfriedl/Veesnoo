@@ -4,6 +4,7 @@
 #import "NVRect.h"
 
 @class NVCursesWindow;
+@class NVColorAttribute;
 
 @interface NVWidget: NSObject { }
 
@@ -12,6 +13,11 @@
 @property(retain) NVRect *contentRect; // the rect clients can paint on
 @property BOOL isVisible;
 @property(retain) NVWidget *parent;
+@property(weak) NVColorAttribute* contentColAttr;
+@property(weak) NVColorAttribute* borderColAttr;
+@property(weak) NVColorAttribute* focusedColAttr;
+@property(weak) NVColorAttribute* focusedBorderColAttr;
+@property(weak) NVColorAttribute* activeColAttr;
 
 -(id)initWithX:(int)ax Y:(int)ay Width:(int)awidth Height:(int)aheight;
 -(void) refresh;

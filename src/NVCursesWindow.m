@@ -106,4 +106,15 @@
             [self addCh:ch atX: x Y: y];
 }
 
+-(void)pairOn: (int) apair {
+    wattron(self.window, COLOR_PAIR(apair));
+}
+
+-(void)pairOff: (int) apair {
+    wattroff(self.window, COLOR_PAIR(apair));
+}
+
+-(void)resetColors {
+    wattrset(self.window, 0);
+}
 @end
