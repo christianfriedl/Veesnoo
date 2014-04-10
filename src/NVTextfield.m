@@ -60,6 +60,7 @@
     if ([self editState] == NVEditState_none) {
         switch (ch) {
             case NVKEY_ENTER:
+            case 'i':
                 self.editState = NVEditState_insert;
                 return YES;
                 break;
@@ -70,6 +71,16 @@
             case KEY_LEFT:
             case 'h':
                 return [self cursorLeft];
+                break;
+            case 'x':
+            case KEY_DL:
+                [self deleteChar];
+                return YES;
+                break;
+            case KEY_IL:
+            case 'R':
+                self.editState = NVEditState_replace;
+                return YES;
                 break;
             default:
                 return NO;
@@ -108,6 +119,10 @@
                 } else
                     return NO;
                 break;
+            case KEY_DL:
+                [self deleteChar];
+                return YES;
+                break;
         }
     } else
         @throw [NSException exceptionWithName: @"NVTextfieldException" reason: @"unknown edit state" userInfo: nil];
@@ -128,6 +143,11 @@
         return YES;
     } else
         return NO;
+}
+
+-(void) deleteChar {
+    if ([self.text length] > cursorX)
+        [self.text deleteCharactersInRange: NSMakeRange(cursorX, 1)];
 }
 
 - (void)forwardInvocation:(NSInvocation *)anInvocation {

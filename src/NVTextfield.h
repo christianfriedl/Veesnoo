@@ -18,5 +18,6 @@ typedef enum { NVEditState_none, NVEditState_insert, NVEditState_replace } NVEdi
 -(void) refresh;
 -(BOOL) receiveKey: (int)ch;
 -(void) forwardInvocation: (NSInvocation *) anInvocation;
+-(void) deleteChar;
 
 @end
