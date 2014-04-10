@@ -24,7 +24,7 @@
         self.rect = [[NVRect alloc] initWithX: ax Y: ay Width: awidth Height: aheight];
         self.contentRect = [self.rect copy];
         self.cw = [[NVCursesWindow alloc] initWithRect: [[NVRect alloc] initWithX:ax Y:ay Width:awidth Height:aheight]];
-        Telf.isVisible = YES;
+        self.isVisible = YES;
         self.parent = nil;
 
         NVApp *app = [NVApp sharedInstance];

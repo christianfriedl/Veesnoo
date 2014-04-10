@@ -1,5 +1,6 @@
 #import"NVContainer.h"
 #import"NVWindow.h"
+#import"NVColorAttribute.h"
 @implementation NVWindow
 
 @synthesize title;
@@ -21,9 +22,22 @@
 }
 
 -(void) refresh {
+    if (self.isFocused)
+        [self.focusedBorderColAttr onCw: self.cw];
+    else
+        [self.borderColAttr onCw: self.cw];
     [self.cw addBorder];
-    if (self.title && [self.title length] > 0)
+    if (self.isFocused)
+        [self.focusedBorderColAttr offCw: self.cw];
+    else
+        [self.borderColAttr offCw: self.cw];
+    if (self.title && [self.title length] > 0) {
+        if (self.isFocused)
+            [self.activeColAttr onCw: self.cw];
         [self addString: self.title atX: 2 Y: 0];
+        if (self.isFocused)
+            [self.activeColAttr offCw: self.cw];
+    }
     [super refresh];
 }
 
