@@ -82,8 +82,8 @@
 }
 
 -(void)moveCursorToX:(int)x Y:(int)y {
+    [NVLogger logText: [NSString stringWithFormat: @"moving to x %i y %i", x, y]];
     wmove(self.window, y, x);
-    wnoutrefresh(self.window);
 }
 
 -(void)moveToX:(int)x Y:(int)y {

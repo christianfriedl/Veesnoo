@@ -86,6 +86,8 @@ static NVApp* instance = nil;
 -(void) run {
     while (1) {
         [mainWindow refresh];
+        if (self.focusedWidget)
+            [self.focusedWidget refresh];
         int ch = getch();
         [self receiveKey: ch];
     }

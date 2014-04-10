@@ -40,7 +40,6 @@
 }
 
 -(void)resizeToWidth: (int) awidth Height: (int) aheight {
-    [self.cw moveCursorToX:0 Y:0];
     [self.cw resizeToWidth:awidth Height:aheight];
     [self.rect resizeToWidth:awidth Height:aheight];
 }

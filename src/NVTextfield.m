@@ -5,8 +5,8 @@
 #pragma clang diagnostic ignored "-Wprotocol"
 
 @interface NVTextfield(Private)
-- (void) cursorLeft;
-- (void) cursorRight;
+- (BOOL) cursorLeft;
+- (BOOL) cursorRight;
 @end
 
 @implementation NVTextfield
@@ -55,13 +55,21 @@
 
 -(BOOL) receiveKey: (int)ch {
 #ifdef DEBUG
-    [NVLogger logText: [NSString stringWithFormat: @"NVTextfield receiveKey: ch='%c'", ch]];
+    [NVLogger logText: [NSString stringWithFormat: @"NVTextfield receiveKey: ch='%c' (%i), cursorX=%i", ch, ch, self.cursorX]];
 #endif
     if ([self editState] == NVEditState_none) {
         switch (ch) {
             case NVKEY_ENTER:
                 self.editState = NVEditState_insert;
                 return YES;
+                break;
+            case KEY_RIGHT:
+            case 'l':
+                return [self cursorRight];
+                break;
+            case KEY_LEFT:
+            case 'h':
+                return [self cursorLeft];
                 break;
             default:
                 return NO;
@@ -75,9 +83,11 @@
             case KEY_RIGHT:
                 [self cursorRight];
                 return YES;
+                break;
             case KEY_LEFT:
                 [self cursorLeft];
                 return YES;
+                break;
             case KEY_HOME:
             case KEY_UP:
                 cursorX = 0;
@@ -104,14 +114,20 @@
     return NO;
 }
 
-- (void) cursorRight {
-    if (self.cursorX < [self.text length] - 1)
-        ++cursorX;
+- (BOOL) cursorRight {
+    if (self.cursorX < [self.text length]) {
+        self.cursorX++;
+        return YES;
+    } else
+        return NO;
 }
 
-- (void) cursorLeft {
-    if (self.cursorX > 0)
-        --cursorX;
+- (BOOL) cursorLeft {
+    if (self.cursorX > 0) {
+        self.cursorX--;
+        return YES;
+    } else
+        return NO;
 }
 
 - (void)forwardInvocation:(NSInvocation *)anInvocation {

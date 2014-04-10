@@ -22,7 +22,7 @@ int main() {
         [win addWidget: tf1];
         [win addWidget: l1];
         NVTextfield *tf2 = [[NVTextfield alloc] initWithX: 8 Y: 1 Width: 10];
-        NVLabel *l2 = [[NVLabel alloc] initWithText: @"Text 1:" X: 0 Y: 1];
+        NVLabel *l2 = [[NVLabel alloc] initWithText: @"Text 2:" X: 0 Y: 1];
         [win addWidget: tf2];
         [win addWidget: l2];
         NVTextfield *tf3 = [[NVTextfield alloc] initWithX: 8 Y: 2 Width: 10];
