@@ -40,6 +40,8 @@
 -(void) forwardInvocation: (NSInvocation *)anInvocation {
     if ([focusManager respondsToSelector: [anInvocation selector]])
         [anInvocation invokeWithTarget:focusManager];
+    else if ([self.delegate respondsToSelector: [anInvocation selector]])
+        [anInvocation invokeWithTarget:self.delegate];
     else
         [super forwardInvocation:anInvocation];
 }

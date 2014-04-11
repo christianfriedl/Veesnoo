@@ -18,6 +18,7 @@
 @property(weak) NVColorAttribute* focusedColAttr;
 @property(weak) NVColorAttribute* focusedBorderColAttr;
 @property(weak) NVColorAttribute* activeColAttr;
+@property(retain) id delegate;
 
 -(id)initWithX:(int)ax Y:(int)ay Width:(int)awidth Height:(int)aheight;
 -(void) refresh;
@@ -32,5 +33,6 @@
 -(void) setCWSize;
 -(NVRect *) absContRect;
 -(NVRect *) absRect;
+-(void) forwardInvocation: (NSInvocation *)anInvocation;
 
 @end

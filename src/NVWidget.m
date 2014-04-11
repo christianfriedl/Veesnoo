@@ -15,6 +15,7 @@
 @synthesize focusedColAttr;
 @synthesize focusedBorderColAttr;
 @synthesize activeColAttr;
+@synthesize delegate;
 
 
 -(id)initWithX:(int)ax Y:(int)ay Width:(int)awidth Height:(int)aheight {
@@ -105,4 +106,10 @@
     [cw addCh:ch atX:ax Y:ay];
 }
 
+-(void) forwardInvocation: (NSInvocation *)anInvocation {
+    if ([delegate respondsToSelector: [anInvocation selector]])
+        [anInvocation invokeWithTarget: delegate];
+    else
+        [super forwardInvocation:anInvocation];
+}
 @end
