@@ -1,9 +1,9 @@
 CC=clang
 CFLAGS+=-ggdb -I../
 LDFLAGS=-lncurses -fobjc-arc -framework Foundation $(STATICLIB)
-OBJECTS=testTextfield.o testHorizVertMenus.o testPopupMenu.o testWidget.o testApp.o
+OBJECTS=testTextfield.o testHorizVertMenus.o testPopupMenu.o testWidget.o testApp.o testSelectbox.o
 STATICLIB=../libnvwm.a
-TESTBINARIES=testWidget testHorizVertMenus testTextfield testPopupMenu testApp
+TESTBINARIES=testWidget testHorizVertMenus testTextfield testPopupMenu testApp testSelectbox
 
 .SUFFIXES: .o .m
 
@@ -24,6 +24,9 @@ testPopupMenu: $(OBJECTS)
 
 testApp: $(OBJECTS)
 	clang $(LDFLAGS) testApp.o -o testApp
+
+testSelectbox: $(OBJECTS)
+	clang $(LDFLAGS) testSelectbox.o -o testSelectbox
 
 .m.o: $<.m
 	$(CC) $(CFLAGS) -c $<

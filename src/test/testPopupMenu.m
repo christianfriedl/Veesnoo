@@ -15,7 +15,7 @@ int main() {
         NVMenuItem *m2 = [[NVMenuItem alloc] initWithText: @"m2" X: 0 Y: 0];
         NVMenuItem *m3 = [[NVMenuItem alloc] initWithText: @"m3" X: 0 Y: 0];
         NVMenuItem *m4 = [[NVMenuItem alloc] initWithText: @"m4" X: 0 Y: 0];
-        NVPopupMenu *pm = [[NVPopupMenu alloc] initWithX: 0 Y: 0];
+        NVPopupMenu *pm = [[NVPopupMenu alloc] initWithX: 5 Y: 5];
         [pm addMenuItem: m1];
         [pm addMenuItem: m2];
         [pm addMenuItem: m3];

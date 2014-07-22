@@ -1,12 +1,12 @@
 #import<Foundation/Foundation.h>
-#import"NVKeyReceiving.h"
+#import"NVWindow.h"
 @class NVWidget;
 @class NVColorAttribute;
 
 @interface NVApp: NSObject { }
 
 @property (retain) NVWidget<NVKeyReceiving>* focusedWidget;
-@property (retain) NVWidget<NVKeyReceiving>* mainWindow;
+@property (retain) NVWindow* mainWindow;
 @property (retain) NVColorAttribute* contentColAttr;
 @property (retain) NVColorAttribute* borderColAttr;
 @property (retain) NVColorAttribute* focusedColAttr;

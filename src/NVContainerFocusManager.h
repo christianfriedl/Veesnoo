@@ -2,7 +2,8 @@
 #import"Foundation/Foundation.h"
 #import "NVWidget.h"
 #import "NVFocusManaging.h"
-#import "NVApp.h"
+
+@class NVApp;
 
 @interface NVContainerFocusManager : NSObject <NVFocusManaging> { }
 

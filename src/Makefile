@@ -5,6 +5,7 @@ OBJECTS=NVRect.o NVCursesManager.o NVCursesWindow.o NVWidget.o NVCheckbox.o \
 		NVColorAttribute.o \
 		NVTextfield.o \
 		NVButton.o NVLabel.o NVMenuItem.o NVHorizontalMenu.o NVVerticalMenu.o NVPopupMenu.o \
+		NVSelectbox.o \
 		NVWindow.o NVApp.o \
 		NVContainerFocusManager.o NVSingleFocusManager.o\
 		NVContainer.o \

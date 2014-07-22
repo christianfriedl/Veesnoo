@@ -1,3 +1,4 @@
+#import"NVApp.h"
 #import"NVContainerFocusManager.h"
 
 @implementation NVContainerFocusManager

@@ -1,3 +1,5 @@
+#import"NVContainer.h"
+
 @interface NVWindow : NVContainer {}
 
 @property(strong) NSString *title;
