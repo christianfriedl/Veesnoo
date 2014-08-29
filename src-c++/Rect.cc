@@ -2,9 +2,9 @@
 
 namespace nv {
 
-inline Rect::Rect(const int x, const int y, const int width, const int height): x(x), y(y), width(width), height(height) { }
+Rect::Rect(const int x, const int y, const int width, const int height): x(x), y(y), width(width), height(height) { }
 
-inline Rect::Rect(const Rect& other): x(other.x), y(other.y), width(other.width), height(other.height) { }
+Rect::Rect(const Rect& other): x(other.x), y(other.y), width(other.width), height(other.height) { }
 
 Rect& Rect::operator=(const Rect& other) {
     if (this != &other) {
@@ -17,12 +17,12 @@ Rect& Rect::operator=(const Rect& other) {
     return *this;
 }
 
-inline void Rect::move(const int x, const int y) {
+void Rect::move(const int x, const int y) {
     this->x = x;
     this->y = y;
 }
 
-inline void Rect::resize(const int width, const int height) {
+void Rect::resize(const int width, const int height) {
     this->width = width;
     this->height = height;
 }

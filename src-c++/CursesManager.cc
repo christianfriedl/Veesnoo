@@ -41,7 +41,7 @@ void CursesManager::destroyWindow(WINDOW *window) {
     delwin(window);
 }
 
-void refresh() {
+void CursesManager::refresh() {
     ::refresh();
 }
 

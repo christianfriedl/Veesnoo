@@ -8,7 +8,6 @@ CursesWindow::CursesWindow(const Rect& rect) {
     window = CursesManager::getInstance().createWindow(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
 }
 
-inline
 CursesWindow::~CursesWindow() {
     CursesManager::getInstance().destroyWindow(window);
 }
