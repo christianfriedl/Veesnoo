@@ -9,7 +9,7 @@ namespace nv {
 
 class CursesManager {
 public:
-    static const CursesManager& getInstance();
+    static CursesManager& getInstance();
     
     WINDOW *createWindow(int x ,int y ,int width ,int height);
     void destroyWindow(WINDOW *window);

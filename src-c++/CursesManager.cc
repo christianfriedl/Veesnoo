@@ -2,8 +2,8 @@
 
 namespace nv {
 
-const CursesManager& CursesManager::getInstance() {
-    static const CursesManager& instance = CursesManager();
+CursesManager& CursesManager::getInstance() {
+    static CursesManager instance = CursesManager();
     return instance;
 }
 
@@ -52,9 +52,10 @@ Rect *CursesManager::getMaxScreenRect() {
 }
 
 int CursesManager::colorPair(int fg, int bg) {
-    int pair = nextPair++;
+    int pair = 0;
     if (!has_colors())
         throw new Exception("this terminal has no colors.");
+    pair = nextPair++;
     if (init_pair(pair, fg, bg) != OK)
         throw new Exception("could not init color");
     return pair;

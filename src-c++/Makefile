@@ -1,7 +1,7 @@
-CC=clang
+CC=gcc
 CFLAGS+=-ggdb
 LDFLAGS=-lncursesw 
-OBJECTS=CursesManager.o
+OBJECTS=CursesManager.o CursesWindow.o CursesException.o Widget.o
 
 all: $(OBJECTS)
 
