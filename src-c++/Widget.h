@@ -3,15 +3,15 @@
 
 #include <ncursesw/ncurses.h>
 #include <string>
+#include <iostream>
 
 namespace nv {
 
-class CursesWindow;
 // class ColorAttribute;
-class Rect;
 
 class Widget {
 public:
+    Widget(): cw(NULL), rect(NULL), contentRect(NULL), absoluteContentRect(NULL), isVisible(false), parent(NULL) {}
     Widget(const Rect& rect);
     virtual ~Widget();
     virtual void refresh();
@@ -22,19 +22,28 @@ public:
     virtual void addCh(const int ch);
     virtual void addCh(const int ch, const int x, const int y);
 
-    const Rect *getAbsoluteContentRect() const; // returns a heap object that clients need to delete!
-    const Rect *getAbsoluteRect() const; // returns a heap object that clients need to delete!
+    const Rect& getAbsoluteContentRect() const; // returns a heap object that clients need to delete!
+    const Rect& getAbsoluteRect() const; // returns a heap object that clients need to delete!
+
 
 protected:
     void setCWPosition();
     void setCWSize();
+    const Rect& getParentAbsoluteContentRect() const;
+    virtual void recalculateAbsoluteRects();
 
-private:
     CursesWindow *cw;
     Rect *rect; // the original rect
     Rect *contentRect; // the rect clients can paint on
+    Rect *absoluteRect;
+    Rect *absoluteContentRect;
     bool isVisible;
     Widget *parent;
+
+
+private:
+    Widget(const Widget&) {}
+
     /*
     @property(weak) ColorAttribute* contentColAttr;
     @property(weak) ColorAttribute* borderColAttr;

@@ -1,12 +1,22 @@
+#ifndef NV_LABEL_H
+#define NV_LABEL_H
+
+#include <string>
+#include <iostream>
+#include "Rect.h"
+#include "CursesWindow.h"
 #include "Widget.h"
 
-@interface NVLabel: NVWidget {
+namespace nv {
+
+class Label: public Widget {
+public:
+    Label(const std::string& text, const int x, const int y): Widget(Rect(x, y, text.size(), 1)), text_(text) { }
+    virtual void refresh();
+private:
+    const std::string text_;
+};
+
 }
 
-@property (retain) NSString *text;
-
--(id) initWithText: (NSString *)atext X: (int)ax Y:(int)ay;
--(void)refresh;
-
-@end
-
+#endif
