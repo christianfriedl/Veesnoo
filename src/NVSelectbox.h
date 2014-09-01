@@ -5,14 +5,16 @@
 #import "NVPopupMenu.h"
 #import "NVSingleFocusManager.h"
 
-@interface NVTextfield : NVWidget <NVKeyReceiving> { }
+@interface NVSelectbox : NVContainer <NVPushDelegate> {}
 
-@property (retain) NVSingleFocusManager *focusManager;
 @property (retain) NVPopupMenu *popupMenu;
+@property (retain) NSDictionary *options;
 
 -(id) initWithX: (int)ax Y: (int)ay Width: (int)awidth;
 -(void) refresh;
 -(BOOL) receiveKey: (int)ch;
 -(void) forwardInvocation: (NSInvocation *) anInvocation;
+-(BOOL) wasPushed: (NVWidget<NVKeyReceiving> *) target;
+-(void) addOption: (id) avalue Text: (NSString*) atext;
 
 @end

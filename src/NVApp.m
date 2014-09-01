@@ -36,7 +36,7 @@ static NVApp* instance = nil;
         self.borderColAttr = [[NVColorAttribute alloc] initWithFg: COLOR_BLACK Bg: COLOR_BLUE Attr: A_NORMAL];
         self.focusedColAttr = [[NVColorAttribute alloc] initWithFg: COLOR_BLACK Bg: COLOR_WHITE Attr: A_NORMAL];
         self.focusedBorderColAttr = [[NVColorAttribute alloc] initWithFg: COLOR_WHITE Bg: COLOR_BLUE Attr: A_NORMAL];
-        self.activeColAttr = [[NVColorAttribute alloc] initWithFg: COLOR_BLACK Bg: COLOR_YELLOW Attr: A_NORMAL];
+        self.activeColAttr = [[NVColorAttribute alloc] initWithFg: COLOR_BLACK Bg: COLOR_YELLOW Attr: A_NORMAL];        
     }
     return self;
 }
