@@ -1,7 +1,7 @@
 CC=g++
-CFLAGS="-ggdb -I../"
+CFLAGS="-ggdb -I../ -Wall"
 LDFLAGS="-lncursesw  -L../"
 STATIC_LIBS=-lnvwm
 LIBOBJS=../libnvwm.a
-BINARIES="testWidget testLabel"
-OBJECTS="testWidget.o testLabel.o"
+BINARIES="testWidget testLabel testButton"
+OBJECTS="testWidget.o testLabel.o testButton.o"

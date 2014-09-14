@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-ggdb
+CFLAGS="-ggdb -Wall"
 LDFLAGS=-lncursesw
 AR=ar
 ARFLAGS=rs

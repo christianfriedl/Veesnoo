@@ -14,7 +14,7 @@ public:
     Label(const std::string& text, const int x, const int y): Widget(Rect(x, y, text.size(), 1)), text_(text) { }
     virtual void refresh();
 private:
-    const std::string text_;
+    std::string text_;
 };
 
 }

@@ -5,6 +5,9 @@
 #include <string>
 #include <iostream>
 
+#include "Rect.h"
+#include "CursesWindow.h"
+
 namespace nv {
 
 // class ColorAttribute;
