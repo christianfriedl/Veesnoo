@@ -6,7 +6,6 @@ Makefile.local
 .*.sw?
 *.i
 *.s
-doc/
 tags
 nbproject/
 src/test/test*[^.m][^.o][^.h]
