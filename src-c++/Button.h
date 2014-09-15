@@ -12,7 +12,7 @@ class Button: public FocusableWidget { // , public KeyReceiving {
 public:
     Button(const std::string& text, int x, int y);
     void refresh();
-    void switchState(); 
+    bool push(); 
     bool receiveKey(int ch);
 
 private:

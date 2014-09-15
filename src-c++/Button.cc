@@ -25,19 +25,18 @@ void Button::refresh() {
     FocusableWidget::refresh();
 }
 
-void Button::switchState() {
-    if (state_ == ButtonState_pushed)
-        state_ = ButtonState_normal;
-    else
-        state_ = ButtonState_pushed;
+bool Button::push() {
+    state_ = ButtonState_pushed;
+    // TODO do stuff
+    refresh();
+    state_ = ButtonState_normal;
+    refresh();
+    return true;
 }
 
 bool Button::receiveKey(int ch) {
     if (ch == ' ' || ch == 13) {
-        switchState();
-        // Todo do stuff
-        // switchState();
-        return true;
+        return push();
     }
     return false;
 }
