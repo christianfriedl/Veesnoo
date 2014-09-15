@@ -2,13 +2,13 @@
 #define NV_BUTTON_H
 
 #include <string>
-#include "Widget.h"
+#include "FocusableWidget.h"
 
 namespace nv {
 
 typedef enum { ButtonState_normal, ButtonState_pushed } ButtonState;
 
-class Button: public Widget { // , public KeyReceiving {
+class Button: public FocusableWidget { // , public KeyReceiving {
 public:
     Button(const std::string& text, int x, int y);
     void refresh();

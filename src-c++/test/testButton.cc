@@ -13,4 +13,12 @@ int main() {
     Button b4("examphhimpf", 20, 3);
     b4.refresh();
     getch();
+
+    b1.focus();
+    b1.refresh();
+    getch();
+
+    b1.receiveKey(' ');
+    b1.refresh();
+    getch();
 }

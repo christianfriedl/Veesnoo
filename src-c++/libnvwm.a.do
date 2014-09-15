@@ -1,4 +1,4 @@
-OBJECTS="CursesException.o CursesManager.o CursesWindow.o Rect.o Widget.o Label.o Button.o"
+OBJECTS="CursesException.o CursesManager.o CursesWindow.o Rect.o Widget.o Label.o Button.o FocusableWidget.o SingleFocusManager.o SingleFocusManager.o FocusManaging.o"
 
 redo-ifchange $OBJECTS
 
