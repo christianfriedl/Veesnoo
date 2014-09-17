@@ -14,9 +14,9 @@ namespace nv {
 
 class Widget {
 public:
-    Widget(): cw(NULL), rect(NULL), contentRect(NULL), absoluteContentRect(NULL), isVisible(false), parent(NULL) {}
     Widget(const Rect& rect);
     virtual ~Widget();
+    void setParent(const Widget& parent); 
     virtual void refresh();
     virtual void resize(const int width, const int height);
     virtual void move(const int x, const int y);
@@ -25,11 +25,17 @@ public:
     virtual void addCh(const int ch);
     virtual void addCh(const int ch, const int x, const int y);
 
-    const Rect& getAbsoluteContentRect() const; // returns a heap object that clients need to delete!
-    const Rect& getAbsoluteRect() const; // returns a heap object that clients need to delete!
+    const Widget& getParent() const;
+    const bool getVisible() const;
 
+    const Rect& getRect() const;
+    const Rect& getContentRect() const;
+    const Rect& getAbsoluteRect() const;
+    const Rect& getAbsoluteContentRect() const; 
 
 protected:
+    Widget(): cw(NULL), rect(NULL), contentRect(NULL), absoluteContentRect(NULL), isVisible(false), parent_(NULL) {}
+
     void setCWPosition();
     void setCWSize();
     const Rect& getParentAbsoluteContentRect() const;
@@ -41,7 +47,7 @@ protected:
     Rect *absoluteRect;
     Rect *absoluteContentRect;
     bool isVisible;
-    Widget *parent;
+    const Widget *parent_;
 
 
 private:
@@ -58,6 +64,42 @@ private:
 
 
 };
+
+inline
+const Widget& 
+Widget::getParent() const {
+    return *parent_;
+}
+
+inline
+const bool 
+Widget::getVisible() const {
+    return isVisible;
+}
+
+inline
+const Rect& 
+Widget::getRect() const {
+    return *rect;
+}
+
+inline
+const Rect& 
+Widget::getContentRect() const {
+    return *contentRect;
+}
+
+inline
+const Rect& 
+Widget::getAbsoluteRect() const {
+    return *absoluteRect;
+}
+
+inline
+void
+Widget::setParent(const Widget& parent) {
+    parent_ = &parent; 
+}
 
 }
 

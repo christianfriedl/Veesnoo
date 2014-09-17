@@ -1,4 +1,6 @@
-OBJECTS="CursesException.o CursesManager.o CursesWindow.o Rect.o Widget.o Label.o Button.o FocusableWidget.o SingleFocusManager.o SingleFocusManager.o FocusManaging.o Checkbox.o"
+OBJECTS="CursesException.o CursesManager.o CursesWindow.o Rect.o Widget.o Label.o Button.o FocusableWidget.o "
+OBJECTS="$OBJECTS SingleFocusManager.o SingleFocusManager.o FocusManaging.o Checkbox.o Container.o FocusableContainer.o"
+OBJECTS="$OBJECTS HorizontalMenu.o MenuItem.o"
 
 redo-ifchange $OBJECTS
 

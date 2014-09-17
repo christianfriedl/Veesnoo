@@ -2,6 +2,7 @@
 
 namespace nv {
 
-inline const FocusManaging& FocusableWidget::getFocusManager() { return *focusManager_; }
+inline 
+const FocusManaging& FocusableWidget::getFocusManager() { return *focusManager_; }
 
 }
