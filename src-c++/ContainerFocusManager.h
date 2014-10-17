@@ -2,8 +2,9 @@
 #define NV_CONTAINER_FOCUS_MANAGER_H
 
 #include <vector>
-#include <ncurses.h>
+#include <ncursesw/ncurses.h>
 #include "Widget.h"
+#include "FocusableContainer.h"
 #include "FocusableWidget.h"
 #include "FocusManaging.h"
 
@@ -12,11 +13,13 @@ namespace nv {
 class ContainerFocusManager : public FocusManaging { 
 
 public:
-    ContainerFocusManager(FocusableWidget& widget) : 
-            FocusManaging(), widget_(&widget), focusedWidget_(NULL), 
-            subWidgets_(std::vector<Widget*>), isFocused_(false) {
-        for (std::vector<Widget*>::iterator iter = subWidgets_->begin(); iter != subWidgets_->end(); ++iter) {
-            if ( (FocusableWidget *f = dynamic_cast<FocusableWidget*> (*iter)) ) {
+    ContainerFocusManager(FocusableContainer& widget) : 
+            FocusManaging(), widget_(&widget), focusedWidget_(NULL), isFocused_(false) {
+        subWidgets_ = std::vector<Focusable*>();
+        // add all subwidgets that are focusable to our collection
+        for ( std::vector<Widget*>::iterator iter = widget.getSubWidgets().begin(); iter != widget.getSubWidgets().end(); ++iter ) {
+            FocusableWidget *f = dynamic_cast<FocusableWidget*> (*iter);
+            if ( f != NULL ) {
                 subWidgets_.push_back(f);
             }
         }
@@ -29,6 +32,8 @@ public:
     void focusNext();
     void focusPrev();
     void addWidget(Focusable *widget);
+    void setWidget(const Widget&);
+    bool isFocused();
 private:
 
     Focusable *widget_;
@@ -39,7 +44,7 @@ private:
     void focusThis(Focusable *widget);
 
 
-}
+};
 
 }
 
