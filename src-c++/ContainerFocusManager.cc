@@ -1,9 +1,29 @@
+       #include <stdio.h>
+       #include <stdlib.h>
+
 #include "ContainerFocusManager.h"
 
 namespace nv {
 
-void ContainerFocusManager::addWidget(Focusable *widget) {
-    subWidgets_.push_back(widget);
+ContainerFocusManager::ContainerFocusManager(FocusableContainer& widget) : 
+        ContainerFocusManaging(), widget_(&widget), focusedWidget_(NULL), isFocused_(false) {
+            endwin();
+            printf("f not null");
+            exit(0);
+    subWidgets_ = std::vector<const FocusableWidget*>();
+    // add all subwidgets that are focusable to our collection
+    for ( std::vector<Widget*>::iterator iter = widget.getSubWidgets().begin(); iter != widget.getSubWidgets().end(); ++iter ) {
+        FocusableWidget *f = dynamic_cast<FocusableWidget*> (*iter);
+        if ( f != NULL ) {
+            subWidgets_.push_back(f);
+        }
+    }
+}
+
+void ContainerFocusManager::addWidget(const Widget& widget) {
+    const FocusableWidget *f = dynamic_cast<const FocusableWidget*>(&widget);
+    if (f != NULL)
+        subWidgets_.push_back(f);
 }
 
 bool ContainerFocusManager::receiveKey(int ch) {
@@ -79,7 +99,7 @@ void ContainerFocusManager::focusPrev() {
     */
 }
 
-void ContainerFocusManager::focusThis(Focusable *widget) {
+void ContainerFocusManager::focusThis(const Focusable *widget) {
     if ( widget->isFocused() ) {
         return;
     }

@@ -6,24 +6,14 @@
 #include "Widget.h"
 #include "FocusableContainer.h"
 #include "FocusableWidget.h"
-#include "FocusManaging.h"
+#include "ContainerFocusManaging.h"
 
 namespace nv {
 
-class ContainerFocusManager : public FocusManaging { 
+class ContainerFocusManager : public ContainerFocusManaging { 
 
 public:
-    ContainerFocusManager(FocusableContainer& widget) : 
-            FocusManaging(), widget_(&widget), focusedWidget_(NULL), isFocused_(false) {
-        subWidgets_ = std::vector<Focusable*>();
-        // add all subwidgets that are focusable to our collection
-        for ( std::vector<Widget*>::iterator iter = widget.getSubWidgets().begin(); iter != widget.getSubWidgets().end(); ++iter ) {
-            FocusableWidget *f = dynamic_cast<FocusableWidget*> (*iter);
-            if ( f != NULL ) {
-                subWidgets_.push_back(f);
-            }
-        }
-    }
+    ContainerFocusManager(FocusableContainer& widget);
 
     bool receiveKey(int ch);
     void focus();
@@ -31,17 +21,17 @@ public:
     void focusFirst();
     void focusNext();
     void focusPrev();
-    void addWidget(Focusable *widget);
+    virtual void addWidget(const Widget& widget);
     void setWidget(const Widget&);
     bool isFocused();
 private:
 
     Focusable *widget_;
     Focusable *focusedWidget_;
-    std::vector<Focusable *> subWidgets_;
+    std::vector<const FocusableWidget *> subWidgets_;
     bool isFocused_;
 
-    void focusThis(Focusable *widget);
+    void focusThis(const Focusable *widget);
 
 
 };

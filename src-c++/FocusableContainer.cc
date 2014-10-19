@@ -1,3 +1,4 @@
+#include "FocusableWidget.h"
 #include "FocusableContainer.h"
 
 namespace nv {
@@ -9,7 +10,9 @@ FocusableContainer::getFocusManager() { return *focusManager_; }
 void 
 FocusableContainer::addWidget(Widget& widget) {
     Container::addWidget(widget);
-    // focusManager_->addWidget(widget);
+    FocusableWidget* f = dynamic_cast<FocusableWidget*>(&widget);
+    if (f != NULL)
+        focusManager_->addWidget(*f);
 }
 
 }

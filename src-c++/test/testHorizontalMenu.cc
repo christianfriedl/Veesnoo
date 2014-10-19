@@ -14,10 +14,12 @@ int main() {
 
     getch();
     hm.pack();
+    // hm.refresh();
+    // getch();
+    hm.focus();
     hm.refresh();
     getch();
-    hm.focus();
-    getch();
     hm.receiveKey(' ');
+    hm.refresh();
     getch();
 }

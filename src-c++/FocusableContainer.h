@@ -3,13 +3,14 @@
 
 #include "Focusable.h"
 #include "Container.h"
+#include "ContainerFocusManaging.h"
 
 namespace nv {
 
 class FocusableContainer: public Focusable, public Container {
 public:
     FocusableContainer(const Rect& rect): Focusable(), Container(rect), focusManager_(NULL) { }
-    FocusableContainer(const Rect& rect, FocusManaging& focusManager): Focusable(), Container(rect), focusManager_(&focusManager) { }
+    FocusableContainer(const Rect& rect, ContainerFocusManaging& focusManager): Focusable(), Container(rect), focusManager_(&focusManager) { }
     FocusableContainer& operator=(const FocusableContainer& other) { 
         if (&other != this) {
             focusManager_ = other.focusManager_;
@@ -31,7 +32,7 @@ public:
 
 protected:
     FocusableContainer(): Container() {}
-    FocusManaging *focusManager_;
+    ContainerFocusManaging *focusManager_;
 private:
 };
 
