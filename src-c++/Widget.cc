@@ -64,8 +64,8 @@ Widget::getParentAbsoluteContentRect() const {
 void 
 Widget::recalculateAbsoluteRects() {
     const Rect& parentAbsoluteContentRect = getParentAbsoluteContentRect();
-    absoluteRect->move(parentAbsoluteContentRect.getX() + absoluteRect->getX(), parentAbsoluteContentRect.getY() + absoluteRect->getY());
-    absoluteContentRect->move(parentAbsoluteContentRect.getX() + absoluteContentRect->getX(), parentAbsoluteContentRect.getY() + absoluteContentRect->getY());
+    absoluteRect->move(parentAbsoluteContentRect.getX() + rect->getX(), parentAbsoluteContentRect.getY() + rect->getY());
+    absoluteContentRect->move(parentAbsoluteContentRect.getX() + contentRect->getX(), parentAbsoluteContentRect.getY() + contentRect->getY());
 }
 
 inline
