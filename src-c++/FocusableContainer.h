@@ -25,10 +25,10 @@ public:
 
     // from Focusable, which is just an interface
     virtual bool receiveKey(int ch) { return focusManager_->receiveKey(ch); }
-    virtual bool isFocused() { return focusManager_->isFocused(); }
-    virtual void focus() { return focusManager_->focus(); }
-    virtual void deFocus() { return focusManager_->deFocus(); }
-    virtual const FocusManaging& getFocusManager();
+    virtual bool isFocused() const { return focusManager_->isFocused(); }
+    virtual void focus() const { return focusManager_->focus(); }
+    virtual void deFocus() const { return focusManager_->deFocus(); }
+    virtual const FocusManaging& getFocusManager() const;
 
 protected:
     FocusableContainer(): Container() {}

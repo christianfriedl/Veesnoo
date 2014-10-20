@@ -5,7 +5,7 @@ namespace nv {
 
 inline 
 const FocusManaging& 
-FocusableContainer::getFocusManager() { return *focusManager_; }
+FocusableContainer::getFocusManager() const { return *focusManager_; }
 
 void 
 FocusableContainer::addWidget(Widget& widget) {

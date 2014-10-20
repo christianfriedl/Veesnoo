@@ -12,14 +12,28 @@ int main() {
     hm.addWidget(m2);
     hm.addWidget(m3);
 
-    getch();
     hm.pack();
-    // hm.refresh();
-    // getch();
+    hm.refresh();
+    getch(); // refresh, no highligts
     hm.focus();
     hm.refresh();
-    getch();
+    getch(); // refresh, first item is focused and highlighted
     hm.receiveKey(' ');
     hm.refresh();
-    getch();
+    getch(); // r4fresh, next item is focused and highlighted
+    hm.receiveKey(' ');
+    hm.refresh();
+    getch(); // r4fresh, next item is focused and highlighted
+    hm.receiveKey(' ');
+    hm.refresh();
+    getch(); // r4fresh, first item is focused and highlighted
+    hm.receiveKey(' ');
+    hm.refresh();
+    getch(); // r4fresh, next item is focused and highlighted
+    hm.receiveKey('h');
+    hm.refresh();
+    getch(); // r4fresh, first item is focused and highlighted
+    hm.receiveKey('h');
+    hm.refresh();
+    getch(); // r4fresh, last item is focused and highlighted
 }

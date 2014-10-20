@@ -27,11 +27,11 @@ public:
 private:
 
     Focusable *widget_;
-    Focusable *focusedWidget_;
+    const FocusableWidget *focusedWidget_;
     std::vector<const FocusableWidget *> subWidgets_;
     bool isFocused_;
 
-    void focusThis(const Focusable *widget);
+    void focusThis(const FocusableWidget *widget);
 
 
 };
