@@ -2,6 +2,7 @@
 
 namespace nv {
 
+void SingleFocusManager::setWidget(const Widget& widget) { widget_ = &widget; }
 
 bool SingleFocusManager::receiveKey(int ch) {
     return false;

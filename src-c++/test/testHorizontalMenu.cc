@@ -36,4 +36,8 @@ int main() {
     hm.receiveKey('h');
     hm.refresh();
     getch(); // r4fresh, last item is focused and highlighted
+
+    hm.focusThis(1);
+    hm.refresh();
+    getch(); // r4fresh, 2nd item is focused and highlighted
 }

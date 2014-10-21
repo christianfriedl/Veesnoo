@@ -2,6 +2,7 @@
 #define NV_FOCUSABLE_CONTAINER_H
 
 #include "Focusable.h"
+#include "FocusableWidget.h"
 #include "Container.h"
 #include "ContainerFocusManaging.h"
 
@@ -29,6 +30,11 @@ public:
     virtual void focus() const { return focusManager_->focus(); }
     virtual void deFocus() const { return focusManager_->deFocus(); }
     virtual const FocusManaging& getFocusManager() const;
+    void focusFirst() const { focusManager_->focusFirst(); }
+    void focusNext()const { focusManager_->focusNext(); }
+    void focusPrev()const { focusManager_->focusPrev(); }
+    void focusThis(const FocusableWidget *widget) const { focusManager_->focusThis(widget); }
+    void focusThis(const unsigned int index) const { focusManager_->focusThis(index); }
 
 protected:
     FocusableContainer(): Container() {}

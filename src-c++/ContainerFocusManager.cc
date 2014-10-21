@@ -92,12 +92,19 @@ void ContainerFocusManager::focusThis(const FocusableWidget *widget) {
     if ( widget->isFocused() ) {
         return;
     }
-    for ( std::vector<const FocusableWidget*>::iterator iter = subWidgets_.begin(); iter != subWidgets_.end(); ++iter) {
+    for ( std::vector<const FocusableWidget*>::iterator iter = subWidgets_.begin(); 
+            iter != subWidgets_.end(); ++iter ) {
         if ( (*iter) == widget )
             (*iter)->focus();
         else
             (*iter)->deFocus();
     }
+}
+
+void ContainerFocusManager::focusThis(const unsigned int index) {
+    if ( index >= subWidgets_.size() )
+        throw new Exception("out of bounds");
+    focusThis(subWidgets_[index]);
 }
 
 void ContainerFocusManager::setWidget(const Widget&) {

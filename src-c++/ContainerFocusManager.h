@@ -24,14 +24,15 @@ public:
     virtual void addWidget(const Widget& widget);
     void setWidget(const Widget&);
     bool isFocused();
+    void focusThis(const FocusableWidget *widget);
+    void focusThis(const unsigned int index);
+
 private:
 
     Focusable *widget_;
     const FocusableWidget *focusedWidget_;
     std::vector<const FocusableWidget *> subWidgets_;
     bool isFocused_;
-
-    void focusThis(const FocusableWidget *widget);
 
 
 };
