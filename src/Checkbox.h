@@ -10,15 +10,17 @@ typedef enum { CheckboxState_unchecked, CheckboxState_checked } CheckboxState;
 
 class Checkbox: public FocusableWidget { // , public KeyReceiving {
 public:
-    Checkbox(const std::string& text, int x, int y);
+    Checkbox(int x, int y);
+    // no need for ~Checkbox(); !, the parent does that
+    void setFrame(const std::string& frame);
     void refresh();
     bool push(); 
     bool isChecked();
     bool receiveKey(int ch);
 
 private:
-    std::string text_;
     CheckboxState state_;
+    std::string frame_;
 };
 
 }
