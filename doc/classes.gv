@@ -1,0 +1,92 @@
+graph "" {
+    compound=true
+    subgraph clusterMain {
+
+        node [ shape=box style=filled ]
+        subgraph clusterWidgets {
+            label="Widget Classes" 
+            color=blue 
+
+            subgraph clusterFundamentalWidgets {
+                label="Fundamental"
+                Widget
+                FocusableWidget
+                Container
+                FocusableContainer
+            }
+            subgraph clusterBasicWidgets {
+                label="Basic"
+                SelectBox
+                TextBox
+                ComboBox
+                TextArea
+                Window
+
+
+            }
+
+            FocusableWidget -- TextBox
+            FocusableWidget -- TextArea
+            FocusableContainer -- SelectBox
+            FocusableContainer -- ComboBox
+            FocusableContainer -- Window
+
+            subgraph clusterAdvancedWidgets {
+                label="Advanced"
+                Frame [ label="Frame?" ]
+                MainWindow [ label="MainWindow?" ]
+                App
+                FileChooser
+                TableView
+                RadioGroup
+                TreeView
+            }
+            subgraph clusterPopups {
+                label="Popups"
+                PopupWindow
+                MessageBox
+                ConfirmBox
+                ErrorBox
+            }
+            subgraph clusterMenu {
+                label="Menu"
+                HorizontalMenu
+                VerticalMenu
+                PopupMenu
+                MenuItem
+            }
+        }
+
+        subgraph clusterKeyboard {
+            label="Keyboard Stuff"
+            SingleCharacterInput [label="Single Character Input"]
+            movements
+            marking
+            changing [label="Change Actions, like DEL"]
+            subgraph clusterx { label="how to abstract the difference?"
+                xa [label="ved (vim)"] 
+                xb [label="ctrl-k b ctrl-e ctrl-k e DEL"]
+                xa -- xb
+            }
+        }
+
+        subgraph clusterOtherThings {
+            label="Other things" 
+            color=red
+
+            Scrolling
+            keyboard_inputs [ label="Keyboard Inputs" ]
+            Eventing
+            Colors
+            mouse_handling
+            Layouting
+            Resizing
+            Moving
+            asynchronous_processing
+            namespaces
+            directories
+            clipboard
+        }
+    }
+
+}
