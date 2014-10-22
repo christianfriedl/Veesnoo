@@ -28,18 +28,21 @@ public:
     const Widget& getParent() const;
     const bool getVisible() const;
 
-    const Rect& getRect() const;
-    const Rect& getContentRect() const;
-    const Rect& getAbsoluteRect() const;
-    const Rect& getAbsoluteContentRect() const; 
+    virtual const Rect& getRect() const;
+    virtual const Rect& getContentRect() const;
+    virtual const Rect& getAbsoluteRect() const;
+    virtual const Rect& getAbsoluteContentRect() const; 
 
 protected:
     Widget(): cw(NULL), rect(NULL), contentRect(NULL), absoluteContentRect(NULL), isVisible(false), parent_(NULL) {}
 
     void setCWPosition();
     void setCWSize();
-    const Rect& getParentAbsoluteContentRect() const;
-    virtual void recalculateAbsoluteRects();
+
+    void calculateAbsoluteRects();
+    void calculateRects();
+
+    virtual void calculateContentRect();
 
     CursesWindow *cw;
     Rect *rect; // the original rect

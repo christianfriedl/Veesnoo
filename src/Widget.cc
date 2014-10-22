@@ -10,25 +10,15 @@ namespace nv {
 
 Widget::Widget(const Rect& rect): isVisible(true), parent_(NULL) {
     this->rect = new Rect(rect);
-    this->contentRect = new Rect(rect);
+    this->contentRect = new Rect(0, 0, rect.getWidth(), rect.getHeight());
 
-    const Rect& parentAbsoluteContentRect = getParentAbsoluteContentRect();
+    const Rect& parentAbsoluteContentRect = parent_ ? parent_->getAbsoluteContentRect() : Rect(0, 0, 1, 1);
     absoluteRect = new Rect(parentAbsoluteContentRect.getX() + rect.getX(), parentAbsoluteContentRect.getY() + rect.getY(),
             rect.getWidth(), rect.getHeight());
     absoluteContentRect = new Rect(parentAbsoluteContentRect.getX() + rect.getX(), parentAbsoluteContentRect.getY() + rect.getY(),
             rect.getWidth(), rect.getHeight());
 
     this->cw = new CursesWindow(*absoluteRect);
-
-    /*
-    App *app = [App sharedInstance];
-
-    self.contentColAttr = [app contentColAttr];
-    self.borderColAttr = [app borderColAttr];
-    self.focusedColAttr = [app focusedColAttr];
-    self.focusedBorderColAttr = [app focusedBorderColAttr];
-    self.activeColAttr = [app activeColAttr];
-    */
 }
 
 Widget::~Widget() {
@@ -49,23 +39,28 @@ void
 Widget::move(const int x, const int y) {
     rect->move(x, y);
     contentRect->move(x, y);
-    recalculateAbsoluteRects();
+    calculateRects();
     cw->move(absoluteRect->getX(), absoluteRect->getY());
 }
 
-const Rect& 
-Widget::getParentAbsoluteContentRect() const {
-    if (parent_ == NULL)
-        return *contentRect;
-    else
-        return parent_->getAbsoluteContentRect();
+void 
+Widget::calculateAbsoluteRects() {
+    const Rect& parentAbsoluteContentRect = parent_ ? parent_->getAbsoluteContentRect() : Rect(0, 0, 1, 1);
+    absoluteRect->move(parentAbsoluteContentRect.getX() + rect->getX(), parentAbsoluteContentRect.getY() + rect->getY());
+    absoluteContentRect->move(parentAbsoluteContentRect.getX() + contentRect->getX(), parentAbsoluteContentRect.getY() + contentRect->getY());
+}
+
+void
+Widget::calculateContentRect() {
+    Rect *temp = contentRect;
+    contentRect = new Rect(0, 0, rect->getWidth(), rect->getHeight());
+    delete temp;
 }
 
 void 
-Widget::recalculateAbsoluteRects() {
-    const Rect& parentAbsoluteContentRect = getParentAbsoluteContentRect();
-    absoluteRect->move(parentAbsoluteContentRect.getX() + rect->getX(), parentAbsoluteContentRect.getY() + rect->getY());
-    absoluteContentRect->move(parentAbsoluteContentRect.getX() + contentRect->getX(), parentAbsoluteContentRect.getY() + contentRect->getY());
+Widget::calculateRects() {
+    calculateContentRect();
+    calculateAbsoluteRects();
 }
 
 inline
@@ -92,22 +87,22 @@ Widget::refresh() {
 
 void 
 Widget::addString(const std::string& text) {
-    cw->addString(text);
+    cw->addString(text, contentRect->getX(), contentRect->getY());
 }
 
 void 
 Widget::addString(const std::string& text, const int x, const int y) {
-    cw->addString(text, x, y);
+    cw->addString(text, contentRect->getX() + x, contentRect->getY() + y);
 }
 
 void 
 Widget::addCh(int ch) {
-    cw->addCh(ch);
+    cw->addCh(ch, contentRect->getX(), contentRect->getY());
 }
 
 void 
 Widget::addCh(const int ch, const int x, const int y) {
-    cw->addCh(ch, x, y);
+    cw->addCh(ch, contentRect->getX() + x, contentRect->getY() + y);
 }
 
 }
