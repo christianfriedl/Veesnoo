@@ -16,15 +16,15 @@ graph "" {
             }
             subgraph clusterBasicWidgets {
                 label="Basic"
-                SelectBox
-                TextBox
                 ComboBox
+                Label
+                SelectBox
                 TextArea
+                TextBox
                 Window
-
-
             }
 
+            Widget -- Label
             FocusableWidget -- TextBox
             FocusableWidget -- TextArea
             FocusableContainer -- SelectBox

@@ -4,4 +4,6 @@ LDFLAGS="-lncursesw  -L../"
 STATIC_LIBS=-lnvwm
 LIBOBJS=../libnvwm.a
 BINARIES="testWidget testLabel testButton testCheckbox testHorizontalMenu testVerticalMenu"
+BINARIES="testWindow"
 OBJECTS="testWidget.o testLabel.o testButton.o testCheckbox.o testHorizontalMenu.o testVerticalMenu.o"
+OBJECTS="$OBJECTS testWindow.o"
