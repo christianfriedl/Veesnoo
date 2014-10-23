@@ -30,6 +30,7 @@ public:
     void fillBackground(int ch);
     int getWidth();
     int getHeight();
+    void setCursorPosition(const int x, const int y);
 
 private:
     WINDOW *window;

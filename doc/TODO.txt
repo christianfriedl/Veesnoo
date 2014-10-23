@@ -1,2 +1,4 @@
 - add copy constructors and operator= everywhere
 - addString, addCh etc: add only the portion that fits into contentRect
+- finish textbox
+    - extract key handler

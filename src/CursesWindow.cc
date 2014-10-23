@@ -108,4 +108,9 @@ void CursesWindow::resetColors() {
     wattrset(window, 0);
 }
 
+void CursesWindow::setCursorPosition(const int x, const int y) {
+    if ( wmove(window, y, x) != OK )
+        throw CursesException("unable to set cursor");
+}
+
 }

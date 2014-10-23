@@ -5,10 +5,12 @@
 
 namespace nv {
 
-class Exception {
-public:
-	Exception(std::string msg) {}
-};
+    const int Key_Esc = 27;
+
+    class Exception {
+    public:
+        Exception(std::string msg) {}
+    };
 
 }
 
