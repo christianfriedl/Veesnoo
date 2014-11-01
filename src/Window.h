@@ -10,9 +10,10 @@ public:
     Window(const Rect& rect, const std::string title = "");
     virtual void refresh();
     void setTitle(const std::string title);
+    void resize(const int width, const int height);
 
 protected:
-    void calculateContentRect();
+    virtual void calculateContentRect();
 
 private:
     std::string title_;

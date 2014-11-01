@@ -13,7 +13,7 @@ public:
     Button(const std::string& text, int x, int y);
     void refresh();
     bool push(); 
-    bool receiveKey(int ch);
+    virtual bool receiveKey(int ch);
 
 private:
     std::string text_;

@@ -9,7 +9,8 @@ namespace nv {
     class PopupMenu : public Window {
         public:
             PopupMenu(const int x, const int y);
-            void addItem(MenuItem& mi);
+            MenuItem& addItem(MenuItem& mi);
+            MenuItem& addItem(const std::string& name);
             void pack();
 
         private:

@@ -21,7 +21,7 @@ public:
     }
 
 
-    virtual bool receiveKey(int ch) const { return focusManager_->receiveKey(ch); }
+    virtual bool receiveKey(int ch) { return focusManager_->receiveKey(ch); }
     virtual bool isFocused() const { return focusManager_->isFocused(); }
     virtual void focus() const { return focusManager_->focus(); }
     virtual void deFocus() const { return focusManager_->deFocus(); }

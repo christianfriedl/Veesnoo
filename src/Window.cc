@@ -1,8 +1,10 @@
+#include "ContainerFocusManager.h"
 #include "Window.h"
 
 namespace nv {
 
 Window::Window(const Rect& rect, const std::string title) : FocusableContainer(rect), title_(title) {
+    focusManager_ = new ContainerFocusManager(*this);
     const Rect& parentAbsoluteContentRect = parent_ ? parent_->getAbsoluteContentRect() : Rect(0, 0, 1, 1);
     absoluteRect = new Rect(parentAbsoluteContentRect.getX() + rect.getX(), parentAbsoluteContentRect.getY() + rect.getY(),
             rect.getWidth(), rect.getHeight());
@@ -13,9 +15,14 @@ Window::Window(const Rect& rect, const std::string title) : FocusableContainer(r
 
 void
 Window::calculateContentRect() {
-    Rect *temp = contentRect;
-    contentRect = new Rect(1, 1, rect->getWidth() - 2, rect->getHeight() - 2);
-    delete temp;
+    contentRect->move(1, 1);
+    contentRect->resize(rect->getWidth() - 2, rect->getHeight() - 2);
+}
+
+void
+Window::resize(const int width, const int height) {
+    FocusableContainer::resize(width, height);
+    calculateRects();
 }
 
 void 

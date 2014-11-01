@@ -3,18 +3,31 @@
 
 namespace nv {
 
-VerticalMenu::VerticalMenu(const int x, const int y): FocusableContainer(Rect(x, y, 1, 1)) {
+VerticalMenu::VerticalMenu(const int x, const int y): FocusableContainer(Rect(x, y, 1, 1)), addedItems_() {
     focusManager_ = new ContainerFocusManager(*this); 
 }
 
+VerticalMenu::~VerticalMenu() {
+    addedItems_.clear();
+}
+
 void VerticalMenu::pack() {
-    int i = 0;
     std::vector<Widget *>::iterator iter;
 
-    for ( iter = subWidgets_.begin(); iter != subWidgets_.end(); ++iter, ++i ) {
-        (*iter)->move(0, i);
+    unsigned int width = 0, height = 0;
+
+    for ( iter = subWidgets_.begin(); iter != subWidgets_.end(); ++iter, ++height ) {
+        (*iter)->move(0, height);
+        if ( (*iter)->getRect().getWidth() > width )
+            width = (*iter)->getRect().getWidth();
     }
-    rect->resize(rect->getWidth(), i);
+    rect->resize(width, height);
+}
+
+MenuItem& VerticalMenu::addItem(const std::string& name) {
+    MenuItem *item = new MenuItem(name);
+    addedItems_.push_back(item);
+    return *item;
 }
 
 }

@@ -29,10 +29,9 @@ Widget::~Widget() {
 
 void 
 Widget::resize(const int width, const int height) {
-    throw CursesException("not yet implemented");
-    cw->resize(width, height);
     rect->resize(width, height);
-    contentRect->resize(width, height);
+    calculateRects();
+    cw->resize(width, height);
 }
 
 void 
@@ -52,9 +51,8 @@ Widget::calculateAbsoluteRects() {
 
 void
 Widget::calculateContentRect() {
-    Rect *temp = contentRect;
-    contentRect = new Rect(0, 0, rect->getWidth(), rect->getHeight());
-    delete temp;
+    contentRect->move(0, 0);
+    contentRect->resize(rect->getWidth(), rect->getHeight());
 }
 
 void 
