@@ -10,4 +10,6 @@ int main() {
     getch();
     w1.focus();
     getch();
+    w1.move(2,2);
+    getch();
 }

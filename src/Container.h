@@ -11,7 +11,7 @@ public:
     Container(const Rect& rect): Widget(rect), subWidgets_() {}
     void addWidget(Widget& widget);
     std::vector<Widget *> getSubWidgets() const { return subWidgets_; }
-    void refresh();
+    virtual void refresh();
 
 protected:
     Container(): Widget(Rect(0, 0, 1, 1)), subWidgets_() {}

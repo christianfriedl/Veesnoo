@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS="-ggdb -I../ -Wall"
+CFLAGS="-g -I../ -Wall"
 LDFLAGS="-lncursesw  -L../"
 STATIC_LIBS=-lnvwm
 LIBOBJS=../libnvwm.a
