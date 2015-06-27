@@ -1,9 +1,11 @@
+#include "Logger.h"
 #include "ContainerFocusManager.h"
 #include "Window.h"
 
 namespace nv {
 
 Window::Window(const Rect& rect, const std::string title) : FocusableContainer(rect), title_(title) {
+    Logger::get().log("new Window @ %ld (x: %i, y: %i)", this, rect.getX(), rect.getY());
     focusManager_ = new ContainerFocusManager(*this);
     const Rect& parentAbsoluteContentRect = parent_ ? parent_->getAbsoluteContentRect() : Rect(0, 0, 1, 1);
     absoluteRect = new Rect(parentAbsoluteContentRect.getX() + rect.getX(), parentAbsoluteContentRect.getY() + rect.getY(),
@@ -15,6 +17,7 @@ Window::Window(const Rect& rect, const std::string title) : FocusableContainer(r
 
 void
 Window::calculateContentRect() {
+    Logger::get().log("Window::calculateContentRect was called.");
     contentRect->move(1, 1);
     contentRect->resize(rect->getWidth() - 2, rect->getHeight() - 2);
 }

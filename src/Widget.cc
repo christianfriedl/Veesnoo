@@ -4,11 +4,13 @@
 #include "Rect.h"
 #include "CursesWindow.h"
 #include "Widget.h"
+#include "Logger.h"
 #include "CursesException.h"
 
 namespace nv {
 
 Widget::Widget(const Rect& rect): isVisible(true), parent_(NULL) {
+    Logger::get().log("new Widget @ %ld (x: %i, y: %i)", this, rect.getX(), rect.getY());
     this->rect = new Rect(rect);
     this->contentRect = new Rect(0, 0, rect.getWidth(), rect.getHeight());
 
@@ -57,6 +59,7 @@ Widget::calculateContentRect() {
 
 void 
 Widget::calculateRects() {
+    Logger::get().log("Widget::calculateRects was called");
     calculateContentRect();
     calculateAbsoluteRects();
 }

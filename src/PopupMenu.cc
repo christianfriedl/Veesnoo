@@ -1,9 +1,11 @@
 #include "PopupMenu.h"
+#include"Logger.h"
 
 namespace nv {
 
     PopupMenu::PopupMenu(const int x, const int y) : Window(Rect(x, y, 1, 1), ""), menu_(1, 1) {
-        subWidgets_.push_back(&menu_);
+		Logger::get().log("new PopupMenu @ %ld", this);
+        addWidget(menu_);
     }
 
     MenuItem& PopupMenu::addItem(MenuItem& mi) {

@@ -1,12 +1,11 @@
-       #include <stdio.h>
-       #include <stdlib.h>
-
+#include"Logger.h"
 #include "ContainerFocusManager.h"
 
 namespace nv {
 
 ContainerFocusManager::ContainerFocusManager(FocusableContainer& widget) : 
         ContainerFocusManaging(), widget_(&widget), focusedWidget_(NULL), isFocused_(false) {
+    Logger::get().log("new ContainerFocusManager @ %ld for widget @ %ld", this, &widget);
     subWidgets_ = std::vector<const FocusableWidget*>();
     // add all subwidgets that are focusable to our collection
     for ( std::vector<Widget*>::iterator iter = widget.getSubWidgets().begin(); iter != widget.getSubWidgets().end(); ++iter ) {
@@ -19,6 +18,7 @@ ContainerFocusManager::ContainerFocusManager(FocusableContainer& widget) :
 
 void ContainerFocusManager::addWidget(const Widget& widget) {
     const FocusableWidget *f = dynamic_cast<const FocusableWidget*>(&widget);
+    Logger::get().log("ContainerFocusManager @ %ld for widget @ %ld will add widget %ld", this, widget_, &widget);
     if (f != NULL)
         subWidgets_.push_back(f);
 }
@@ -54,6 +54,8 @@ void ContainerFocusManager::focusFirst() {
 void ContainerFocusManager::focusNext() {
     const FocusableWidget *res = NULL;
     unsigned int i=0;
+    Logger::get().log("ContainerFocusManager @ %ld ::focusNext(), subWidgets_ have size %i", this, subWidgets_.size());
+
     for (std::vector<const FocusableWidget *>::iterator iter = subWidgets_.begin(); 
             iter != subWidgets_.end(); 
             ++iter) {

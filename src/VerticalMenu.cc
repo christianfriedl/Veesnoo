@@ -1,9 +1,11 @@
+#include "Logger.h"
 #include "VerticalMenu.h"
 #include "ContainerFocusManager.h"
 
 namespace nv {
 
 VerticalMenu::VerticalMenu(const int x, const int y): FocusableContainer(Rect(x, y, 1, 1)), addedItems_() {
+    Logger::get().log("new VerticalMenu @ %ld (x: %i, y: %i)", this, x, y);
     focusManager_ = new ContainerFocusManager(*this); 
 }
 
@@ -26,6 +28,7 @@ void VerticalMenu::pack() {
 
 MenuItem& VerticalMenu::addItem(const std::string& name) {
     MenuItem *item = new MenuItem(name);
+    FocusableContainer::addWidget(*item);
     addedItems_.push_back(item);
     return *item;
 }
