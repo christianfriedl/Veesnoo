@@ -33,7 +33,7 @@ public:
     std::unique_ptr<const Rect> getAbsoluteRect() const;
     virtual std::unique_ptr<const Rect> getAbsoluteContentRect() const;
 
-    virtual std::unique_ptr<std::string> toString();
+    virtual std::unique_ptr<const std::string> toString()const ;
 
 protected:
     Widget(): rect(0, 0, 1, 1), contentRect(0, 0, 1, 1), isVisible(false), parent_(NULL) {}

@@ -17,10 +17,12 @@ Widget::Widget(const Rect& rect): rect(rect), contentRect(0, 0, rect.getWidth(),
     this->cw = std::make_unique<CursesWindow>(this->getAbsoluteRect());
 }
 
-std::unique_ptr<std::string> Widget::toString() {
+std::unique_ptr<const std::string> Widget::toString() const {
     std::ostringstream ostr;
     ostr << "<Widget @ " << this << " rect: " << *(rect.toString()) << std::endl;
     ostr << "    contentRect: " << *(contentRect.toString()) << std::endl;
+    ostr << "    absoluteRect: " << *(getAbsoluteRect()->toString()) << std::endl;
+    ostr << "    absoluteContentRect: " << *(getAbsoluteContentRect()->toString()) << std::endl;
     ostr << ">";
     return std::make_unique<std::string>(ostr.str());
 }
