@@ -32,7 +32,7 @@ void
 Widget::move(const int x, const int y) {
     rect.move(x, y);
     contentRect.move(x, y);
-    cw->move(getAbsoluteRect().getX(), getAbsoluteRect().getY());
+    cw->move(getAbsoluteRect()->getX(), getAbsoluteRect()->getY());
 }
 
 std::unique_ptr<const Rect> 
@@ -46,33 +46,15 @@ Widget::getAbsoluteContentRect() const {
     const Rect& parentAbsoluteContentRect = parent_ ? *(parent_->getAbsoluteContentRect().get()) : Rect(0, 0, 1, 1);
     return std::make_unique<const Rect>(parentAbsoluteContentRect.getX() + contentRect.getX(), parentAbsoluteContentRect.getY() + contentRect.getY(), rect.getWidth(), contentRect.getHeight());
 }
-
-void
-Widget::calculateContentRect() {
-    contentRect->move(0, 0);
-    contentRect->resize(rect->getWidth(), rect->getHeight());
-}
-
-void 
-Widget::calculateRects() {
-    Logger::get().log("Widget::calculateRects was called");
-    calculateContentRect();
-    calculateAbsoluteRects();
-}
-
-inline
-const Rect& 
-Widget::getAbsoluteContentRect() const {
-    return *absoluteContentRect;
-}
-
 void 
 Widget::setCWPosition() {
+    auto absoluteRect = getAbsoluteRect(); 
     cw->move(absoluteRect->getX(), absoluteRect->getY());
 }
 
 void 
 Widget::setCWSize() {
+    auto absoluteRect = getAbsoluteRect();
     cw->resize(absoluteRect->getWidth(), absoluteRect->getHeight());
 }
 
@@ -84,22 +66,22 @@ Widget::refresh() {
 
 void 
 Widget::addString(const std::string& text) {
-    cw->addString(text, contentRect->getX(), contentRect->getY());
+    cw->addString(text, contentRect.getX(), contentRect.getY());
 }
 
 void 
 Widget::addString(const std::string& text, const int x, const int y) {
-    cw->addString(text, contentRect->getX() + x, contentRect->getY() + y);
+    cw->addString(text, contentRect.getX() + x, contentRect.getY() + y);
 }
 
 void 
 Widget::addCh(int ch) {
-    cw->addCh(ch, contentRect->getX(), contentRect->getY());
+    cw->addCh(ch, contentRect.getX(), contentRect.getY());
 }
 
 void 
 Widget::addCh(const int ch, const int x, const int y) {
-    cw->addCh(ch, contentRect->getX() + x, contentRect->getY() + y);
+    cw->addCh(ch, contentRect.getX() + x, contentRect.getY() + y);
 }
 
 }

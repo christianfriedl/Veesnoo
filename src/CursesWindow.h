@@ -10,6 +10,7 @@ class CursesWindow {
 
 public:
     CursesWindow(const Rect& rect);
+    CursesWindow(std::unique_ptr<const Rect> rect);
     ~CursesWindow();
     void addString(const std::string& text);
     void addString(const std::string& text, int x, int y);

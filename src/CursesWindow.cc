@@ -8,6 +8,10 @@ CursesWindow::CursesWindow(const Rect& rect) {
     window = CursesManager::getInstance().createWindow(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
 }
 
+CursesWindow::CursesWindow(std::unique_ptr<const Rect> rect) {
+    window = CursesManager::getInstance().createWindow(rect->getX(), rect->getY(), rect->getWidth(), rect->getHeight());
+}
+
 CursesWindow::~CursesWindow() {
     CursesManager::getInstance().destroyWindow(window);
 }
