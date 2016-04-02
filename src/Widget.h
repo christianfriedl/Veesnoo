@@ -28,7 +28,7 @@ public:
     const Widget& getParent() const;
     const bool getVisible() const;
 
-    virtual const Rect& getRect() const;
+    const Rect& getRect() const;
     virtual const Rect& getContentRect() const;
     std::unique_ptr<const Rect> getAbsoluteRect() const;
     virtual std::unique_ptr<const Rect> getAbsoluteContentRect() const;
