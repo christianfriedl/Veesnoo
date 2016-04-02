@@ -16,6 +16,11 @@ Logger::~Logger() {
 	fclose(file);
 }
 
+void Logger::log(const std::string& msg) {
+    fprintf(file, "%s", msg.c_str());
+	fprintf(file, "\n");
+	fflush(file);
+}
 void Logger::log(const char *format, ...) {
 	va_list argptr;
 	va_start(argptr, format);

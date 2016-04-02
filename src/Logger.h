@@ -10,6 +10,7 @@ class Logger {
 public:
     static Logger& get();
 	void log(const char *format, ...);
+	void log(const std::string& msg);
 
 private:
     FILE *file;
