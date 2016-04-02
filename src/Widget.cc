@@ -74,6 +74,7 @@ Widget::refresh() {
 
 void 
 Widget::addString(const std::string& text) {
+    Logger::get()->log("adding text to contentRect: %s, %i %i", text, contentRect.getX(), contentRect.getY());
     cw->addString(text, contentRect.getX(), contentRect.getY());
 }
 
