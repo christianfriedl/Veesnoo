@@ -49,7 +49,7 @@ Widget::getAbsoluteRect() const {
 std::unique_ptr<const Rect> 
 Widget::getAbsoluteContentRect() const {
     const Rect& parentAbsoluteContentRect = parent_ ? *(parent_->getAbsoluteContentRect().get()) : Rect(0, 0, 1, 1);
-    return std::make_unique<const Rect>(parentAbsoluteContentRect.getX() + contentRect.getX(), parentAbsoluteContentRect.getY() + contentRect.getY(), rect.getWidth(), contentRect.getHeight());
+    return std::make_unique<const Rect>(parentAbsoluteContentRect.getX() + rect.getX() + contentRect.getX(), parentAbsoluteContentRect.getY() + rect.getY() + contentRect.getY(), rect.getWidth(), contentRect.getHeight());
 }
 void 
 Widget::setCWPosition() {
