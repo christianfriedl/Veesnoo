@@ -19,7 +19,7 @@ Widget::Widget(const Rect& rect): rect(rect), contentRect(0, 0, rect.getWidth(),
 
 std::unique_ptr<std::string> Widget::toString() {
     std::ostringstream ostr;
-    ostr << "<Widget @ " << this << " rect: " << *(rect.toString());
+    ostr << "<Widget @ " << this << " rect: " << *(rect.toString()) << std::endl;
     ostr << "    contentRect: " << *(contentRect.toString());
     ostr << ">";
     return std::make_unique<std::string>(ostr.str());
