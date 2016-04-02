@@ -1,4 +1,5 @@
 #include <algorithm>
+#include "Logger.h"
 #include "CursesWindow.h"
 #include "CursesException.h"
 
@@ -20,6 +21,7 @@ void CursesWindow::addString(const std::string& text) {
     int x, y;
 
     getyx(window, y, x);
+    Logger::get().log("CursesWindow addSring(text) adding text t: %s, %i %i", text.c_str(), x, y);
 
     addString(text, x, y);
 }
@@ -28,7 +30,10 @@ void CursesWindow::addString(const std::string& text, int x, int y) {
     int width, height;
 
     getmaxyx(window, height, width);
-    mvwaddnstr(window, y, x, text.c_str(), std::min((int)text.length(), (int)(width - x)));
+    auto actualLength = std::min((int)text.length(), (int)(width - x));
+    Logger::get().log("CursesWindow adding text t: %s, x %i y %i width %i height %i text.length %i, actuallength %i", text.c_str(), x, y, width, height, (int)text.length(), actualLength);
+    Logger::get().log("CursesWindow adding text - window %ld", window);
+    mvwaddnstr(window, y, x, text.c_str(), actualLength);
 }
 
 void CursesWindow::addCh(int ch) {

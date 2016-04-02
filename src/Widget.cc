@@ -11,7 +11,7 @@
 
 namespace nv {
 
-Widget::Widget(const Rect& rect): rect(rect), contentRect(rect), isVisible(true), parent_(NULL) {
+Widget::Widget(const Rect& rect): rect(rect), contentRect(0, 0, rect.getWidth(), rect.getHeight()), isVisible(true), parent_(NULL) {
     Logger::get().log("new Widget @ %ld (x: %i, y: %i)", this, rect.getX(), rect.getY());
 
     /*
@@ -26,7 +26,9 @@ Widget::Widget(const Rect& rect): rect(rect), contentRect(rect), isVisible(true)
 
 std::unique_ptr<std::string> Widget::toString() {
     std::ostringstream ostr;
-    ostr << "<Widget @ " << this << " rect: " << *(rect.toString()) << ">";
+    ostr << "<Widget @ " << this << " rect: " << *(rect.toString());
+    ostr << "    contentRect: " << *(contentRect.toString());
+    ostr << ">";
     return std::make_unique<std::string>(ostr.str());
 }
 
@@ -74,7 +76,7 @@ Widget::refresh() {
 
 void 
 Widget::addString(const std::string& text) {
-    Logger::get()->log("adding text to contentRect: %s, %i %i", text, contentRect.getX(), contentRect.getY());
+    Logger::get().log("Widget adding text to contentRect: %s, %i %i", text.c_str(), contentRect.getX(), contentRect.getY());
     cw->addString(text, contentRect.getX(), contentRect.getY());
 }
 

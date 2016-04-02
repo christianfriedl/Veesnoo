@@ -42,8 +42,8 @@ protected:
     void setCWSize();
 
     std::unique_ptr<CursesWindow> cw;
-    Rect rect; // the original rect, covering all our area
-    Rect contentRect; // the rect clients can paint on - in RELATIVE coords
+    Rect rect; // the original rect, covering all our area - relative to parent
+    Rect contentRect; // the rect clients can paint on - in RELATIVE coords ===> relative to rect
     bool isVisible;
     const Widget *parent_;
 
