@@ -1,4 +1,4 @@
-OBJECTS="CursesException.o CursesManager.o CursesWindow.o Rect.o Widget.o "
+OBJECTS="CursesException.o CursesManager.o CursesWindow.o Rect.o Widget.o Label.o"
 OBJECTS="$OBJECTS Logger.o"
 
 redo-ifchange $OBJECTS
