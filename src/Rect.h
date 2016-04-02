@@ -1,6 +1,9 @@
 #ifndef NV_RECT_H
 #define NV_RECT_H
 
+#include <string>
+#include <memory>
+
 namespace nv {
 
 class Rect {
@@ -11,6 +14,8 @@ public:
     Rect(const int x, const int y, const int width, const int height);
     Rect(const Rect& other);
     Rect& operator=(const Rect& other);
+
+    std::unique_ptr<std::string> toString();
 
     void move(const int ax, const int ay);
     void resize(const int width, const int height);

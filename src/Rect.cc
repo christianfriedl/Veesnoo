@@ -1,4 +1,5 @@
 #include "Rect.h"
+#include <sstream>
 
 namespace nv {
 
@@ -31,5 +32,11 @@ void Rect::setOriginRelativeTo(const Rect& other) {
     x += other.x;
     y += other.y;
 }	
+
+std::unique_ptr<std::string> Rect::toString() {
+    std::ostringstream ostr;
+    ostr << "<Rect @ " << this << " <x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << ">>";
+    return std::make_unique<std::string>(ostr.str());
+}
 
 }

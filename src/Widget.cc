@@ -1,6 +1,8 @@
 // #include "ColorAttribute.h"
 // #include "App.h"
 #include <memory>
+#include <iostream>
+#include <sstream>
 #include "Rect.h"
 #include "CursesWindow.h"
 #include "Widget.h"
@@ -20,6 +22,12 @@ Widget::Widget(const Rect& rect): rect(rect), contentRect(rect), isVisible(true)
             */
 
     this->cw = std::make_unique<CursesWindow>(this->getAbsoluteRect());
+}
+
+std::unique_ptr<std::string> Widget::toString() {
+    std::ostringstream ostr;
+    ostr << "<Widget @ " << this << " rect: " << *(rect.toString()) << ">";
+    return std::make_unique<std::string>(ostr.str());
 }
 
 void 

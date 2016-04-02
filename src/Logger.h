@@ -2,6 +2,7 @@
 #define NV_LOGGER_H
 
 #include<string>
+#include<memory>
 #include<stdio.h>
 
 namespace nv {
@@ -11,6 +12,7 @@ public:
     static Logger& get();
 	void log(const char *format, ...);
 	void log(const std::string& msg);
+    void log(std::unique_ptr<const std::string> msg);
 
 private:
     FILE *file;
