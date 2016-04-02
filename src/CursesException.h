@@ -9,7 +9,7 @@ class CursesException: public std::exception {
 public:
     CursesException(): _what("") {}
     CursesException(const char *msg): _what(msg) {}
-    inline const char *what() const _GLIBCXX_USE_NOEXCEPT;
+    const char *what() const _GLIBCXX_USE_NOEXCEPT;
 private:
     const char *_what;
 };

@@ -16,7 +16,6 @@ namespace nv {
 class Widget {
 public:
     Widget(const Rect& rect);
-    virtual ~Widget();
     void setParent(const Widget& parent); 
     virtual void refresh();
     virtual void resize(const int width, const int height);
@@ -39,11 +38,6 @@ protected:
 
     void setCWPosition();
     void setCWSize();
-
-    void calculateAbsoluteRects();
-    void calculateRects();
-
-    virtual void calculateContentRect();
 
     std::unique_ptr<CursesWindow> cw;
     Rect rect; // the original rect, covering all our area

@@ -1,2 +1,2 @@
 rm -f *.a *.o
-redo-ifchange test/clean
+redo test/clean

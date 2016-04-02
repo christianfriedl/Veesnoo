@@ -1,6 +1,7 @@
 #ifndef NV_CURSES_WINDOW_H
 #define NV_CURSES_WINDOW_H
 
+#include <memory>
 #include <ncursesw/ncurses.h>
 #include "CursesManager.h"
 
