@@ -30,7 +30,7 @@ public:
 
     virtual const Rect& getRect() const;
     virtual const Rect& getContentRect() const;
-    virtual std::unique_ptr<const Rect> getAbsoluteRect() const;
+    std::unique_ptr<const Rect> getAbsoluteRect() const;
     virtual std::unique_ptr<const Rect> getAbsoluteContentRect() const;
 
     virtual std::unique_ptr<std::string> toString();

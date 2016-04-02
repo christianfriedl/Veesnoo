@@ -14,13 +14,6 @@ namespace nv {
 Widget::Widget(const Rect& rect): rect(rect), contentRect(0, 0, rect.getWidth(), rect.getHeight()), isVisible(true), parent_(NULL) {
     Logger::get().log("new Widget @ %ld (x: %i, y: %i)", this, rect.getX(), rect.getY());
 
-    /*
-    absoluteRect = new Rect(parentAbsoluteContentRect.getX() + rect.getX(), parentAbsoluteContentRect.getY() + rect.getY(),
-            rect.getWidth(), rect.getHeight());
-    absoluteContentRect = new Rect(parentAbsoluteContentRect.getX() + rect.getX(), parentAbsoluteContentRect.getY() + rect.getY(),
-            rect.getWidth(), rect.getHeight());
-            */
-
     this->cw = std::make_unique<CursesWindow>(this->getAbsoluteRect());
 }
 
