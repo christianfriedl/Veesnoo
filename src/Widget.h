@@ -4,6 +4,7 @@
 #include <ncursesw/ncurses.h>
 #include <string>
 #include <iostream>
+#include <memory>
 
 #include "Rect.h"
 #include "CursesWindow.h"
@@ -30,11 +31,11 @@ public:
 
     virtual const Rect& getRect() const;
     virtual const Rect& getContentRect() const;
-    virtual const Rect& getAbsoluteRect() const;
-    virtual const Rect& getAbsoluteContentRect() const; 
+    virtual std::unique_ptr<const Rect> getAbsoluteRect() const;
+    virtual std::unique_ptr<const Rect> getAbsoluteContentRect() const;
 
 protected:
-    Widget(): cw(NULL), rect(NULL), contentRect(NULL), absoluteContentRect(NULL), isVisible(false), parent_(NULL) {}
+    Widget(): rect(0, 0, 1, 1), contentRect(0, 0, 1, 1), isVisible(false), parent_(NULL) {}
 
     void setCWPosition();
     void setCWSize();
@@ -44,11 +45,9 @@ protected:
 
     virtual void calculateContentRect();
 
-    CursesWindow *cw;
-    Rect *rect; // the original rect
-    Rect *contentRect; // the rect clients can paint on
-    Rect *absoluteRect;
-    Rect *absoluteContentRect;
+    std::unique_ptr<CursesWindow> cw;
+    Rect rect; // the original rect, covering all our area
+    Rect contentRect; // the rect clients can paint on - in RELATIVE coords
     bool isVisible;
     const Widget *parent_;
 
@@ -83,19 +82,13 @@ Widget::getVisible() const {
 inline
 const Rect& 
 Widget::getRect() const {
-    return *rect;
+    return rect;
 }
 
 inline
 const Rect& 
 Widget::getContentRect() const {
-    return *contentRect;
-}
-
-inline
-const Rect& 
-Widget::getAbsoluteRect() const {
-    return *absoluteRect;
+    return contentRect;
 }
 
 inline

@@ -11,3 +11,4 @@ nbproject/
 src/test/test*[^.m][^.o][^.h]
 *.log
 doc/*/
+.redo/

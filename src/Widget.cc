@@ -1,6 +1,6 @@
 // #include "ColorAttribute.h"
 // #include "App.h"
-#include <tr1/memory>
+#include <memory>
 #include "Rect.h"
 #include "CursesWindow.h"
 #include "Widget.h"
@@ -9,46 +9,42 @@
 
 namespace nv {
 
-Widget::Widget(const Rect& rect): isVisible(true), parent_(NULL) {
+Widget::Widget(const Rect& rect): rect(rect), contentRect(rect), isVisible(true), parent_(NULL) {
     Logger::get().log("new Widget @ %ld (x: %i, y: %i)", this, rect.getX(), rect.getY());
-    this->rect = new Rect(rect);
-    this->contentRect = new Rect(0, 0, rect.getWidth(), rect.getHeight());
 
-    const Rect& parentAbsoluteContentRect = parent_ ? parent_->getAbsoluteContentRect() : Rect(0, 0, 1, 1);
+    /*
     absoluteRect = new Rect(parentAbsoluteContentRect.getX() + rect.getX(), parentAbsoluteContentRect.getY() + rect.getY(),
             rect.getWidth(), rect.getHeight());
     absoluteContentRect = new Rect(parentAbsoluteContentRect.getX() + rect.getX(), parentAbsoluteContentRect.getY() + rect.getY(),
             rect.getWidth(), rect.getHeight());
+            */
 
-    this->cw = new CursesWindow(*absoluteRect);
-}
-
-Widget::~Widget() {
-    delete cw;
-    delete contentRect;
-    delete rect;
+    this->cw = std::make_unique<CursesWindow>(this->getAbsoluteRect());
 }
 
 void 
 Widget::resize(const int width, const int height) {
-    rect->resize(width, height);
-    calculateRects();
+    rect.resize(width, height);
     cw->resize(width, height);
 }
 
 void 
 Widget::move(const int x, const int y) {
-    rect->move(x, y);
-    contentRect->move(x, y);
-    calculateRects();
-    cw->move(absoluteRect->getX(), absoluteRect->getY());
+    rect.move(x, y);
+    contentRect.move(x, y);
+    cw->move(getAbsoluteRect().getX(), getAbsoluteRect().getY());
 }
 
-void 
-Widget::calculateAbsoluteRects() {
-    const Rect& parentAbsoluteContentRect = parent_ ? parent_->getAbsoluteContentRect() : Rect(0, 0, 1, 1);
-    absoluteRect->move(parentAbsoluteContentRect.getX() + rect->getX(), parentAbsoluteContentRect.getY() + rect->getY());
-    absoluteContentRect->move(parentAbsoluteContentRect.getX() + contentRect->getX(), parentAbsoluteContentRect.getY() + contentRect->getY());
+std::unique_ptr<const Rect> 
+Widget::getAbsoluteRect() const {
+    const Rect& parentAbsoluteRect = parent_ ? *(parent_->getAbsoluteRect().get()) : Rect(0, 0, 1, 1);
+    return std::make_unique<const Rect>(parentAbsoluteRect.getX() + rect.getX(), parentAbsoluteRect.getY() + rect.getY(), rect.getWidth(), rect.getHeight());
+}
+
+std::unique_ptr<const Rect> 
+Widget::getAbsoluteContentRect() const {
+    const Rect& parentAbsoluteContentRect = parent_ ? *(parent_->getAbsoluteContentRect().get()) : Rect(0, 0, 1, 1);
+    return std::make_unique<const Rect>(parentAbsoluteContentRect.getX() + contentRect.getX(), parentAbsoluteContentRect.getY() + contentRect.getY(), rect.getWidth(), contentRect.getHeight());
 }
 
 void

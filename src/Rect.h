@@ -7,6 +7,7 @@ class Rect {
 
 public:
 
+    Rect(): x(0), y(0), width(0), height(0) {}
     Rect(const int x, const int y, const int width, const int height);
     Rect(const Rect& other);
     Rect& operator=(const Rect& other);
