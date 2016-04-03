@@ -9,5 +9,6 @@ OBJECTS="testWidget.o testLabel.o testButton.o testCheckbox.o testHorizontalMenu
 OBJECTS="$OBJECTS testWindow.o testTextBox.o testPopupMenu.o"
 
 #### debugging
-BINARIES="testWidget testLabel "
-OBJECTS="testWidget.o testLabel.o "
+BINARIES="testWidget testLabel testButton testCheckbox"
+OBJECTS="testWidget.o testLabel.o testCheckbox.o"
+OBJECTS="$OBJECTS testButton.o "
