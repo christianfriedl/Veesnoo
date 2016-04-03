@@ -1,6 +1,7 @@
 OBJECTS="CursesException.o CursesManager.o CursesWindow.o Rect.o Widget.o Label.o"
-OBJECTS="$OBJECTS FocusManaging.o SingleFocusManager.o FocusableWidget.o Button.o"
-OBJECTS="$OBJECTS Checkbox.o TextBox.o"
+OBJECTS="$OBJECTS FocusManaging.o SingleFocusManager.o ContainerFocusManager.o ContainerFocusManaging.o FocusableWidget.o FocusableContainer.o "
+OBJECTS="$OBJECTS Button.o"
+OBJECTS="$OBJECTS Checkbox.o TextBox.o Container.o MenuItem.o HorizontalMenu.o"
 OBJECTS="$OBJECTS Logger.o"
 
 redo-ifchange $OBJECTS

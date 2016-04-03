@@ -17,7 +17,7 @@ void HorizontalMenu::pack() {
         (*iter)->move(width, 0);
         width += (*iter)->getRect().getWidth();
     }
-    rect->resize(width, rect->getHeight());
+    rect.resize(width, rect.getHeight());
 }
 
 }
