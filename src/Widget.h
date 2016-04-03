@@ -28,9 +28,10 @@ public:
     const Widget& getParent() const;
     const bool getVisible() const;
 
-    const Rect& getRect() const;
-    virtual const Rect& getContentRect() const;
-    std::unique_ptr<const Rect> getAbsoluteRect() const;
+    std::unique_ptr<const Rect> getRect() const;
+
+    virtual std::unique_ptr<const Rect> getContentRect() const;
+    virtual std::unique_ptr<const Rect> getAbsoluteRect() const;
     virtual std::unique_ptr<const Rect> getAbsoluteContentRect() const;
 
     virtual std::unique_ptr<const std::string> toString()const ;
@@ -76,15 +77,15 @@ Widget::getVisible() const {
 }
 
 inline
-const Rect& 
+std::unique_ptr<const Rect>
 Widget::getRect() const {
-    return rect;
+    return std::make_unique<const Rect>(rect);
 }
 
 inline
-const Rect& 
+std::unique_ptr<const Rect>
 Widget::getContentRect() const {
-    return contentRect;
+    return std::make_unique<const Rect>(contentRect);
 }
 
 inline

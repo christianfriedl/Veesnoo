@@ -9,6 +9,8 @@
 
     - CursesManager.h ? (WINDOW* needs to be a pointer...) --- Rect* not, though
 
+
+- refactor toString to ostream& <<
 - move to new realtime get*Rect()
 - rename addCh to addChar
 
