@@ -1,6 +1,7 @@
 #ifndef NV_FOCUSABLE_CONTAINER_H
 #define NV_FOCUSABLE_CONTAINER_H
 
+#include <memory>
 #include "Focusable.h"
 #include "FocusableWidget.h"
 #include "Container.h"
@@ -11,7 +12,7 @@ namespace nv {
 class FocusableContainer: public Focusable, public Container {
 public:
     FocusableContainer(const Rect& rect): Focusable(), Container(rect), focusManager_(NULL) { }
-    FocusableContainer(const Rect& rect, ContainerFocusManaging& focusManager): Focusable(), Container(rect), focusManager_(&focusManager) { }
+    FocusableContainer(const Rect& rect, std::unique_ptr<ContainerFocusManaging> focusManager): Focusable(), Container(rect), focusManager_(focusManager) { }
     FocusableContainer& operator=(const FocusableContainer& other) { 
         if (&other != this) {
             focusManager_ = other.focusManager_;
@@ -38,7 +39,7 @@ public:
 
 protected:
     FocusableContainer(): Container() {}
-    ContainerFocusManaging *focusManager_;
+    std::unique_ptr<ContainerFocusManaging> focusManager_;
 private:
 };
 

@@ -1,2 +1,2 @@
-rm -f *.a *.o
+rm -f *.a *.o *.d
 redo test/clean

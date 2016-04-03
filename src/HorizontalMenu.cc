@@ -4,7 +4,7 @@
 namespace nv {
 
 HorizontalMenu::HorizontalMenu(const int x, const int y): FocusableContainer(Rect(x, y, 1, 1)) {
-    focusManager_ = new ContainerFocusManager(*this); 
+    focusManager_ = std::unique_ptr<ContainerFocusManager>(*this); 
 }
 
 void HorizontalMenu::pack() {
