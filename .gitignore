@@ -12,3 +12,6 @@ src/test/test*[^.m][^.o][^.h]
 *.log
 doc/*/
 .redo/
+doxygen_sqlite3.db
+doc/html
+doc/latext

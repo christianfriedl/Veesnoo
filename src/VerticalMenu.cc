@@ -16,7 +16,7 @@ VerticalMenu::~VerticalMenu() {
 void VerticalMenu::pack() {
     std::vector<Widget *>::iterator iter;
 
-    unsigned int width = 0, height = 0;
+    int width = 0, height = 0;
 
     for ( iter = subWidgets_.begin(); iter != subWidgets_.end(); ++iter, ++height ) {
         (*iter)->move(0, height);

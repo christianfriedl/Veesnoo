@@ -35,7 +35,7 @@ public:
     void focusNext()const { focusManager_->focusNext(); }
     void focusPrev()const { focusManager_->focusPrev(); }
     void focusThis(const FocusableWidget *widget) const { focusManager_->focusThis(widget); }
-    void focusThis(const unsigned int index) const { focusManager_->focusThis(index); }
+    void focusThis(const int index) const { focusManager_->focusThis(index); }
 
 protected:
     FocusableContainer(): Container() {}

@@ -25,7 +25,7 @@ public:
     void setWidget(const Widget&);
     bool isFocused();
     void focusThis(const FocusableWidget *widget);
-    void focusThis(const unsigned int index);
+    void focusThis(const int index);
 
 private:
 

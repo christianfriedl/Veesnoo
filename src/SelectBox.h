@@ -13,7 +13,7 @@ public:
     const std::string& getText();
     virtual void refresh();
 
-    bool cursorTo(unsigned int x);
+    bool cursorTo(int x);
     bool cursorRight();
     bool cursorLeft();
 
@@ -21,8 +21,8 @@ public:
 private:
     std::string text_;
     Status status_;
-    unsigned int cursorX_;
-    unsigned int startX_;
+    int cursorX_;
+    int startX_;
 
 };
 
