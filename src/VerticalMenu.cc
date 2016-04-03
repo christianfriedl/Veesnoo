@@ -23,7 +23,7 @@ void VerticalMenu::pack() {
         if ( (*iter)->getRect().getWidth() > width )
             width = (*iter)->getRect().getWidth();
     }
-    rect->resize(width, height);
+    rect.resize(width, height);
 }
 
 MenuItem& VerticalMenu::addItem(const std::string& name) {
