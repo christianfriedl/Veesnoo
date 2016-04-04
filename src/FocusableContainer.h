@@ -11,17 +11,9 @@ namespace nv {
 
 class FocusableContainer: public Focusable, public Container {
 public:
-    FocusableContainer(const Rect& rect): Focusable(), Container(rect), focusManager_(NULL) { }
-    FocusableContainer(const Rect& rect, std::unique_ptr<ContainerFocusManaging> focusManager): Focusable(), Container(rect), focusManager_(focusManager) { }
-    FocusableContainer& operator=(const FocusableContainer& other) { 
-        if (&other != this) {
-            focusManager_ = other.focusManager_;
-        }
-        return *this;
-    }
-    virtual ~FocusableContainer() {
-        delete focusManager_;
-    }
+    FocusableContainer(const Rect& rect): Focusable(), Container(rect), focusManager_() { }
+
+    FocusableContainer(const Rect& rect, std::unique_ptr<ContainerFocusManaging> focusManager): Focusable(), Container(rect), focusManager_() { focusManager_ = std::move(focusManager); }
 
     void addWidget(Widget& widget);
 
