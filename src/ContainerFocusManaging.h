@@ -19,7 +19,7 @@ public:
     virtual void focusNext() = 0;
     virtual void focusPrev() = 0;
     virtual void focusThis(const FocusableWidget *widget) = 0;
-    virtual void focusThis(const unsigned int index) = 0;
+    virtual void focusThis(const int index) = 0;
 };
 
 }

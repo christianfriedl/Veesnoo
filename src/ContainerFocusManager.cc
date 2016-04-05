@@ -53,7 +53,7 @@ void ContainerFocusManager::focusFirst() {
 
 void ContainerFocusManager::focusNext() {
     const FocusableWidget *res = NULL;
-    unsigned int i=0;
+    int i=0;
     Logger::get().log("ContainerFocusManager @ %ld ::focusNext(), subWidgets_ have size %i", this, subWidgets_.size());
 
     for (std::vector<const FocusableWidget *>::iterator iter = subWidgets_.begin(); 
@@ -73,7 +73,7 @@ void ContainerFocusManager::focusNext() {
 
 void ContainerFocusManager::focusPrev() {
     const FocusableWidget *res = NULL;
-    unsigned int i=subWidgets_.size() - 1;
+    int i=subWidgets_.size() - 1;
     for (std::vector<const FocusableWidget *>::reverse_iterator iter = subWidgets_.rbegin(); 
             iter != subWidgets_.rend(); 
             ++iter) {
@@ -103,7 +103,7 @@ void ContainerFocusManager::focusThis(const FocusableWidget *widget) {
     }
 }
 
-void ContainerFocusManager::focusThis(const unsigned int index) {
+void ContainerFocusManager::focusThis(const int index) {
     if ( index >= subWidgets_.size() )
         throw new Exception("out of bounds");
     focusThis(subWidgets_[index]);
