@@ -1,4 +1,62 @@
+- remove bare pointers
+    - Widget.h
+    - FocusableContainer.h
+    - FocusableWidget.h
+    - Container.h
+    - ContainerFocusManager.h
+    - VerticalMenu.h
+    - SingleFocusManager.h
+
+    - CursesManager.h ? (WINDOW* needs to be a pointer...) --- Rect* not, though
+
+- move to new realtime get*Rect()
+- rename addCh to addChar
+
 - add copy constructors and operator= everywhere
 - addString, addCh etc: add only the portion that fits into contentRect
 - finish textbox
     - extract key handler
+
+- create event queue
+    - boost::signals2 !!!
+    - std::map<std::string, boost:signals2:sig>
+
+- what events will we actually need?
+    - Widget
+        - should_refresh ???
+    - KeyReceiving
+        - before_keypress
+        - after_keypress
+    - Focusable
+        - after_focus
+        - after_blur
+    - (Window etc) 
+        - before_close
+        - after_activate
+
+
+- add interfaces to classes
+    - KeyReceiving
+
+- rename deFocus() to blur()
+
+- FocusableWidget and FocusableContainer currently have a common 
+interface but implement their focus... methods themselves, is this good?
+
+- finalize widgets
+    - PopupMenu
+    - SelectBox
+    - Window
+
+- implement focus handling
+- create an App class
+
+-  add functionality to TextBox
+
+
+- layout and sizing
+    - remove pack()
+    - class Size { int width; int height }
+    - Widget member: minimumSize_
+    - use Container's for layout control
+    ---- HorizontalLayout
