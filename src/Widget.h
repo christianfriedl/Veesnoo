@@ -15,7 +15,7 @@ namespace nv {
 
 class Widget {
 public:
-    Widget(const Rect& rect);
+    explicit Widget(const Rect& rect);
     void setParent(const Widget& parent); 
     virtual void refresh();
     virtual void resize(const int width, const int height);
@@ -31,7 +31,7 @@ public:
     std::unique_ptr<const Rect> getRect() const;
 
     virtual std::unique_ptr<const Rect> getContentRect() const;
-    virtual std::unique_ptr<const Rect> getAbsoluteRect() const;
+    std::unique_ptr<const Rect> getAbsoluteRect() const;
     virtual std::unique_ptr<const Rect> getAbsoluteContentRect() const;
 
     virtual std::unique_ptr<const std::string> toString()const ;

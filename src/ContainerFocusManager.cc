@@ -3,15 +3,14 @@
 
 namespace nv {
 
-ContainerFocusManager::ContainerFocusManager(FocusableContainer& widget) : 
-        ContainerFocusManaging(), widget_(&widget), focusedWidget_(NULL), isFocused_(false) {
+ContainerFocusManager::ContainerFocusManager(const FocusableContainer& widget) : 
+        ContainerFocusManaging(), focusedWidget_(NULL), isFocused_(false) {
     Logger::get().log("new ContainerFocusManager @ %ld for widget @ %ld", this, &widget);
-    subWidgets_ = std::vector<const FocusableWidget*>();
     // add all subwidgets that are focusable to our collection
     for ( std::vector<Widget*>::iterator iter = widget.getSubWidgets().begin(); iter != widget.getSubWidgets().end(); ++iter ) {
-        FocusableWidget *f = dynamic_cast<FocusableWidget*> (*iter);
+        FocusableWidget *f = dynamic_cast<FocusableWidget*> (*iter); // TODO find better way to do instanceof
         if ( f != NULL ) {
-            subWidgets_.push_back(f);
+            subWidgets_.push_back(*f);
         }
     }
 }
