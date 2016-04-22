@@ -11,12 +11,14 @@
 
 namespace nv {
 
+// constructor: set parent_ to "null", size from rect and make visible by default
 Widget::Widget(const Rect& rect): rect(rect), contentRect(0, 0, rect.getWidth(), rect.getHeight()), isVisible(true), parent_(std::weak_ptr<Widget>()) {
     Logger::get().log("new Widget @ %lld (x: %i, y: %i)", this, rect.getX(), rect.getY());
 
     cw = std::make_unique<CursesWindow>(this->getAbsoluteRect());
 }
 
+// it seems we don't need special cons' after all
 /*
 Widget::Widget(Widget&& other) : cw(nullptr), rect(0, 0, 0, 0), contentRect(0, 0, 0, 0), parent_(std::weak_ptr<Widget>()) {
     std::swap(cw, other.cw);
