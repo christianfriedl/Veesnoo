@@ -30,9 +30,10 @@ public:
 private:
 
     std::shared_ptr<FocusableWidget> focusedWidget_;
-    std::vector<std::shared_ptr<FocusableWidget>> subWidgets_;
     bool isFocused_;
 
+    auto getSubWidgets();
+    auto getFocusableSubWidgets();
 
 };
 

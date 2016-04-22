@@ -4,7 +4,7 @@
 namespace nv {
 
     PopupMenu::PopupMenu(const int x, const int y) : Window(Rect(x, y, 1, 1), ""), menu_(1, 1) {
-		Logger::get().log("new PopupMenu @ %ld", this);
+		Logger::get().log("new PopupMenu @ %lld", this);
         addWidget(menu_);
     }
 
