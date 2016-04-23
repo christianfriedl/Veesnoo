@@ -14,4 +14,8 @@ void FocusableWidget::deFocus() {
     isFocused_ = false;
 }
 
+bool FocusableWidget::isFocused() const {
+    return isFocused_;
+}
+
 }
