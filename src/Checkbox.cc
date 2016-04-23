@@ -12,7 +12,6 @@
 namespace nv {
 
 Checkbox::Checkbox(int x, int y): FocusableWidget(Rect(x, y, 3, 1)), state_(CheckboxState_unchecked), frame_("[]") {
-    focusManager_ = new SingleFocusManager(*this); 
 }
 
 void Checkbox::setFrame(const std::string& frame) {
@@ -20,13 +19,13 @@ void Checkbox::setFrame(const std::string& frame) {
 }
 
 void Checkbox::refresh() {
-    if ( focusManager_->isFocused() )
+    if ( isFocused() )
         cw->attrOn(A_REVERSE);
     char c = (state_ == CheckboxState_checked ? 'x' : ' ');
     std::stringstream s; 
     s << frame_[0] << c << frame_[1];
     addString(s.str(), 0, 0);
-    if ( focusManager_->isFocused() )
+    if ( isFocused() )
         cw->attrOff(A_REVERSE);
     FocusableWidget::refresh();
 }
