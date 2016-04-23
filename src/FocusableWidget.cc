@@ -2,7 +2,16 @@
 
 namespace nv {
 
-inline 
-const FocusManaging& FocusableWidget::getFocusManager() const { return *focusManager_; }
+bool FocusableWidget::receiveKey(int ch) {
+    return false;
+}
+
+void FocusableWidget::focus() {
+    isFocused_ = true;
+}
+
+void FocusableWidget::deFocus() {
+    isFocused_ = false;
+}
 
 }

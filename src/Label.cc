@@ -2,7 +2,7 @@
 
 namespace nv {
 
-/*
+/* it seems we do not need special cons' after all
 Label::Label(Label&& other): Widget() {
     std::swap(*this, other);
 }

@@ -1,0 +1,7 @@
+LIBOBJECTS="CursesException.o CursesManager.o CursesWindow.o Rect.o Widget.o Label.o "
+LIBOBJECTS="$LIBOBJECTS Button.o FocusableWidget.o "
+LIBOBJECTS="$LIBOBJECTS TextBox.o "
+LIBOBJECTS="$LIBOBJECTS Logger.o "
+# LIBOBJECTS="$OBJECTS SingleFocusManager.o SingleFocusManager.o FocusManaging.o Checkbox.o Container.o FocusableContainer.o"
+# LIBOBJECTS="$OBJECTS HorizontalMenu.o VerticalMenu.o MenuItem.o ContainerFocusManager.o ContainerFocusManaging.o"
+# LIBOBJECTS="$OBJECTS Window.o TextBox.o PopupMenu.o"

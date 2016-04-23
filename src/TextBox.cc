@@ -12,7 +12,7 @@ namespace nv {
     void
     TextBox::refresh() {
         addString(text_, 0, 0);
-        int cur = (cursorX_ > rect->getWidth() - 1) ? (rect->getWidth() - 1) : cursorX_;
+        int cur = (cursorX_ > rect.getWidth() - 1) ? (rect.getWidth() - 1) : cursorX_;
 
         cw->setCursorPosition(cur, 0);
         FocusableWidget::refresh();

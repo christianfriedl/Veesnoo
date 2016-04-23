@@ -1,12 +1,7 @@
-OBJECTS="CursesException.o CursesManager.o CursesWindow.o Rect.o Widget.o Label.o "
-OBJECTS="$OBJECTS Logger.o"
-# OBJECTS="$OBJECTS Button.o FocusableWidget.o "
-# OBJECTS="$OBJECTS SingleFocusManager.o SingleFocusManager.o FocusManaging.o Checkbox.o Container.o FocusableContainer.o"
-# OBJECTS="$OBJECTS HorizontalMenu.o VerticalMenu.o MenuItem.o ContainerFocusManager.o ContainerFocusManaging.o"
-# OBJECTS="$OBJECTS Window.o TextBox.o PopupMenu.o"
+. ./libnvwm-objects.sh
 
-redo-ifchange $OBJECTS
+redo-ifchange $LIBOBJECTS
 
-. ./config.sh
+. ./redo-config.sh
 
-$AR $ARFLAGS $3 $OBJECTS
+$AR $ARFLAGS $3 $LIBOBJECTS
