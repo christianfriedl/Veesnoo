@@ -1,2 +1,2 @@
-. ./config.sh
+. ./redo-config.sh
 redo-ifchange $BINARIES

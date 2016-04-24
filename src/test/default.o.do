@@ -1,4 +1,4 @@
-. ./config.sh
+. ./redo-config.sh
 
 redo-ifchange $2.cc
 

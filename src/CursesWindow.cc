@@ -7,13 +7,18 @@ namespace nv {
 
 CursesWindow::CursesWindow(const Rect& rect) {
     window = CursesManager::getInstance().createWindow(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
+    Logger::get().log("new CursesWindow from rect @ %lld (x: %i, y: %i, window: %lld)", this, rect.getX(), rect.getY(), window);
 }
 
+/*
 CursesWindow::CursesWindow(std::unique_ptr<const Rect> rect) {
     window = CursesManager::getInstance().createWindow(rect->getX(), rect->getY(), rect->getWidth(), rect->getHeight());
+    Logger::get().log("new CursesWindow from up rect @ %lld (x: %i, y: %i, window: %lld)", this, rect->getX(), rect->getY(), window);
 }
+*/
 
 CursesWindow::~CursesWindow() {
+    Logger::get().log("~ CursesWindow @ %lld (window: %lld)", this, window);
     CursesManager::getInstance().destroyWindow(window);
 }
 
@@ -32,7 +37,7 @@ void CursesWindow::addString(const std::string& text, int x, int y) {
     getmaxyx(window, height, width);
     auto actualLength = std::min((int)text.length(), (int)(width - x));
     Logger::get().log("CursesWindow adding text t: %s, x %i y %i width %i height %i text.length %i, actuallength %i", text.c_str(), x, y, width, height, (int)text.length(), actualLength);
-    Logger::get().log("CursesWindow adding text - window %ld", window);
+    Logger::get().log("CursesWindow adding text - window %lld", window);
     mvwaddnstr(window, y, x, text.c_str(), actualLength);
 }
 
@@ -92,7 +97,7 @@ void CursesWindow::moveCursor(int x, int y) {
 
 void CursesWindow::move(int x, int y) {
     if ((mvwin(window, y, x)) != OK) {
-        // [Logger logText: [NSString stringWithFormat: @"unable to move window %ld to x=%i, y=%i", window, x, y]];
+        // [Logger logText: [NSString stringWithFormat: @"unable to move window %lld to x=%i, y=%i", window, x, y]];
         throw CursesException("unable to move window");
     }
 }

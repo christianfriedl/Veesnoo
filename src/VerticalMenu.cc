@@ -5,7 +5,7 @@
 namespace nv {
 
 VerticalMenu::VerticalMenu(const int x, const int y): FocusableContainer(Rect(x, y, 1, 1)), addedItems_() {
-    Logger::get().log("new VerticalMenu @ %ld (x: %i, y: %i)", this, x, y);
+    Logger::get().log("new VerticalMenu @ %lld (x: %i, y: %i)", this, x, y);
     focusManager_ = new ContainerFocusManager(*this); 
 }
 

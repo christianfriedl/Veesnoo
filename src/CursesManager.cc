@@ -1,13 +1,16 @@
 #include "CursesManager.h"
+#include "Logger.h"
 
 namespace nv {
 
 CursesManager& CursesManager::getInstance() {
     static CursesManager instance = CursesManager();
+    Logger::get().log("CursesManager::getInstance called, returns %lld", (void*)&instance);
     return instance;
 }
 
 CursesManager::CursesManager() : bufferedMode(false), echo(false), keypadAvailable(true), width(0), height(0), nextPair(1) { 
+    Logger::get().log("CursesManager cons called, this is %lld", (void*)this);
 	initCurses();
 }
 
@@ -30,6 +33,7 @@ void CursesManager::initCurses() {
 }
 
 CursesManager::~CursesManager() {
+    Logger::get().log("CursesManager destr called, this is %lld", (void*)this);
     endwin();
 }
 

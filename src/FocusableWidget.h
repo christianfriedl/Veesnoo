@@ -8,29 +8,18 @@ namespace nv {
 
 class FocusableWidget: public Focusable, public Widget {
 public:
-    FocusableWidget(const Rect& rect): Focusable(), Widget(rect), focusManager_(new SingleFocusManager(*this)) { }
-    FocusableWidget(const Rect& rect, FocusManaging& focusManager): Focusable(), Widget(rect), focusManager_(&focusManager) { }
-    FocusableWidget& operator=(const FocusableWidget& other) { 
-        if (&other != this) {
-            focusManager_ = other.focusManager_;
-        }
-        return *this;
-    }
-    virtual ~FocusableWidget() {
-        delete focusManager_;
-    }
+    FocusableWidget(const Rect& rect): Focusable(), Widget(rect) { }
 
-
-    virtual bool receiveKey(int ch) { return focusManager_->receiveKey(ch); }
-    virtual bool isFocused() const { return focusManager_->isFocused(); }
-    virtual void focus() const { return focusManager_->focus(); }
-    virtual void deFocus() const { return focusManager_->deFocus(); }
-    virtual const FocusManaging& getFocusManager() const;
+    virtual bool receiveKey(int ch);
+    virtual bool isFocused() const;
+    virtual void focus();
+    virtual void deFocus();
 
 protected:
     FocusableWidget(): Widget() {}
-    FocusManaging *focusManager_;
+
 private:
+    bool isFocused_;
 };
 
 }

@@ -18,8 +18,6 @@ public:
 private:
     std::string text_;
     ButtonState state_;
-    // SingleFocusManager *focusManager_;
-
 
 };
 

@@ -15,7 +15,7 @@ public:
 
     FocusableContainer(const Rect& rect, std::unique_ptr<ContainerFocusManaging> focusManager): Focusable(), Container(rect), focusManager_() { focusManager_ = std::move(focusManager); }
 
-    void addWidget(Widget& widget);
+    void addWidget(std::shared_ptr<Widget> widget);
 
     // from Focusable, which is just an interface
     virtual bool receiveKey(int ch) { return focusManager_->receiveKey(ch); }

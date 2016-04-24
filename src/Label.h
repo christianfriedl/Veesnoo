@@ -12,6 +12,10 @@ namespace nv {
 class Label: public Widget {
 public:
     Label(const std::string& text, const int x, const int y): Widget(Rect(x, y, text.size(), 1)), text_(text) { }
+    /*
+    Label(Label&& other);
+    Label& operator=(Label&& other);
+    */
     virtual void refresh();
 private:
     std::string text_;

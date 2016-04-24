@@ -8,11 +8,11 @@ const FocusManaging&
 FocusableContainer::getFocusManager() const { return *focusManager_; }
 
 void 
-FocusableContainer::addWidget(Widget& widget) {
+FocusableContainer::addWidget(std::shared_ptr<Widget> widget) {
     Container::addWidget(widget);
-    FocusableWidget* f = dynamic_cast<FocusableWidget*>(&widget);
+    FocusableWidget* f = dynamic_cast<FocusableWidget*>(widget->get());
     if (f != NULL)
-        focusManager_->addWidget(*f);
+        focusManager_->addWidget(std::make_shared<FocusableWidget>(*f));
 }
 
 }

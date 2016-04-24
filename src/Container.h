@@ -9,13 +9,13 @@ namespace nv {
 class Container: public Widget {
 public:
     Container(const Rect& rect): Widget(rect), subWidgets_() {}
-    void addWidget(Widget& widget);
-    std::vector<Widget *> getSubWidgets() const { return subWidgets_; }
+    void addWidget(std::shared_ptr<Widget> widget);
+    auto getSubWidgets() const { return subWidgets_; }
     virtual void refresh();
 
 protected:
     Container(): Widget(Rect(0, 0, 1, 1)), subWidgets_() {}
-    std::vector<Widget *> subWidgets_;
+    std::vector<std::shared_ptr<Widget> > subWidgets_;
 };
 
 }

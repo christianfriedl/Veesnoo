@@ -3,24 +3,10 @@
 
 namespace nv {
 
-ContainerFocusManager::ContainerFocusManager(FocusableContainer& widget) : 
-        ContainerFocusManaging(), widget_(&widget), focusedWidget_(NULL), isFocused_(false) {
-    Logger::get().log("new ContainerFocusManager @ %ld for widget @ %ld", this, &widget);
-    subWidgets_ = std::vector<const FocusableWidget*>();
+ContainerFocusManager::ContainerFocusManager(const FocusableContainer& widget) : 
+        ContainerFocusManaging(), focusedWidget_(NULL), isFocused_(false) {
+    Logger::get().log("new ContainerFocusManager @ %lld for widget @ %lld", this, &widget);
     // add all subwidgets that are focusable to our collection
-    for ( std::vector<Widget*>::iterator iter = widget.getSubWidgets().begin(); iter != widget.getSubWidgets().end(); ++iter ) {
-        FocusableWidget *f = dynamic_cast<FocusableWidget*> (*iter);
-        if ( f != NULL ) {
-            subWidgets_.push_back(f);
-        }
-    }
-}
-
-void ContainerFocusManager::addWidget(const Widget& widget) {
-    const FocusableWidget *f = dynamic_cast<const FocusableWidget*>(&widget);
-    Logger::get().log("ContainerFocusManager @ %ld for widget @ %ld will add widget %ld", this, widget_, &widget);
-    if (f != NULL)
-        subWidgets_.push_back(f);
 }
 
 bool ContainerFocusManager::receiveKey(int ch) {
@@ -47,55 +33,69 @@ void ContainerFocusManager::deFocus() {
 }
 
 void ContainerFocusManager::focusFirst() {
-    if ( subWidgets_.size() != 0)
-        focusThis(subWidgets_[0]);
+    auto subWidgets = getFocusableSubWidgets();
+    if ( subWidgets.size() != 0)
+        focusThis(subWidgets[0]);
+}
+
+auto ContainerFocusManager::getFocusableSubWidgets() {
+    return std::copy_if(getSubWidgets(),
+        [] (auto widget) { 
+            FocusableWidget *f = dynamic_cast<FocusableWidget*> (widget.get()); // TODO find better way to do instanceof
+            return ( f != NULL );
+        });
 }
 
 void ContainerFocusManager::focusNext() {
+    auto focusableSubWidgets = getFocusableSubWidgets();
+        
     const FocusableWidget *res = NULL;
     int i=0;
-    Logger::get().log("ContainerFocusManager @ %ld ::focusNext(), subWidgets_ have size %i", this, subWidgets_.size());
+    Logger::get().log("ContainerFocusManager @ %lld ::focusNext(), subWidgets have size %i", this, subWidgets.size());
 
-    for (std::vector<const FocusableWidget *>::iterator iter = subWidgets_.begin(); 
-            iter != subWidgets_.end(); 
-            ++iter) {
-        if ((*iter) == focusedWidget_) {
-            if (i == subWidgets_.size() - 1)
-                res = subWidgets_[0];
+    for (auto widget : subWidgets) {
+        if (widget.get() == focusedWidget_.get()) {
+            if (i == subWidgets.size() - 1)
+                res = subWidgets[0];
             else
-                res = subWidgets_[i+1];
+                res = subWidgets[i+1];
             break;
         } 
         ++i;
     }
-    focusThis(res);
+    if ( res )
+        focusThis(res);
 }
 
 void ContainerFocusManager::focusPrev() {
+    auto subWidgets = getSubWidgets();
     const FocusableWidget *res = NULL;
-    int i=subWidgets_.size() - 1;
-    for (std::vector<const FocusableWidget *>::reverse_iterator iter = subWidgets_.rbegin(); 
-            iter != subWidgets_.rend(); 
+    int i=subWidgets.size() - 1;
+    for (std::vector<std::shared_ptr<const FocusableWidget> >::reverse_iterator iter = subWidgets.rbegin(); 
+            iter != subWidgets.rend(); 
             ++iter) {
         if ((*iter) == focusedWidget_) {
             if (i == 0)
-                res = subWidgets_[subWidgets_.size() - 1];
+                res = subWidgets[subWidgets.size() - 1];
             else
-                res = subWidgets_[i-1];
+                res = subWidgets[i-1];
             break;
         } 
         --i;
     }
-    focusThis(res);
+    if ( res )
+        focusThis(res);
 }
 
 void ContainerFocusManager::focusThis(const FocusableWidget *widget) {
+    auto subWidgets = getSubWidgets();
+
     focusedWidget_ = widget;
     if ( widget->isFocused() ) {
         return;
     }
-    for ( std::vector<const FocusableWidget*>::iterator iter = subWidgets_.begin(); 
-            iter != subWidgets_.end(); ++iter ) {
+    for ( std::vector<const FocusableWidget*>::iterator iter = subWidgets.begin(); 
+            iter != subWidgets.end(); ++iter ) {
         if ( (*iter) == widget )
             (*iter)->focus();
         else
@@ -104,9 +104,14 @@ void ContainerFocusManager::focusThis(const FocusableWidget *widget) {
 }
 
 void ContainerFocusManager::focusThis(const int index) {
-    if ( index >= subWidgets_.size() )
+    auto subWidgets = getSubWidgets();
+    if ( index >= subWidgets.size() )
         throw new Exception("out of bounds");
-    focusThis(subWidgets_[index]);
+    focusThis(subWidgets[index]);
+}
+
+auto ContainerFocusManager::getSubWidgets() {
+    return widget_.getSubWidgets();
 }
 
 void ContainerFocusManager::setWidget(const Widget&) {
