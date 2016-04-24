@@ -1,4 +1,5 @@
 Makefile.local
+*.d
 *.o
 *.a
 *.e
