@@ -6,7 +6,6 @@
 #include <string.h>
 #include "Widget.h"
 #// include "KeyReceiving.h"
-#include "SingleFocusManager.h"
 #include "Checkbox.h"
 
 namespace nv {

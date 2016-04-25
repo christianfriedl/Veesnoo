@@ -13,12 +13,10 @@ public:
     ContainerFocusManaging(const ContainerFocusManaging&) {}
     virtual ~ContainerFocusManaging();
 
-    virtual void addWidget(const Widget& widget) = 0;
-
     virtual void focusFirst() = 0;
     virtual void focusNext() = 0;
     virtual void focusPrev() = 0;
-    virtual void focusThis(const FocusableWidget *widget) = 0;
+    virtual void focusThis(std::shared_ptr<FocusableWidget> widget) = 0;
     virtual void focusThis(const int index) = 0;
 };
 

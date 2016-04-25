@@ -14,7 +14,8 @@ namespace nv {
 
 // class ColorAttribute;
 
-class Widget : public NonCopyable {
+// TODO check whether we should derive from NonCopyable
+class Widget {
 public:
     explicit Widget(const Rect& rect); // from a rectangle
     /*
@@ -54,9 +55,7 @@ protected:
     bool isVisible;
     std::weak_ptr<Widget> parent_;
 
-
 private:
-    Widget(const Widget&) {}
 
     /*
     @property(weak) ColorAttribute* contentColAttr;

@@ -8,13 +8,13 @@ namespace nv {
 class FocusManaging {
 public:
     FocusManaging() {}
-    FocusManaging(const FocusManaging&) {}
     virtual ~FocusManaging();
     virtual bool receiveKey(int ch) = 0;
     virtual void focus() = 0;
     virtual void deFocus() = 0;
-    virtual void setWidget(const Widget&) = 0;
+    virtual void setWidget(std::shared_ptr<Widget>) = 0;
     virtual bool isFocused() = 0;
+
 };
 
 }

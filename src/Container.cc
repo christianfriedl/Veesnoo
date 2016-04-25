@@ -4,7 +4,7 @@ namespace nv {
 
 void 
 Container::addWidget(std::shared_ptr<Widget> widget) {
-    widget->setParent(*this);
+    widget->setParent(std::shared_ptr<Widget>(this));
     subWidgets_.push_back(widget);
 }
 

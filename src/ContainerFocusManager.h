@@ -13,7 +13,7 @@ namespace nv {
 class ContainerFocusManager : public ContainerFocusManaging { 
 
 public:
-    explicit ContainerFocusManager(const FocusableContainer& widget);
+    explicit ContainerFocusManager(std::shared_ptr<FocusableContainer> widget);
 
     bool receiveKey(int ch);
     void focus();
@@ -21,10 +21,9 @@ public:
     void focusFirst();
     void focusNext();
     void focusPrev();
-    virtual void addWidget(const Widget& widget);
-    void setWidget(const Widget&);
+    void setWidget(std::shared_ptr<Widget> widget);
     bool isFocused();
-    void focusThis(const FocusableWidget *widget);
+    void focusThis(std::shared_ptr<FocusableWidget> widget);
     void focusThis(const int index);
 
 private:

@@ -3,9 +3,9 @@
 
 namespace nv {
 
-ContainerFocusManager::ContainerFocusManager(const FocusableContainer& widget) : 
-        ContainerFocusManaging(), focusedWidget_(NULL), isFocused_(false) {
-    Logger::get().log("new ContainerFocusManager @ %lld for widget @ %lld", this, &widget);
+ContainerFocusManager::ContainerFocusManager(std::shared_ptr<FocusableContainer> widget) : 
+        ContainerFocusManaging(), focusedWidget_(NULL), isFocused_(false), _widget(widget) {
+    Logger::get().log("new ContainerFocusManager @ %lld for widget @ %lld", this, *widget);
     // add all subwidgets that are focusable to our collection
 }
 

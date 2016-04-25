@@ -2,7 +2,6 @@
 #define NV_FOCUSABLE_WIDGET_H
 
 #include "Focusable.h"
-#include "SingleFocusManager.h"
 
 namespace nv {
 

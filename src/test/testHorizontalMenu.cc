@@ -1,3 +1,4 @@
+#include <memory>
 #include "MenuItem.h"
 #include "HorizontalMenu.h"
 
@@ -8,9 +9,9 @@ int main() {
     MenuItem m2("menu item 2");
     MenuItem m3("menu item 3");
     HorizontalMenu hm(2, 2);
-    hm.addWidget(m1);
-    hm.addWidget(m2);
-    hm.addWidget(m3);
+    hm.addWidget(std::make_shared<Widget>(std::move(m1)));
+    hm.addWidget(std::make_shared<Widget>(std::move(m2)));
+    hm.addWidget(std::make_shared<Widget>(std::move(m3)));
 
     hm.pack();
     hm.refresh();
