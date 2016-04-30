@@ -29,7 +29,6 @@ public:
     void focusThis(const int index) { focusManager_->focusThis(index); }
 
 protected:
-    FocusableContainer(): Container() {}
     std::unique_ptr<ContainerFocusManaging> focusManager_;
 private:
 };

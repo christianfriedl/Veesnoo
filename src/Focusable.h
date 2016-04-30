@@ -1,8 +1,6 @@
 #ifndef NV_FOCUSABLE_H
 #define NV_FOCUSABLE_H
 
-#include "FocusManaging.h"
-
 namespace nv {
 
 class Focusable {

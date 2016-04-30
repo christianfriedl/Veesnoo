@@ -14,7 +14,6 @@ public:
     virtual void refresh();
 
 protected:
-    Container(): Widget(Rect(0, 0, 1, 1)), subWidgets_() {}
     std::vector<std::shared_ptr<Widget> > subWidgets_;
 };
 

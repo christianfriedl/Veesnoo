@@ -21,18 +21,17 @@ public:
     void focusFirst();
     void focusNext();
     void focusPrev();
-    void setWidget(std::shared_ptr<Widget> widget);
     bool isFocused();
     void focusThis(std::shared_ptr<FocusableWidget> widget);
     void focusThis(const int index);
 
 private:
-
-    std::shared_ptr<FocusableWidget> focusedWidget_;
-    bool isFocused_;
-
     auto getSubWidgets();
     auto getFocusableSubWidgets();
+
+    std::shared_ptr<Container> widget_; // TODO this might be a weak_ptr??
+    std::shared_ptr<FocusableWidget> focusedWidget_;
+    bool isFocused_;
 
 };
 

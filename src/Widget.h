@@ -6,7 +6,6 @@
 #include <iostream>
 #include <memory>
 
-#include "NonCopyable.h"
 #include "Rect.h"
 #include "CursesWindow.h"
 
@@ -23,6 +22,8 @@ public:
     Widget& operator=(Widget&& other);
     */
 
+    virtual ~Widget() {}
+
     void setParent(const std::weak_ptr<Widget> parent); 
     virtual void refresh();
     virtual void resize(const int width, const int height);
@@ -38,7 +39,7 @@ public:
     Rect getRect() const;
 
     virtual Rect getContentRect() const;
-    Rect getAbsoluteRect() const; // will never change in derived classes, thus  not virtual
+    virtual Rect getAbsoluteRect() const; // used in constructor... needs to be virtual
     virtual Rect getAbsoluteContentRect() const;
 
     virtual std::unique_ptr<const std::string> toString()const ;

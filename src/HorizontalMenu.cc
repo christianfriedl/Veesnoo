@@ -3,7 +3,7 @@
 
 namespace nv {
 
-HorizontalMenu::HorizontalMenu(const int x, const int y): FocusableContainer(Rect(x, y, 1, 1), std::make_unique<ContainerFocusManager>(std::shared_ptr<FocusableContainer>(this))) {
+HorizontalMenu::HorizontalMenu(const int x, const int y): FocusableContainer(Rect(x, y, 1, 1), std::make_unique<ContainerFocusManager>(std::shared_ptr<HorizontalMenu>(this))) {
 }
 
 void HorizontalMenu::pack() {
