@@ -28,11 +28,12 @@ public:
 
 private:
     auto getSubWidgets();
-    auto getFocusableSubWidgets();
+    std::vector<std::shared_ptr<FocusableWidget>> getFocusableSubWidgets();
 
-    std::weak_ptr<Container> widget_; // TODO this might be a weak_ptr??
+    std::weak_ptr<Container> widget_;
     std::shared_ptr<FocusableWidget> focusedWidget_;
     bool isFocused_;
+    // std::vector<std::shared_ptr<FocusableWidget>>(tmpSubWidgets.size()) focusableSubWidgets_; // only ever used temporarily
 
 };
 
