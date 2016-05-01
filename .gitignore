@@ -16,3 +16,4 @@ doc/*/
 doxygen_sqlite3.db
 doc/html
 doc/latext
+/docs
