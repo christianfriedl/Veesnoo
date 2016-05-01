@@ -6,6 +6,7 @@ namespace nv {
 class Focusable {
 
 public:
+    virtual ~Focusable() {}
     virtual bool receiveKey(int ch) = 0;
     virtual bool isFocused() const = 0;
     virtual void focus() = 0;

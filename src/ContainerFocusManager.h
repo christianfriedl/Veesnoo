@@ -14,6 +14,7 @@ class ContainerFocusManager : public ContainerFocusManaging {
 
 public:
     explicit ContainerFocusManager(std::shared_ptr<FocusableContainer> widget);
+    virtual ~ContainerFocusManager() {}
 
     bool receiveKey(int ch);
     void focus();
@@ -29,7 +30,7 @@ private:
     auto getSubWidgets();
     auto getFocusableSubWidgets();
 
-    std::shared_ptr<Container> widget_; // TODO this might be a weak_ptr??
+    std::weak_ptr<Container> widget_; // TODO this might be a weak_ptr??
     std::shared_ptr<FocusableWidget> focusedWidget_;
     bool isFocused_;
 

@@ -9,6 +9,7 @@ namespace nv {
 class Container: public Widget {
 public:
     explicit Container(const Rect& rect): Widget(rect), subWidgets_() {}
+    virtual ~Container() {}
     void addWidget(std::shared_ptr<Widget> widget);
     auto getSubWidgets() const { return subWidgets_; }
     virtual void refresh();

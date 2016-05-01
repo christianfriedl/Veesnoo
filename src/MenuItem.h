@@ -11,6 +11,7 @@ class MenuItem: public FocusableWidget {
 public:
     MenuItem(const std::string& text, const int x, const int y);
     MenuItem(const std::string& text);
+    virtual ~MenuItem() {}
     void refresh();
     bool receiveKey(int ch);
 
