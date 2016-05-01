@@ -6,6 +6,7 @@ namespace nv {
 class FocusManaging {
 public:
     virtual ~FocusManaging() {}
+
     virtual bool receiveKey(int ch) = 0;
     virtual void focus() = 0;
     virtual void deFocus() = 0;

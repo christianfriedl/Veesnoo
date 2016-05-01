@@ -16,9 +16,6 @@ public:
     virtual void focus();
     virtual void deFocus();
 
-
-protected:
-
 private:
     bool isFocused_;
 };
