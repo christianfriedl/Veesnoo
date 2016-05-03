@@ -11,7 +11,7 @@ namespace nv {
 
 class FocusableContainer: public Focusable, public Container {
 public:
-    FocusableContainer(const Rect& rect): Focusable(), Container(rect), focusManager_() { }
+    explicit FocusableContainer(const Rect& rect): Focusable(), Container(rect), focusManager_() { }
 
     FocusableContainer(const Rect& rect, std::unique_ptr<ContainerFocusManaging> focusManager): Focusable(), Container(rect), focusManager_(std::move(focusManager)) { }
     virtual ~FocusableContainer() {}
