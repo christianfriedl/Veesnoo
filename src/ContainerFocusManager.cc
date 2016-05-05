@@ -52,7 +52,7 @@ std::vector<std::shared_ptr<FocusableWidget>> ContainerFocusManager::getFocusabl
     auto focusableSubWidgets = std::vector<std::shared_ptr<FocusableWidget>>(tmpSubWidgets.size());
     for (auto widget: tmpSubWidgets) { // TODO i'm sure there is a better way for copying to vector of subtype
         FocusableWidget *f = dynamic_cast<FocusableWidget*> (widget.get());
-        focusableSubWidgets.push_back(std::shared_ptr<FocusableWidget>(f));
+        focusableSubWidgets.emplace_back(std::shared_ptr<FocusableWidget>(f));
     }
 
     return focusableSubWidgets; // copied
@@ -109,7 +109,7 @@ void ContainerFocusManager::focusPrev() {
     }
 }
 
-void ContainerFocusManager::focusThis(std::shared_ptr<FocusableWidget> widget) {
+void ContainerFocusManager::focusThis(const std::shared_ptr<FocusableWidget>& widget) {
     auto focusableSubWidgets = getFocusableSubWidgets();
 
     focusedWidget_ = widget;
@@ -122,11 +122,6 @@ void ContainerFocusManager::focusThis(std::shared_ptr<FocusableWidget> widget) {
         else
             widget->deFocus();
     }
-}
-
-void ContainerFocusManager::focusThis(const int index) {
-    auto focusableSubWidgets = getFocusableSubWidgets();
-    focusThis(focusableSubWidgets[index]);
 }
 
 bool ContainerFocusManager::isFocused() {

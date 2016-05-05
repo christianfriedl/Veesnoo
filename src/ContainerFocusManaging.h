@@ -14,8 +14,7 @@ public:
     virtual void focusFirst() = 0;
     virtual void focusNext() = 0;
     virtual void focusPrev() = 0;
-    virtual void focusThis(std::shared_ptr<FocusableWidget> widget) = 0;
-    virtual void focusThis(const int index) = 0;
+    virtual void focusThis(const std::shared_ptr<FocusableWidget>& widget) = 0;
     virtual void setWidget(std::shared_ptr<Container> widget) = 0;
 };
 

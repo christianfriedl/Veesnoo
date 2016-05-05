@@ -9,7 +9,7 @@ int main() {
     auto m1 (std::make_shared<MenuItem>("menu item 1"));
     auto m2 (std::make_shared<MenuItem>("menu item 2"));
     auto m3 (std::make_shared<MenuItem>("menu item 3"));
-    HorizontalMenu hm(2, 2);
+    HorizontalMenu hm(6, 2);
     hm.addWidget(m1);
     hm.addWidget(m2);
     hm.addWidget(m3);
@@ -39,7 +39,7 @@ int main() {
     hm.refresh();
     getch(); // r4fresh, last item is focused and highlighted
 
-    hm.focusThis(1);
+    hm.focusThis(m2);
     hm.refresh();
     getch(); // r4fresh, 2nd item is focused and highlighted
 }

@@ -25,8 +25,7 @@ public:
     void focusNext();
     void focusPrev();
     bool isFocused();
-    void focusThis(std::shared_ptr<FocusableWidget> widget);
-    void focusThis(const int index);
+    void focusThis(const std::shared_ptr<FocusableWidget>& widget);
 
 private:
     auto getSubWidgets();

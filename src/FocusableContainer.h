@@ -30,8 +30,7 @@ public:
     void focusFirst() { focusManager_->focusFirst(); }
     void focusNext() { focusManager_->focusNext(); }
     void focusPrev() { focusManager_->focusPrev(); }
-    void focusThis(std::shared_ptr<FocusableWidget> widget) { focusManager_->focusThis(widget); }
-    void focusThis(const int index) { focusManager_->focusThis(index); }
+    void focusThis(const std::shared_ptr<FocusableWidget>& widget) { focusManager_->focusThis(widget); }
 
 protected:
     void setThisToFocusManager() {
