@@ -13,8 +13,10 @@ namespace nv {
 class ContainerFocusManager : public ContainerFocusManaging { 
 
 public:
-    explicit ContainerFocusManager(std::shared_ptr<FocusableContainer> widget);
+    explicit ContainerFocusManager(const std::weak_ptr<FocusableContainer>& widget);
     virtual ~ContainerFocusManager() {}
+
+    void setWidget(std::shared_ptr<Container> widget) { widget_ = widget; }
 
     bool receiveKey(int ch);
     void focus();

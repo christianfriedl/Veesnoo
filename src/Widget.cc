@@ -76,7 +76,7 @@ Widget::getIsVisible() const {
 }
 
 void
-Widget::setParent(const std::weak_ptr<Widget> parent) {
+Widget::setParent(const std::weak_ptr<Widget>& parent) {
     parent_ = parent;
 }
 

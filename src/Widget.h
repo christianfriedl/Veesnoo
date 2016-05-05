@@ -24,7 +24,7 @@ public:
 
     virtual ~Widget() {}
 
-    void setParent(const std::weak_ptr<Widget> parent); 
+    void setParent(const std::weak_ptr<Widget>& parent); 
     virtual void refresh();
     virtual void resize(const int width, const int height);
     virtual void move(const int x, const int y);

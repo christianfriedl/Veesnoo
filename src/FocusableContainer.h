@@ -13,7 +13,11 @@ class FocusableContainer: public Focusable, public Container {
 public:
     explicit FocusableContainer(const Rect& rect): Focusable(), Container(rect), focusManager_() { }
 
-    FocusableContainer(const Rect& rect, std::unique_ptr<ContainerFocusManaging> focusManager): Focusable(), Container(rect), focusManager_(std::move(focusManager)) { }
+    FocusableContainer(const Rect& rect, std::shared_ptr<ContainerFocusManaging> focusManager): Focusable(), Container(rect), focusManager_(focusManager) { }
+    void setFocusManager(std::shared_ptr<ContainerFocusManaging> focusManager) { focusManager_ = focusManager; }
+
+    // std::shared_ptr<FocusableContainer> create(const int x, const int y) = 0; // TODO: abstract this away into an interface
+
     virtual ~FocusableContainer() {}
 
     // from Focusable, which is just an interface
@@ -30,7 +34,11 @@ public:
     void focusThis(const int index) { focusManager_->focusThis(index); }
 
 protected:
-    std::unique_ptr<ContainerFocusManaging> focusManager_;
+    void setThisToFocusManager() {
+        focusManager_->setWidget(std::shared_ptr<FocusableContainer>(this));
+    }
+
+    std::shared_ptr<ContainerFocusManaging> focusManager_;
 private:
 };
 
