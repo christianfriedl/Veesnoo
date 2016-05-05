@@ -5,6 +5,10 @@
 
 namespace nv {
 
+#ifndef NV_NO_PAINTING
+
+// normal, nondebugging mode
+
 CursesWindow::CursesWindow(const Rect& rect) {
     window = CursesManager::getInstance().createWindow(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
     Logger::get().log("new CursesWindow from rect @ %lld (x: %i, y: %i, window: %lld)", this, rect.getX(), rect.getY(), window);
@@ -126,5 +130,75 @@ void CursesWindow::setCursorPosition(const int x, const int y) {
     if ( wmove(window, y, x) != OK )
         throw CursesException("unable to set cursor");
 }
+#else
+
+// debugging mode
+
+CursesWindow::CursesWindow(const Rect& rect) {
+    window = nullptr;
+    Logger::get().log("new CursesWindow from rect @ %lld (x: %i, y: %i, no curses window)", this, rect.getX(), rect.getY());
+}
+
+CursesWindow::~CursesWindow() {
+    Logger::get().log("~ CursesWindow without curses window)", this);
+}
+
+void CursesWindow::addString(const std::string& text) {
+}
+
+void CursesWindow::addString(const std::string& text, int x, int y) {
+}
+
+void CursesWindow::addCh(int ch) {
+}
+
+void CursesWindow::addCh(int ch, int x, int y) {
+}
+
+void CursesWindow::refresh() {
+}
+
+void CursesWindow::addBorder() {
+}
+
+int CursesWindow::getWidth() {
+    return 0;
+}
+
+int CursesWindow::getHeight() {
+    return 0;
+}
+
+void CursesWindow::attrOn(int attr) {
+}
+
+void CursesWindow::attrOff(int attr) {
+}
+
+void CursesWindow::resize(int width, int height) {
+}
+
+void CursesWindow::moveCursor(int x, int y) {
+}
+
+void CursesWindow::move(int x, int y) {
+}
+
+void CursesWindow::fillBackground(int ch) {
+}
+
+void CursesWindow::pairOn(int pair) {
+}
+
+void CursesWindow::pairOff(int pair) {
+}
+
+void CursesWindow::resetColors() {
+}
+
+void CursesWindow::setCursorPosition(const int x, const int y) {
+}
+
+#endif
 
 }
