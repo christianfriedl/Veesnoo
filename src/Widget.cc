@@ -12,7 +12,7 @@
 namespace nv {
 
 // constructor: set parent_ to "null", size from rect and make visible by default
-Widget::Widget(const Rect& rect): rect(rect), contentRect(0, 0, rect.getWidth(), rect.getHeight()), isVisible(true), parent_(std::weak_ptr<Widget>()) {
+Widget::Widget(const Rect& rect): rect(rect), contentRect(0, 0, rect.getWidth(), rect.getHeight()), isVisible(true), parent_(nullptr) {
     Logger::get().log("new Widget @ %lld (x: %i, y: %i)", this, rect.getX(), rect.getY());
 
     cw = std::make_unique<CursesWindow>(this->getAbsoluteRect());
@@ -65,9 +65,9 @@ Widget::move(const int x, const int y) {
     cw->move(getAbsoluteRect().getX(), getAbsoluteRect().getY());
 }
 
-std::weak_ptr<Widget>
+std::shared_ptr<Widget>
 Widget::getParent() const {
-    return parent_;
+    return std::shared_ptr<Widget>(parent_);
 }
 
 bool 
@@ -76,7 +76,7 @@ Widget::getIsVisible() const {
 }
 
 void
-Widget::setParent(const std::weak_ptr<Widget>& parent) {
+Widget::setParent(Widget *parent) {
     parent_ = parent;
 }
 
@@ -93,9 +93,8 @@ Widget::getContentRect() const {
 
 Rect 
 Widget::getAbsoluteRect() const {
-    auto sharedParent = parent_.lock();
-    if ( sharedParent ) {
-        const Rect parentAbsoluteRect = sharedParent.get() ? sharedParent.get()->getAbsoluteRect() : Rect(0, 0, 1, 1);
+    if ( parent_ ) {
+        const Rect parentAbsoluteRect = parent_->getAbsoluteRect();
         return Rect(parentAbsoluteRect.getX() + rect.getX(), parentAbsoluteRect.getY() + rect.getY(), rect.getWidth(), rect.getHeight());
     } else {
         const Rect parentAbsoluteRect(0, 0, 1, 1);
@@ -105,9 +104,8 @@ Widget::getAbsoluteRect() const {
 
 Rect 
 Widget::getAbsoluteContentRect() const {
-    auto sharedParent = parent_.lock();
-    if ( sharedParent ) {
-        const Rect parentAbsoluteContentRect = sharedParent.get() ? sharedParent.get()->getAbsoluteContentRect() : Rect(0, 0, 1, 1);
+    if ( parent_ ) {
+        const Rect parentAbsoluteContentRect = parent_->getAbsoluteContentRect();
         return Rect(parentAbsoluteContentRect.getX() + rect.getX() + contentRect.getX(), parentAbsoluteContentRect.getY() + rect.getY() + contentRect.getY(), rect.getWidth(), contentRect.getHeight());
     } else {
         const Rect parentAbsoluteContentRect(0, 0, 1, 1);

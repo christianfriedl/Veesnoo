@@ -27,7 +27,7 @@ int main() {
     w3->refresh();
     getch();
     Widget w4(Rect(1, 1, 10, 1));
-    w4.setParent(w3);
+    w4.setParent(w3.get());
     Logger::get().log("w4 ( in w3) : ");
     Logger::get().log(w4.toString());
     Logger::get().log("should be at 2, 2, size 10, 1");

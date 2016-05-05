@@ -24,7 +24,7 @@ public:
 
     virtual ~Widget() {}
 
-    void setParent(const std::weak_ptr<Widget>& parent); 
+    void setParent(Widget *parent); 
     virtual void refresh();
     virtual void resize(const int width, const int height);
     virtual void move(const int x, const int y);
@@ -33,7 +33,7 @@ public:
     virtual void addCh(const int ch);
     virtual void addCh(const int ch, const int x, const int y);
 
-    std::weak_ptr<Widget> getParent() const;
+    std::shared_ptr<Widget> getParent() const;
     bool getIsVisible() const;
 
     Rect getRect() const;
@@ -45,7 +45,7 @@ public:
     virtual std::unique_ptr<const std::string> toString()const ;
 
 protected:
-    Widget(): rect(0, 0, 1, 1), contentRect(0, 0, 1, 1), isVisible(false), parent_(std::weak_ptr<Widget>()) {}
+    Widget(): rect(0, 0, 1, 1), contentRect(0, 0, 1, 1), isVisible(false), parent_(nullptr) {}
 
     void setCWPosition();
     void setCWSize();
@@ -54,7 +54,7 @@ protected:
     Rect rect; // the original rect, covering all our area - relative to parent
     Rect contentRect; // the rect clients can paint on - in RELATIVE coords ===> relative to rect
     bool isVisible;
-    std::weak_ptr<Widget> parent_;
+    Widget *parent_;
 
 private:
 
