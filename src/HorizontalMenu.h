@@ -8,7 +8,9 @@ public:
 
     HorizontalMenu(const int x, const int y);
     virtual ~HorizontalMenu() {}
-    void pack();
+    virtual void addWidget(const std::shared_ptr<Widget>& widget) override;
+private:
+    void layout(); // not virtual, because each widget will ahve to know on its own how to do this
 
 };
 }

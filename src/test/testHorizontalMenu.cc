@@ -14,7 +14,6 @@ int main() {
     hm.addWidget(m2);
     hm.addWidget(m3);
 
-    hm.pack();
     hm.refresh();
     getch(); // refresh, no highligts
     hm.focus();

@@ -1,4 +1,5 @@
 #include "Container.h"
+#include "Logger.h"
 
 namespace nv {
 
@@ -10,8 +11,10 @@ Container::addWidget(const std::shared_ptr<Widget>& widget) {
 
 void Container::refresh() {
     Widget::refresh();
-    for ( auto widget: subWidgets_)
+    for ( auto widget: subWidgets_) {
+        Logger::get().log("Container @%llx will refresh subWidget @ %llx", this, widget.get());
         widget.get()->refresh();
+    }
 }
 
 }

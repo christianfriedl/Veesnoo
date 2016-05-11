@@ -61,7 +61,6 @@ Widget::resize(const int width, const int height) {
 void 
 Widget::move(const int x, const int y) {
     rect.move(x, y);
-    contentRect.move(x, y);
     cw->move(getAbsoluteRect().getX(), getAbsoluteRect().getY());
 }
 
@@ -139,6 +138,7 @@ Widget::addString(const std::string& text) {
 
 void 
 Widget::addString(const std::string& text, const int x, const int y) {
+    Logger::get().log("Widget adding text to contentRect: %s, %i %i, @ x %i y %i", text.c_str(), contentRect.getX(), contentRect.getY(), x, y);
     cw->addString(text, contentRect.getX() + x, contentRect.getY() + y);
 }
 

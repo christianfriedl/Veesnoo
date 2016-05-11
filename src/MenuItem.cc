@@ -10,6 +10,7 @@ MenuItem::MenuItem(const std::string& text) : FocusableWidget(Rect(0, 0, text.si
 }
 
 void MenuItem::refresh() {
+    addString(text_, 0, 0); 
 }
 
 bool MenuItem::receiveKey(int ch) {
