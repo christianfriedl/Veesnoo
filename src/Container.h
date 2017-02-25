@@ -4,17 +4,23 @@
 #include <memory>
 #include <vector>
 #include "Widget.h"
+#include "Logger.h"
 
 namespace nv {
 
-class Container: public Widget, public std::enable_shared_from_this<Container> {
+class Container: public Widget {
 public:
-    explicit Container(const Rect& rect): Widget(rect), subWidgets_() {}
-    virtual ~Container() {}
+    explicit Container(const Rect& rect): Widget(rect), subWidgets_() {
+        Logger::get().log("new Container() %s", toString().c_str());
+    }
+    virtual ~Container() {
+        // TODO: Will we delete the subWidgets_, or will we set teir parent to null? currently, they will be deleted along wit us
+        Logger::get().log("~Container() %s", toString().c_str());
+    }
     virtual void addWidget(const std::shared_ptr<Widget>& widget);
     auto getSubWidgets() const { return subWidgets_; } // we copy the vector, because in all likelihood this will be like 10 pointers or so
     virtual void refresh();
-
+    
 protected:
     std::vector<std::shared_ptr<Widget> > subWidgets_;
 };

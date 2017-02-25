@@ -6,6 +6,7 @@
 #include <iostream>
 #include <memory>
 
+#include "Logger.h"
 #include "Rect.h"
 #include "CursesWindow.h"
 
@@ -22,7 +23,9 @@ public:
     Widget& operator=(Widget&& other);
     */
 
-    virtual ~Widget() {}
+    virtual ~Widget() {
+        Logger::get().log("~Widget() %s", toString().c_str());
+    }
 
     void setParent(Widget *parent); 
     virtual void refresh();
@@ -42,7 +45,8 @@ public:
     virtual Rect getAbsoluteRect() const; // used in constructor... needs to be virtual
     virtual Rect getAbsoluteContentRect() const;
 
-    virtual std::unique_ptr<const std::string> toString()const ;
+    virtual const std::string toString() const;
+
 
 protected:
     Widget(): rect(0, 0, 1, 1), contentRect(0, 0, 1, 1), isVisible(false), parent_(nullptr) {}

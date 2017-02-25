@@ -13,7 +13,7 @@ namespace nv {
 
 // constructor: set parent_ to "null", size from rect and make visible by default
 Widget::Widget(const Rect& rect): rect(rect), contentRect(0, 0, rect.getWidth(), rect.getHeight()), isVisible(true), parent_(nullptr) {
-    Logger::get().log("new Widget @ %lld (x: %i, y: %i)", this, rect.getX(), rect.getY());
+    Logger::get().log("new Widget %s", toString().c_str());
 
     cw = std::make_unique<CursesWindow>(this->getAbsoluteRect());
 }
@@ -42,14 +42,14 @@ Widget& Widget::operator=(Widget&& other) {
 }
 */
 
-std::unique_ptr<const std::string> Widget::toString() const {
+const std::string Widget::toString() const {
     std::ostringstream ostr;
-    ostr << "<Widget @ " << this << " rect: " << *(rect.toString()) << std::endl;
+    ostr << "<Widget @ " << (unsigned long long int)this << " rect: " << *(rect.toString()) << std::endl;
     ostr << "    contentRect: " << *(contentRect.toString()) << std::endl;
     ostr << "    absoluteRect: " << *(getAbsoluteRect().toString()) << std::endl;
     ostr << "    absoluteContentRect: " << *(getAbsoluteContentRect().toString()) << std::endl;
     ostr << ">";
-    return std::make_unique<std::string>(ostr.str());
+    return ostr.str();
 }
 
 void 
