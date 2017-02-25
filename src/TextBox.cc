@@ -5,7 +5,7 @@
 namespace nv {
 
     TextBox::TextBox(const int x, const int y, const int width) : FocusableWidget(Rect(x, y, width, 1)),
-            status_(Status_normal), cursorX_(0), startX_(0) {}
+            mode_(Mode_normal), cursorX_(0), startX_(0) {}
 
     const std::string& TextBox::getText() { return text_; }
 
@@ -21,11 +21,11 @@ namespace nv {
     bool
     TextBox::receiveKey(const int ch) {
         bool received = false;
-        if ( status_ == Status_normal ) {
+        if ( mode_ == Mode_normal ) { // normal mode
             switch ( ch ) {
                 case KEY_IL:
                 case 'i':
-                    status_ = Status_insert;
+                    mode_ = Mode_insert;
                     received = true;
                     break;
                 case KEY_DL:
@@ -34,7 +34,7 @@ namespace nv {
                     received = true;
                     break;
             }
-        } else if ( status_ == Status_insert ) {
+        } else if ( mode_ == Mode_insert ) {
             if ( iswprint(ch) ) {
                 if ( cursorX_ <= text_.size() ) {
                     text_.insert(cursorX_, 1, ch);
@@ -52,12 +52,12 @@ namespace nv {
                         received = true;
                         break;
                     case Key_Esc:
-                        status_ = Status_normal;
+                        mode_ = Mode_normal;
                         received = true;
                         break;
                 }
             }
-        } else if ( status_ == Status_replace ) {
+        } else if ( mode_ == Mode_replace ) {
             if ( iswprint(ch) ) {
                 if ( cursorX_ <= text_.size() ) {
                     char s[2];
@@ -77,7 +77,7 @@ namespace nv {
                         received = true;
                         break;
                     case Key_Esc:
-                        status_ = Status_normal;
+                        mode_ = Mode_normal;
                         received = true;
                         break;
                 }

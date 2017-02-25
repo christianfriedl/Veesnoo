@@ -33,6 +33,11 @@ void Logger::log(const char *format, ...) {
 	va_end(argptr);
 }
 
+/*
+template<typename... Args>
+void log(Args&&... args) { Logger::get().log(std::forward<Args>(args)...); }
+*/
+void log(const std::string& msg) { Logger::get().log(msg); }
 
 }
 

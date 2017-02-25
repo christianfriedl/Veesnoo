@@ -5,6 +5,8 @@
 #include<memory>
 #include<stdio.h>
 
+#define LOG(format, args...) Logger::get().log(format, args)
+
 namespace nv {
 
 class Logger {
@@ -21,9 +23,13 @@ private:
     Logger(const Logger&);
     Logger& operator=(const Logger&);
     ~Logger();
-
-    
 };
+
+/* TODO this does not work yet
+template<typename... Args>
+void log(Args&&... args);
+*/
+void log(const std::string& msg);
 
 }
 

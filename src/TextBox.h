@@ -9,6 +9,8 @@ namespace nv {
 
 class TextBox : public FocusableWidget {
 public:
+    typedef enum { Mode_normal, Mode_insert, Mode_replace } Mode;
+
     TextBox(const int x, const int y, const int width);
     virtual bool receiveKey(const int ch);
     const std::string& getText();
@@ -18,10 +20,12 @@ public:
     bool cursorRight();
     bool cursorLeft();
 
-    typedef enum { Status_normal, Status_insert, Status_replace } Status;
+    Mode getMode() { return mode_; }
+    void setMode(Mode mode) { mode_ = mode; }
+
 private:
     std::string text_;
-    Status status_;
+    Mode mode_;
     int cursorX_;
     int startX_;
 

@@ -1,4 +1,5 @@
 #include "TextBox.h"
+#include "Logger.h"
 
 using namespace nv;
 
@@ -25,4 +26,5 @@ int main() {
         if ( !received && ch == Key_Esc )
             break;
     }
+    LOG("text is: '%s'", t1.getText().c_str());
 }
