@@ -15,6 +15,7 @@ public:
     virtual bool isFocused() const;
     virtual void focus();
     virtual void deFocus();
+    virtual void blur();
 
 private:
     bool isFocused_;

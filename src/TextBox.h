@@ -15,6 +15,7 @@ public:
     virtual bool receiveKey(const int ch);
     const std::string& getText();
     virtual void refresh();
+    inline int getCursorPos();
 
     bool cursorTo(int x);
     bool cursorRight();

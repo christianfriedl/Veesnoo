@@ -9,13 +9,25 @@ namespace nv {
 
     const std::string& TextBox::getText() { return text_; }
 
+    inline int TextBox::getCursorPos() {
+        return cursorX_ - startX_;
+    }
+
     void
     TextBox::refresh() {
-        addString(text_, 0, 0);
-        int cur = (cursorX_ > rect.getWidth() - 1) ? (rect.getWidth() - 1) : cursorX_;
+        if ( isFocused() )
+            cw->attrOn(A_REVERSE);
+        addString(text_.substr(startX_), 0, 0);
+        Logger::get().log("text is %s", text_.c_str());
 
+        for ( int i = std::min(rect.getWidth(), (int)text_.length() - startX_); i < rect.getWidth(); ++i )
+            addCh(' ', i, 0);
+
+        int cur = (getCursorPos() > rect.getWidth() - 1) ? (rect.getWidth() - 1) : getCursorPos();
         cw->setCursorPosition(cur, 0);
         FocusableWidget::refresh();
+        if ( isFocused() )
+            cw->attrOff(A_REVERSE);
     }
 
     bool
@@ -91,6 +103,8 @@ namespace nv {
         if (cursorX_ == text_.size())
             return false;
         ++cursorX_;
+        if ( cursorX_ > rect.getWidth() )
+            ++startX_;
         return true;
     }
 
@@ -98,6 +112,8 @@ namespace nv {
         if ( cursorX_ == 0 )
             return false;
         --cursorX_;
+        if ( cursorX_ < startX_ )
+            --startX_;
         return true;
     }
 
@@ -107,4 +123,5 @@ namespace nv {
         cursorX_ = x;
         return true;
     }
+
 }
