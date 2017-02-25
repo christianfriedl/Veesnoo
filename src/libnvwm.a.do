@@ -1,3 +1,4 @@
+./create_ctags.sh
 . ./libnvwm-objects.sh
 
 redo-ifchange $LIBOBJECTS
