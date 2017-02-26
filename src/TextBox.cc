@@ -15,13 +15,17 @@ namespace nv {
 
     void
     TextBox::refresh() {
-        if ( isFocused() )
+        char fillChar = '.';
+        if ( isFocused() ) {
             cw->attrOn(A_REVERSE);
+            fillChar = ' ';
+        }
+
         addString(text_.substr(startX_), 0, 0);
         Logger::get().log("text is %s", text_.c_str());
 
         for ( int i = std::min(rect.getWidth(), (int)text_.length() - startX_); i < rect.getWidth(); ++i )
-            addCh(' ', i, 0);
+            addCh(fillChar, i, 0);
 
         int cur = (getCursorPos() > rect.getWidth() - 1) ? (rect.getWidth() - 1) : getCursorPos();
         cw->setCursorPosition(cur, 0);
