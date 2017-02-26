@@ -1,3 +1,7 @@
+- additional basic textbox features
+    - go to start
+    - go to end
+    - backspace
 - remove bare pointers
     - Widget.h
     - FocusableContainer.h

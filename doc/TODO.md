@@ -1,4 +1,5 @@
-* TextBox: size should be obvious when not focused, v.1 -- TODO;prio-1
+* TextBox: size should be obvious when not focused, v.1 -- DONE;prio-1
+* Implement additional TextBox features -- TODO;prio-1;see todo-notes.txt
 * Implement Horizontal Menu -- TODO;prio-1
 * Implement Vertical Menu -- TODO;prio-1
 * Implement Popup Menu -- TODO;prio-1
@@ -12,6 +13,7 @@
 * Implement Focus management -- TODO;prio-2
 * Implement Window -- TODO;prio-2
 * Implement App with basic loop -- TODO;prio-2
+* Implement multi-level undo
 * Figure out additional necessary widgets -- TODO;ongoing
 * Add events -- TODO;prio-3
 * TextBox: size should be obvious when not focused -- TODO;prio-4

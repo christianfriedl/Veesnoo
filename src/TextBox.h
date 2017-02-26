@@ -20,6 +20,8 @@ public:
     bool cursorTo(int x);
     bool cursorRight();
     bool cursorLeft();
+    bool cursorToStart();
+    bool cursorToEnd();
 
     Mode getMode() { return mode_; }
     void setMode(Mode mode) { mode_ = mode; }

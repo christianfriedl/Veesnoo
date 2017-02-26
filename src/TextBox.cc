@@ -125,7 +125,17 @@ namespace nv {
         if ( x > text_.size() )
             return false;
         cursorX_ = x;
+        if ( cursorX_ > rect.getWidth() )
+            startX_ = cursorX_ - rect.getWidth();
         return true;
+    }
+
+    bool TextBox::cursorToStart() {
+        return cursorTo(0);
+    }
+
+    bool TextBox::cursorToEnd() {
+        return cursorTo(text_.length());
     }
 
 }
