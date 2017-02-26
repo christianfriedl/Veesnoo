@@ -14,6 +14,7 @@ public:
     TextBox(const int x, const int y, const int width);
     virtual bool receiveKey(const int ch);
     const std::string& getText();
+    void setText(const std::string& text) { text_ = text; }
     virtual void refresh();
     inline int getCursorPos();
 

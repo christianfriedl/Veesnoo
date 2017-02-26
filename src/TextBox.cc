@@ -17,9 +17,11 @@ namespace nv {
     TextBox::refresh() {
         char fillChar = '.';
         if ( isFocused() ) {
+            Logger::get().log("is focused! ");
             cw->attrOn(A_REVERSE);
             fillChar = ' ';
         }
+        LOG("fillchar is '%c'", fillChar);
 
         addString(text_.substr(startX_), 0, 0);
         Logger::get().log("text is %s", text_.c_str());
@@ -39,14 +41,21 @@ namespace nv {
         bool received = false;
         if ( mode_ == Mode_normal ) { // normal mode
             switch ( ch ) {
-                case KEY_IL:
+                case KEY_IL: // go to insert mode
                 case 'i':
                     mode_ = Mode_insert;
                     received = true;
                     break;
-                case KEY_DL:
+                case KEY_DL: // delete char under cursor
                 case 'x':
                     text_.replace(cursorX_, 1, "");
+                    received = true;
+                    break;
+                case KEY_BACKSPACE: // backspace
+                    received = true;
+                    break;
+                case '0': // move to start
+                case '$': // move to end
                     received = true;
                     break;
             }

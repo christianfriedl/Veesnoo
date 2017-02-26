@@ -1,7 +1,8 @@
 #ifndef NV_CURSES_MANAGER_H
 #define NV_CURSES_MANAGER_H
 
-#include <ncursesw/curses.h>
+// #include <ncursesw/curses.h>
+#include <ncurses.h>
 #include "NVBase.h"
 #include "Rect.h"
 

@@ -1,7 +1,8 @@
 #ifndef NV_WIDGET_H
 #define NV_WIDGET_H
 
-#include <ncursesw/ncurses.h>
+// #include <ncursesw/ncurses.h>
+#include <ncurses.h>
 #include <string>
 #include <iostream>
 #include <memory>

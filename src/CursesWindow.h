@@ -2,7 +2,8 @@
 #define NV_CURSES_WINDOW_H
 
 #include <memory>
-#include <ncursesw/ncurses.h>
+// #include <ncursesw/ncurses.h>
+#include <ncurses.h>
 #include "CursesManager.h"
 
 namespace nv {

@@ -1,6 +1,6 @@
 CC=clang++
 CFLAGS="-g -I../ -Wall -std=c++14"
-LDFLAGS="-lncursesw  -L../ -std=c++14"
+LDFLAGS="-lncurses  -L../ -std=c++14"
 STATIC_LIBS=-lnvwm
 LIBOBJS=../libnvwm.a
 BINARIES="testOneWidget testWidget testLabel "

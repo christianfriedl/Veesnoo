@@ -2,7 +2,7 @@
 #define NV_CONTAINER_FOCUS_MANAGER_H
 
 #include <vector>
-#include <ncursesw/ncurses.h>
+#include <ncurses.h>
 #include "Widget.h"
 #include "FocusableContainer.h"
 #include "FocusableWidget.h"
