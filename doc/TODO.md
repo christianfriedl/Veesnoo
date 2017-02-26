@@ -25,4 +25,6 @@
 * Add flexible Color management -- TODO;prio-4
 * Add sizing and layouting -- TODO;prio-4
 * The whole bloody thing needs to be utf-8 -- TODO;prio-4
+* Work with actual models -- TODO;prio-4
+* Add validators -- TODO;prio-4
 * Think about real life applications -- TODO;prio-5

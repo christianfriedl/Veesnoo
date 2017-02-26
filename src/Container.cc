@@ -15,6 +15,7 @@ Container::addWidget(const std::shared_ptr<Widget>& widget) {
 }
 
 void Container::refresh() {
+    Logger::get().log("Container @%llx will refresh itself (%s)", this, toString().c_str());
     Widget::refresh();
     for ( auto widget: subWidgets_) {
         Logger::get().log("Container @%llx will refresh subWidget @ %llx", this, widget.get());

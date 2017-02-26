@@ -19,9 +19,8 @@ void test1() {
 int main() {
     TextBox t1(1, 1, 10);
     t1.setText("abcde");
-    t1.refresh();
-    getch();
     t1.focus();
+    t1.refresh();
     int ch = 0;
     while ( true ) {
         ch = getch();

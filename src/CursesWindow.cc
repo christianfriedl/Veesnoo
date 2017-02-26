@@ -40,9 +40,9 @@ void CursesWindow::addString(const std::string& text, int x, int y) {
 
     getmaxyx(window, height, width);
     auto actualLength = std::min((int)text.length(), (int)(width - x));
-    Logger::get().log("CursesWindow adding text t: %s, x %i y %i width %i height %i text.length %i, actuallength %i", text.c_str(), x, y, width, height, (int)text.length(), actualLength);
-    Logger::get().log("CursesWindow adding text - window %lld", window);
+    Logger::get().log("CursesWindow adding text: '%s', x %i y %i width %i height %i text.length %i, actualLength %i, window %lld", text.c_str(), x, y, width, height, (int)text.length(), actualLength, window);
     mvwaddnstr(window, y, x, text.c_str(), actualLength);
+    wnoutrefresh(window);
 }
 
 void CursesWindow::addCh(int ch) {

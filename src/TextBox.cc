@@ -38,6 +38,8 @@ namespace nv {
 
     bool
     TextBox::receiveKey(const int ch) {
+        LOG("TextBox receiveKey '%c' (%i)", ch, ch);
+        LOG("TextBox receiveKey mode is %i", mode_);
         bool received = false;
         if ( mode_ == Mode_normal ) { // normal mode
             switch ( ch ) {
@@ -52,10 +54,28 @@ namespace nv {
                     received = true;
                     break;
                 case KEY_BACKSPACE: // backspace
+                    if ( cursorLeft() )
+                        text_.replace(cursorX_, 1, "");
+                    received = true;
+                    break;
+                case 'h': // move left
+                case KEY_LEFT:
+                    cursorLeft();
+                    received = true;
+                    break;
+                case 'l': // move right
+                case KEY_RIGHT:
+                    cursorRight();
                     received = true;
                     break;
                 case '0': // move to start
+                case KEY_HOME:
+                    cursorToStart();
+                    received = true;
+                    break;
                 case '$': // move to end
+                case KEY_END:
+                    cursorToEnd();
                     received = true;
                     break;
             }
