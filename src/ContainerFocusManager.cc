@@ -4,8 +4,8 @@
 
 namespace nv {
 
-ContainerFocusManager::ContainerFocusManager(const std::weak_ptr<FocusableContainer>& widget) : 
-        ContainerFocusManaging(), widget_(widget), focusedWidget_(NULL), isFocused_(false) {
+ContainerFocusManager::ContainerFocusManager(FocusableContainer *widget) : 
+        widget_(widget), focusedWidget_(NULL), isFocused_(false) {
     // Logger::get().log("new ContainerFocusManager @ %lld for widget @ %lld", this, widget.get());
 }
 

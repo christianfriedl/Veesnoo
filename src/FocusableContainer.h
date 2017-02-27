@@ -5,39 +5,35 @@
 #include "Focusable.h"
 #include "FocusableWidget.h"
 #include "Container.h"
-#include "ContainerFocusManaging.h"
+#include "ContainerFocusManager.h"
 
 namespace nv {
 
+class ContainerFocusManager;
+
 class FocusableContainer: public Focusable, public Container {
 public:
-    explicit FocusableContainer(const Rect& rect): Focusable(), Container(rect), focusManager_() { }
+    explicit FocusableContainer(const Rect& rect): Focusable(), Container(rect), focusManager_(this) { }
 
-    FocusableContainer(const Rect& rect, std::shared_ptr<ContainerFocusManaging> focusManager): Focusable(), Container(rect), focusManager_(focusManager) { }
-    void setFocusManager(std::shared_ptr<ContainerFocusManaging> focusManager) { focusManager_ = focusManager; }
-
-    // std::shared_ptr<FocusableContainer> create(const int x, const int y) = 0; // TODO: abstract this away into an interface
+    FocusableContainer(const Rect& rect, const ContainerFocusManager& focusManager): Focusable(), Container(rect), focusManager_(focusManager) { }
+    void setFocusManager(const ContainerFocusManager& focusManager) { focusManager_ = focusManager; }
 
     virtual ~FocusableContainer() {}
 
     // from Focusable, which is just an interface
     virtual bool receiveKey(int ch);
 
-    virtual bool isFocused() const { return focusManager_->isFocused(); }
-    virtual void focus() { return focusManager_->focus(); }
-    virtual void deFocus() { return focusManager_->deFocus(); }
+    virtual bool isFocused() const { return focusManager_.isFocused(); }
+    virtual void focus() { return focusManager_.focus(); }
+    virtual void deFocus() { return focusManager_.deFocus(); }
 
-    void focusFirst() { focusManager_->focusFirst(); }
-    void focusNext() { focusManager_->focusNext(); }
-    void focusPrev() { focusManager_->focusPrev(); }
-    void focusThis(const std::shared_ptr<FocusableWidget>& widget) { focusManager_->focusThis(widget); }
+    void focusFirst() { focusManager_.focusFirst(); }
+    void focusNext() { focusManager_.focusNext(); }
+    void focusPrev() { focusManager_.focusPrev(); }
+    void focusThis(FocusableWidget *widget) { focusManager_.focusThis(widget); }
 
 protected:
-    void setThisToFocusManager() {
-        focusManager_->setWidget(std::shared_ptr<FocusableContainer>(this));
-    }
-
-    std::shared_ptr<ContainerFocusManaging> focusManager_;
+    ContainerFocusManager focusManager_;
 private:
 };
 

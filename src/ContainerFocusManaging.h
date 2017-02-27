@@ -3,9 +3,11 @@
 
 #include "FocusableWidget.h"
 #include "FocusManaging.h"
-#include "Container.h"
+#include "FocusableContainer.h"
 
 namespace nv {
+
+class FocusableContainer;
 
 class ContainerFocusManaging: public FocusManaging {
 public:
@@ -14,8 +16,8 @@ public:
     virtual void focusFirst() = 0;
     virtual void focusNext() = 0;
     virtual void focusPrev() = 0;
-    virtual void focusThis(const std::shared_ptr<FocusableWidget>& widget) = 0;
-    virtual void setWidget(std::shared_ptr<Container> widget) = 0;
+    virtual void focusThis(FocusableWidget *widget) = 0;
+    virtual void setWidget(FocusableContainer *widget) = 0;
 };
 
 }

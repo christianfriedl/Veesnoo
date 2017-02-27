@@ -4,17 +4,11 @@
 
 namespace nv {
 
-HorizontalMenu::HorizontalMenu(const int x, const int y): FocusableContainer(Rect(x, y, 1, 1), std::make_shared<ContainerFocusManager>(std::make_shared<FocusableContainer>(Rect(0,0,1,1)))) { } 
+HorizontalMenu::HorizontalMenu(const int x, const int y): FocusableContainer(Rect(x, y, 1, 1)) { } 
 
 void HorizontalMenu::addWidget(const std::shared_ptr<Widget>& widget) {
     FocusableContainer::addWidget(widget);
     layout();
-}
-
-std::shared_ptr<HorizontalMenu> HorizontalMenu::create(const int x, const int y) {
-    auto hm = std::make_shared<HorizontalMenu>(x, y);
-    hm->focusManager_->setWidget(std::shared_ptr<HorizontalMenu>(hm));
-    hm->setThisToFocusManager();
 }
 
 void HorizontalMenu::layout() {

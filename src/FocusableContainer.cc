@@ -3,5 +3,5 @@
 
 namespace nv {
 
-bool FocusableContainer::receiveKey(int ch) { return focusManager_->receiveKey(ch); }
+bool FocusableContainer::receiveKey(int ch) { return focusManager_.receiveKey(ch); }
 }
