@@ -8,12 +8,8 @@ namespace nv {
 class Window : public FocusableContainer {
 public:
     Window(const Rect& rect, const std::string title = "");
-    virtual void refresh();
+    virtual void refresh() override;
     void setTitle(const std::string title);
-    void resize(const int width, const int height);
-
-protected:
-    virtual void calculateContentRect();
 
 private:
     std::string title_;

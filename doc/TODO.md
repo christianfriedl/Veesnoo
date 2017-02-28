@@ -1,9 +1,10 @@
 * TextBox: size should be obvious when not focused, v.1 -- DONE;prio-1
+* rename all members to have \_s.
 * Implement additional TextBox features -- TODO;prio-1;see todo-notes.txt
-* Correctly test for location of curses.h header file -- TODO;prio-1
+* Correctly test for location of curses.h header file -- DONE;prio-1
 * #inlcude system header files from only one location -- TODO;prio-1
-* Implement Horizontal Menu -- TODO;prio-1
-* Implement Vertical Menu -- TODO;prio-1
+* Implement Horizontal Menu -- DONE;prio-1
+* Implement Vertical Menu -- DONE;prio-1
 * Implement Popup Menu -- TODO;prio-1
 * Implement Message Box -- TODO;prio-1
 * Implement Confirm Box -- TODO;prio-1
