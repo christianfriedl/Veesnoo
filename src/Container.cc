@@ -10,7 +10,13 @@ Container::addWidget(const std::shared_ptr<Widget>& widget) {
      * ... eigentlich, wenn der parent destruktor ENTWEDER den parent im subwidget nullt, oder
      * das subwidget deleted, dürfte das nie passieren
      */
-    widget->setParent(this);
+    /*
+    std::shared_ptr<Widget> weakThisWidget = shared_from_this();
+    std::shared_ptr<Container> wc(dynamic_cast<Container*>(weakThisWidget.get()));
+    widget->setParent(wc);
+    */
+    auto weakThis = shared_from_this();
+    widget->setParent(weakThis);
     subWidgets_.emplace_back(widget);
 }
 

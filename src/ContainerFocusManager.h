@@ -4,10 +4,11 @@
 #include <vector>
 #include <ncurses.h>
 #include "Widget.h"
-#include "FocusableContainer.h"
 #include "FocusableWidget.h"
 
 namespace nv {
+
+class FocusableContainer;
 
 class ContainerFocusManager { 
 
@@ -24,14 +25,14 @@ public:
     void focusNext();
     void focusPrev();
     bool isFocused() const;
-    void focusThis(FocusableWidget *widget);
+    void focusThis(std::shared_ptr<FocusableWidget>& widget);
 
 private:
     auto getSubWidgets();
     std::vector<std::shared_ptr<FocusableWidget>> getFocusableSubWidgets();
 
     FocusableContainer *widget_;
-    FocusableWidget *focusedWidget_;
+    std::shared_ptr<FocusableWidget> focusedWidget_;
     bool isFocused_;
     // std::vector<std::shared_ptr<FocusableWidget>>(tmpSubWidgets.size()) focusableSubWidgets_; // only ever used temporarily
 

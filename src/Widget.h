@@ -16,7 +16,7 @@ namespace nv {
 // class ColorAttribute;
 
 // TODO check whether we should derive from NonCopyable
-class Widget {
+class Widget: public std::enable_shared_from_this<Widget> {
 public:
     explicit Widget(const Rect& rect); // from a rectangle
     /*
@@ -28,7 +28,7 @@ public:
         Logger::get().log("~Widget() %s", toString().c_str());
     }
 
-    void setParent(Widget *parent); 
+    void setParent(const std::weak_ptr<Widget>& parent); 
     virtual void refresh();
     virtual void resize(const int width, const int height);
     virtual void move(const int x, const int y);
@@ -37,7 +37,7 @@ public:
     virtual void addCh(const int ch);
     virtual void addCh(const int ch, const int x, const int y);
 
-    std::shared_ptr<Widget> getParent() const;
+    const std::weak_ptr<Widget>& getParent() const;
     bool getIsVisible() const;
 
     Rect getRect() const;
@@ -50,7 +50,7 @@ public:
 
 
 protected:
-    Widget(): rect(0, 0, 1, 1), contentRect(0, 0, 1, 1), isVisible(false), parent_(nullptr) {}
+    Widget();
 
     void setCWPosition();
     void setCWSize();
@@ -59,7 +59,7 @@ protected:
     Rect rect; // the original rect, covering all our area - relative to parent
     Rect contentRect; // the rect clients can paint on - in RELATIVE coords ===> relative to rect
     bool isVisible;
-    Widget *parent_;
+    std::weak_ptr<Widget> parent_;
 
 private:
 

@@ -11,8 +11,10 @@
 
 namespace nv {
 
+Widget::Widget(): rect(0, 0, 1, 1), contentRect(0, 0, 1, 1), isVisible(false), parent_(std::weak_ptr<Widget>()) {}
+
 // constructor: set parent_ to "null", size from rect and make visible by default
-Widget::Widget(const Rect& rect): rect(rect), contentRect(0, 0, rect.getWidth(), rect.getHeight()), isVisible(true), parent_(nullptr) {
+Widget::Widget(const Rect& rect): rect(rect), contentRect(0, 0, rect.getWidth(), rect.getHeight()), isVisible(true), parent_(std::weak_ptr<Widget>()) {
     Logger::get().log("new Widget %s", toString().c_str());
 
     cw = std::make_unique<CursesWindow>(this->getAbsoluteRect());
@@ -64,9 +66,9 @@ Widget::move(const int x, const int y) {
     cw->move(getAbsoluteRect().getX(), getAbsoluteRect().getY());
 }
 
-std::shared_ptr<Widget>
+const std::weak_ptr<Widget>&
 Widget::getParent() const {
-    return std::shared_ptr<Widget>(parent_);
+    return parent_;
 }
 
 bool 
@@ -75,7 +77,7 @@ Widget::getIsVisible() const {
 }
 
 void
-Widget::setParent(Widget *parent) {
+Widget::setParent(const std::weak_ptr<Widget>& parent) {
     parent_ = parent;
 }
 
@@ -92,9 +94,11 @@ Widget::getContentRect() const {
 
 Rect 
 Widget::getAbsoluteRect() const {
-    if ( parent_ ) {
-        const Rect parentAbsoluteRect = parent_->getAbsoluteRect();
-        return Rect(parentAbsoluteRect.getX() + rect.getX(), parentAbsoluteRect.getY() + rect.getY(), rect.getWidth(), rect.getHeight());
+    if ( parent_.use_count() != 0 ) {
+        if ( auto parent = parent_.lock() ) {
+            const Rect parentAbsoluteRect = parent->getAbsoluteRect();
+            return Rect(parentAbsoluteRect.getX() + rect.getX(), parentAbsoluteRect.getY() + rect.getY(), rect.getWidth(), rect.getHeight());
+        }
     } else {
         const Rect parentAbsoluteRect(0, 0, 1, 1);
         return Rect(parentAbsoluteRect.getX() + rect.getX(), parentAbsoluteRect.getY() + rect.getY(), rect.getWidth(), rect.getHeight());
@@ -103,9 +107,12 @@ Widget::getAbsoluteRect() const {
 
 Rect 
 Widget::getAbsoluteContentRect() const {
-    if ( parent_ ) {
-        const Rect parentAbsoluteContentRect = parent_->getAbsoluteContentRect();
-        return Rect(parentAbsoluteContentRect.getX() + rect.getX() + contentRect.getX(), parentAbsoluteContentRect.getY() + rect.getY() + contentRect.getY(), rect.getWidth(), contentRect.getHeight());
+    if ( parent_.use_count() != 0 ) {
+        if ( auto parent = parent_.lock() ) {
+            const Rect parentAbsoluteContentRect = parent->getAbsoluteContentRect();
+            return Rect(parentAbsoluteContentRect.getX() + rect.getX() + contentRect.getX(), parentAbsoluteContentRect.getY() + rect.getY() + contentRect.getY(), rect.getWidth(), contentRect.getHeight());
+        } else
+            throw std::runtime_error("parent should be there, but was not lockable");
     } else {
         const Rect parentAbsoluteContentRect(0, 0, 1, 1);
         return Rect(parentAbsoluteContentRect.getX() + rect.getX() + contentRect.getX(), parentAbsoluteContentRect.getY() + rect.getY() + contentRect.getY(), rect.getWidth(), contentRect.getHeight());

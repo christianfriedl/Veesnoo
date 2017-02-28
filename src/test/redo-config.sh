@@ -1,5 +1,7 @@
-CC=clang++
+# CC=clang++
+CC=g++
 CFLAGS="-g -I../ -Wall -std=c++14"
+# CFLAGS="-I../ -Wall -std=c++14"
 LDFLAGS="-lncurses  -L../ -std=c++14"
 STATIC_LIBS=-lnvwm
 LIBOBJS=../libnvwm.a

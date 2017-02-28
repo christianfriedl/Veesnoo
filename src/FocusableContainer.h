@@ -9,8 +9,6 @@
 
 namespace nv {
 
-class ContainerFocusManager;
-
 class FocusableContainer: public Focusable, public Container {
 public:
     explicit FocusableContainer(const Rect& rect): Focusable(), Container(rect), focusManager_(this) { }
@@ -30,7 +28,7 @@ public:
     void focusFirst() { focusManager_.focusFirst(); }
     void focusNext() { focusManager_.focusNext(); }
     void focusPrev() { focusManager_.focusPrev(); }
-    void focusThis(FocusableWidget *widget) { focusManager_.focusThis(widget); }
+    void focusThis(std::shared_ptr<FocusableWidget>& widget) { focusManager_.focusThis(widget); }
 
 protected:
     ContainerFocusManager focusManager_;

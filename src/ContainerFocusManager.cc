@@ -1,6 +1,7 @@
 #include<algorithm>
 #include"Logger.h"
 #include "ContainerFocusManager.h"
+#include "FocusableContainer.h"
 
 namespace nv {
 
@@ -32,10 +33,7 @@ void ContainerFocusManager::deFocus() {
 }
 
 auto ContainerFocusManager::getSubWidgets() {
-    if (auto widget = widget_.lock())
-        return widget.get()->getSubWidgets();
-    else
-        return std::vector<std::shared_ptr<Widget>>();
+    return widget_->getSubWidgets();
 }
 
 
@@ -109,7 +107,7 @@ void ContainerFocusManager::focusPrev() {
     }
 }
 
-void ContainerFocusManager::focusThis(const std::shared_ptr<FocusableWidget>& widget) {
+void ContainerFocusManager::focusThis(std::shared_ptr<FocusableWidget>& widget) {
     auto focusableSubWidgets = getFocusableSubWidgets();
 
     focusedWidget_ = widget;
@@ -124,7 +122,7 @@ void ContainerFocusManager::focusThis(const std::shared_ptr<FocusableWidget>& wi
     }
 }
 
-bool ContainerFocusManager::isFocused() {
+bool ContainerFocusManager::isFocused() const {
     return isFocused_;
 }
 
