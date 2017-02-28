@@ -6,7 +6,7 @@
 namespace nv {
 
 ContainerFocusManager::ContainerFocusManager(FocusableContainer *widget) : 
-        widget_(widget), focusedWidget_(NULL), isFocused_(false) {
+        widget_(widget), focusedWidget_(nullptr), isFocused_(false) {
     // Logger::get().log("new ContainerFocusManager @ %lld for widget @ %lld", this, widget.get());
 }
 
@@ -43,7 +43,7 @@ std::vector<std::shared_ptr<FocusableWidget>> ContainerFocusManager::getFocusabl
 
     for ( auto widget: subWidgets ) {
         auto f = std::dynamic_pointer_cast<FocusableWidget>(widget);
-        if ( f.get() != NULL )
+        if ( f.get() != nullptr )
             focusableSubWidgets.emplace_back(f);
     }
 
