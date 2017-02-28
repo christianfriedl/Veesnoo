@@ -4,7 +4,7 @@ LIBSOURCES="$LIBSOURCES CursesException.cc CursesManager.cc CursesWindow.cc Rect
 LIBSOURCES="$LIBSOURCES Button.cc FocusableWidget.cc "
 LIBSOURCES="$LIBSOURCES TextBox.cc Checkbox.cc MenuItem.cc "
 LIBSOURCES="$LIBSOURCES Container.cc "
-LIBSOURCES="$LIBSOURCES HorizontalMenu.cc FocusableContainer.cc ContainerFocusManaging.cc ContainerFocusManager.cc "
+LIBSOURCES="$LIBSOURCES HorizontalMenu.cc VerticalMenu.cc FocusableContainer.cc ContainerFocusManaging.cc ContainerFocusManager.cc "
 
 LIBOBJECTS=""
 LIBOBJECTS="$LIBOBJECTS Logger.o "
@@ -12,8 +12,4 @@ LIBOBJECTS="$LIBOBJECTS CursesException.o CursesManager.o CursesWindow.o Rect.o 
 LIBOBJECTS="$LIBOBJECTS Button.o FocusableWidget.o "
 LIBOBJECTS="$LIBOBJECTS TextBox.o Checkbox.o MenuItem.o "
 LIBOBJECTS="$LIBOBJECTS Container.o "
-LIBOBJECTS="$LIBOBJECTS HorizontalMenu.o FocusableContainer.o ContainerFocusManaging.o ContainerFocusManager.o "
-
-# LIBOBJECTS="$OBJECTS SingleFocusManager.o SingleFocusManager.o FocusManaging.o Checkbox.o Container.o FocusableContainer.o"
-# LIBOBJECTS="$OBJECTS HorizontalMenu.o VerticalMenu.o MenuItem.o ContainerFocusManager.o ContainerFocusManaging.o"
-# LIBOBJECTS="$OBJECTS Window.o TextBox.o PopupMenu.o"
+LIBOBJECTS="$LIBOBJECTS HorizontalMenu.o VerticalMenu.o FocusableContainer.o ContainerFocusManaging.o ContainerFocusManager.o "

@@ -4,40 +4,21 @@
 using namespace nv;
 
 int main() {
-    MenuItem m1("menu item 1");
-    MenuItem m2("menu item 2");
-    MenuItem m3("menu item 3");
-    VerticalMenu vm(2, 2);
-    vm.addWidget(m1);
-    vm.addWidget(m2);
-    vm.addWidget(m3);
+    auto m1 (std::make_shared<MenuItem>("menuitem1"));
+    auto m2 (std::make_shared<MenuItem>("menuitem2"));
+    auto m3 (std::make_shared<MenuItem>("menuitem3"));
+    auto hm = std::make_shared<VerticalMenu>(6, 2);
+    hm->addWidget(m1);
+    hm->addWidget(m2);
+    hm->addWidget(m3);
 
-    vm.pack();
-    vm.refresh();
-    getch(); // refresh, no highligts
-    vm.focus();
-    vm.refresh();
-    getch(); // refresh, first item is focused and highlighted
-    vm.receiveKey(' ');
-    vm.refresh();
-    getch(); // r4fresh, next item is focused and highlighted
-    vm.receiveKey(' ');
-    vm.refresh();
-    getch(); // r4fresh, next item is focused and highlighted
-    vm.receiveKey(' ');
-    vm.refresh();
-    getch(); // r4fresh, first item is focused and highlighted
-    vm.receiveKey(' ');
-    vm.refresh();
-    getch(); // r4fresh, next item is focused and highlighted
-    vm.receiveKey('h');
-    vm.refresh();
-    getch(); // r4fresh, first item is focused and highlighted
-    vm.receiveKey('h');
-    vm.refresh();
-    getch(); // r4fresh, last item is focused and highlighted
+    auto oida = std::shared_ptr<FocusableWidget>(m1.get());
+    hm->focus();
 
-    vm.focusThis(1);
-    vm.refresh();
-    getch(); // r4fresh, 2nd item is focused and highlighted
+    int ch = 0;
+    do {
+        hm->refresh();
+        ch = getch();
+        hm->receiveKey(ch);
+    } while ( ch != Key_Esc );
 }

@@ -6,13 +6,14 @@ namespace nv {
 class VerticalMenu: public FocusableContainer {
 public:
     VerticalMenu(const int x, const int y);
-    virtual ~VerticalMenu();
-    void pack();
+    virtual ~VerticalMenu() {}
+    virtual void addWidget(const std::shared_ptr<Widget>& widget) override;
 
-    MenuItem& addItem(const std::string& name);
+    // TODO MenuItem& addItem(const std::string& name);
 
 
 private:
-    std::vector<MenuItem*> addedItems_;
+    void layout(); // not virtual, because each widget will ahve to know on its own how to do this
 };
+
 }
