@@ -13,14 +13,12 @@ int main() {
     hm->addWidget(m2);
     hm->addWidget(m3);
 
-    auto oida = std::shared_ptr<FocusableWidget>(m1.get());
-    // hm->focusThis(oida);
     hm->focus();
 
     int ch = 0;
     do {
         hm->refresh();
-        ch = getch();
+        ch = CursesManager::getInstance().getCh();
         hm->receiveKey(ch);
     } while ( ch != Key_Esc );
 }

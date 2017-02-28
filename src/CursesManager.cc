@@ -65,4 +65,8 @@ int CursesManager::colorPair(int fg, int bg) {
     return pair;
 }
 
+int CursesManager::getCh() {
+    return getch();
+}
+
 }

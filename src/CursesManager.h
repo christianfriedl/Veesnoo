@@ -23,6 +23,7 @@ public:
     void refresh();
     Rect *getMaxScreenRect();
     int colorPair(int fg, int bg);
+    int getCh();
 private:
     void initCurses();
     CursesManager(); 
