@@ -39,30 +39,19 @@ auto ContainerFocusManager::getSubWidgets() {
 
 std::vector<std::shared_ptr<FocusableWidget>> ContainerFocusManager::getFocusableSubWidgets() {
     auto subWidgets = getSubWidgets();
-    auto tmpSubWidgets = std::vector<std::shared_ptr<Widget>>(subWidgets.size());
-    auto it = std::copy_if(subWidgets.begin(), subWidgets.end(), tmpSubWidgets.begin(),
-        [] (auto widget) { 
-            FocusableWidget *f = dynamic_cast<FocusableWidget*> (widget.get()); // TODO find better way to do instanceof
-            return ( f != NULL );
-        });
-    tmpSubWidgets.resize(std::distance(tmpSubWidgets.begin(), it));
+    auto focusableSubWidgets = std::vector<std::shared_ptr<FocusableWidget>>();
 
-    auto focusableSubWidgets = std::vector<std::shared_ptr<FocusableWidget>>(tmpSubWidgets.size());
-    for (auto widget: tmpSubWidgets) { // TODO i'm sure there is a better way for copying to vector of subtype
-        FocusableWidget *f = dynamic_cast<FocusableWidget*> (widget.get());
-        if ( f == nullptr ) throw std::runtime_error("widget not castable to FocusableWidget");
-        focusableSubWidgets.emplace_back(std::shared_ptr<FocusableWidget>(f));
+    for ( auto widget: subWidgets ) {
+        auto f = std::dynamic_pointer_cast<FocusableWidget>(widget);
+        if ( f.get() != NULL )
+            focusableSubWidgets.emplace_back(f);
     }
 
-    for ( auto w: tmpSubWidgets ) Logger::get().log("getFocusableSubWidgets w from focusableSubWidgets is %lld", w.get());
-    return focusableSubWidgets; // copied
+    return focusableSubWidgets;
 }
 
 void ContainerFocusManager::focusFirst() {
     auto focusableSubWidgets = getFocusableSubWidgets();
-    for ( auto w: focusableSubWidgets ) Logger::get().log("focusFirst w from focusableSubWidgets is %lld", w.get());
-
-    Logger::get().log("focusFirst w from focusableSubWidgets first %lld", focusableSubWidgets.front().get());
 
     if ( focusableSubWidgets.size() != 0 )
         focusThis(focusableSubWidgets.front());
