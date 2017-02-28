@@ -2,8 +2,9 @@
 
 CC=clang++
 CURSESLIB=asdfasfs
+CFLAGS="-Wall -std=c++14"
 
-./redo-config.local.sh
+. ./redo-config.local.sh
 
 if [ "$HAVE_DEBUG_SYMBOLS" == "yes" ]; then 
     CFLAGS="-g -Wall -std=c++14"
@@ -11,7 +12,6 @@ else
     CFLAGS="-Wall -std=c++14"
 fi
 
-CFLAGS="-Wall -std=c++14"
 
 # CC=g++
 # CFLAGS="-Wall -std=c++14"

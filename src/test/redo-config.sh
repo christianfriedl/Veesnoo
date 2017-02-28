@@ -11,6 +11,7 @@ LDFLAGS="$CURSESLIB -L../ -std=c++14"
 
 STATIC_LIBS=-lnvwm
 LIBOBJS=../libnvwm.a
+
 BINARIES="testOneWidget testWidget testLabel "
 BINARIES="$BINARIES testButton testTextBox testCheckbox "
 BINARIES="$BINARIES testHorizontalMenu testContainer"
@@ -22,10 +23,3 @@ TESTOBJECTS="$TESTOBJECTS testButton.o testTextBox.o testCheckbox.o "
 TESTOBJECTS="$TESTOBJECTS testHorizontalMenu.o testContainer.o"
 # LIBOBJECTS="$TESTOBJECTS testButton.o testCheckbox.o testHorizontalMenu.o testVerticalMenu.o"
 # LIBOBJECTS="$TESTOBJECTS testWindow.o testTextBox.o testPopupMenu.o"
-
-HAVEDEFINES=""
-if [ -f /usr/include/ncurses.h ]; then
-    HAVEDEFINES="-DHAVE_USR_INCLUDE_NCURSES_H $HAVEDEFINES"
-elif [ -f /usr/include/ncursesw/ncurses.h ]; then
-    HAVEDEFINES="-DHAVE_USR_INCLUDE_NCURSESW_NCURSES_H $HAVEDEFINES"
-fi
