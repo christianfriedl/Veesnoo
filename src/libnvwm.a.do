@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ./create_ctags.sh
 . ./libnvwm-objects.sh
 

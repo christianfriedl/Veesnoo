@@ -1,8 +1,14 @@
-# CC=clang++
-CC=g++
+#!/bin/bash
+
+CC=clang++
 CFLAGS="-g -I../ -Wall -std=c++14"
-# CFLAGS="-I../ -Wall -std=c++14"
-LDFLAGS="-lncurses  -L../ -std=c++14"
+
+. ../redo-config.local.sh
+
+. ../config-defines.sh
+
+LDFLAGS="$CURSESLIB -L../ -std=c++14"
+
 STATIC_LIBS=-lnvwm
 LIBOBJS=../libnvwm.a
 BINARIES="testOneWidget testWidget testLabel "
@@ -16,3 +22,10 @@ TESTOBJECTS="$TESTOBJECTS testButton.o testTextBox.o testCheckbox.o "
 TESTOBJECTS="$TESTOBJECTS testHorizontalMenu.o testContainer.o"
 # LIBOBJECTS="$TESTOBJECTS testButton.o testCheckbox.o testHorizontalMenu.o testVerticalMenu.o"
 # LIBOBJECTS="$TESTOBJECTS testWindow.o testTextBox.o testPopupMenu.o"
+
+HAVEDEFINES=""
+if [ -f /usr/include/ncurses.h ]; then
+    HAVEDEFINES="-DHAVE_USR_INCLUDE_NCURSES_H $HAVEDEFINES"
+elif [ -f /usr/include/ncursesw/ncurses.h ]; then
+    HAVEDEFINES="-DHAVE_USR_INCLUDE_NCURSESW_NCURSES_H $HAVEDEFINES"
+fi

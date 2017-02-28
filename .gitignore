@@ -18,3 +18,4 @@ doc/html
 doc/latext
 /docs
 .fuse_hidden*
+redo-config.local.sh

@@ -1,8 +1,14 @@
 #ifndef NV_CURSES_MANAGER_H
 #define NV_CURSES_MANAGER_H
 
-// #include <ncursesw/curses.h>
-#include <ncurses.h>
+#ifdef HAVE_USR_INCLUDE_NCURSES_H
+    #include <ncurses.h>
+#elif HAVE_USR_INCLUDE_NCURSESW_NCURSES_H
+    #include <ncursesw/ncurses.h>
+#else
+    #error "no curses header file set"
+#endif
+
 #include "NVBase.h"
 #include "Rect.h"
 

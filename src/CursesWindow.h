@@ -2,8 +2,13 @@
 #define NV_CURSES_WINDOW_H
 
 #include <memory>
-// #include <ncursesw/ncurses.h>
-#include <ncurses.h>
+#ifdef HAVE_USR_INCLUDE_NCURSES_H
+    #include <ncurses.h>
+#elif HAVE_USR_INCLUDE_NCURSESW_NCURSES_H
+    #include <ncursesw/ncurses.h>
+#else
+    #error "no curses header file set"
+#endif
 #include "CursesManager.h"
 
 namespace nv {

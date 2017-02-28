@@ -1,0 +1,6 @@
+*) src/redo-config.local.sh ist:
+
+CC=clang++
+CURSESLIB=-lncursesw
+
+
