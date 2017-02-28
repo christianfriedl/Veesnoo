@@ -7,7 +7,6 @@ namespace nv {
 
 ContainerFocusManager::ContainerFocusManager(FocusableContainer *widget) : 
         widget_(widget), focusedWidget_(nullptr), isFocused_(false) {
-    // Logger::get().log("new ContainerFocusManager @ %lld for widget @ %lld", this, widget.get());
 }
 
 bool ContainerFocusManager::receiveKey(int ch) {
@@ -102,7 +101,6 @@ void ContainerFocusManager::focusPrev() {
 }
 
 void ContainerFocusManager::focusThis(std::shared_ptr<FocusableWidget>& widget) {
-    Logger::get().log("focusThis called on widget %lld", widget.get());
     auto focusableSubWidgets = getFocusableSubWidgets();
 
     focusedWidget_ = widget;
