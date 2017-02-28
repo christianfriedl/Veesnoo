@@ -50,17 +50,22 @@ std::vector<std::shared_ptr<FocusableWidget>> ContainerFocusManager::getFocusabl
     auto focusableSubWidgets = std::vector<std::shared_ptr<FocusableWidget>>(tmpSubWidgets.size());
     for (auto widget: tmpSubWidgets) { // TODO i'm sure there is a better way for copying to vector of subtype
         FocusableWidget *f = dynamic_cast<FocusableWidget*> (widget.get());
+        if ( f == nullptr ) throw std::runtime_error("widget not castable to FocusableWidget");
         focusableSubWidgets.emplace_back(std::shared_ptr<FocusableWidget>(f));
     }
 
+    for ( auto w: tmpSubWidgets ) Logger::get().log("getFocusableSubWidgets w from focusableSubWidgets is %lld", w.get());
     return focusableSubWidgets; // copied
 }
 
 void ContainerFocusManager::focusFirst() {
     auto focusableSubWidgets = getFocusableSubWidgets();
+    for ( auto w: focusableSubWidgets ) Logger::get().log("focusFirst w from focusableSubWidgets is %lld", w.get());
 
-    if (focusableSubWidgets.size() != 0)
-        focusThis(focusableSubWidgets[0]);
+    Logger::get().log("focusFirst w from focusableSubWidgets first %lld", focusableSubWidgets.front().get());
+
+    if ( focusableSubWidgets.size() != 0 )
+        focusThis(focusableSubWidgets.front());
 }
 
 void ContainerFocusManager::focusNext() {
@@ -108,6 +113,7 @@ void ContainerFocusManager::focusPrev() {
 }
 
 void ContainerFocusManager::focusThis(std::shared_ptr<FocusableWidget>& widget) {
+    Logger::get().log("focusThis called on widget %lld", widget.get());
     auto focusableSubWidgets = getFocusableSubWidgets();
 
     focusedWidget_ = widget;
