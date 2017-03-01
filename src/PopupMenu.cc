@@ -13,9 +13,17 @@ namespace nv {
         addWidget(menu_);
     }
 
+    void 
+    PopupMenu::addWidget(const std::shared_ptr<Widget>& widget) {
+        Window::addWidget(widget);
+        layout();
+    }
+
+
     const std::shared_ptr<MenuItem>& 
     PopupMenu::addItem(const std::shared_ptr<MenuItem>& mi) {
         menu_->addWidget(mi);
+        layout();
         return mi;
     }
 

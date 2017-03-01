@@ -12,6 +12,7 @@ namespace nv {
             const std::shared_ptr<MenuItem>& addItem(const std::shared_ptr<MenuItem>& mi);
             const std::shared_ptr<MenuItem>& addItem(const std::string& name);
             void setMenu(const std::shared_ptr<VerticalMenu>& menu);
+            void addWidget(const std::shared_ptr<Widget>& widget);
 
         private:
             std::shared_ptr<VerticalMenu> menu_;
