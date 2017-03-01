@@ -101,6 +101,7 @@ void ContainerFocusManager::focusPrev() {
 }
 
 void ContainerFocusManager::focusThis(std::shared_ptr<FocusableWidget>& widget) {
+    Logger::get().log("ContainerFocusManager will focus widget: %s", widget->toString().c_str());
     auto focusableSubWidgets = getFocusableSubWidgets();
 
     focusedWidget_ = widget;

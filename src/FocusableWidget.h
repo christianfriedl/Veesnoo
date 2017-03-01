@@ -16,6 +16,7 @@ public:
     virtual void focus();
     virtual void deFocus();
     virtual void blur();
+    const std::string toString() const;
 
 private:
     bool isFocused_;
