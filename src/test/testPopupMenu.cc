@@ -1,6 +1,7 @@
 #include <ncursesw/ncurses.h>
 #include "MenuItem.h"
 #include "PopupMenu.h"
+#include "MainLoop.h"
 
 using namespace nv;
 
@@ -14,13 +15,7 @@ int main() {
     m->addItem(m2);
     m->addItem(m3);
 
-    m->focus();
+    MainLoop ml(m);
 
-    int ch = 0;
-    do {
-        m->refresh();
-        refresh();
-        ch = CursesManager::getInstance().getCh();
-        m->receiveKey(ch);
-    } while ( ch != Key_Esc );
+    ml.run();
 }

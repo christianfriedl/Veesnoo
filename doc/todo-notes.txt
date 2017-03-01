@@ -1,3 +1,5 @@
+- where do we want to add subwidgets, which we cannot do in the constructor?
+    - have a vector preparedSubWidgets, and add them all in a special method?
 - what do we call a window that is a main app?
     - should we bind the app to a window?
     - where does the event loop live?

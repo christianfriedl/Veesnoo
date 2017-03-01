@@ -1,5 +1,6 @@
 #include "MenuItem.h"
 #include "VerticalMenu.h"
+#include "MainLoop.h"
 
 using namespace nv;
 
@@ -12,12 +13,6 @@ int main() {
     hm->addWidget(m2);
     hm->addWidget(m3);
 
-    hm->focus();
-
-    int ch = 0;
-    do {
-        hm->refresh();
-        ch = CursesManager::getInstance().getCh();
-        hm->receiveKey(ch);
-    } while ( ch != Key_Esc );
+    MainLoop ml(hm);
+    ml.run();
 }

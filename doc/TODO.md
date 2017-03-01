@@ -2,10 +2,12 @@
 * rename all members to have \_s.
 * Implement additional TextBox features -- TODO;prio-1;see todo-notes.txt
 * Correctly test for location of curses.h header file -- DONE;prio-1
+* Add configure/autoconf tests -- TODO;prio-1
 * #inlcude system header files from only one location -- TODO;prio-1
+* Implement MainLoop -- TODO;prio-1
 * Implement Horizontal Menu -- DONE;prio-1
 * Implement Vertical Menu -- DONE;prio-1
-* Implement Popup Menu -- TODO;prio-1
+* Implement Popup Menu -- DONE;prio-1
 * Implement Message Box -- TODO;prio-1
 * Implement Confirm Box -- TODO;prio-1
 * Implement Select Box -- TODO;prio-1
@@ -14,14 +16,14 @@
 * Implement Radio Group -- TODO;prio-1
 * Implement Text area -- TODO;prio-1
 * Implement Focus management -- TODO;prio-2
+* Add events -- TODO;prio-2
 * Implement Window -- TODO;prio-2
 * Implement App with basic loop (AppWindow??? MainWindow??) -- TODO;prio-2
 * Implement multi-level undo -- TODO;prio-3
 * Window needs to react to move(); -- TODO;prio-1
 * All widgets need to react to move(); -- TODO;prio-1
 * Figure out additional necessary widgets -- TODO;ongoing
-* Add events -- TODO;prio-3
-* TextBox: size should be obvious when not focused -- TODO;prio-4
+* TextBox: size should be obvious when not focused, v.2 -- TODO;prio-4
 * TextBox: add colors? (at what point?) -- TODO;prio-4
 * TextBox: ... implement color pairs -- TODO;prio-4
 * Add flexible keyboard interface -- TODO;prio-4

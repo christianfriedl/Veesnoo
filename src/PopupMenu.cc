@@ -10,7 +10,6 @@ namespace nv {
     // TODO remove old menu first
     void PopupMenu::setMenu(const std::shared_ptr<VerticalMenu>& menu) {
         menu_ = menu;
-        addWidget(menu_);
     }
 
     void 

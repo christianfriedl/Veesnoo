@@ -46,8 +46,8 @@ public:
     const std::weak_ptr<Widget>& getParent() const;
     bool getIsVisible() const;
 
+    // those return copies of the rects, thus no need for const'ness
     Rect getRect() const;
-
     virtual Rect getContentRect() const;
     virtual Rect getAbsoluteRect() const; // used in constructor... needs to be virtual
     virtual Rect getAbsoluteContentRect() const;
