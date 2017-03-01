@@ -9,12 +9,14 @@ namespace nv {
     class PopupMenu : public Window {
         public:
             PopupMenu(const int x, const int y);
-            MenuItem& addItem(MenuItem& mi);
-            MenuItem& addItem(const std::string& name);
-            void pack();
+            const std::shared_ptr<MenuItem>& addItem(const std::shared_ptr<MenuItem>& mi);
+            const std::shared_ptr<MenuItem>& addItem(const std::string& name);
+            void setMenu(const std::shared_ptr<VerticalMenu>& menu);
 
         private:
-            VerticalMenu menu_;
+            std::shared_ptr<VerticalMenu> menu_;
+
+            void layout();
     };
 }
 

@@ -15,8 +15,10 @@
 * Implement Text area -- TODO;prio-1
 * Implement Focus management -- TODO;prio-2
 * Implement Window -- TODO;prio-2
-* Implement App with basic loop -- TODO;prio-2
-* Implement multi-level undo
+* Implement App with basic loop (AppWindow??? MainWindow??) -- TODO;prio-2
+* Implement multi-level undo -- TODO;prio-3
+* Window needs to react to move(); -- TODO;prio-1
+* All widgets need to react to move(); -- TODO;prio-1
 * Figure out additional necessary widgets -- TODO;ongoing
 * Add events -- TODO;prio-3
 * TextBox: size should be obvious when not focused -- TODO;prio-4

@@ -4,40 +4,21 @@
 using namespace nv;
 
 int main() {
-    MenuItem m1("menu item 1");
-    MenuItem m2("menu item 2");
-    MenuItem m3("menu item 3");
-    PopupMenu pm(2, 2);
-    pm.addItem(m1);
-    pm.addItem(m2);
-    pm.addItem(m3);
+    auto m1 (std::make_shared<MenuItem>("menuitem1"));
+    auto m2 (std::make_shared<MenuItem>("menuitem2"));
+    auto m3 (std::make_shared<MenuItem>("menuitem3"));
+    auto m (std::make_shared<PopupMenu>(6, 2));
 
-    pm.pack();
-    pm.refresh();
-    getch(); // refresh, no highligts
-    pm.focus();
-    pm.refresh();
-    getch(); // refresh, first item is focused and highlighted
-    pm.receiveKey(' ');
-    pm.refresh();
-    getch(); // r4fresh, next item is focused and highlighted
-    pm.receiveKey(' ');
-    pm.refresh();
-    getch(); // r4fresh, next item is focused and highlighted
-    pm.receiveKey(' ');
-    pm.refresh();
-    getch(); // r4fresh, first item is focused and highlighted
-    pm.receiveKey(' ');
-    pm.refresh();
-    getch(); // r4fresh, next item is focused and highlighted
-    pm.receiveKey('h');
-    pm.refresh();
-    getch(); // r4fresh, first item is focused and highlighted
-    pm.receiveKey('h');
-    pm.refresh();
-    getch(); // r4fresh, last item is focused and highlighted
+    m->addItem(m1);
+    m->addItem(m2);
+    m->addItem(m3);
 
-    pm.focusThis(1);
-    pm.refresh();
-    getch(); // r4fresh, 2nd item is focused and highlighted
+    m->focus();
+
+    int ch = 0;
+    do {
+        m->refresh();
+        ch = CursesManager::getInstance().getCh();
+        m->receiveKey(ch);
+    } while ( ch != Key_Esc );
 }

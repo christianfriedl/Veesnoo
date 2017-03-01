@@ -3,24 +3,32 @@
 
 namespace nv {
 
-    PopupMenu::PopupMenu(const int x, const int y) : Window(Rect(x, y, 1, 1), ""), menu_(1, 1) {
-		Logger::get().log("new PopupMenu @ %lld", this);
+    PopupMenu::PopupMenu(const int x, const int y) : Window(Rect(x, y, 1, 1)), menu_(std::make_shared<VerticalMenu>(1, 1)) {
+		Logger::get().log("new PopupMenu %s", toString().c_str());
+    }
+
+    // TODO remove old menu first
+    void PopupMenu::setMenu(const std::shared_ptr<VerticalMenu>& menu) {
+        menu_ = menu;
         addWidget(menu_);
     }
 
-    MenuItem& PopupMenu::addItem(MenuItem& mi) {
-        menu_.addWidget(mi);
+    const std::shared_ptr<MenuItem>& 
+    PopupMenu::addItem(const std::shared_ptr<MenuItem>& mi) {
+        menu_->addWidget(mi);
         return mi;
     }
 
-    MenuItem& PopupMenu::addItem(const std::string& name) {
-        return  menu_.addItem(name);
+    const std::shared_ptr<MenuItem>& 
+    PopupMenu::addItem(const std::string& name) {
+        auto mi = std::make_shared<MenuItem>(name);
+        return addItem(mi);
     }
 
     void 
-    PopupMenu::pack() {
-        menu_.pack();
-        resize(menu_.getRect().getWidth() + 2, menu_.getRect().getHeight() + 2);
-        calculateRects();
+    PopupMenu::layout() {
+        if ( subWidgets_.size() == 0 ) // work around shared_ptr-in-cons issue
+            addWidget(menu_);
+        resize(menu_->getRect().getWidth() + 2, menu_->getRect().getHeight() + 2);
     }
 }

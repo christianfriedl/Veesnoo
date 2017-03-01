@@ -15,7 +15,7 @@ Container::addWidget(const std::shared_ptr<Widget>& widget) {
     std::shared_ptr<Container> wc(dynamic_cast<Container*>(weakThisWidget.get()));
     widget->setParent(wc);
     */
-    auto weakThis = shared_from_this();
+    auto weakThis = std::weak_ptr<Widget>(shared_from_this());
     widget->setParent(weakThis);
     subWidgets_.emplace_back(widget);
 }

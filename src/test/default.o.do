@@ -1,3 +1,5 @@
+#!/bin/bash
+
 . ./redo-config.sh
 
 redo-ifchange $2.cc

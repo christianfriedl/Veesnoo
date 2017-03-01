@@ -1,3 +1,9 @@
+- what do we call a window that is a main app?
+    - should we bind the app to a window?
+    - where does the event loop live?
+        - in the main window?
+        - in a separate app, that has a window as a member... sounds good
+        - App::window_
 - additional basic textbox features
     - go to start
     - go to end
