@@ -96,7 +96,7 @@ Rect
 Widget::getAbsoluteRect() const {
     if ( parent_.use_count() != 0 ) {
         if ( auto parent = parent_.lock() ) {
-            const Rect parentAbsoluteRect = parent->getAbsoluteRect();
+            const Rect parentAbsoluteRect = parent->getAbsoluteContentRect();
             return Rect(parentAbsoluteRect.getX() + rect.getX(), parentAbsoluteRect.getY() + rect.getY(), rect.getWidth(), rect.getHeight());
         }
     } else {

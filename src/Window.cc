@@ -7,7 +7,7 @@ namespace nv {
 
 Window::Window(const Rect& rect, const std::string title) : FocusableContainer(rect), title_(title) {
     contentRect = Rect(1, 1, rect.getWidth() - 2, rect.getHeight() - 2);
-    Logger::get().log("new Window @ %ld (x: %i, y: %i)", this, rect.getX(), rect.getY());
+    Logger::get().log("new Window @ %ld %s", toString().c_str());
 }
 
 void 
