@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ./create_ctags.sh
-. ./libnvwm-objects.sh
+. ./redo-config.sh
 
 redo-ifchange $LIBOBJECTS
 
