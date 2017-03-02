@@ -1,0 +1,7 @@
+CXX=@CXX@
+LDFLAGS="@LIB_CURSES@"
+CXXFLAGS="@CXXFLAGS@"
+CXXFLAGS="-g -Wall -std=c++14"
+LDFLAGS="-lncursesw -std=c++14"
+AR="ar"
+ARFLAGS="rs"

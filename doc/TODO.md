@@ -1,5 +1,5 @@
 * TextBox: size should be obvious when not focused, v.1 -- DONE;prio-1
-* rename all members to have \_s.
+* rename all members to have trailing \_s.
 * Implement additional TextBox features -- TODO;prio-1;see todo-notes.txt
 * Correctly test for location of curses.h header file -- DONE;prio-1
 * Add configure/autoconf tests -- TODO;prio-1
@@ -16,13 +16,15 @@
 * Implement Radio Group -- TODO;prio-1
 * Implement Text area -- TODO;prio-1
 * Implement Focus management -- TODO;prio-2
+* Consistently use scoped enums -- TODO;prio-2
+* Consistently "=default" or "=delete" or create special functions -- TODO;prio-2
 * Add events -- TODO;prio-2
 * Implement Window -- TODO;prio-2
 * Implement App with basic loop (AppWindow??? MainWindow??) -- TODO;prio-2
 * Implement multi-level undo -- TODO;prio-3
 * Window needs to react to move(); -- TODO;prio-1
 * All widgets need to react to move(); -- TODO;prio-1
-* Figure out additional necessary widgets -- TODO;ongoing
+* Figure out additional necessary widgets - see gtk for inspiration ( https://developer.gnome.org/gtk3/stable/ch03.html ) -- TODO;ongoing
 * TextBox: size should be obvious when not focused, v.2 -- TODO;prio-4
 * TextBox: add colors? (at what point?) -- TODO;prio-4
 * TextBox: ... implement color pairs -- TODO;prio-4
@@ -32,4 +34,7 @@
 * The whole bloody thing needs to be utf-8 -- TODO;prio-4
 * Work with actual models -- TODO;prio-4
 * Add validators -- TODO;prio-4
-* Think about real life applications -- TODO;prio-5
+* Check out thread safety -- REFLECT;prio-4
+* Add an xml ui description language -- REFLECT;prio-4
+* Think about real life applications -- REFLECT;prio-5
+* Add scriptability -- REFLECT;prio-6

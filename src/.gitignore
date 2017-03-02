@@ -3,3 +3,9 @@
 .vimsession
 *.tmp
 redo-config.sh
+autom4te.cache
+config.h.in~
+config.h
+configure
+config.status
+configure.scan

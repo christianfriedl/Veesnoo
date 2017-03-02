@@ -1,18 +1,7 @@
 #ifndef NV_WIDGET_H
 #define NV_WIDGET_H
 
-#ifdef HAVE_USR_INCLUDE_NCURSES_H
-    #include <ncurses.h>
-#elif HAVE_USR_INCLUDE_NCURSESW_NCURSES_H
-    #include <ncursesw/ncurses.h>
-#else
-    #error "no curses header file set"
-#endif
-
-#include <string>
-#include <iostream>
-#include <memory>
-
+#include "NVBase.h"
 #include "Logger.h"
 #include "Rect.h"
 #include "CursesWindow.h"

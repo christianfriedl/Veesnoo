@@ -3,6 +3,9 @@
 redo-ifchange redo-config.sh
 
 ./create_ctags.sh
+
+. ./libnvwm-objects.sh
+
 . ./redo-config.sh
 
 redo-ifchange $LIBOBJECTS
