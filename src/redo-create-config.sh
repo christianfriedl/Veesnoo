@@ -26,7 +26,7 @@ AR=ar
 ARFLAGS=rs 
 
 
-cat << EOF > redo-config.sh
+cat << EOF
 CC=$CC
 CURSESLIB=$CURSESLIB
 CFLAGS="$CFLAGS"
