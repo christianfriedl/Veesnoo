@@ -1,4 +1,5 @@
 #include "FocusableWidget.h"
+#include "FocusableContainer.h"
 #include <iostream>
 #include <sstream>
 
@@ -11,6 +12,16 @@ bool FocusableWidget::receiveKey(int ch) {
 void FocusableWidget::focus() {
     Logger::get().log("FocusableWidget::focus() on %s", toString().c_str());
     isFocused_ = true;
+    auto p = parent_.lock();
+    if ( p ) {
+        auto p2 = std::dynamic_pointer_cast<FocusableContainer>(p);
+        if ( !p2 )
+            throw Exception("cannot cast parent to FocusableContainer");
+        std::shared_ptr<Focusable> this2 = std::dynamic_pointer_cast<Focusable>(shared_from_this());
+        if ( !this2 )
+            throw Exception("cannot cast this to Focusable");
+        p2->subWidgetHasFocused(this2);
+    }
 }
 
 void FocusableWidget::deFocus() {

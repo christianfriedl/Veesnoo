@@ -25,6 +25,8 @@ public:
     void focusPrev() { focusManager_->focusPrev(); }
     void focusThis(std::shared_ptr<Focusable>& widget) { focusManager_->focusThis(widget); }
 
+    void subWidgetHasFocused(std::shared_ptr<Focusable>& widget);
+
 protected:
     ContainerFocusManager *focusManager_;
 private:
