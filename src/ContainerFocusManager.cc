@@ -2,6 +2,7 @@
 #include"Logger.h"
 #include "ContainerFocusManager.h"
 #include "FocusableContainer.h"
+#include "FocusableWidget.h"
 
 namespace nv {
 
@@ -9,11 +10,24 @@ ContainerFocusManager::ContainerFocusManager(FocusableContainer *widget) :
         widget_(widget), focusedWidget_(nullptr), isFocused_(false) {
 }
 
+
+bool ContainerFocusManager::bubbleReceiveKey(int ch, std::shared_ptr<Widget> w) {
+    auto f = std::dynamic_pointer_cast<Focusable> (w);
+    if ( !f ) throw Exception("w is not focusable");
+    if ( f.get() == dynamic_cast<Focusable*>(widget_) )
+        return false;
+    else if ( f->receiveKey(ch) )
+        return true;
+    else {
+        auto ff = w->getParent().lock();
+        return bubbleReceiveKey(ch, ff);
+    }
+}
+
 bool ContainerFocusManager::receiveKey(int ch) {
-    auto fw = focusedWidget_.get();
-    Logger::get().log("receiveKey focusedWidget is %lld", fw);
+    auto fw = focusedWidget_;
     if ( fw )  {
-        if ( fw->receiveKey(ch) )
+        if ( bubbleReceiveKey(ch, std::dynamic_pointer_cast<Widget>(fw)) )
             return true;
     } else {
         focusFirst();

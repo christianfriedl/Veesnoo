@@ -4,6 +4,7 @@
 #include <vector>
 #include "Widget.h"
 #include "Focusable.h"
+#include "FocusableWidget.h"
 
 namespace nv {
 
@@ -30,6 +31,7 @@ public:
 private:
     std::vector<std::shared_ptr<Widget>> getSubWidgets();
     std::vector<std::shared_ptr<Focusable>> getFocusableSubWidgets();
+    bool bubbleReceiveKey(int ch, std::shared_ptr<Widget> w);
 
     FocusableContainer *widget_;
     std::shared_ptr<Focusable> focusedWidget_;
