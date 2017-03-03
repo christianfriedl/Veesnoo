@@ -8,29 +8,28 @@
 #include "ContainerFocusManager.h"
 
 namespace nv {
+    class FocusableContainer: public Focusable, public Container {
+        public:
+            explicit FocusableContainer(const Rect& rect);
+            virtual ~FocusableContainer();
 
-class FocusableContainer: public Focusable, public Container {
-public:
-    explicit FocusableContainer(const Rect& rect);
-    virtual ~FocusableContainer();
+            virtual bool receiveKey(int ch);
 
-    virtual bool receiveKey(int ch);
+            virtual bool isFocused() const { return focusManager_->isFocused(); }
+            virtual void focus() { Logger::get().log("fc @ %lld is focused", this); focusManager_->focus(); }
+            virtual void deFocus() { focusManager_->deFocus(); }
 
-    virtual bool isFocused() const { return focusManager_->isFocused(); }
-    virtual void focus() { Logger::get().log("fc @ %lld is focused", this); focusManager_->focus(); }
-    virtual void deFocus() { focusManager_->deFocus(); }
+            void focusFirst() { focusManager_->focusFirst(); }
+            void focusNext() { focusManager_->focusNext(); }
+            void focusPrev() { focusManager_->focusPrev(); }
+            void focusThis(std::shared_ptr<Focusable>& widget) { focusManager_->focusThis(widget); }
 
-    void focusFirst() { focusManager_->focusFirst(); }
-    void focusNext() { focusManager_->focusNext(); }
-    void focusPrev() { focusManager_->focusPrev(); }
-    void focusThis(std::shared_ptr<Focusable>& widget) { focusManager_->focusThis(widget); }
+            void subWidgetHasFocused(std::shared_ptr<Focusable>& widget);
 
-    void subWidgetHasFocused(std::shared_ptr<Focusable>& widget);
-
-protected:
-    ContainerFocusManager *focusManager_;
-private:
-};
+        protected:
+            ContainerFocusManager *focusManager_;
+        private:
+    };
 
 }
 #endif
