@@ -22,6 +22,7 @@ bool ContainerFocusManager::receiveKey(int ch) {
 }
 
 void ContainerFocusManager::focus() {
+    Logger::get().log("ContainerFocusManager @ %lld is focused, will focusFirst() on subwids length %i, fsw le %i", this, getSubWidgets().size(), getFocusableSubWidgets().size()),
     isFocused_ = true;
     focusFirst();
 }
@@ -30,18 +31,18 @@ void ContainerFocusManager::deFocus() {
     // [app setFocusedWidget: nil];
     isFocused_ = false;
 }
-
-auto ContainerFocusManager::getSubWidgets() {
+std::vector<std::shared_ptr<Widget>> 
+ContainerFocusManager::getSubWidgets() {
     return widget_->getSubWidgets();
 }
 
 
-std::vector<std::shared_ptr<FocusableWidget>> ContainerFocusManager::getFocusableSubWidgets() {
+std::vector<std::shared_ptr<Focusable>> ContainerFocusManager::getFocusableSubWidgets() {
     auto subWidgets = getSubWidgets();
-    auto focusableSubWidgets = std::vector<std::shared_ptr<FocusableWidget>>();
+    auto focusableSubWidgets = std::vector<std::shared_ptr<Focusable>>();
 
     for ( auto widget: subWidgets ) {
-        auto f = std::dynamic_pointer_cast<FocusableWidget>(widget);
+        auto f = std::dynamic_pointer_cast<Focusable>(widget);
         if ( f.get() != nullptr )
             focusableSubWidgets.emplace_back(f);
     }
@@ -60,7 +61,7 @@ void ContainerFocusManager::focusNext() {
     auto focusableSubWidgets = getFocusableSubWidgets();
         
     if (focusableSubWidgets.size() != 0) {
-        std::shared_ptr<FocusableWidget> res;
+        std::shared_ptr<Focusable> res;
         int i=0;
 
         for (auto widget : focusableSubWidgets) {
@@ -82,9 +83,9 @@ void ContainerFocusManager::focusPrev() {
     auto focusableSubWidgets = getFocusableSubWidgets();
 
     if (focusableSubWidgets.size() != 0) {
-        std::shared_ptr<FocusableWidget> res;
+        std::shared_ptr<Focusable> res;
         int i = focusableSubWidgets.size() - 1;
-        for (std::vector<std::shared_ptr<FocusableWidget> >::reverse_iterator iter = focusableSubWidgets.rbegin(); 
+        for (std::vector<std::shared_ptr<Focusable> >::reverse_iterator iter = focusableSubWidgets.rbegin(); 
                 iter != focusableSubWidgets.rend(); ++iter) {
             if ((*iter) == focusedWidget_) {
                 if (i == 0)
@@ -100,8 +101,8 @@ void ContainerFocusManager::focusPrev() {
     }
 }
 
-void ContainerFocusManager::focusThis(std::shared_ptr<FocusableWidget>& widget) {
-    Logger::get().log("ContainerFocusManager will focus widget: %s", widget->toString().c_str());
+void ContainerFocusManager::focusThis(std::shared_ptr<Focusable>& widget) {
+    // Logger::get().log("ContainerFocusManager will focus widget: %s", widget->toString().c_str());
     auto focusableSubWidgets = getFocusableSubWidgets();
 
     focusedWidget_ = widget;

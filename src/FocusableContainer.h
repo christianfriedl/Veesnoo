@@ -3,7 +3,7 @@
 
 #include <memory>
 #include "Focusable.h"
-#include "FocusableWidget.h"
+#include "Focusable.h"
 #include "Container.h"
 #include "ContainerFocusManager.h"
 
@@ -22,13 +22,13 @@ public:
     virtual bool receiveKey(int ch);
 
     virtual bool isFocused() const { return focusManager_.isFocused(); }
-    virtual void focus() { return focusManager_.focus(); }
-    virtual void deFocus() { return focusManager_.deFocus(); }
+    virtual void focus() { Logger::get().log("fc @ %lld is focused", this); focusManager_.focus(); }
+    virtual void deFocus() { focusManager_.deFocus(); }
 
     void focusFirst() { focusManager_.focusFirst(); }
     void focusNext() { focusManager_.focusNext(); }
     void focusPrev() { focusManager_.focusPrev(); }
-    void focusThis(std::shared_ptr<FocusableWidget>& widget) { focusManager_.focusThis(widget); }
+    void focusThis(std::shared_ptr<Focusable>& widget) { focusManager_.focusThis(widget); }
 
 protected:
     ContainerFocusManager focusManager_;

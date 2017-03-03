@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "Widget.h"
-#include "FocusableWidget.h"
+#include "Focusable.h"
 
 namespace nv {
 
@@ -24,16 +24,16 @@ public:
     void focusNext();
     void focusPrev();
     bool isFocused() const;
-    void focusThis(std::shared_ptr<FocusableWidget>& widget);
+    void focusThis(std::shared_ptr<Focusable>& widget);
 
 private:
-    auto getSubWidgets();
-    std::vector<std::shared_ptr<FocusableWidget>> getFocusableSubWidgets();
+    std::vector<std::shared_ptr<Widget>> getSubWidgets();
+    std::vector<std::shared_ptr<Focusable>> getFocusableSubWidgets();
 
     FocusableContainer *widget_;
-    std::shared_ptr<FocusableWidget> focusedWidget_;
+    std::shared_ptr<Focusable> focusedWidget_;
     bool isFocused_;
-    // std::vector<std::shared_ptr<FocusableWidget>>(tmpSubWidgets.size()) focusableSubWidgets_; // only ever used temporarily
+    // std::vector<std::shared_ptr<Focusable>>(tmpSubWidgets.size()) focusableSubWidgets_; // only ever used temporarily
 
 };
 
