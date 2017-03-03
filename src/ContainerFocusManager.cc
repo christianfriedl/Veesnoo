@@ -20,6 +20,8 @@ bool ContainerFocusManager::bubbleReceiveKey(int ch, std::shared_ptr<Widget> w) 
         return true;
     else {
         auto ff = w->getParent().lock();
+        if ( !ff )
+            return false;
         return bubbleReceiveKey(ch, ff);
     }
 }

@@ -8,7 +8,7 @@ namespace nv {
 
 class FocusableWidget: public Focusable, public Widget {
 public:
-    explicit FocusableWidget(const Rect& rect): Focusable(), Widget(rect) { }
+    explicit FocusableWidget(const Rect& rect): Focusable(), Widget(rect), isFocused_(false) { }
     virtual ~FocusableWidget() {}
 
     virtual bool receiveKey(int ch);
