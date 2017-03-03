@@ -11,10 +11,8 @@ namespace nv {
 
 class FocusableContainer: public Focusable, public Container {
 public:
-    explicit FocusableContainer(const Rect& rect): Focusable(), Container(rect), focusManager_(new ContainerFocusManager(this)) { }
-    virtual ~FocusableContainer() { delete focusManager_; }
-
-    // FocusableContainer(const Rect& rect, const ContainerFocusManager& focusManager): Focusable(), Container(rect), focusManager_(&focusManager) { }
+    explicit FocusableContainer(const Rect& rect);
+    virtual ~FocusableContainer();
 
     virtual bool receiveKey(int ch);
 
