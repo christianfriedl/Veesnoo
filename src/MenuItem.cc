@@ -28,6 +28,7 @@ void MenuItem::refresh() {
 }
 
 bool MenuItem::receiveKey(int ch) {
+    Logger::get().log("MenuItem::receiveKey @ %lld (%i)", this, ch);
     if (ch == KEY_ENTER || ch == ' ') {
         return true;
     } else

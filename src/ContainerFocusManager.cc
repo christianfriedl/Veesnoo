@@ -10,6 +10,16 @@ ContainerFocusManager::ContainerFocusManager(FocusableContainer *widget) :
 }
 
 bool ContainerFocusManager::receiveKey(int ch) {
+    auto fw = focusedWidget_.get();
+    Logger::get().log("receiveKey focusedWidget is %lld", fw);
+    if ( fw )  {
+        if ( fw->receiveKey(ch) )
+            return true;
+    } else {
+        focusFirst();
+        return true;
+    }
+        
     if (ch == ' ' || ch == '\t' || ch == KEY_STAB || ch == KEY_DOWN || ch == KEY_RIGHT || ch == 'j' || ch == 'l') {
         focusNext();
         return true;
@@ -18,7 +28,8 @@ bool ContainerFocusManager::receiveKey(int ch) {
         focusPrev();
         return true;
     }
-    return false;
+    else
+        return false;
 }
 
 void ContainerFocusManager::focus() {

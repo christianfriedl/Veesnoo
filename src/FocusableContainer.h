@@ -18,7 +18,6 @@ public:
 
     virtual ~FocusableContainer() {}
 
-    // from Focusable, which is just an interface
     virtual bool receiveKey(int ch);
 
     virtual bool isFocused() const { return focusManager_.isFocused(); }
