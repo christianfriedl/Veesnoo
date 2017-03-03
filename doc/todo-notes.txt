@@ -1,3 +1,7 @@
+- what does a mainwindow have to do?
+    - it has to route receiveKey directly to its focused widget
+    - it has to have a sep. focusmanager
+    - it has to receive the request to set its focused widget
 - where do we want to add subwidgets, which we cannot do in the constructor?
     - have a vector preparedSubWidgets, and add them all in a special method?
 - what do we call a window that is a main app?

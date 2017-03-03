@@ -11,26 +11,24 @@ namespace nv {
 
 class FocusableContainer: public Focusable, public Container {
 public:
-    explicit FocusableContainer(const Rect& rect): Focusable(), Container(rect), focusManager_(this) { }
+    explicit FocusableContainer(const Rect& rect): Focusable(), Container(rect), focusManager_(new ContainerFocusManager(this)) { }
+    virtual ~FocusableContainer() { delete focusManager_; }
 
-    FocusableContainer(const Rect& rect, const ContainerFocusManager& focusManager): Focusable(), Container(rect), focusManager_(focusManager) { }
-    void setFocusManager(const ContainerFocusManager& focusManager) { focusManager_ = focusManager; }
-
-    virtual ~FocusableContainer() {}
+    // FocusableContainer(const Rect& rect, const ContainerFocusManager& focusManager): Focusable(), Container(rect), focusManager_(&focusManager) { }
 
     virtual bool receiveKey(int ch);
 
-    virtual bool isFocused() const { return focusManager_.isFocused(); }
-    virtual void focus() { Logger::get().log("fc @ %lld is focused", this); focusManager_.focus(); }
-    virtual void deFocus() { focusManager_.deFocus(); }
+    virtual bool isFocused() const { return focusManager_->isFocused(); }
+    virtual void focus() { Logger::get().log("fc @ %lld is focused", this); focusManager_->focus(); }
+    virtual void deFocus() { focusManager_->deFocus(); }
 
-    void focusFirst() { focusManager_.focusFirst(); }
-    void focusNext() { focusManager_.focusNext(); }
-    void focusPrev() { focusManager_.focusPrev(); }
-    void focusThis(std::shared_ptr<Focusable>& widget) { focusManager_.focusThis(widget); }
+    void focusFirst() { focusManager_->focusFirst(); }
+    void focusNext() { focusManager_->focusNext(); }
+    void focusPrev() { focusManager_->focusPrev(); }
+    void focusThis(std::shared_ptr<Focusable>& widget) { focusManager_->focusThis(widget); }
 
 protected:
-    ContainerFocusManager focusManager_;
+    ContainerFocusManager *focusManager_;
 private:
 };
 
