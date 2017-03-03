@@ -18,4 +18,7 @@ namespace nv {
         } while ( received );
     }
 
+    std::shared_ptr<FocusableContainer>& MainLoop::getContainer() {
+        return mainContainer_;
+    }
 }

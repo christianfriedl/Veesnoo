@@ -13,7 +13,7 @@ public:
     WINDOW *createWindow(int x ,int y ,int width ,int height);
     void destroyWindow(WINDOW *window);
     void refresh();
-    Rect *getMaxScreenRect();
+    Rect getMaxScreenRect();
     int colorPair(int fg, int bg);
     int getCh();
 private:

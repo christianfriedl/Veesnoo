@@ -49,10 +49,10 @@ void CursesManager::refresh() {
     ::refresh();
 }
 
-Rect *CursesManager::getMaxScreenRect() {
+Rect CursesManager::getMaxScreenRect() {
     int x, y;
     getmaxyx(stdscr, y, x);
-    return new Rect(0, 0, x, y);
+    return Rect(0, 0, x, y);
 }
 
 int CursesManager::colorPair(int fg, int bg) {
