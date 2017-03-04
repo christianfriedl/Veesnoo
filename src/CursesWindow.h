@@ -6,35 +6,35 @@
 
 namespace nv {
 
-class CursesWindow {
+    class CursesWindow {
 
-public:
-    CursesWindow(const Rect& rect);
-    ~CursesWindow();
-    void addString(const std::string& text);
-    void addString(const std::string& text, int x, int y);
-    void addCh(int ch, int x, int y);
-    void refresh();
-    void addBorder();
-    void addCh(int ch);
-    int width();
-    int height();
-    void attrOn(int attr);
-    void attrOff(int attr);
-    void pairOn(int apair);
-    void pairOff(int apair);
-    void resetColors();
-    void resize(int width, int height);
-    void move(int x, int y);
-    void fillBackground(int ch);
-    int getWidth();
-    int getHeight();
-    void setCursorPosition(const int x, const int y);
+        public:
+            CursesWindow(const Rect& rect);
+            ~CursesWindow();
+            void addString(const std::string& text);
+            void addString(const std::string& text, int x, int y);
+            void addCh(int ch, int x, int y);
+            void refresh();
+            void addBorder();
+            void addCh(int ch);
+            int width();
+            int height();
+            void attrOn(int attr);
+            void attrOff(int attr);
+            void pairOn(int apair);
+            void pairOff(int apair);
+            void resetColors();
+            void resize(int width, int height);
+            void move(int x, int y);
+            void fillBackground(int ch);
+            int getWidth();
+            int getHeight();
+            void setCursorPosition(const int x, const int y);
 
-private:
-    WINDOW *window;
+        private:
+            WINDOW *window;
 
-};
+    };
 
 }
 
