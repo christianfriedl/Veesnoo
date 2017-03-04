@@ -31,6 +31,9 @@ namespace nv {
             int getHeight();
             void setCursorPosition(const int x, const int y);
 
+            // just for testing
+            WINDOW *getWin() { return window; }
+
         private:
             WINDOW *window;
 

@@ -28,6 +28,7 @@ public:
     void setMode(Mode mode) { mode_ = mode; }
 
 private:
+    char fillCharForMode(Mode mode);
     std::string text_;
     Mode mode_;
     int cursorX_;

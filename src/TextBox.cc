@@ -13,13 +13,18 @@ namespace nv {
         return cursorX_ - startX_;
     }
 
+    inline char TextBox::fillCharForMode(Mode mode) {
+        if ( mode == Mode_insert || mode == Mode_replace ) 
+            return ' ';
+        else
+            return '.';
+    }
+
     void
     TextBox::refresh() {
-        char fillChar = '.';
+        char fillChar = fillCharForMode(mode_);
         if ( isFocused() ) {
-            Logger::get().log("is focused! ");
             cw->attrOn(A_REVERSE);
-            fillChar = ' ';
         }
         LOG("fillchar is '%c'", fillChar);
 
@@ -32,7 +37,7 @@ namespace nv {
         int cur = (getCursorPos() > rect.getWidth() - 1) ? (rect.getWidth() - 1) : getCursorPos();
         cw->setCursorPosition(cur, 0);
         FocusableWidget::refresh();
-        if ( isFocused() )
+        if ( isFocused() && (mode_ == Mode_insert || mode_ == Mode_replace) )
             cw->attrOff(A_REVERSE);
     }
 
