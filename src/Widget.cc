@@ -134,6 +134,7 @@ Widget::setCWSize() {
 void 
 Widget::refresh() {
     setCWPosition(); // not necessary until we have a working move(), but what the bloody heck
+    Logger::get().log("Widget @ %lld will refresh() its curses window", this);
     cw->refresh();
 }
 

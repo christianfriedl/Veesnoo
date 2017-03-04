@@ -1,3 +1,5 @@
+- reflect class hierarchy
+    - merge Container into FocusableContainer?
 - what does a mainwindow have to do?
     - it has to route receiveKey directly to its focused widget
     - it has to have a sep. focusmanager

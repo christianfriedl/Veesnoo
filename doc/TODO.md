@@ -1,4 +1,5 @@
 * TextBox: size should be obvious when not focused, v.1 -- DONE;prio-1
+* Window: seems to initially print all widgets twice... -- BUG;TODO;prio-1
 * rename all members to have trailing \_s.
 * Implement additional TextBox features -- TODO;prio-1;see todo-notes.txt
 * Correctly test for location of curses.h header file -- DONE;prio-1
@@ -15,12 +16,16 @@
 * Implement Radio Button -- TODO;prio-1
 * Implement Radio Group -- TODO;prio-1
 * Implement Text area -- TODO;prio-1
+* Checkbox: add constructor with frame -- TODO;prio-2
+* CursesManager: rename getInstance() to get() -- TODO;prio-2;cost-5
+* CursesManager: add public move cons -- TODO;prio-2;cost-8
 * Implement Focus management -- TODO;prio-2
 * Consistently use scoped enums -- TODO;prio-2
 * Consistently "=default" or "=delete" or create special functions -- TODO;prio-2
 * Add events -- TODO;prio-2
 * Implement Window -- TODO;prio-2
 * Implement App with basic loop (AppWindow??? MainWindow??) -- TODO;prio-2
+* Reflect the basic class hierarchy -- TODO;prio-2;see-notes
 * Implement multi-level undo -- TODO;prio-3
 * Window needs to react to move(); -- TODO;prio-1
 * All widgets need to react to move(); -- TODO;prio-1

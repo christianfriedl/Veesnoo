@@ -15,7 +15,7 @@ namespace nv {
         setCWPosition(); // not necessary until we have a working move(), but what the bloody heck
         cw->addBorder();
         cw->addString(title_, ( rect.getWidth() - title_.size() ) / 2, 0);
-        FocusableContainer::refresh();
+        Container::refresh();
     }
 
 
