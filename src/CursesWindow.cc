@@ -42,7 +42,6 @@ void CursesWindow::addString(const std::string& text, int x, int y) {
     auto actualLength = std::min((int)text.length(), (int)(width - x));
     Logger::get().log("CursesWindow adding text: '%s', x %i y %i width %i height %i text.length %i, actualLength %i, window %lld", text.c_str(), x, y, width, height, (int)text.length(), actualLength, window);
     mvwaddnstr(window, y, x, text.c_str(), actualLength);
-//    wnoutrefresh(window);
 }
 
 void CursesWindow::addCh(int ch) {
@@ -54,7 +53,6 @@ void CursesWindow::addCh(int ch) {
 
 void CursesWindow::addCh(int ch, int x, int y) {
     mvwaddch(window, y, x, ch);
-    //wnoutrefresh(window);
 }
 
 void CursesWindow::refresh() {
@@ -93,10 +91,6 @@ void CursesWindow::attrOff(int attr) {
 void CursesWindow::resize(int width, int height) {
     if ((wresize(window, height, width)) != OK)
         throw new Exception("unable to resize window");
-}
-
-void CursesWindow::moveCursor(int x, int y) {
-    wmove(window, y, x);
 }
 
 void CursesWindow::move(int x, int y) {
@@ -176,9 +170,6 @@ void CursesWindow::attrOff(int attr) {
 }
 
 void CursesWindow::resize(int width, int height) {
-}
-
-void CursesWindow::moveCursor(int x, int y) {
 }
 
 void CursesWindow::move(int x, int y) {

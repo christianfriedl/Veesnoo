@@ -25,7 +25,6 @@ public:
     void pairOff(int apair);
     void resetColors();
     void resize(int width, int height);
-    void moveCursor(int x, int y);
     void move(int x, int y);
     void fillBackground(int ch);
     int getWidth();
