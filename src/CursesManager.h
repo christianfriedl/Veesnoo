@@ -6,30 +6,30 @@
 
 namespace nv {
 
-class CursesManager {
-public:
-    static CursesManager& get();
-    
-    WINDOW *createWindow(int x ,int y ,int width ,int height);
-    void destroyWindow(WINDOW *window);
-    void refresh();
-    Rect getMaxScreenRect();
-    int colorPair(int fg, int bg);
-    int getCh();
-private:
-    void initCurses();
-    CursesManager(); 
-    ~CursesManager();
+    class CursesManager {
+        public:
+            static CursesManager& get();
+            
+            WINDOW *createWindow(int x ,int y ,int width ,int height);
+            void destroyWindow(WINDOW *window);
+            void refresh();
+            Rect getMaxScreenRect();
+            int colorPair(int fg, int bg);
+            int getCh();
+        private:
+            void initCurses();
+            CursesManager(); 
+            ~CursesManager();
 
-    CursesManager(const CursesManager&);
-    CursesManager& operator=(const CursesManager&);
+            CursesManager(const CursesManager&);
+            CursesManager& operator=(const CursesManager&);
 
-    bool bufferedMode;
-    bool echo;
-    bool keypadAvailable;
-    int width, height;
-    int nextPair;
-};
+            bool bufferedMode_;
+            bool echo_;
+            bool keypadAvailable_;
+            int width_, height_;
+            int nextPair_;
+    };
 
 }
 

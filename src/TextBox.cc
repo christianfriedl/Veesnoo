@@ -24,21 +24,21 @@ namespace nv {
     TextBox::refresh() {
         char fillChar = fillCharForMode(mode_);
         if ( isFocused() ) {
-            cw->attrOn(A_REVERSE);
+            cursesWindow_->attrOn(A_REVERSE);
         }
         LOG("fillchar is '%c'", fillChar);
 
         addString(text_.substr(startX_), 0, 0);
         Logger::get().log("text is %s", text_.c_str());
 
-        for ( int i = std::min(rect.getWidth(), (int)text_.length() - startX_); i < rect.getWidth(); ++i )
+        for ( int i = std::min(rect_.getWidth(), (int)text_.length() - startX_); i < rect_.getWidth(); ++i )
             addCh(fillChar, i, 0);
 
-        int cur = (getCursorPos() > rect.getWidth() - 1) ? (rect.getWidth() - 1) : getCursorPos();
-        cw->setCursorPosition(cur, 0);
+        int cur = (getCursorPos() > rect_.getWidth() - 1) ? (rect_.getWidth() - 1) : getCursorPos();
+        cursesWindow_->setCursorPosition(cur, 0);
         FocusableWidget::refresh();
         if ( isFocused() && (mode_ == Mode_insert || mode_ == Mode_replace) )
-            cw->attrOff(A_REVERSE);
+            cursesWindow_->attrOff(A_REVERSE);
     }
 
     bool
@@ -141,7 +141,7 @@ namespace nv {
         if (cursorX_ == text_.size())
             return false;
         ++cursorX_;
-        if ( cursorX_ > rect.getWidth() )
+        if ( cursorX_ > rect_.getWidth() )
             ++startX_;
         return true;
     }
@@ -159,8 +159,8 @@ namespace nv {
         if ( x > text_.size() )
             return false;
         cursorX_ = x;
-        if ( cursorX_ > rect.getWidth() )
-            startX_ = cursorX_ - rect.getWidth();
+        if ( cursorX_ > rect_.getWidth() )
+            startX_ = cursorX_ - rect_.getWidth();
         return true;
     }
 

@@ -32,10 +32,10 @@ namespace nv {
             void setCursorPosition(const int x, const int y);
 
             // just for testing
-            WINDOW *getWin() { return window; }
+            WINDOW *getWin() { return window_; }
 
         private:
-            WINDOW *window;
+            WINDOW *window_;
 
     };
 

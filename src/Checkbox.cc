@@ -18,13 +18,13 @@ namespace nv {
 
     void Checkbox::refresh() {
         if ( isFocused() )
-            cw->attrOn(A_REVERSE);
+            cursesWindow_->attrOn(A_REVERSE);
         char c = (state_ == CheckboxState_checked ? 'x' : ' ');
         std::stringstream s; 
         s << frame_[0] << c << frame_[1];
         addString(s.str(), 0, 0);
         if ( isFocused() )
-            cw->attrOff(A_REVERSE);
+            cursesWindow_->attrOff(A_REVERSE);
         FocusableWidget::refresh();
     }
 

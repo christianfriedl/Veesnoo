@@ -15,16 +15,16 @@ void MenuItem::refresh() {
     char fillChar = ' ';
     if ( isFocused() ) {
         Logger::get().log("is focused! ");
-        cw->attrOn(A_REVERSE);
+        cursesWindow_->attrOn(A_REVERSE);
     }
 
     addString(text_, 0, 0); 
 
-    for ( int i = std::min(rect.getWidth(), (int)text_.length()); i < rect.getWidth(); ++i )
+    for ( int i = std::min(rect_.getWidth(), (int)text_.length()); i < rect_.getWidth(); ++i )
         addCh(fillChar, i, 0);
 
     if ( isFocused() )
-        cw->attrOff(A_REVERSE);
+        cursesWindow_->attrOff(A_REVERSE);
 
     Widget::refresh();
 }

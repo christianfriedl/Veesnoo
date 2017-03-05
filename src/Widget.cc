@@ -11,33 +11,33 @@
 
 namespace nv {
 
-Widget::Widget(): rect(0, 0, 1, 1), contentRect(0, 0, 1, 1), isVisible(false), parent_(std::weak_ptr<Widget>()) {}
+Widget::Widget(): rect_(0, 0, 1, 1), contentRect_(0, 0, 1, 1), isVisible_(false), parent_(std::weak_ptr<Widget>()) {}
 
 // constructor: set parent_ to "null", size from rect and make visible by default
-Widget::Widget(const Rect& rect): rect(rect), contentRect(0, 0, rect.getWidth(), rect.getHeight()), isVisible(true), parent_(std::weak_ptr<Widget>()) {
+Widget::Widget(const Rect& rect): rect_(rect), contentRect_(0, 0, rect.getWidth(), rect.getHeight()), isVisible_(true), parent_(std::weak_ptr<Widget>()) {
     Logger::get().log("new Widget %s", toString().c_str());
 
-    cw = std::make_unique<CursesWindow>(this->getAbsoluteRect());
+    cursesWindow_ = std::make_unique<CursesWindow>(this->getAbsoluteRect());
 }
 
 // it seems we don't need special cons' after all
 /*
-Widget::Widget(Widget&& other) : cw(nullptr), rect(0, 0, 0, 0), contentRect(0, 0, 0, 0), parent_(std::weak_ptr<Widget>()) {
+Widget::Widget(Widget&& other) : cw(nullptr), rect(0, 0, 0, 0), contentRect_(0, 0, 0, 0), parent_(std::weak_ptr<Widget>()) {
     std::swap(cw, other.cw);
     std::swap(rect, other.rect);
-    std::swap(contentRect, other.contentRect);
+    std::swap(contentRect_, other.contentRect_);
     std::swap(parent_, other.parent_);
 }
 
 Widget& Widget::operator=(Widget&& other) {
     rect = Rect(0, 0, 0, 0);
-    contentRect = Rect(0, 0, 0, 0);
+    contentRect_ = Rect(0, 0, 0, 0);
     parent_ = nullptr;
     cw = nullptr;
 
     std::swap(cw, other.cw);
     std::swap(rect, other.rect);
-    std::swap(contentRect, other.contentRect);
+    std::swap(contentRect_, other.contentRect_);
     std::swap(parent_, other.parent_);
 
     return *this;
@@ -46,8 +46,8 @@ Widget& Widget::operator=(Widget&& other) {
 
 const std::string Widget::toString() const {
     std::ostringstream ostr;
-    ostr << "<Widget @ " << std::hex << (unsigned long long int)this << std::dec << " rect: " << *(rect.toString()) << std::endl;
-    ostr << "    contentRect: " << *(contentRect.toString()) << std::endl;
+    ostr << "<Widget @ " << std::hex << (unsigned long long int)this << std::dec << " rect: " << *(rect_.toString()) << std::endl;
+    ostr << "    contentRect_: " << *(contentRect_.toString()) << std::endl;
     ostr << "    absoluteRect: " << *(getAbsoluteRect().toString()) << std::endl;
     ostr << "    absoluteContentRect: " << *(getAbsoluteContentRect().toString()) << std::endl;
     ostr << ">";
@@ -57,15 +57,15 @@ const std::string Widget::toString() const {
 void 
 Widget::resize(const int width, const int height) {
     Logger::get().log("Widget(%lld)::resize(%i, %i)", this, width, height);
-    rect.resize(width, height);
-    contentRect.resize(width, height);
-    cw->resize(width, height);
+    rect_.resize(width, height);
+    contentRect_.resize(width, height);
+    cursesWindow_->resize(width, height);
 }
 
 void 
 Widget::move(const int x, const int y) {
-    rect.move(x, y);
-    cw->move(getAbsoluteRect().getX(), getAbsoluteRect().getY());
+    rect_.move(x, y);
+    cursesWindow_->move(getAbsoluteRect().getX(), getAbsoluteRect().getY());
 }
 
 const std::weak_ptr<Widget>&
@@ -75,7 +75,7 @@ Widget::getParent() const {
 
 bool 
 Widget::getIsVisible() const {
-    return isVisible;
+    return isVisible_;
 }
 
 void
@@ -86,12 +86,12 @@ Widget::setParent(const std::weak_ptr<Widget>& parent) {
 
 Rect
 Widget::getRect() const {
-    return rect;
+    return rect_;
 }
 
 Rect
 Widget::getContentRect() const {
-    return contentRect;
+    return contentRect_;
 }
 
 Rect 
@@ -99,11 +99,11 @@ Widget::getAbsoluteRect() const {
     if ( parent_.use_count() != 0 ) {
         if ( auto parent = parent_.lock() ) {
             const Rect parentAbsoluteRect = parent->getAbsoluteContentRect();
-            return Rect(parentAbsoluteRect.getX() + rect.getX(), parentAbsoluteRect.getY() + rect.getY(), rect.getWidth(), rect.getHeight());
+            return Rect(parentAbsoluteRect.getX() + rect_.getX(), parentAbsoluteRect.getY() + rect_.getY(), rect_.getWidth(), rect_.getHeight());
         }
     } else {
         const Rect parentAbsoluteRect(0, 0, 1, 1);
-        return Rect(parentAbsoluteRect.getX() + rect.getX(), parentAbsoluteRect.getY() + rect.getY(), rect.getWidth(), rect.getHeight());
+        return Rect(parentAbsoluteRect.getX() + rect_.getX(), parentAbsoluteRect.getY() + rect_.getY(), rect_.getWidth(), rect_.getHeight());
     }
 }
 
@@ -112,54 +112,54 @@ Widget::getAbsoluteContentRect() const {
     if ( parent_.use_count() != 0 ) {
         if ( auto parent = parent_.lock() ) {
             const Rect parentAbsoluteContentRect = parent->getAbsoluteContentRect();
-            return Rect(parentAbsoluteContentRect.getX() + rect.getX() + contentRect.getX(), parentAbsoluteContentRect.getY() + rect.getY() + contentRect.getY(), rect.getWidth(), contentRect.getHeight());
+            return Rect(parentAbsoluteContentRect.getX() + rect_.getX() + contentRect_.getX(), parentAbsoluteContentRect.getY() + rect_.getY() + contentRect_.getY(), rect_.getWidth(), contentRect_.getHeight());
         } else
             throw std::runtime_error("parent should be there, but was not lockable");
     } else {
         const Rect parentAbsoluteContentRect(0, 0, 1, 1);
-        return Rect(parentAbsoluteContentRect.getX() + rect.getX() + contentRect.getX(), parentAbsoluteContentRect.getY() + rect.getY() + contentRect.getY(), rect.getWidth(), contentRect.getHeight());
+        return Rect(parentAbsoluteContentRect.getX() + rect_.getX() + contentRect_.getX(), parentAbsoluteContentRect.getY() + rect_.getY() + contentRect_.getY(), rect_.getWidth(), contentRect_.getHeight());
     }
 }
 
 void 
 Widget::setCWPosition() {
     auto absoluteRect = getAbsoluteRect(); 
-    cw->move(absoluteRect.getX(), absoluteRect.getY());
+    cursesWindow_->move(absoluteRect.getX(), absoluteRect.getY());
 }
 
 void 
 Widget::setCWSize() {
     auto absoluteRect = getAbsoluteRect();
-    cw->resize(absoluteRect.getWidth(), absoluteRect.getHeight());
+    cursesWindow_->resize(absoluteRect.getWidth(), absoluteRect.getHeight());
 }
 
 void 
 Widget::refresh() {
     Logger::get().log("Widget(%llx)::refresh()", this);
     setCWPosition(); // not necessary until we have a working move(), but what the bloody heck
-    cw->refresh();
+    cursesWindow_->refresh();
 }
 
 void 
 Widget::addString(const std::string& text) {
-    Logger::get().log("Widget adding text to contentRect: %s, %i %i", text.c_str(), contentRect.getX(), contentRect.getY());
-    cw->addString(text, contentRect.getX(), contentRect.getY());
+    Logger::get().log("Widget adding text to contentRect_: %s, %i %i", text.c_str(), contentRect_.getX(), contentRect_.getY());
+    cursesWindow_->addString(text, contentRect_.getX(), contentRect_.getY());
 }
 
 void 
 Widget::addString(const std::string& text, const int x, const int y) {
-    Logger::get().log("Widget adding text to contentRect: %s, %i %i, @ x %i y %i", text.c_str(), contentRect.getX(), contentRect.getY(), x, y);
-    cw->addString(text, contentRect.getX() + x, contentRect.getY() + y);
+    Logger::get().log("Widget adding text to contentRect_: %s, %i %i, @ x %i y %i", text.c_str(), contentRect_.getX(), contentRect_.getY(), x, y);
+    cursesWindow_->addString(text, contentRect_.getX() + x, contentRect_.getY() + y);
 }
 
 void 
 Widget::addCh(int ch) {
-    cw->addCh(ch, contentRect.getX(), contentRect.getY());
+    cursesWindow_->addCh(ch, contentRect_.getX(), contentRect_.getY());
 }
 
 void 
 Widget::addCh(const int ch, const int x, const int y) {
-    cw->addCh(ch, contentRect.getX() + x, contentRect.getY() + y);
+    cursesWindow_->addCh(ch, contentRect_.getX() + x, contentRect_.getY() + y);
 }
 
 }

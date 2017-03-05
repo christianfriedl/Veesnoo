@@ -1,7 +1,7 @@
 * TextBox: size should be obvious when not focused, v.1 -- DONE;prio-1
-* Window: seems to initially print all widgets twice... -- BUG;TODO;prio-1
-* Correctly set the cursor -- BUG;TODO;prio-1
+* Window: seems to initially print all widgets twice... -- BUG;DONE;prio-1
 * Textbox: needs to look differently when in edit mode -- DONE;prio-1
+* Correctly set the cursor -- BUG;TODO;prio-1
 * rename all members to have trailing \_s.
 * Implement additional TextBox features -- TODO;prio-1;see todo-notes.txt
 * Correctly test for location of curses.h header file -- DONE;prio-1

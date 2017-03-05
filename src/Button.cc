@@ -13,12 +13,12 @@ namespace nv {
 
     void Button::refresh() {
         if ( isFocused() || state_ == ButtonState_pushed)
-            cw->attrOn(A_REVERSE);
+            cursesWindow_->attrOn(A_REVERSE);
         std::stringstream s; 
         s << "[ " << text_ << " ]";
         addString(s.str(), 0, 0);
         if ( isFocused() || state_ == ButtonState_pushed)
-            cw->attrOff(A_REVERSE);
+            cursesWindow_->attrOff(A_REVERSE);
         FocusableWidget::refresh();
     }
 

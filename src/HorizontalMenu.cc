@@ -23,7 +23,7 @@ void HorizontalMenu::layout() {
         width += widget->getRect().getWidth();
     Logger::get().log("HorizontalMenu width is %i, i is %i", width, i);
     }
-    rect.resize(width, rect.getHeight());
+    rect_.resize(width, rect_.getHeight());
     Logger::get().log("HorizontalMenu layouting done");
 }
 

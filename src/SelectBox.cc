@@ -14,7 +14,7 @@ namespace nv {
         addString(text_, 0, 0);
         int cur = (cursorX_ > rect->getWidth() - 1) ? (rect->getWidth() - 1) : cursorX_;
 
-        cw->setCursorPosition(cur, 0);
+        cursesWindow_->setCursorPosition(cur, 0);
         FocusableWidget::refresh();
     }
 

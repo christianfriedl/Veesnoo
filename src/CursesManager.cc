@@ -9,22 +9,22 @@ CursesManager& CursesManager::get() {
     return instance;
 }
 
-CursesManager::CursesManager() : bufferedMode(false), echo(false), keypadAvailable(true), width(0), height(0), nextPair(1) { 
+CursesManager::CursesManager() : bufferedMode_(false), echo_(false), keypadAvailable_(true), width_(0), height_(0), nextPair_(1) { 
     Logger::get().log("new CursesManager()");
 	initCurses();
 }
 
 void CursesManager::initCurses() {
     initscr();
-    getmaxyx(stdscr, height, width);
-    if (!bufferedMode) {
+    getmaxyx(stdscr, height_, width_);
+    if (!bufferedMode_) {
         raw();
         cbreak();
     }
-    if (!echo) {
+    if (!echo_) {
         noecho();
     }
-    if (keypadAvailable) {
+    if (keypadAvailable_) {
         keypad(stdscr, TRUE);
         set_escdelay(250);       /* set ESC delay to a very low level so we can use the ESC key AND the function keys ('tis good enough for VIM, 'tis good enough for me) */
     }
@@ -59,7 +59,7 @@ int CursesManager::colorPair(int fg, int bg) {
     int pair = 0;
     if (!has_colors())
         throw new Exception("this terminal has no colors.");
-    pair = nextPair++;
+    pair = nextPair_++;
     if (init_pair(pair, fg, bg) != OK)
         throw new Exception("could not init color");
     return pair;

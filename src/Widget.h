@@ -50,10 +50,10 @@ protected:
     void setCWPosition();
     void setCWSize();
 
-    std::unique_ptr<CursesWindow> cw;
-    Rect rect; // the original rect, covering all our area - relative to parent
-    Rect contentRect; // the rect clients can paint on - in RELATIVE coords ===> relative to rect
-    bool isVisible;
+    std::unique_ptr<CursesWindow> cursesWindow_;
+    Rect rect_; // the original rect, covering all our area - relative to parent
+    Rect contentRect_; // the rect clients can paint on - in RELATIVE coords ===> relative to rect
+    bool isVisible_;
     std::weak_ptr<Widget> parent_;
 
 private:
