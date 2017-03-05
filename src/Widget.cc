@@ -46,7 +46,7 @@ Widget& Widget::operator=(Widget&& other) {
 
 const std::string Widget::toString() const {
     std::ostringstream ostr;
-    ostr << "<Widget @ " << (unsigned long long int)this << " rect: " << *(rect.toString()) << std::endl;
+    ostr << "<Widget @ " << std::hex << (unsigned long long int)this << std::dec << " rect: " << *(rect.toString()) << std::endl;
     ostr << "    contentRect: " << *(contentRect.toString()) << std::endl;
     ostr << "    absoluteRect: " << *(getAbsoluteRect().toString()) << std::endl;
     ostr << "    absoluteContentRect: " << *(getAbsoluteContentRect().toString()) << std::endl;
@@ -56,7 +56,9 @@ const std::string Widget::toString() const {
 
 void 
 Widget::resize(const int width, const int height) {
+    Logger::get().log("Widget(%lld)::resize(%i, %i)", this, width, height);
     rect.resize(width, height);
+    contentRect.resize(width, height);
     cw->resize(width, height);
 }
 
@@ -133,8 +135,8 @@ Widget::setCWSize() {
 
 void 
 Widget::refresh() {
+    Logger::get().log("Widget(%llx)::refresh()", this);
     setCWPosition(); // not necessary until we have a working move(), but what the bloody heck
-    Logger::get().log("Widget @ %lld will refresh() its curses window", this);
     cw->refresh();
 }
 

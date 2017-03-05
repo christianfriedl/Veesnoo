@@ -1,11 +1,12 @@
 * TextBox: size should be obvious when not focused, v.1 -- DONE;prio-1
 * Window: seems to initially print all widgets twice... -- BUG;TODO;prio-1
 * Correctly set the cursor -- BUG;TODO;prio-1
-* Textbox: needs to look differently when in edit mode -- BUG;TODO;prio-1
+* Textbox: needs to look differently when in edit mode -- DONE;prio-1
 * rename all members to have trailing \_s.
 * Implement additional TextBox features -- TODO;prio-1;see todo-notes.txt
 * Correctly test for location of curses.h header file -- DONE;prio-1
 * Add configure/autoconf tests -- TODO;prio-1
+* PopupMenu: figure out how to privatize cons but call it from create() -- TODO;prio-1
 * #inlcude system header files from only one location -- TODO;prio-1
 * Implement MainLoop -- TODO;prio-1
 * Implement Horizontal Menu -- DONE;prio-1
@@ -19,6 +20,8 @@
 * Implement Radio Group -- TODO;prio-1
 * Implement Text area -- TODO;prio-1
 * Checkbox: add constructor with frame -- TODO;prio-2
+* Consider whether curses functions in curseswindow should run through cursesmanager -- TODO;prio-2
+* Add scrolling containers -- TODO;prio-2
 * CursesManager: rename getInstance() to get() -- TODO;prio-2;cost-5
 * CursesManager: add public move cons -- TODO;prio-2;cost-8
 * Implement Focus management -- TODO;prio-2

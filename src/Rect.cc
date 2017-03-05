@@ -35,7 +35,7 @@ void Rect::setOriginRelativeTo(const Rect& other) {
 
 std::unique_ptr<const std::string> Rect::toString() const {
     std::ostringstream ostr;
-    ostr << "<Rect @ " << this << " <x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << ">>";
+    ostr << "<Rect @ " << std::hex << (unsigned long long int)this << std::dec << " <x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << ">>";
     return std::make_unique<const std::string>(ostr.str());
 }
 

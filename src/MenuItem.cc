@@ -25,10 +25,12 @@ void MenuItem::refresh() {
 
     if ( isFocused() )
         cw->attrOff(A_REVERSE);
+
+    Widget::refresh();
 }
 
 bool MenuItem::receiveKey(int ch) {
-    Logger::get().log("MenuItem::receiveKey @ %lld (%i)", this, ch);
+    Logger::get().log("MenuItem(%llx)::receiveKey(%i)", this, ch);
     if (ch == KEY_ENTER || ch == ' ') {
         return true;
     } else

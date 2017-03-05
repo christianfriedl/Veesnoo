@@ -19,6 +19,7 @@ public:
     }
     virtual void addWidget(const std::shared_ptr<Widget>& widget);
     auto getSubWidgets() const { return subWidgets_; } // we copy the vector, because in all likelihood this will be like 10 pointers or so
+    int getSubWidgetsSize() const { return subWidgets_.size(); }
     virtual void refresh();
     
 protected:

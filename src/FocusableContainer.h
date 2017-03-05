@@ -16,7 +16,7 @@ namespace nv {
             virtual bool receiveKey(int ch);
 
             virtual bool isFocused() const { return focusManager_->isFocused(); }
-            virtual void focus() { Logger::get().log("fc @ %lld is focused", this); focusManager_->focus(); }
+            virtual void focus() { focusManager_->focus(); }
             virtual void deFocus() { focusManager_->deFocus(); }
 
             void focusFirst() { focusManager_->focusFirst(); }

@@ -49,7 +49,7 @@ bool ContainerFocusManager::receiveKey(int ch) {
 }
 
 void ContainerFocusManager::focus() {
-    Logger::get().log("ContainerFocusManager @ %lld is focused, will focusFirst() on subwids length %i, fsw le %i", this, getSubWidgets().size(), getFocusableSubWidgets().size()),
+    Logger::get().log("ContainerFocusManager @ %llx is focused, will focusFirst() on subwids length %i, fsw le %i", this, getSubWidgets().size(), getFocusableSubWidgets().size()),
     isFocused_ = true;
     focusFirst();
 }
