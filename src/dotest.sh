@@ -9,6 +9,7 @@ echo $TESTFILE
 echo $TESTFILE
 [ -f test/$TESTFILE ] || TESTFILE="test$TESTFILE"
 echo $TESTFILE
+if [ ! -f test/$TESTFILE ]; then echo "Testfile $TESTFILE not found."; exit; fi
 
-rm -f test.log;
-redo test/$TESTFILE && (test/$1 ; reset; less test.log)
+rm -f test.log || true
+redo test/$TESTFILE && (test/$TESTFILE ; reset; less test.log)
