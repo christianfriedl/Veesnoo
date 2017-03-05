@@ -16,10 +16,10 @@ namespace nv {
         do {
             Logger::get().log("add start of MainLoop(%llx)::do loop$ has subWidgets length %i", this, mainContainer_->getSubWidgets().size());
             mainContainer_->refresh();
-            CursesManager::getInstance().refresh();
-            ch = CursesManager::getInstance().getCh();
+            CursesManager::get().refresh();
+            ch = CursesManager::get().getCh();
             received = mainContainer_->receiveKey(ch);
-        } while ( false ); //////
+        } while ( received );
     }
 
     std::shared_ptr<FocusableContainer>& MainLoop::getContainer() {

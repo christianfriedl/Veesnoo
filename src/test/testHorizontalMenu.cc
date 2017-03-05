@@ -18,7 +18,7 @@ int main() {
     int ch = 0;
     do {
         hm->refresh();
-        ch = CursesManager::getInstance().getCh();
+        ch = CursesManager::get().getCh();
         hm->receiveKey(ch);
     } while ( ch != Key_Esc );
 }

@@ -8,7 +8,7 @@ namespace nv {
 
 class CursesManager {
 public:
-    static CursesManager& getInstance();
+    static CursesManager& get();
     
     WINDOW *createWindow(int x ,int y ,int width ,int height);
     void destroyWindow(WINDOW *window);

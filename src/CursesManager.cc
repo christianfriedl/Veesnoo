@@ -3,14 +3,14 @@
 
 namespace nv {
 
-CursesManager& CursesManager::getInstance() {
+CursesManager& CursesManager::get() {
     static CursesManager instance = CursesManager();
-    Logger::get().log("CursesManager::getInstance called, returns %llx", (void*)&instance);
+    Logger::get().log("CursesManager::get(): %llx", (void*)&instance);
     return instance;
 }
 
 CursesManager::CursesManager() : bufferedMode(false), echo(false), keypadAvailable(true), width(0), height(0), nextPair(1) { 
-    Logger::get().log("CursesManager cons called, this is %llx", (void*)this);
+    Logger::get().log("new CursesManager()");
 	initCurses();
 }
 
@@ -33,7 +33,7 @@ void CursesManager::initCurses() {
 }
 
 CursesManager::~CursesManager() {
-    Logger::get().log("CursesManager destr called, this is %llx", (void*)this);
+    Logger::get().log("~CursesManager()");
     endwin();
 }
 

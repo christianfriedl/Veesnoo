@@ -11,7 +11,6 @@ namespace nv {
         Logger::get().log("PopupMenu::create(%i, %i)", x, y);
         auto widget(std::make_shared<PopupMenu>(x, y));
         widget->addWidget(widget->menu_);
-        Logger::get().log("after create, PopupMenu(%llx) has subws size %i", widget.get(), widget->getSubWidgetsSize());
         return widget;
     }
 
@@ -50,9 +49,6 @@ namespace nv {
         Logger::get().log("PopupMenu::layout() end has vm %llx, vm subWidgets length %i", vm.get(), vm->getSubWidgetsSize());
         */
         Logger::get().log("PopupMenu::layout()");
-        Logger::get().log("PopupMenu::layout() determines rect: %i, %i", menu_->getRect().getWidth() + 2, menu_->getRect().getHeight() + 2);
         resize(menu_->getRect().getWidth() + 2, menu_->getRect().getHeight() + 2);
-        // Logger::get().log("PopupMenu::layout() end has vm %llx, vm subWidgets length %i", vm.get(), vm->getSubWidgetsSize());
-        Logger::get().log("PopupMenu::layout() end has menu_ subWidgets length %i", menu_->getSubWidgets().size());
     }
 }

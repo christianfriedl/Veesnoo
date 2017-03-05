@@ -6,13 +6,13 @@
 namespace nv {
 
     CursesWindow::CursesWindow(const Rect& rect) {
-        window = CursesManager::getInstance().createWindow(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
+        window = CursesManager::get().createWindow(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
         Logger::get().log("new CursesWindow from rect @ %llx (x: %i, y: %i, window: %llx)", this, rect.getX(), rect.getY(), window);
     }
 
     CursesWindow::~CursesWindow() {
         Logger::get().log("~ CursesWindow @ %llx (window: %llx)", this, window);
-        CursesManager::getInstance().destroyWindow(window);
+        CursesManager::get().destroyWindow(window);
     }
 
     void CursesWindow::addString(const std::string& text) {
@@ -48,7 +48,7 @@ namespace nv {
 
     void CursesWindow::refresh() {
         Logger::get().log("CursesWindow(%llx)::refresh(), window %llx", this, window);
-        CursesManager::getInstance().refresh();
+        CursesManager::get().refresh();
         wrefresh(window);
     }
 
