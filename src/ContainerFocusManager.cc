@@ -10,6 +10,11 @@ ContainerFocusManager::ContainerFocusManager(FocusableContainer *widget) :
         widget_(widget), focusedWidget_(nullptr), isFocused_(false) {
 }
 
+std::shared_ptr<Focusable> 
+ContainerFocusManager::getFocusedWidget() {
+    return focusedWidget_;
+}
+
 
 bool ContainerFocusManager::bubbleReceiveKey(int ch, std::shared_ptr<Widget> w) {
     auto f = std::dynamic_pointer_cast<Focusable> (w);

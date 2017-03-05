@@ -35,10 +35,10 @@ namespace nv {
             addCh(fillChar, i, 0);
 
         int cur = (getCursorPos() > rect_.getWidth() - 1) ? (rect_.getWidth() - 1) : getCursorPos();
-        cursesWindow_->setCursorPosition(cur, 0);
-        FocusableWidget::refresh();
         if ( isFocused() && (mode_ == Mode_insert || mode_ == Mode_replace) )
             cursesWindow_->attrOff(A_REVERSE);
+        cursesWindow_->setCursorPosition(cur, 0);
+        FocusableWidget::refresh();
     }
 
     bool

@@ -19,4 +19,16 @@ namespace nv {
     FocusableContainer::subWidgetHasFocused(std::shared_ptr<Focusable>& widget) {
         focusManager_->subWidgetHasFocused(widget);
     }
+
+    void
+    FocusableContainer::refresh() {
+        Container::refresh();
+        auto focusedFocusable = focusManager_->getFocusedWidget();
+        if ( !focusedFocusable )
+            return;
+        auto focusedWidget = std::dynamic_pointer_cast<FocusableWidget>(focusedFocusable);
+        if ( !focusedWidget )
+            return;
+        focusedWidget->refresh();
+    }
 }

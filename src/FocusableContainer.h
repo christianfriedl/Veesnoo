@@ -14,6 +14,7 @@ namespace nv {
             virtual ~FocusableContainer();
 
             virtual bool receiveKey(int ch);
+            virtual void refresh();
 
             virtual bool isFocused() const { return focusManager_->isFocused(); }
             virtual void focus() { focusManager_->focus(); }

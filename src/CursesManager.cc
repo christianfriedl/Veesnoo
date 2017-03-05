@@ -46,6 +46,7 @@ void CursesManager::destroyWindow(WINDOW *window) {
 }
 
 void CursesManager::refresh() {
+    Logger::get().log("CursesManager::refresh()");
     ::refresh();
 }
 
@@ -66,6 +67,7 @@ int CursesManager::colorPair(int fg, int bg) {
 }
 
 int CursesManager::getCh() {
+    Logger::get().log("CursesManager::getCh()");
     return getch();
 }
 
