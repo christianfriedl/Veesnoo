@@ -1,6 +1,7 @@
-- #1 App quitting
+- id-0001 App quitting
     - in debug, ESC is good
     - "default" key: ctrl-c would actually be a rather good choice...
+    - implement a ctrl-c/SIGINT handler
 - reflect class hierarchy
     - merge Container into FocusableContainer?
 - what does a mainwindow have to do?
