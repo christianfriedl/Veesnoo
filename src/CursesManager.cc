@@ -71,4 +71,10 @@ int CursesManager::getCh() {
     return getch();
 }
 
+const char * const CursesManager::getKeyName(int ch) const {
+    const char * const name = keyname(ch); // TODO do we need to delete()???
+    Logger::get().log("CursesManager::getKeyName(%i): %s", ch, name);
+    return name;
+}
+
 }

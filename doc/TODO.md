@@ -2,17 +2,16 @@
 * Window: seems to initially print all widgets twice... -- BUG;DONE;prio-1
 * Textbox: needs to look differently when in edit mode -- DONE;prio-1
 * rename all members to have trailing \_s. -- DONE
-* Correctly set the cursor -- BUG;TODO;prio-1
-* Add override declarations whereever appropriate -- TODO;prio-2;cost-3
-* Implement additional TextBox features -- TODO;prio-1;see todo-notes.txt
 * Correctly test for location of curses.h header file -- DONE;prio-1
-* Add configure/autoconf tests -- TODO;prio-1
-* PopupMenu: figure out how to privatize cons but call it from create() -- TODO;prio-1
-* #inlcude system header files from only one location -- TODO;prio-1
-* Implement MainLoop -- TODO;prio-1
+* Screen should not quit on ESC, if we compile for production; how should it quit? -- REFLECT;TODO;prio-1;cost-2;see-#1
 * Implement Horizontal Menu -- DONE;prio-1
 * Implement Vertical Menu -- DONE;prio-1
 * Implement Popup Menu -- DONE;prio-1
+* Correctly set the cursor -- BUG;DONE;prio-1
+* Implement MainLoop -- DONE;prio-1
+* Implement additional TextBox features -- TODO;prio-1;see todo-notes.txt
+* PopupMenu: figure out how to privatize cons but call it from create() -- TODO;prio-1
+* #inlcude system header files from only one location -- TODO;prio-1
 * Implement Message Box -- TODO;prio-1
 * Implement Confirm Box -- TODO;prio-1
 * Implement Select Box -- TODO;prio-1
@@ -20,6 +19,9 @@
 * Implement Radio Button -- TODO;prio-1
 * Implement Radio Group -- TODO;prio-1
 * Implement Text area -- TODO;prio-1
+* Add override declarations whereever appropriate -- TODO;prio-2;cost-3;codestyle
+* Optimize: when refreshing subwidgets, we currently refresh the focused subwidget twice -- TODO;prio-2;cost-3;optimization
+* Possibly use pImpls to speed up builds? -- TODO;REFLECT;prio-2
 * Checkbox: add constructor with frame -- TODO;prio-2
 * Consider whether curses functions in curseswindow should run through cursesmanager -- TODO;prio-2
 * Add scrolling containers -- TODO;prio-2
@@ -48,5 +50,6 @@
 * Check out thread safety -- REFLECT;prio-4
 * Add an xml ui description language -- REFLECT;prio-4
 * Think about real life applications -- REFLECT;prio-5
+* Add more configure/autoconf tests -- TODO;prio-5
 * Add scriptability -- REFLECT;prio-6
 * in src/, redo test/NONEXISTANT will try to redo test/NONEXISTANT.cc, then test/NONEXISTANT.cc.o, then test/NONEXISTANT.cc.o.cc, and so on -- BUG;TODO;prio-6
