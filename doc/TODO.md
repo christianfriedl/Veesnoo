@@ -48,3 +48,4 @@
 * Add an xml ui description language -- REFLECT;prio-4
 * Think about real life applications -- REFLECT;prio-5
 * Add scriptability -- REFLECT;prio-6
+* in src/, redo test/NONEXISTANT will try to redo test/NONEXISTANT.cc, then test/NONEXISTANT.cc.o, then test/NONEXISTANT.cc.o.cc, and so on -- BUG;TODO;prio-6
