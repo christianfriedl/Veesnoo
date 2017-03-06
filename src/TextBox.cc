@@ -1,5 +1,6 @@
 #include "TextBox.h"
 #include <stdio.h>
+#include <string.h>
 
 
 namespace nv {
@@ -43,8 +44,7 @@ namespace nv {
 
     bool
     TextBox::receiveKey(const int ch) {
-        LOG("TextBox::receiveKey '%c' (%i) '%s'", ch, ch, keyname(ch)); // should not leak...
-        LOG("TextBox::receiveKey mode is %i", mode_);
+        LOG("TextBox::receiveKey '%c' (%i) '%s', isprint: %i, iswprint: %i, mode: %i", ch, ch, keyname(ch), isprint(ch), iswprint(ch), mode_); // should not leak...
         bool received = false;
         if ( mode_ == Mode_normal ) { // normal mode
             switch ( ch ) {
@@ -79,6 +79,16 @@ namespace nv {
                     cursorToEnd();
                     received = true;
                     break;
+                default:
+                    auto name = keyname(ch);
+                    if  ( strncmp(name, "^A", 2) == 0 ) {
+                        cursorToStart();
+                        received = true;
+                    } else if  ( strncmp(name, "^E", 2) == 0 ) {
+                        cursorToEnd();
+                        received = true;
+                    }
+                    break;
             }
         } else if ( mode_ == Mode_insert ) {
             if ( isprint(ch) ) { // TODO this prolly won't work with full utf-8 support
@@ -106,9 +116,19 @@ namespace nv {
                         mode_ = Mode_normal;
                         received = true;
                         break;
+                default:
+                    auto name = keyname(ch);
+                    if  ( strncmp(name, "^A", 2) == 0 ) {
+                        cursorToStart();
+                        received = true;
+                    } else if  ( strncmp(name, "^E", 2) == 0 ) {
+                        cursorToEnd();
+                        received = true;
+                    }
+                    break;
                 }
             }
-        } else if ( mode_ == Mode_replace ) {
+        } else if ( mode_ == Mode_replace ) { // TODO this is quite unfinished
             if ( iswprint(ch) ) {
                 if ( cursorX_ <= text_.size() ) {
                     char s[2];
