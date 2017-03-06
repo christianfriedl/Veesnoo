@@ -10,10 +10,10 @@ namespace nv {
     }
 
     bool Screen::receiveKey(int ch) {
-        bool received = FocusableContainer::receiveKey(ch);
-        if ( received )
-            return true;
         const char * const name = CursesManager::get().getKeyName(ch);
-        return strncmp(name, "^C", 2) != 0;
+        if ( strncmp(name, "^C", 2) == 0 )
+            return false;
+        FocusableContainer::receiveKey(ch); // we ignore the rv here
+        return true;
     }
 }
