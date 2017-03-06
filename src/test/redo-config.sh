@@ -1,13 +1,15 @@
 #!/bin/bash
 
 CC=clang++
-CFLAGS="-g -I../ -Wall -std=c++14"
+CFLAGS="-g -I../ -Wall -std=c++14 "
+CFLAGS="$CFLAGS `pkg-config --cflags sigc++-2.0`"
 
 . ../redo-config.local.sh
 
 . ../config-defines.sh
 
 LDFLAGS="$CURSESLIB -L../ -std=c++14"
+LDFLAGS="$LDFLAGS `pkg-config --libs sigc++-2.0`"
 
 STATIC_LIBS=-lnvwm
 LIBOBJS=../libnvwm.a

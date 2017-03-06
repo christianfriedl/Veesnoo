@@ -19,6 +19,7 @@
 * Implement Radio Group -- TODO;prio-1
 * Implement Text area -- TODO;prio-1
 * Figure out how to do "Help" items -- TODO;prio-2
+* Correctly autoconfigure location of libsigc++ header file -- TODO;prio-2
 * Figure out how to do "Context sensitive" items -- TODO;prio-2
 * Class hierarchy: Create a common base class for Focusable Widget and FocusableContainer? -- TODO;REFLECT;prio-3;cost-13
 * Reflect and do = delete and = default on special functions -- TODO;prio-3;cost-8

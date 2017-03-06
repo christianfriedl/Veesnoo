@@ -114,6 +114,7 @@ namespace nv {
                     break;
                     case Key_Esc:
                         mode_ = Mode_normal;
+                        signal_changed.emit(text_);
                         received = true;
                         break;
                 default:

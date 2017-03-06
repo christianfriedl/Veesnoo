@@ -2,12 +2,13 @@
 #define NV_TEXT_BOX_H
 
 #include <string>
+#include <sigc++-2.0/sigc++/sigc++.h>
 #include "FocusableWidget.h"
 
 namespace nv {
     
 
-class TextBox : public FocusableWidget {
+class TextBox : public FocusableWidget, sigc::trackable {
 public:
     typedef enum { Mode_normal, Mode_insert, Mode_replace } Mode;
 
@@ -26,6 +27,8 @@ public:
 
     Mode getMode() { return mode_; }
     void setMode(Mode mode) { mode_ = mode; }
+
+    sigc::signal<void, std::string> signal_changed;
 
 private:
     char fillCharForMode(Mode mode);

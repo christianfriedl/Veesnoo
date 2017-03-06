@@ -1,7 +1,14 @@
+#include <ncursesw/ncurses.h>
 #include "TextBox.h"
 #include "Logger.h"
 
 using namespace nv;
+
+void is_changed(std::string text)
+{
+	endwin();
+    std::cout << "Changed to: " << text << std::endl;
+}
 
 void test1() {
     TextBox t1(1, 1, 10);
@@ -18,6 +25,7 @@ void test1() {
 
 int main() {
     TextBox t1(1, 1, 10);
+    t1.signal_changed.connect( sigc::ptr_fun(is_changed) );
     t1.setText("abcde");
     t1.focus();
     t1.refresh();
