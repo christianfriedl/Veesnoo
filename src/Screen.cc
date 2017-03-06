@@ -14,6 +14,6 @@ namespace nv {
         if ( received )
             return true;
         const char * const name = CursesManager::get().getKeyName(ch);
-        return strncmp(name, "^W", 2) != 0;
+        return strncmp(name, "^C", 2) != 0;
     }
 }
