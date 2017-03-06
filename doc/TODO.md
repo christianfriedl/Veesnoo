@@ -18,6 +18,8 @@
 * Implement Radio Button -- TODO;prio-1
 * Implement Radio Group -- TODO;prio-1
 * Implement Text area -- TODO;prio-1
+* Figure out how to do "Help" items -- TODO;prio-2
+* Figure out how to do "Context sensitive" items -- TODO;prio-2
 * Class hierarchy: Create a common base class for Focusable Widget and FocusableContainer? -- TODO;REFLECT;prio-3;cost-13
 * Reflect and do = delete and = default on special functions -- TODO;prio-3;cost-8
 * Reflect splitting up namespace and directory laoyut -- TODO;prio-3;cost-5
@@ -35,6 +37,8 @@
 * Implement Focus management -- TODO;prio-2
 * Consistently use scoped enums -- TODO;prio-2
 * Consistently "=default" or "=delete" or create special functions -- TODO;prio-2
+* Use scr\_dump() to make the whole thing testable!! -- TODO;prio-3 (also need to use wborder to set borders that are always printable)
+* Use curs_set() to hide the cursor -- TODO;prio-3
 * Add events -- TODO;prio-2
 * Implement Window -- TODO;prio-2
 * Implement App with basic loop (AppWindow??? MainWindow??) -- TODO;prio-2
@@ -48,7 +52,7 @@
 * Add flexible keyboard interface -- TODO;prio-4
 * Add flexible Color management -- TODO;prio-4
 * Add sizing and layouting -- TODO;prio-4
-* The whole bloody thing needs to be utf-8 -- TODO;prio-4
+* The whole bloody thing needs to be utf-8 -- TODO;prio-4 -- add_wch(); see ...tests.../getcharcode.c
 * Work with actual models -- TODO;prio-4
 * Add validators -- TODO;prio-4
 * Check out thread safety -- REFLECT;prio-4
