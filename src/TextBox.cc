@@ -43,8 +43,8 @@ namespace nv {
 
     bool
     TextBox::receiveKey(const int ch) {
-        LOG("TextBox receiveKey '%c' (%i)", ch, ch);
-        LOG("TextBox receiveKey mode is %i", mode_);
+        LOG("TextBox::receiveKey '%c' (%i) '%s'", ch, ch, keyname(ch)); // should not leak...
+        LOG("TextBox::receiveKey mode is %i", mode_);
         bool received = false;
         if ( mode_ == Mode_normal ) { // normal mode
             switch ( ch ) {
@@ -58,12 +58,8 @@ namespace nv {
                     text_.replace(cursorX_, 1, "");
                     received = true;
                     break;
-                case KEY_BACKSPACE: // backspace
-                    if ( cursorLeft() )
-                        text_.replace(cursorX_, 1, "");
-                    received = true;
-                    break;
                 case 'h': // move left
+                case KEY_BACKSPACE: // backspace
                 case KEY_LEFT:
                     cursorLeft();
                     received = true;
@@ -85,7 +81,7 @@ namespace nv {
                     break;
             }
         } else if ( mode_ == Mode_insert ) {
-            if ( iswprint(ch) ) {
+            if ( isprint(ch) ) { // TODO this prolly won't work with full utf-8 support
                 if ( cursorX_ <= text_.size() ) {
                     text_.insert(cursorX_, 1, ch);
                     cursorRight();
@@ -101,6 +97,11 @@ namespace nv {
                         cursorLeft();
                         received = true;
                         break;
+                case KEY_BACKSPACE: // backspace
+                    if ( cursorLeft() )
+                        text_.replace(cursorX_, 1, "");
+                    received = true;
+                    break;
                     case Key_Esc:
                         mode_ = Mode_normal;
                         received = true;
