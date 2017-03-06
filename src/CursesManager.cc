@@ -9,24 +9,27 @@ CursesManager& CursesManager::get() {
     return instance;
 }
 
-CursesManager::CursesManager() : bufferedMode_(false), echo_(false), keypadAvailable_(true), width_(0), height_(0), nextPair_(1) { 
+CursesManager::CursesManager() : bufferedMode_(false), cBreak_(false), echo_(false), keypadAvailable_(true), width_(0), height_(0), nextPair_(1) { 
     Logger::get().log("new CursesManager()");
 	initCurses();
 }
 
 void CursesManager::initCurses() {
+    setlocale(LC_ALL, "");
     initscr();
     getmaxyx(stdscr, height_, width_);
     if (!bufferedMode_) {
-        raw();
-        cbreak();
+        if (cBreak_)
+            cbreak();
+        else
+            raw();
     }
     if (!echo_) {
         noecho();
     }
     if (keypadAvailable_) {
         keypad(stdscr, TRUE);
-        set_escdelay(250);       /* set ESC delay to a very low level so we can use the ESC key AND the function keys ('tis good enough for VIM, 'tis good enough for me) */
+        set_escdelay(30);       /* set ESC delay to a very low level so we can use the ESC key AND the function keys ('tis good enough for VIM, 'tis good enough for me) */
     }
     if (has_colors())
         start_color();

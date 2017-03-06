@@ -100,7 +100,8 @@ Widget::getAbsoluteRect() const {
         if ( auto parent = parent_.lock() ) {
             const Rect parentAbsoluteRect = parent->getAbsoluteContentRect();
             return Rect(parentAbsoluteRect.getX() + rect_.getX(), parentAbsoluteRect.getY() + rect_.getY(), rect_.getWidth(), rect_.getHeight());
-        }
+        } else
+            throw Exception("parent found, but unable to obtain lock");
     } else {
         const Rect parentAbsoluteRect(0, 0, 1, 1);
         return Rect(parentAbsoluteRect.getX() + rect_.getX(), parentAbsoluteRect.getY() + rect_.getY(), rect_.getWidth(), rect_.getHeight());

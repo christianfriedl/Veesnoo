@@ -26,6 +26,7 @@ namespace nv {
             CursesManager& operator=(const CursesManager&);
 
             bool bufferedMode_;
+            bool cBreak_;
             bool echo_;
             bool keypadAvailable_;
             int width_, height_;
