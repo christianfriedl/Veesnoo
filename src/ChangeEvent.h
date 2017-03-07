@@ -6,7 +6,8 @@
 namespace nv {
     class ChangeEvent: public Event {
         public:
-            ChangeEvent(const std::string name, const std::shared_ptr<Widget>& target);
+            ChangeEvent(std::shared_ptr<Widget> const & target);
+            virtual ~ChangeEvent();
             const std::string& getName();
             const std::shared_ptr<Widget>& getTarget();
 

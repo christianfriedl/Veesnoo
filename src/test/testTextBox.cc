@@ -4,10 +4,11 @@
 
 using namespace nv;
 
-void is_changed(std::string text)
+void is_changed(const std::shared_ptr<ChangeEvent>& ev)
 {
 	endwin();
-    std::cout << "Changed to: " << text << std::endl;
+    auto tgt = std::static_pointer_cast<TextBox>(ev->getTarget());
+    std::cout << "Changed to: " << tgt->getText() << std::endl;
 }
 
 void test1() {

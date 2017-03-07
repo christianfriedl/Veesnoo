@@ -2,4 +2,5 @@
 
 namespace nv {
     Event::Event() {}
+    Event::~Event() {}
 }

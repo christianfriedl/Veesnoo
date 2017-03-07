@@ -1,6 +1,8 @@
 #ifndef NV_WIDGET_H
 #define NV_WIDGET_H
 
+#include <sigc++-2.0/sigc++/sigc++.h>
+
 #include "NVBase.h"
 #include "Logger.h"
 #include "Rect.h"
@@ -11,7 +13,7 @@ namespace nv {
 // class ColorAttribute;
 
 // TODO check whether we should derive from NonCopyable
-class Widget: public std::enable_shared_from_this<Widget> {
+class Widget: public std::enable_shared_from_this<Widget>, public sigc::trackable {
 public:
     explicit Widget(const Rect& rect); // from a rectangle
     /*

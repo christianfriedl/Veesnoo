@@ -107,26 +107,29 @@ namespace nv {
                         cursorLeft();
                         received = true;
                         break;
-                case KEY_BACKSPACE: // backspace
-                    if ( cursorLeft() )
-                        text_.replace(cursorX_, 1, "");
-                    received = true;
-                    break;
-                    case Key_Esc:
-                        mode_ = Mode_normal;
-                        signal_changed.emit(text_);
+                    case KEY_BACKSPACE: // backspace
+                        if ( cursorLeft() )
+                            text_.replace(cursorX_, 1, "");
                         received = true;
                         break;
-                default:
-                    auto name = keyname(ch);
-                    if  ( strncmp(name, "^A", 2) == 0 ) {
-                        cursorToStart();
-                        received = true;
-                    } else if  ( strncmp(name, "^E", 2) == 0 ) {
-                        cursorToEnd();
-                        received = true;
-                    }
-                    break;
+                    case Key_Esc:
+                        {
+                            mode_ = Mode_normal;
+                            auto ev(std::make_shared<ChangeEvent>(shared_from_this()));
+                            signal_changed.emit(ev);
+                            received = true;
+                        }
+                        break;
+                    default:
+                        auto name = keyname(ch);
+                        if  ( strncmp(name, "^A", 2) == 0 ) {
+                            cursorToStart();
+                            received = true;
+                        } else if  ( strncmp(name, "^E", 2) == 0 ) {
+                            cursorToEnd();
+                            received = true;
+                        }
+                        break;
                 }
             }
         } else if ( mode_ == Mode_replace ) { // TODO this is quite unfinished

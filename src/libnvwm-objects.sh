@@ -8,6 +8,7 @@ LIBSOURCES="$LIBSOURCES HorizontalMenu.cc VerticalMenu.cc FocusableContainer.cc 
 LIBSOURCES="$LIBSOURCES Window.cc PopupMenu.cc "
 LIBSOURCES="$LIBSOURCES MainLoop.cc "
 LIBSOURCES="$LIBSOURCES Screen.cc "
+LIBSOURCES="$LIBSOURCES Event.cc ChangeEvent.cc "
 
 LIBOBJECTS=""
 LIBOBJECTS="$LIBOBJECTS Logger.o "
@@ -19,3 +20,4 @@ LIBOBJECTS="$LIBOBJECTS HorizontalMenu.o VerticalMenu.o FocusableContainer.o Con
 LIBOBJECTS="$LIBOBJECTS Window.o PopupMenu.o "
 LIBOBJECTS="$LIBOBJECTS MainLoop.o "
 LIBOBJECTS="$LIBOBJECTS Screen.o "
+LIBSOURCES="$LIBOBJECTS Event.o ChangeEvent.o "
