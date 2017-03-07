@@ -20,6 +20,12 @@ AC_CHECK_LIB(ncursesw, [init_pair], [], [AC_MSG_ERROR([function initpair was not
 AC_CHECK_LIB(ncursesw, [getch], [], [AC_MSG_ERROR([function getch was not found in libncursesw])])
 dnl getmaxyx is a macro AC_CHECK_LIB(ncursesw, [getmaxyx], [], [AC_MSG_ERROR([function getmaxyx was not found in libncursesw])])
 
+DEPS_CFLAGS="-I/usr/include/sigc++-2.0 -I/usr/lib/x86_64-linux-gnu/sigc++-2.0/include"
+DEPS_LIBS="-lsigc-2.0"
+dnl does not work... PKG_CHECK_MODULES([DEPS], [sigc++-2.0])
+AC_SUBST([DEPS_CFLAGS])
+AC_SUBST([DEPS_LIBS])
+
 AC_CHECK_HEADERS([ncursesw/ncurses.h], [], [AC_MSG_ERROR([no ncurses header found])])
 AC_CHECK_HEADERS([ncurses.h], [], [])
 

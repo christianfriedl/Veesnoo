@@ -8,7 +8,7 @@ void is_changed(const std::shared_ptr<ChangeEvent>& ev)
 {
 	endwin();
     auto tgt = std::static_pointer_cast<TextBox>(ev->getTarget());
-    std::cout << "Changed to: " << tgt->getText() << std::endl;
+    std::cout << "This is the changed handler, Textbox was changed to: " << tgt->getText() << std::endl;
 }
 
 void test1() {
@@ -25,18 +25,18 @@ void test1() {
 }
 
 int main() {
-    TextBox t1(1, 1, 10);
-    t1.signal_changed.connect( sigc::ptr_fun(is_changed) );
-    t1.setText("abcde");
-    t1.focus();
-    t1.refresh();
+    auto t1(std::make_shared<TextBox>(1, 1, 10));
+    t1->signal_changed.connect( sigc::ptr_fun(is_changed) );
+    t1->setText("abcde");
+    t1->focus();
+    t1->refresh();
     int ch = 0;
     while ( true ) {
         ch = getch();
-        bool received = t1.receiveKey(ch);
-        t1.refresh();
+        bool received = t1->receiveKey(ch);
+        t1->refresh();
         if ( !received && ch == Key_Esc )
             break;
     }
-    LOG("text is: '%s'", t1.getText().c_str());
+    LOG("text is: '%s'", t1->getText().c_str());
 }

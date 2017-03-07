@@ -20,4 +20,4 @@ LIBOBJECTS="$LIBOBJECTS HorizontalMenu.o VerticalMenu.o FocusableContainer.o Con
 LIBOBJECTS="$LIBOBJECTS Window.o PopupMenu.o "
 LIBOBJECTS="$LIBOBJECTS MainLoop.o "
 LIBOBJECTS="$LIBOBJECTS Screen.o "
-LIBSOURCES="$LIBOBJECTS Event.o ChangeEvent.o "
+LIBOBJECTS="$LIBOBJECTS Event.o ChangeEvent.o "

@@ -1,3 +1,8 @@
+- id-0002 wnoutrefresh(), doupdate()
+    - by #define? NV_STANDALONE_WIDGETS
+    - widgets always only do wnoutrefresh() ? and whomever is responsible for the "App" shall have the hard work of doing doupdate()?
+    - by a mode in each widget?
+    - by a mode_ in CursesManager...? (i.e., a global config param, to be honest...)
 - id-0001 App quitting
     - in debug, ESC is good
     - "default" key: ctrl-c would actually be a rather good choice...

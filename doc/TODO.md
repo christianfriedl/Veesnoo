@@ -27,7 +27,7 @@
 * Figure out how to do "Context sensitive" items -- TODO;prio-20
 * Add override declarations whereever appropriate -- TODO;prio-20;cost-3;codestyle
 * Optimize: when refreshing subwidgets, we currently refresh the focused subwidget twice -- TODO;prio-20;cost-3;optimization
-* Optimize: use wnoutrefresh etc... -- TODO;prio-20;optimization;cost-8
+* Optimize: use wnoutrefresh and doupdate... the question is, when do we know to do doupdate()? -- TODO;prio-20;optimization;cost-8; id-0002
 * Possibly use pImpls to speed up builds? -- TODO;REFLECT;prio-20
 * Checkbox: add constructor with frame -- TODO;prio-20
 * Consider whether curses functions in curseswindow should run through cursesmanager -- TODO;prio-20
@@ -38,6 +38,7 @@
 * Consistently use scoped enums -- TODO;prio-20
 * Consistently "=default" or "=delete" or create special functions -- TODO;prio-20
 * Use scr\_dump() to make the whole thing testable!! -- TODO;prio-30 (also need to use wborder to set borders that are always printable)
+* ^L should refresh everytthing -- TODO;prio-30
 * Use curs_set() to hide the cursor -- TODO;prio-30
 * Implement Window -- TODO;prio-20
 * Implement App with basic loop (AppWindow??? MainWindow??) -- TODO;prio-20
@@ -63,3 +64,4 @@
 * Add more configure/autoconf tests -- TODO;prio-50
 * Add scriptability -- REFLECT;prio-60
 * in src/, redo test/NONEXISTANT will try to redo test/NONEXISTANT.cc, then test/NONEXISTANT.cc.o, then test/NONEXISTANT.cc.o.cc, and so on -- BUG;TODO;prio-60
+* Consider if we want a status line (StatusLine widget)? -- TODO;prio-40

@@ -1,7 +1,5 @@
 CXX=@CXX@
-LDFLAGS="@LIB_CURSES@"
-CXXFLAGS="@CXXFLAGS@"
-CXXFLAGS="-g -Wall -std=c++14"
-LDFLAGS="-lncursesw -std=c++14"
+LDFLAGS="-g -Wall -std=c++14 @LIB_CURSES@ @DEPS_LIBS@"
+CXXFLAGS="-g -Wall -std=c++14 @CXXFLAGS@ @DEPS_CFLAGS@"
 AR="ar"
 ARFLAGS="rs"
