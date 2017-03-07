@@ -13,6 +13,11 @@ namespace nv {
 
 Widget::Widget(): rect_(0, 0, 1, 1), contentRect_(0, 0, 1, 1), isVisible_(false), parent_(std::weak_ptr<Widget>()) {}
 
+std::shared_ptr<Widget> 
+Widget::create(const Rect& rect) {
+    return std::make_shared<Widget>(rect);
+}
+
 // constructor: set parent_ to "null", size from rect and make visible by default
 Widget::Widget(const Rect& rect): rect_(rect), contentRect_(0, 0, rect.getWidth(), rect.getHeight()), isVisible_(true), parent_(std::weak_ptr<Widget>()) {
     Logger::get().log("new Widget %s", toString().c_str());

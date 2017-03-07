@@ -6,6 +6,11 @@ namespace nv {
 
 VerticalMenu::VerticalMenu(const int x, const int y): FocusableContainer(Rect(x, y, 1, 1)) { } 
 
+const std::shared_ptr<VerticalMenu>
+VerticalMenu::create(const int x, const int y) {
+    return std::make_shared<VerticalMenu>(x, y);
+}
+
 void VerticalMenu::addWidget(const std::shared_ptr<Widget>& widget) {
     Logger::get().log("VerticalMenu(%llx)::addWidget(%llx)", this, widget.get());
     FocusableContainer::addWidget(widget);

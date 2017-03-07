@@ -11,6 +11,7 @@ namespace nv {
     class FocusableContainer: public Focusable, public Container {
         public:
             explicit FocusableContainer(const Rect& rect);
+            static const std::shared_ptr<FocusableContainer> create(const Rect& rect);
             virtual ~FocusableContainer();
 
             virtual bool receiveKey(int ch);

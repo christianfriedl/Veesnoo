@@ -2,8 +2,12 @@
 #include "Logger.h"
 
 namespace nv {
+    std::shared_ptr<Container> 
+    Container::create(const Rect& rect) {
+        return std::make_shared<Container>(rect);
+    }
 
-void 
+    void 
     Container::addWidget(const std::shared_ptr<Widget>& widget) {
         Logger::get().log("Container(%llx)::addWidget(%llx)", this, widget.get());
         auto weakThis = std::weak_ptr<Widget>(shared_from_this());

@@ -2,6 +2,10 @@
 #include "Screen.h"
 
 namespace nv {
+    std::shared_ptr<Screen> Screen::create() {
+        return std::make_shared<Screen>();
+    }
+
     Screen::Screen(): FocusableContainer(Rect(0, 0, 1, 1)) {
         Logger::get().log("new Screen()");
         rect_ = CursesManager::get().getMaxScreenRect(); // TODO why can't I just initialize from this via copy-constr?

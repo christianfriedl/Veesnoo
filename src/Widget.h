@@ -1,6 +1,7 @@
 #ifndef NV_WIDGET_H
 #define NV_WIDGET_H
 
+#include <memory>
 #include <sigc++-2.0/sigc++/sigc++.h>
 
 #include "NVBase.h"
@@ -16,6 +17,7 @@ namespace nv {
 class Widget: public std::enable_shared_from_this<Widget>, public sigc::trackable {
 public:
     explicit Widget(const Rect& rect); // from a rectangle
+    static std::shared_ptr<Widget> create(const Rect& rect);
     /*
     Widget(Widget&& other);
     Widget& operator=(Widget&& other);

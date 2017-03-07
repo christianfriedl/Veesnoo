@@ -5,5 +5,5 @@
 using namespace nv;
 
 int main() {
-    auto s1 (std::make_shared<Screen>());
+    auto s1(Screen::create());
 }

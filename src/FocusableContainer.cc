@@ -5,6 +5,10 @@ namespace nv {
     FocusableContainer::FocusableContainer(const Rect& rect): 
         Focusable(), Container(rect), focusManager_(new ContainerFocusManager(this)) { } 
 
+    const std::shared_ptr<FocusableContainer> FocusableContainer::create(const Rect& rect) {
+        return std::make_shared<FocusableContainer>(rect);
+    }
+
     FocusableContainer::~FocusableContainer() { 
         delete focusManager_; 
     }

@@ -9,6 +9,7 @@ namespace nv {
     class VerticalMenu: public FocusableContainer {
     public:
         VerticalMenu(const int x, const int y);
+        static const std::shared_ptr<VerticalMenu> create(const int x, const int y);
         virtual ~VerticalMenu() {}
         virtual void addWidget(const std::shared_ptr<Widget>& widget) override;
 
