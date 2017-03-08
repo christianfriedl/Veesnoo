@@ -9,9 +9,7 @@
 * Implement Popup Menu -- DONE;prio-10
 * Correctly set the cursor -- BUG;DONE;prio-10
 * Implement MainLoop -- DONE;prio-10
-* PopupMenu: figure out how to privatize cons but call it from create() -- DONE;prio-10
 * Implement additional TextBox features, v.1 -- DONE;prio-10;see todo-notes.txt
-* #inlcude system header files from only one location -- TODO;prio-10
 * Implement Message Box -- TODO;prio-10
 * Implement Confirm Box -- TODO;prio-10
 * Implement Select Box -- TODO;prio-10
@@ -19,11 +17,12 @@
 * Implement Radio Button -- TODO;prio-10
 * Implement Radio Group -- TODO;prio-10
 * Implement Text area -- TODO;prio-10
+* #inlcude system header files from only one location -- TODO;prio-10
 * All widgets need to react to move(); -- TODO;prio-10
-* Add create() method to all widgets, and make their constructors private -- TODO;prio-10
 * Add events -- TODO;prio-10
 * Figure out how to do "Help" items -- TODO;prio-20
 * Correctly autoconfigure location of libsigc++ header file -- TODO;prio-20
+* All remaining widgets: figure out how to protected'ize cons but call it from create() -- DONE;prio-10
 * Figure out how to do "Context sensitive" items -- TODO;prio-20
 * Add override declarations whereever appropriate -- TODO;prio-20;cost-3;codestyle
 * Optimize: when refreshing subwidgets, we currently refresh the focused subwidget twice -- TODO;prio-20;cost-3;optimization
