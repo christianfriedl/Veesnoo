@@ -37,4 +37,14 @@ namespace nv {
         }
     }
 
+    /** regardless of what happens, we will just close the box */
+    bool MessageBox::receiveKey(int ch) {
+        if ( parent_.use_count() != 0 ) { // we have a parent
+            auto parent = std::static_pointer_cast<Container>(parent_.lock()); // GNARF!
+            if ( parent == nullptr )
+                throw std::runtime_error("Parent found, but not accessible.");
+            parent->removeWidget(shared_from_this());
+        }
+    }
+
 }

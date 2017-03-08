@@ -17,6 +17,8 @@
 * Implement Radio Button -- TODO;prio-10
 * Implement Radio Group -- TODO;prio-10
 * Implement Text area -- TODO;prio-10
+* Widget::parent\_ needs to be a Container, not a Widget -- TODO;prio-10 
+* Rename TextBox::signal\_changed to onAfterChanged or similar -- TODO;prio-10
 * #inlcude system header files from only one location -- TODO;prio-10
 * All widgets need to react to move(); -- TODO;prio-10
 * Add events -- TODO;prio-10

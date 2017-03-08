@@ -9,5 +9,6 @@ int main() {
     w1->addWidget(mb1);
     mb1->layout();
     w1->refresh();
-    getch();
+    while (int ch = getch())
+        w1->receiveKey(ch);
 }
