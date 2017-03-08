@@ -44,7 +44,10 @@ namespace nv {
             if ( parent == nullptr )
                 throw std::runtime_error("Parent found, but not accessible.");
             parent->removeWidget(shared_from_this());
+            auto ev(std::make_shared<BasicEvent>(shared_from_this()));
+            onAfterClose.emit(ev);
         }
+        return true;
     }
 
 }

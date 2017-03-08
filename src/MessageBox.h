@@ -3,6 +3,7 @@
 
 #include "Window.h"
 #include "Label.h"
+#include "BasicEvent.h"
 
 namespace nv {
 
@@ -14,6 +15,7 @@ namespace nv {
             const std::shared_ptr<Label> getLabel();
             void layout();
             virtual bool receiveKey(int ch);
+            sigc::signal<void, const std::shared_ptr<BasicEvent>&> onAfterClose;
 
         private:
             std::shared_ptr<Label> label_;
