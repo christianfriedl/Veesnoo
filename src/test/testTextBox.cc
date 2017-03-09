@@ -26,7 +26,7 @@ void test1() {
 
 int main() {
     auto t1(std::make_shared<TextBox>(1, 1, 10));
-    t1->signal_changed.connect( sigc::ptr_fun(is_changed) );
+    t1->onAfterChange.connect( sigc::ptr_fun(is_changed) );
     t1->setText("abcde");
     t1->focus();
     t1->refresh();

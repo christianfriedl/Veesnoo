@@ -28,7 +28,7 @@ public:
     Mode getMode() { return mode_; }
     void setMode(Mode mode) { mode_ = mode; }
 
-    sigc::signal<void, const std::shared_ptr<ChangeEvent>&> signal_changed;
+    sigc::signal<void, const std::shared_ptr<ChangeEvent>&> onAfterChange;
 
 private:
     char fillCharForMode(Mode mode);

@@ -116,7 +116,7 @@ namespace nv {
                         {
                             mode_ = Mode_normal;
                             auto ev(std::make_shared<ChangeEvent>(shared_from_this()));
-                            signal_changed.emit(ev);
+                            onAfterChange.emit(ev);
                             received = true;
                         }
                         break;
