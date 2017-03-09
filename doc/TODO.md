@@ -10,14 +10,23 @@
 * Correctly set the cursor -- BUG;DONE;prio-10
 * Implement MainLoop -- DONE;prio-10
 * Implement additional TextBox features, v.1 -- DONE;prio-10;see todo-notes.txt
-* Implement Message Box -- TODO;prio-10
+* Implement Message Box -- DONE;prio-10
+
+* We need to figure out what to do after FocusableContainer gets removed from parent -- TODO;prio-10
+
 * Implement Confirm Box -- TODO;prio-10
 * Implement Select Box -- TODO;prio-10
 * Implement Combo Box -- TODO;prio-10
 * Implement Radio Button -- TODO;prio-10
 * Implement Radio Group -- TODO;prio-10
 * Implement Text area -- TODO;prio-10
-* Widget::parent\_ needs to be a Container, not a Widget -- TODO;prio-10 
+* Implement Tabbed Page -- TODO;prio-10
+* Implement Table -- TODO;prio-10
+* Check all the header gaurds for errors -- TODO;prio-10
+* Implement a Point class and use it for overloaded move() -- TODO;prio-10
+* Implement a Point class and use it for overloaded resize() -- TODO;prio-10
+* Widget::parent\_ needs to be a Container, not a Widget, so we don't have to cast every access -- TODO;prio-10 
+* Move closing code of MessageBox into Widget::close() -- TODO;prio-10
 * Rename TextBox::signal\_changed to onAfterChanged or similar -- TODO;prio-10
 * #inlcude system header files from only one location -- TODO;prio-10
 * All widgets need to react to move(); -- TODO;prio-10
