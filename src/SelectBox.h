@@ -1,5 +1,5 @@
-#ifndef NV_TEXT_BOX_H
-#define NV_TEXT_BOX_H
+#ifndef NV_SELECT_BOX_H
+#define NV_SELECT_BOX_H
 
 #include <string>
 #include "FocusableWidget.h"
