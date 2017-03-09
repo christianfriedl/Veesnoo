@@ -1,5 +1,5 @@
-#ifndef NV_CHANGE_EVENT_H
-#define NV_CHANGE_EVENT_H
+#ifndef NV_BASIC_EVENT_H
+#define NV_BASIC_EVENT_H
 
 #include "Event.h"
 
