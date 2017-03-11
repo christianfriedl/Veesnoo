@@ -18,6 +18,11 @@ int main() {
     window->addWidget(cb1);
     auto cb2(std::make_shared<Checkbox>(24, 2));
     cb2->setFrame("()");
-    window->addWidget(cb2);
+    auto lrb1(std::make_shared<Label>("Radioi here:", 0, 4));
+    window->addWidget(lrb1);
+    auto rb11(std::make_shared<RadioButton>(20, 4, "radio_rb11"));
+    window->addWidget(rb11);
+    auto rb12(std::make_shared<RadioButton>(24, 4, "radio_rb12"));
+    window->addWidget(rb12);
     mainLoop->run();
 }

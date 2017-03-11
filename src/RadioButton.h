@@ -1,12 +1,12 @@
-#ifndef NV_CHECKBOX_H
-#define NV_CHECKBOX_H
+#ifndef NV_RADIO_BUTTON_H
+#define NV_RADIO_BUTTON_H
 
 #include <string>
 #include "FocusableWidget.h"
 
 namespace nv {
 
-typedef enum class { unchecked, checked } RadioButtonState;
+enum class RadioButtonState { unchecked, checked };
 
 class RadioButton: public FocusableWidget { // , public KeyReceiving {
 public:

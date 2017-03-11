@@ -8,6 +8,7 @@
 #include "Button.h"
 #include "FocusableWidget.h"
 #include "Checkbox.h"
+#include "RadioButton.h"
 #include "MenuItem.h"
 #include "HorizontalMenu.h"
 #include "VerticalMenu.h"

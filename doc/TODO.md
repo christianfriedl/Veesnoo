@@ -14,10 +14,9 @@
 * Check all the header gaurds for errors -- DONE;prio-10
 * Rename TextBox::signal\_changed to onAfterChanged or similar -- DONE;prio-10
 * #inlcude system header files from only one location -- REJECTED;prio-10
+* Implement Confirm Box -- DONE;prio-10
+* We need to figure out what to do after FocusableContainer gets removed from parent -- DONE;prio-10
 
-* We need to figure out what to do after FocusableContainer gets removed from parent -- TODO;prio-10
-
-* Implement Confirm Box -- TODO;prio-10
 * Implement Select Box -- TODO;prio-10
 * Implement Combo Box -- TODO;prio-10
 * Implement Radio Button -- TODO;prio-10
@@ -34,6 +33,8 @@
 * Add more events to existing widgets -- TODO;prio-10
 * Figure out how to do "Help" items -- TODO;prio-20
 * Merge ContainerFocusManaging into FocusManaging -- TODO;prio-20
+* Create a simple wrapper around ConfirmBox that just returns ok or cancel -- TODO;prio-20
+* Create a simple wrapper around MessageBox that just returns -- TODO;prio-20
 * Possibly rename FocusStealing to Closable, and move onClose into it? -- TODO;prio-20
 * Correctly autoconfigure location of libsigc++ header file -- TODO;prio-20
 * All remaining widgets: figure out how to protected'ize cons but call it from create() -- DONE;prio-10

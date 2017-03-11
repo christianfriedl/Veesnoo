@@ -8,7 +8,7 @@
 
 namespace nv {
 
-    RadioButton::RadioButton(int x, int y, const std::string& value): FocusableWidget(Rect(x, y, 3, 1)), state_(RadioButtonState_unchecked), frame_("{}"), value_(value) {
+    RadioButton::RadioButton(int x, int y, const std::string& value): FocusableWidget(Rect(x, y, 3, 1)), state_(RadioButtonState::unchecked), frame_("{}"), value_(value) {
     }
 
     void RadioButton::setFrame(const std::string& frame) {
@@ -18,7 +18,7 @@ namespace nv {
     void RadioButton::refresh() {
         if ( isFocused() )
             cursesWindow_->attrOn(A_REVERSE);
-        char c = (state_ == RadioButtonState_checked ? '+' : ' ');
+        char c = (state_ == RadioButtonState::checked ? '+' : ' ');
         std::stringstream s; 
         s << frame_[0] << c << frame_[1];
         addString(s.str(), 0, 0);
@@ -28,14 +28,14 @@ namespace nv {
     }
 
     bool RadioButton::push() {
-        state_ = (state_ == RadioButtonState_checked ? RadioButtonState_unchecked : RadioButtonState_checked);
+        state_ = (state_ == RadioButtonState::checked ? RadioButtonState::unchecked : RadioButtonState::checked);
         // TODO do stuff
         refresh();
         return true;
     }
 
     bool RadioButton::isChecked() {
-        return state_ == RadioButtonState_checked;
+        return state_ == RadioButtonState::checked;
     }
 
     bool RadioButton::receiveKey(int ch) {

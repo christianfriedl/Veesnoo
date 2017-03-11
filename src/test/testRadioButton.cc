@@ -4,7 +4,7 @@
 using namespace nv;
 
 int main() {
-    RadioButton c1(2, 2);
+    RadioButton c1(2, 2, "1");
     c1.refresh();
     move(10, 10);
     getch();
@@ -19,7 +19,7 @@ int main() {
     move(10, 10);
     getch();
 
-    RadioButton c2(2, 3);
+    RadioButton c2(2, 3, "2");
     c2.setFrame("{}");
     c2.refresh();
     move(10, 10);
