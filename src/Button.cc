@@ -23,11 +23,14 @@ namespace nv {
     }
 
     bool Button::push() {
+        Logger::get().log("Button(%llx)::push()", this);
         state_ = ButtonState_pushed;
         // TODO do stuff
         refresh();
         state_ = ButtonState_normal;
         refresh();
+        auto ev(std::make_shared<BasicEvent>(shared_from_this()));
+        onAfterPush.emit(ev);
         return true;
     }
 

@@ -6,7 +6,9 @@ namespace nv {
     ConfirmBox::ConfirmBox(const std::string& title, const std::string& text): Window(Rect(0, 0, 1, 1), title) {
         label_ = std::make_shared<Label>(text, 1, 1);
         okButton_ = std::make_shared<Button>("Ok", 1, 1);
+        okButton_->onAfterPush.connect( sigc::mem_fun(this, &ConfirmBox::okPushed) );
         cancelButton_ = std::make_shared<Button>("Cancel", 1, 1);
+        cancelButton_->onAfterPush.connect( sigc::mem_fun(this, &ConfirmBox::cancelPushed) );
     }
 
     ConfirmBox::~ConfirmBox() {}
@@ -47,6 +49,7 @@ namespace nv {
     }
 
     bool ConfirmBox::close() {
+        Logger::get().log("ConfirmBox(%llx)::close()", this);
         if ( !FocusStealer::close() )
             return false;
         if ( parent_.use_count() != 0 ) { // we have a parent
@@ -60,5 +63,14 @@ namespace nv {
         return true;
     }
 
+    void ConfirmBox::okPushed(const std::shared_ptr<BasicEvent>& ev) {
+        Logger::get().log("ConfirmBox(%llx)::okPushed()", this);
+        close();
+    }
+
+    void ConfirmBox::cancelPushed(const std::shared_ptr<BasicEvent>& ev) {
+        Logger::get().log("ConfirmBox(%llx)::cancelPushed()", this);
+        close();
+    }
 
 }

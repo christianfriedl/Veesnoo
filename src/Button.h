@@ -3,6 +3,7 @@
 
 #include <string>
 #include "FocusableWidget.h"
+#include "BasicEvent.h"
 
 namespace nv {
 
@@ -14,6 +15,7 @@ namespace nv {
             void refresh();
             bool push(); 
             virtual bool receiveKey(int ch);
+            sigc::signal<void, const std::shared_ptr<BasicEvent>&> onAfterPush;
 
         private:
             std::string text_;

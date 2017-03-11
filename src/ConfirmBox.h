@@ -20,6 +20,8 @@ namespace nv {
             sigc::signal<void, const std::shared_ptr<BasicEvent>&> onAfterClose;
 
         private:
+            void okPushed(const std::shared_ptr<BasicEvent>& ev);
+            void cancelPushed(const std::shared_ptr<BasicEvent>& ev);
             std::shared_ptr<Label> label_;
             std::shared_ptr<Button> okButton_;
             std::shared_ptr<Button> cancelButton_;
