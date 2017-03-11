@@ -18,6 +18,8 @@ namespace nv {
             void layout();
             virtual bool close();
             sigc::signal<void, const std::shared_ptr<BasicEvent>&> onAfterClose;
+            sigc::signal<void, const std::shared_ptr<BasicEvent>&> onOkPushed;
+            sigc::signal<void, const std::shared_ptr<BasicEvent>&> onCancelPushed;
 
         private:
             void okPushed(const std::shared_ptr<BasicEvent>& ev);

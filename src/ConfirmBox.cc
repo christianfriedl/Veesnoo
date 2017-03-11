@@ -65,11 +65,15 @@ namespace nv {
 
     void ConfirmBox::okPushed(const std::shared_ptr<BasicEvent>& ev) {
         Logger::get().log("ConfirmBox(%llx)::okPushed()", this);
+        auto ev2(std::make_shared<BasicEvent>(shared_from_this()));
+        onOkPushed.emit(ev2);
         close();
     }
 
     void ConfirmBox::cancelPushed(const std::shared_ptr<BasicEvent>& ev) {
         Logger::get().log("ConfirmBox(%llx)::cancelPushed()", this);
+        auto ev2(std::make_shared<BasicEvent>(shared_from_this()));
+        onCancelPushed.emit(ev2);
         close();
     }
 
