@@ -11,6 +11,9 @@
 * Implement MainLoop -- DONE;prio-10
 * Implement additional TextBox features, v.1 -- DONE;prio-10;see todo-notes.txt
 * Implement Message Box -- DONE;prio-10
+* Check all the header gaurds for errors -- DONE;prio-10
+* Rename TextBox::signal\_changed to onAfterChanged or similar -- DONE;prio-10
+* #inlcude system header files from only one location -- REJECTED;prio-10
 
 * We need to figure out what to do after FocusableContainer gets removed from parent -- TODO;prio-10
 
@@ -22,16 +25,16 @@
 * Implement Text area -- TODO;prio-10
 * Implement Tabbed Page -- TODO;prio-10
 * Implement Table -- TODO;prio-10
-* Check all the header gaurds for errors -- TODO;prio-10
 * Implement a Point class and use it for overloaded move() -- TODO;prio-10
 * Implement a Point class and use it for overloaded resize() -- TODO;prio-10
 * Widget::parent\_ needs to be a Container, not a Widget, so we don't have to cast every access -- TODO;prio-10 
 * Move closing code of MessageBox into Widget::close() -- TODO;prio-10
-* Rename TextBox::signal\_changed to onAfterChanged or similar -- TODO;prio-10
-* #inlcude system header files from only one location -- TODO;prio-10
+* Move closing code of ConfirmBox into Widget::close() -- TODO;prio-10
 * All widgets need to react to move(); -- TODO;prio-10
-* Add events -- TODO;prio-10
+* Add more events to existing widgets -- TODO;prio-10
 * Figure out how to do "Help" items -- TODO;prio-20
+* Merge ContainerFocusManaging into FocusManaging -- TODO;prio-20
+* Possibly rename FocusStealing to Closable, and move onClose into it? -- TODO;prio-20
 * Correctly autoconfigure location of libsigc++ header file -- TODO;prio-20
 * All remaining widgets: figure out how to protected'ize cons but call it from create() -- DONE;prio-10
 * Figure out how to do "Context sensitive" items -- TODO;prio-20

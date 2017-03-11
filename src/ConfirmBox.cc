@@ -46,17 +46,19 @@ namespace nv {
         }
     }
 
-    /** regardless of what happens, we will just close the box */
-    bool ConfirmBox::receiveKey(int ch) {
+    bool ConfirmBox::close() {
+        if ( !FocusStealer::close() )
+            return false;
         if ( parent_.use_count() != 0 ) { // we have a parent
             auto parent = std::static_pointer_cast<Container>(parent_.lock()); // GNARF!
             if ( parent == nullptr )
                 throw std::runtime_error("Parent found, but not accessible.");
             parent->removeWidget(shared_from_this());
-            auto ev(std::make_shared<BasicEvent>(shared_from_this()));
-            onAfterClose.emit(ev);
         }
+        auto ev(std::make_shared<BasicEvent>(shared_from_this()));
+        onAfterClose.emit(ev);
         return true;
     }
+
 
 }
