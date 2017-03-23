@@ -24,5 +24,8 @@ int main() {
     window->addWidget(rb11);
     auto rb12(std::make_shared<RadioButton>(24, 4, "radio_rb12"));
     window->addWidget(rb12);
+    auto sb1(std::make_shared<SelectBox>(20, 6);
+
+    window->addWidget(rb12);
     mainLoop->run();
 }

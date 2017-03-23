@@ -2,7 +2,7 @@
 #define NV_WIDGET_H
 
 #include <memory>
-#include <sigc++-2.0/sigc++/sigc++.h>
+#include <sigc++/sigc++.h>
 
 #include "NVBase.h"
 #include "Logger.h"

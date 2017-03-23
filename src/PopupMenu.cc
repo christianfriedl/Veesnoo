@@ -1,3 +1,4 @@
+#include "VerticalMenu.h"
 #include "PopupMenu.h"
 #include"Logger.h"
 

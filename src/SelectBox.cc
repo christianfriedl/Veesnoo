@@ -1,110 +1,52 @@
-#include "TextBox.h"
-#include <stdio.h>
-
+#include "Logger.h"
+#include "SelectBox.h"
+#include "FocusableContainer.h"
 
 namespace nv {
 
-    TextBox::TextBox(const int x, const int y, const int width) : FocusableWidget(Rect(x, y, width, 1)),
-            status_(Status_normal), cursorX_(0), startX_(0) {}
-
-    const std::string& TextBox::getText() { return text_; }
-
-    void
-    TextBox::refresh() {
-        addString(text_, 0, 0);
-        int cur = (cursorX_ > rect->getWidth() - 1) ? (rect->getWidth() - 1) : cursorX_;
-
-        cursesWindow_->setCursorPosition(cur, 0);
-        FocusableWidget::refresh();
+    SelectBox::SelectBox(const int x, const int y): FocusableContainer(Rect(x, y, 1, 1)), menu_(std::make_shared<PopupMenu>(x, y + 1)) { 
+        Logger::get().log("new SelectBox %s", toString().c_str());
     }
 
-    bool
-    TextBox::receiveKey(const int ch) {
-        bool received = false;
-        if ( status_ == Status_normal ) {
-            switch ( ch ) {
-                case KEY_IL:
-                case 'i':
-                    status_ = Status_insert;
-                    received = true;
-                    break;
-                case KEY_DL:
-                case 'x':
-                    text_.replace(cursorX_, 1, "");
-                    received = true;
-                    break;
-            }
-        } else if ( status_ == Status_insert ) {
-            if ( iswprint(ch) ) {
-                if ( cursorX_ <= text_.size() ) {
-                    text_.insert(cursorX_, 1, ch);
-                    cursorRight();
-                }
-                received = true;
-            } else {
-                switch ( ch ) {
-                    case KEY_RIGHT:
-                        cursorRight();
-                        received = true;
-                        break;
-                    case KEY_LEFT:
-                        cursorLeft();
-                        received = true;
-                        break;
-                    case Key_Esc:
-                        status_ = Status_normal;
-                        received = true;
-                        break;
-                }
-            }
-        } else if ( status_ == Status_replace ) {
-            if ( iswprint(ch) ) {
-                if ( cursorX_ <= text_.size() ) {
-                    char s[2];
-                    sprintf(s, "%c", ch);
-                    text_.replace(cursorX_, 1, s);
-                    cursorRight();
-                }
-                received = true;
-            } else {
-                switch ( ch ) {
-                    case KEY_RIGHT:
-                        cursorRight();
-                        received = true;
-                        break;
-                    case KEY_LEFT:
-                        cursorLeft();
-                        received = true;
-                        break;
-                    case Key_Esc:
-                        status_ = Status_normal;
-                        received = true;
-                        break;
-                }
-            }
-        } else
-            throw Exception("no such status");
-        return received;
+    const std::shared_ptr<SelectBox>
+    SelectBox::create(const int x, const int y) {
+        auto sb = std::make_shared<SelectBox>(x, y);
+        sb->addWidget(sb->menu_);
+        return sb;
     }
 
-    bool TextBox::cursorRight() { 
-        if (cursorX_ == text_.size())
-            return false;
-        ++cursorX_;
-        return true;
+    void SelectBox::layout() {
+        menu_->layout();
     }
 
-    bool TextBox::cursorLeft() { 
-        if ( cursorX_ == 0 )
-            return false;
-        --cursorX_;
-        return true;
+    void SelectBox::miPushed(const std::shared_ptr<BasicEvent>& ev) {
     }
 
-    bool TextBox::cursorTo(int x) {
-        if ( x > text_.size() )
-            return false;
-        cursorX_ = x;
-        return true;
+
+    const std::shared_ptr<MenuItem>& 
+    SelectBox::addItem(const std::shared_ptr<MenuItem>& mi) {
+        Logger::get().log("SelectBox(%llx)::addItem(%llx)", this, mi.get());
+        mi->onAfterPush.connect(sigc::mem_fun(this, &SelectBox::miPushed) );
+        menu_->addWidget(mi);
+        return mi;
+    }
+
+    const std::shared_ptr<MenuItem>& 
+    SelectBox::addItem(const std::string& name, const std::string& value) {
+        Logger::get().log("SelectBox(%llx)::addItem('%s')", this, name.c_str());
+        auto mi = std::make_shared<MenuItem>(name);
+        return addItem(mi);
+    }
+
+    // TODO remove old menu first
+    void SelectBox::setMenu(const std::shared_ptr<PopupMenu>& menu) {
+        menu_ = menu;
+    }
+
+    void 
+    SelectBox::addWidget(const std::shared_ptr<Widget>& widget) {
+        Logger::get().log("SelectBox(%llx)::addWidget(%llx)", this, widget.get());
+        FocusableContainer::addWidget(widget);
+        layout();
     }
 }

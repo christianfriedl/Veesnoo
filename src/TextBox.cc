@@ -36,7 +36,7 @@ namespace nv {
             addCh(fillChar, i, 0);
 
         int cur = (getCursorPos() > rect_.getWidth() - 1) ? (rect_.getWidth() - 1) : getCursorPos();
-        if ( isFocused() && (mode_ == Mode_insert || mode_ == Mode_replace) )
+        if ( isFocused() )
             cursesWindow_->attrOff(A_REVERSE);
         cursesWindow_->setCursorPosition(cur, 0);
         FocusableWidget::refresh();

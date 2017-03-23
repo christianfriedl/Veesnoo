@@ -1,4 +1,5 @@
 #include "MenuItem.h"
+#include "BasicEvent.h"
 
 
 namespace nv {
@@ -29,10 +30,16 @@ void MenuItem::refresh() {
     Widget::refresh();
 }
 
+bool MenuItem::push() {
+    auto ev(std::make_shared<BasicEvent>(shared_from_this()));
+    onAfterPush.emit(ev);
+    return true;
+}
+
 bool MenuItem::receiveKey(int ch) {
     Logger::get().log("MenuItem(%llx)::receiveKey(%i)", this, ch);
     if (ch == KEY_ENTER || ch == ' ') {
-        return true;
+        return push();
     } else
         return false;
 }

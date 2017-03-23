@@ -16,10 +16,10 @@
 * #inlcude system header files from only one location -- REJECTED;prio-10
 * Implement Confirm Box -- DONE;prio-10
 * We need to figure out what to do after FocusableContainer gets removed from parent -- DONE;prio-10
+* Implement Radio Button -- DONE;prio-10
 
 * Implement Select Box -- TODO;prio-10
 * Implement Combo Box -- TODO;prio-10
-* Implement Radio Button -- TODO;prio-10
 * Implement Radio Group -- TODO;prio-10
 * Implement Text area -- TODO;prio-10
 * Implement Tabbed Page -- TODO;prio-10

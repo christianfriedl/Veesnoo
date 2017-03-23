@@ -2,9 +2,9 @@
 #define NV_POPUP_MENU_H
 
 #include "Window.h"
-#include "VerticalMenu.h"
 #include "MenuItem.h"
 
+class VerticalMenu;
 namespace nv {
     class PopupMenu : public Window {
         public:
@@ -14,11 +14,11 @@ namespace nv {
             const std::shared_ptr<MenuItem>& addItem(const std::string& name);
             void setMenu(const std::shared_ptr<VerticalMenu>& menu);
             void addWidget(const std::shared_ptr<Widget>& widget);
+            void layout();
 
         private:
             std::shared_ptr<VerticalMenu> menu_;
 
-            void layout();
     };
 }
 

@@ -1,30 +1,26 @@
-#ifndef NV_SELECT_BOX_H
-#define NV_SELECT_BOX_H
+#ifndef NV_VERTICAL_MENU_H
+#define NV_VERTICAL_MENU_H
 
-#include <string>
-#include "FocusableWidget.h"
+#include "MenuItem.h"
+#include "PopupMenu.h"
 
 namespace nv {
 
-class TextBox : public FocusableWidget {
-public:
-    TextBox(const int x, const int y, const int width);
-    virtual bool receiveKey(const int ch);
-    const std::string& getText();
-    virtual void refresh();
+    class SelectBox: public FocusableContainer {
+    public:
+        SelectBox(const int x, const int y);
+        static const std::shared_ptr<SelectBox> create(const int x, const int y);
+        virtual ~SelectBox() {}
+        virtual void addWidget(const std::shared_ptr<Widget>& widget) override;
+        const std::shared_ptr<MenuItem>& addItem(const std::shared_ptr<MenuItem>& mi);
+        const std::shared_ptr<MenuItem>& addItem(const std::string& name, const std::string& value);
+        void setMenu(const std::shared_ptr<PopupMenu>& menu);
+        void miPushed(const std::shared_ptr<BasicEvent>& ev);
 
-    bool cursorTo(int x);
-    bool cursorRight();
-    bool cursorLeft();
-
-    typedef enum { Status_normal, Status_insert, Status_replace } Status;
-private:
-    std::string text_;
-    Status status_;
-    int cursorX_;
-    int startX_;
-
-};
+    private:
+        void layout(); // not virtual, because each widget will ahve to know on its own how to do this
+        std::shared_ptr<PopupMenu> menu_;
+    };
 
 }
 
