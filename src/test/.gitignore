@@ -10,3 +10,4 @@ testMainWindow
 testMessageBox
 testConfirmBox
 testRadioButton
+testSelectBox

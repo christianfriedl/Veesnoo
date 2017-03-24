@@ -1,43 +1,55 @@
 #include "MenuItem.h"
-#include "PopupMenu.h"
+#include "SelectBox.h"
+#include "Screen.h"
+#include "Window.h"
+#include "MainLoop.h"
 
 using namespace nv;
 
 int main() {
-    MenuItem m1("menu item 1");
-    MenuItem m2("menu item 2");
-    MenuItem m3("menu item 3");
-    PopupMenu pm(2, 2);
-    pm.addItem(m1);
-    pm.addItem(m2);
-    pm.addItem(m3);
+    auto screen(std::make_shared<Screen>());
+    auto screenRect = CursesManager::get().getMaxScreenRect();
+    auto window(std::make_shared<Window>(screenRect));
+    screen->addWidget(window);
+    auto mainLoop(std::make_shared<MainLoop>(screen));
 
-    pm.pack();
-    pm.refresh();
+    auto m1 (std::make_shared<MenuItem>("option1"));
+    auto m2 (std::make_shared<MenuItem>("option2"));
+    auto m3 (std::make_shared<MenuItem>("option3"));
+
+    auto sb(SelectBox::create(window, 2, 2));
+
+    sb->addItem(m1);
+    sb->addItem(m2);
+    sb->addItem(m3);
+
+    mainLoop->run();
+    /*
+
+
+
+    screen->refresh();
     getch(); // refresh, no highligts
-    pm.focus();
-    pm.refresh();
+    screen->focus();
+    screen->refresh();
     getch(); // refresh, first item is focused and highlighted
-    pm.receiveKey(' ');
-    pm.refresh();
+    screen->receiveKey(' ');
+    screen->refresh();
     getch(); // r4fresh, next item is focused and highlighted
-    pm.receiveKey(' ');
-    pm.refresh();
+    screen->receiveKey(' ');
+    screen->refresh();
     getch(); // r4fresh, next item is focused and highlighted
-    pm.receiveKey(' ');
-    pm.refresh();
+    screen->receiveKey(' ');
+    screen->refresh();
     getch(); // r4fresh, first item is focused and highlighted
-    pm.receiveKey(' ');
-    pm.refresh();
+    screen->receiveKey(' ');
+    screen->refresh();
     getch(); // r4fresh, next item is focused and highlighted
-    pm.receiveKey('h');
-    pm.refresh();
+    screen->receiveKey('h');
+    screen->refresh();
     getch(); // r4fresh, first item is focused and highlighted
-    pm.receiveKey('h');
-    pm.refresh();
+    screen->receiveKey('h');
+    screen->refresh();
     getch(); // r4fresh, last item is focused and highlighted
-
-    pm.focusThis(1);
-    pm.refresh();
-    getch(); // r4fresh, 2nd item is focused and highlighted
+    */
 }

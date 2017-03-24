@@ -9,3 +9,4 @@ config.h
 configure
 config.status
 configure.scan
+.*

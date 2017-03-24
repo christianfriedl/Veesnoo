@@ -15,6 +15,7 @@ namespace nv {
             void setMenu(const std::shared_ptr<VerticalMenu>& menu);
             void addWidget(const std::shared_ptr<Widget>& widget);
             void layout();
+            virtual void refresh() { Logger::get().log("PopupMenu::refresh()"); Window::refresh(); }
 
         private:
             std::shared_ptr<VerticalMenu> menu_;
