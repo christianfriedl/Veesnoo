@@ -148,13 +148,13 @@ Widget::refresh() {
 
 void 
 Widget::addString(const std::string& text) {
-    Logger::get().log("Widget adding text to contentRect_: %s, %i %i", text.c_str(), contentRect_.getX(), contentRect_.getY());
+    Logger::get().log("Widget::addString(%s)", text.c_str());
     cursesWindow_->addString(text, contentRect_.getX(), contentRect_.getY());
 }
 
 void 
 Widget::addString(const std::string& text, const int x, const int y) {
-    Logger::get().log("Widget adding text to contentRect_: %s, %i %i, @ x %i y %i", text.c_str(), contentRect_.getX(), contentRect_.getY(), x, y);
+    Logger::get().log("Widget::addString(%s, %i, %i) adding text to contentRect_: (%i %i, %i, %i)", text.c_str(), x, y, contentRect_.getX(), contentRect_.getY(), contentRect_.getWidth(), contentRect_.getHeight());
     cursesWindow_->addString(text, contentRect_.getX() + x, contentRect_.getY() + y);
 }
 

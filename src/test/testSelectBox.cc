@@ -18,6 +18,7 @@ int main() {
     auto m3 (std::make_shared<MenuItem>("option3"));
 
     auto sb(SelectBox::create(window, 2, 2));
+    window->addWidget(sb);
 
     sb->addItem(m1);
     sb->addItem(m2);

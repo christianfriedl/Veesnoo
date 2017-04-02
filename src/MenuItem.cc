@@ -1,3 +1,4 @@
+#include "NVBase.h"
 #include "MenuItem.h"
 #include "BasicEvent.h"
 
@@ -5,9 +6,11 @@
 namespace nv {
 
 MenuItem::MenuItem(const std::string& text, const int x, const int y) : FocusableWidget(Rect(x, y, text.size(), 1)), text_{text} {
+    Logger::get().log("MenuItem::MenuItem(%s, %i, %i)", text.c_str(), x, y);
 }
 
 MenuItem::MenuItem(const std::string& text) : FocusableWidget(Rect(0, 0, text.size(), 1)), text_{text} {
+    Logger::get().log("MenuItem::MenuItem(%s)", text.c_str());
 }
 
 void MenuItem::refresh() {
@@ -38,10 +41,14 @@ bool MenuItem::push() {
 
 bool MenuItem::receiveKey(int ch) {
     Logger::get().log("MenuItem(%llx)::receiveKey(%i)", this, ch);
-    if (ch == KEY_ENTER || ch == ' ') {
+    if (ch == Key_Enter || ch == ' ') {
         return push();
     } else
         return false;
+}
+
+const std::string& MenuItem::getText() {
+    return text_;
 }
 
 }

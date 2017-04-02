@@ -16,6 +16,7 @@ public:
     void refresh();
     bool receiveKey(int ch);
     bool push();
+    const std::string& getText();
     sigc::signal<void, const std::shared_ptr<BasicEvent>&> onAfterPush;
 
 private:

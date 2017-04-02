@@ -3,11 +3,13 @@
 
 namespace nv {
     std::shared_ptr<Screen> Screen::create() {
-        return std::make_shared<Screen>();
+        auto sc = std::make_shared<Screen>();
+        Logger::get().log("Screen::create() -> %lld", sc.get());
+        return sc;
     }
 
     Screen::Screen(): FocusableContainer(Rect(0, 0, 1, 1)) {
-        Logger::get().log("new Screen()");
+        Logger::get().log("Screen::Screen()");
         rect_ = CursesManager::get().getMaxScreenRect(); // TODO why can't I just initialize from this via copy-constr?
         contentRect_ = rect_;
         Logger::get().log("Screen is %s", toString().c_str());

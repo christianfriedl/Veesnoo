@@ -16,6 +16,8 @@ public:
     static std::shared_ptr<Label> create(const std::string& text, const int x, const int y) {
         return std::make_shared<Label>(text, x, y);
     }
+
+    void setText(const std::string& text);
     /*
     Label(Label&& other);
     Label& operator=(Label&& other);
