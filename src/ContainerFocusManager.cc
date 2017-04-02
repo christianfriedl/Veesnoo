@@ -74,9 +74,11 @@ std::vector<std::shared_ptr<Focusable>> ContainerFocusManager::getFocusableSubWi
     auto focusableSubWidgets = std::vector<std::shared_ptr<Focusable>>();
 
     for ( auto widget: subWidgets ) {
-        auto f = std::dynamic_pointer_cast<Focusable>(widget);
-        if ( f.get() != nullptr )
-            focusableSubWidgets.emplace_back(f);
+        if ( widget->getIsVisibleBubbling() ) {
+            auto f = std::dynamic_pointer_cast<Focusable>(widget);
+            if ( f.get() != nullptr )
+                focusableSubWidgets.emplace_back(f);
+        }
     }
 
     return focusableSubWidgets;
