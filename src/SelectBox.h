@@ -19,6 +19,8 @@ namespace nv {
         void miPushed(const std::shared_ptr<BasicEvent>& ev);
         void miHover(const std::shared_ptr<BasicEvent>& ev);
         virtual void refresh();
+        virtual void focus();
+        virtual void deFocus();
 
     private:
         void layout(); // not virtual, because each widget will ahve to know on its own how to do this

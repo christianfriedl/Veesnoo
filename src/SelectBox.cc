@@ -97,4 +97,15 @@ namespace nv {
         FocusableContainer::addWidget(widget);
         layout();
     }
+
+    void SelectBox::focus() {
+        menu_->show();
+        menu_->focus();
+        menu_->refresh();
+    }
+
+    void SelectBox::deFocus() {
+        menu_->hide();
+        // hmmm....
+    }
 }
