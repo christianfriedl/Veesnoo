@@ -14,7 +14,9 @@ MenuItem::MenuItem(const std::string& text) : FocusableWidget(Rect(0, 0, text.si
 }
 
 void MenuItem::refresh() {
-    Logger::get().log("MenuItem::refresh(), text: '%s', %s, isFocused=%i", text_.c_str(), toString().c_str(), isFocused());
+    Logger::get().log("MenuItem(%lld)::refresh(), text: '%s', %s, isFocused=%i", this, text_.c_str(), toString().c_str(), isFocused());
+    if ( !getIsVisibleBubbling() )
+        return;
 
     char fillChar = ' ';
     if ( isFocused() ) {

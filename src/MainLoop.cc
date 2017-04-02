@@ -14,7 +14,6 @@ namespace nv {
         int ch = 0; 
         bool received = false;
         do {
-            Logger::get().log("add start of MainLoop(%llx)::do loop$ has subWidgets length %i", this, mainContainer_->getSubWidgets().size());
             mainContainer_->refresh();
             ch = CursesManager::get().getCh();
             received = mainContainer_->receiveKey(ch);

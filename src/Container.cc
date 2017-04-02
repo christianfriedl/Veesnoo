@@ -24,13 +24,14 @@ namespace nv {
 
 
     void Container::refresh() {
-        Logger::get().log("Container(%llx)::refresh()  will refresh itself (%s)", this, toString().c_str());
-        Logger::get().log("Container(%llx)::refresh() before w::r() has subWidgets length %i", this, subWidgets_.size());
+        Logger::get().log("Container(%llx)::refresh()  will refresh itself (%s), isVisible=%i", this, toString().c_str(), isVisible_ );
+        Logger::get().log("Container(%llx)::refresh() has subWidgets length %i, isVisible_ = %i", this, subWidgets_.size(), isVisible_);
+        if ( !getIsVisibleBubbling() )
+            return;
         Widget::refresh();
-        Logger::get().log("Container(%llx)::refresh() has subWidgets length %i", this, subWidgets_.size());
         for ( auto widget: subWidgets_ ) {
-            Logger::get().log("Container @%llx will refresh subWidget @ %llx", this, widget.get());
-            widget.get()->refresh();
+            Logger::get().log("Container(%llx)::refresh() will refresh widget %llx", this, widget.get());
+                widget->refresh();
         }
     }
 

@@ -11,7 +11,7 @@
 
 namespace nv {
 
-Widget::Widget(): rect_(0, 0, 1, 1), contentRect_(0, 0, 1, 1), isVisible_(false), parent_(std::weak_ptr<Widget>()) {}
+Widget::Widget(): rect_(0, 0, 1, 1), contentRect_(0, 0, 1, 1), isVisible_(true), parent_(std::weak_ptr<Widget>()) {}
 
 std::shared_ptr<Widget> 
 Widget::create(const Rect& rect) {
@@ -78,9 +78,30 @@ Widget::getParent() const {
     return parent_;
 }
 
-bool 
-Widget::getIsVisible() const {
+bool Widget::getIsVisible() const {
     return isVisible_;
+}
+
+bool Widget::getIsVisibleBubbling() const {
+    if ( !isVisible_ )
+        return false;
+    if ( parent_.use_count() != 0 ) {
+        if ( auto parent = parent_.lock() ) {
+            return parent->getIsVisibleBubbling();
+        } else
+            throw std::runtime_error("parent is there but cannot be locked");
+    } else
+        return true;
+}
+
+void 
+Widget::show() {
+    isVisible_ = true;
+}
+
+void 
+Widget::hide() {
+    isVisible_ = false;
 }
 
 void
@@ -141,9 +162,11 @@ Widget::setCWSize() {
 
 void 
 Widget::refresh() {
-    Logger::get().log("Widget(%llx)::refresh()", this);
-    setCWPosition(); // not necessary until we have a working move(), but what the bloody heck
-    cursesWindow_->refresh();
+    Logger::get().log("Widget(%llx)::refresh(), isVisible_=%i", this, isVisible_);
+    if ( !getIsVisibleBubbling() )
+        return;
+    setCWPosition(); // TODO check if still valid: not necessary until we have a working move(), but what the bloody heck
+        cursesWindow_->refresh();
 }
 
 void 

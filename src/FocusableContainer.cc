@@ -26,6 +26,9 @@ namespace nv {
 
     void
     FocusableContainer::refresh() {
+        Logger::get().log("FocusableContainer(%lld)::refresh()", this);
+        if ( !getIsVisibleBubbling() )
+            return;
         Container::refresh();
         auto focusedFocusable = focusManager_->getFocusedWidget();
         if ( !focusedFocusable )
@@ -33,6 +36,8 @@ namespace nv {
         auto focusedWidget = std::dynamic_pointer_cast<FocusableWidget>(focusedFocusable);
         if ( !focusedWidget )
             return;
-        focusedWidget->refresh();
+        Logger::get().log("FocusableContainer(%llx)::refresh() will refresh focusedWidget %llx", this, focusedWidget.get());
+        if ( focusedWidget->getIsVisible() )
+            focusedWidget->refresh();
     }
 }

@@ -8,6 +8,7 @@ namespace nv {
 
     SelectBox::SelectBox(const int x, const int y): FocusableContainer(Rect(x, y, 5, 1)), menu_(PopupMenu::create(x, y + 1)), selectedItem_() { 
         Logger::get().log("new SelectBox %s", toString().c_str());
+        menu_->hide();
     }
 
     const std::shared_ptr<SelectBox>
@@ -26,7 +27,9 @@ namespace nv {
     }
 
     void SelectBox::refresh() { // TODO what do we output if we don't have anything...
-        Logger::get().log("SelectBox::refresh()");
+        Logger::get().log("SelectBox(%lld)::refresh()", this);
+        if ( !getIsVisibleBubbling() )
+            return;
         addCh('\\', 0, 0);
 
         std::string text("...");
@@ -54,7 +57,7 @@ namespace nv {
     }
 
     /**
-     * @unused, TODO needs onAfterFocus event
+     * unused, TODO needs onAfterFocus event
      */
     void 
     SelectBox::miHover(const std::shared_ptr<BasicEvent>& ev) {

@@ -17,6 +17,9 @@ namespace nv {
     }
 
     void Checkbox::refresh() {
+        Logger::get().log("Checkbox(%lld)::refresh()", this);
+        if ( !getIsVisibleBubbling() )
+            return;
         if ( isFocused() )
             cursesWindow_->attrOn(A_REVERSE);
         char c = (state_ == CheckboxState_checked ? 'x' : ' ');

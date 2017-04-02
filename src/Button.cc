@@ -12,6 +12,9 @@ namespace nv {
     }
 
     void Button::refresh() {
+        Logger::get().log("Button(%lld)::refresh()", this);
+        if ( !getIsVisibleBubbling() )
+            return;
         if ( isFocused() || state_ == ButtonState_pushed)
             cursesWindow_->attrOn(A_REVERSE);
         std::stringstream s; 

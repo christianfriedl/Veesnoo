@@ -26,6 +26,7 @@
 * Implement Table -- TODO;prio-10
 * Implement a Point class and use it for overloaded move() -- TODO;prio-10
 * Implement a Point class and use it for overloaded resize() -- TODO;prio-10
+* Create .so instead of .a, and use it in test/ -- TODO;prio-10
 * Widget::parent\_ needs to be a Container, not a Widget, so we don't have to cast every access -- TODO;prio-10 
 * Move closing code of MessageBox into Widget::close() -- TODO;prio-10
 * Move closing code of ConfirmBox into Widget::close() -- TODO;prio-10

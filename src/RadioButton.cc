@@ -16,6 +16,9 @@ namespace nv {
     }
 
     void RadioButton::refresh() {
+        Logger::get().log("RadioButton(%lld)::refresh()", this);
+        if ( !getIsVisibleBubbling() )
+            return;
         if ( isFocused() )
             cursesWindow_->attrOn(A_REVERSE);
         char c = (state_ == RadioButtonState::checked ? '+' : ' ');

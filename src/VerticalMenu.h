@@ -12,7 +12,7 @@ namespace nv {
         static const std::shared_ptr<VerticalMenu> create(const int x, const int y);
         virtual ~VerticalMenu() {}
         virtual void addWidget(const std::shared_ptr<Widget>& widget);
-        virtual void refresh() { Logger::get().log("VerticalMenu::refresh()"); FocusableContainer::refresh(); }
+        virtual void refresh();
 
         // TODO MenuItem& addItem(const std::string& name);
 

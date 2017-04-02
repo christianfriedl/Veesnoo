@@ -52,4 +52,12 @@ namespace nv {
         Logger::get().log("PopupMenu::layout()");
         resize(menu_->getRect().getWidth() + 2, menu_->getRect().getHeight() + 2);
     }
+
+    void PopupMenu::refresh() { 
+        Logger::get().log("PopupMenu(%lld)::refresh()", this);
+        Logger::get().log("PopupMenu(%lld)::refresh() isVisible_ = %i", this, isVisible_);
+        if ( !getIsVisibleBubbling() )
+            return;
+        Window::refresh(); 
+    }
 }

@@ -38,6 +38,9 @@ public:
 
     const std::weak_ptr<Widget>& getParent() const;
     bool getIsVisible() const;
+    bool getIsVisibleBubbling() const; // TODO this naming...
+    virtual void show();
+    virtual void hide();
 
     // those return copies of the rects, thus no need for const'ness
     Rect getRect() const;
