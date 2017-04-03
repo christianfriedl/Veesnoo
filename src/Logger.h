@@ -5,7 +5,7 @@
 #include<memory>
 #include<stdio.h>
 
-#define LOG(format, args...) Logger::get().log(format, args)
+#define LOG(classname, funcname, format, args...) Logger::get().log("%s::%s[@%llx]( " format ")", classname, funcname, this, args)
 
 namespace nv {
 

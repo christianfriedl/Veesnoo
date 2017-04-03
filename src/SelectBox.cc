@@ -27,7 +27,7 @@ namespace nv {
     }
 
     void SelectBox::refresh() { // TODO what do we output if we don't have anything...
-        Logger::get().log("SelectBox(%lld)::refresh()", this);
+        Logger::get().log("SelectBox(%llx)::refresh()", this);
         if ( !getIsVisibleBubbling() )
             return;
         addCh('\\', 0, 0);
@@ -52,7 +52,7 @@ namespace nv {
     void 
     SelectBox::miPushed(const std::shared_ptr<BasicEvent>& ev) {
         auto tgt = std::static_pointer_cast<MenuItem>(ev->getTarget());
-        Logger::get().log("SelectBox::miPushed(ev) has target %lld", tgt.get());
+        Logger::get().log("SelectBox::miPushed(ev) has target %llx", tgt.get());
         selectedItem_ = tgt;
         menu_->close();
     }
@@ -63,7 +63,7 @@ namespace nv {
     void 
     SelectBox::miHover(const std::shared_ptr<BasicEvent>& ev) {
         auto tgt = std::static_pointer_cast<MenuItem>(ev->getTarget());
-        Logger::get().log("SelectBox::miHover(ev) has target %lld", tgt.get());
+        Logger::get().log("SelectBox::miHover(ev) has target %llx", tgt.get());
         selectedItem_ = tgt;
     }
 
@@ -100,10 +100,9 @@ namespace nv {
     }
 
     bool SelectBox::receiveKey(int ch) {
+        LOG("SelectBox", "receiveKey", "'%i'", ch);
         if ( ch == Key_Enter || ch == ' ' ) { // TODO and not open??
             menu_->open();
-            menu_->focus();
-            menu_->refresh();
             return true;
         } else
             return false;

@@ -16,8 +16,8 @@ namespace nv {
         auto root = findRootFocusable();
         previouslyFocusedWidget_ = root->getFocusedWidget();
         Logger::get().log("PopupWindow(%llx)::open(), previouslyFocusedWidget_ = %lld", previouslyFocusedWidget_.get());
-        focus();
         show();
+        focus();
         refresh();
         return true;
     }

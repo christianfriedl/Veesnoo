@@ -30,7 +30,7 @@ namespace nv {
         if ( isFocused() ) {
             cursesWindow_->attrOn(A_REVERSE);
         }
-        LOG("fillchar is '%c'", fillChar);
+        LOG("TextBox", "refresh", "fillchar is '%c'", fillChar);
 
         addString(text_.substr(startX_), 0, 0);
         Logger::get().log("text is %s", text_.c_str());
@@ -47,7 +47,7 @@ namespace nv {
 
     bool
     TextBox::receiveKey(const int ch) {
-        LOG("TextBox::receiveKey '%c' (%i) '%s', isprint: %i, iswprint: %i, mode: %i", ch, ch, keyname(ch), isprint(ch), iswprint(ch), mode_); // should not leak...
+        LOG("TextBox", "receiveKey", "'%c' (%i) '%s', isprint: %i, iswprint: %i, mode: %i", ch, ch, keyname(ch), isprint(ch), iswprint(ch), mode_); // should not leak...
         bool received = false;
         if ( mode_ == Mode_normal ) { // normal mode
             switch ( ch ) {

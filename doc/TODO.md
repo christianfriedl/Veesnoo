@@ -18,6 +18,8 @@
 * We need to figure out what to do after FocusableContainer gets removed from parent -- DONE;prio-10
 * Implement Radio Button -- DONE;prio-10
 * Implement Select Box -- DONE;prio-10
+* rename deFocus() to blur() -- DONE;prio-10;#focusblur
+* BUG: Selectbox cannot be opened the 2nd time -- TODO;prio-10;cost-5;BUG
 
 * Add override declarations whereever appropriate -- TODO;prio-20;cost-3;codestyle
 * Implement Radio Group -- TODO;prio-10
@@ -33,7 +35,6 @@
 * All widgets need to react to move(); -- TODO;prio-10
 * Add onAfterFocus to FocusableXXX -- TODO;prio-10;events
 * focus() and deFocus() should return bool -- TODO;prio-10
-* rename focus() to blur() -- TODO;prio-10
 * figure out at what point we need to paint once over everything (set default colors in terminal emu to see the difference!) -- TODO;prio-10
 * Figure out how to do "Help" items -- TODO;prio-20
 * Merge ContainerFocusManaging into FocusManaging -- TODO;prio-20
