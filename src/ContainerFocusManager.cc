@@ -59,7 +59,7 @@ void ContainerFocusManager::focus() {
     focusFirst();
 }
 
-void ContainerFocusManager::deFocus() {
+void ContainerFocusManager::blur() {
     // [app setFocusedWidget: nil];
     isFocused_ = false;
 }
@@ -147,7 +147,7 @@ void ContainerFocusManager::focusThis(std::shared_ptr<Focusable>& widget) {
         if ( focusedWidget_.get() == widget.get() )
             widget->focus();
         else
-            widget->deFocus();
+            widget->blur();
     }
 }
 

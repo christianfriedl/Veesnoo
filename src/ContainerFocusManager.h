@@ -20,7 +20,7 @@ public:
 
     bool receiveKey(int ch);
     void focus();
-    void deFocus();
+    void blur();
     void focusFirst();
     void focusNext();
     void focusPrev();

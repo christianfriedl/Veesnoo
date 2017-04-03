@@ -11,12 +11,11 @@ namespace nv {
             explicit FocusableWidget(const Rect& rect): Focusable(), Widget(rect), isFocused_(false) { }
             virtual ~FocusableWidget() {}
 
-            virtual bool receiveKey(int ch);
-            virtual bool isFocused() const;
-            virtual void focus();
-            virtual void deFocus();
-            virtual void blur();
-            const std::string toString() const;
+            virtual bool receiveKey(int ch) override;
+            virtual bool isFocused() const override;
+            virtual void focus() override;
+            virtual void blur() override;
+            const std::string toString() const override;
 
         private:
             bool isFocused_;

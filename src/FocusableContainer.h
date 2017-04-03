@@ -14,12 +14,12 @@ namespace nv {
             static const std::shared_ptr<FocusableContainer> create(const Rect& rect);
             virtual ~FocusableContainer();
 
-            virtual bool receiveKey(int ch);
-            virtual void refresh();
+            virtual bool receiveKey(int ch) override;
+            virtual void refresh() override;
 
-            virtual bool isFocused() const { return focusManager_->isFocused(); }
-            virtual void focus() { focusManager_->focus(); }
-            virtual void deFocus() { focusManager_->deFocus(); }
+            virtual bool isFocused() const override { return focusManager_->isFocused(); }
+            virtual void focus() override { focusManager_->focus(); }
+            virtual void blur() override { focusManager_->blur(); }
 
             void focusFirst() { focusManager_->focusFirst(); }
             void focusNext() { focusManager_->focusNext(); }

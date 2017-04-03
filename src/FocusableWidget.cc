@@ -24,13 +24,9 @@ void FocusableWidget::focus() {
     }
 }
 
-void FocusableWidget::deFocus() {
-    Logger::get().log("FocusableWidget::deFocus() on %s", toString().c_str());
-    isFocused_ = false;
-}
-
 void FocusableWidget::blur() {
-    deFocus();
+    Logger::get().log("FocusableWidget::blur() on %s", toString().c_str());
+    isFocused_ = false;
 }
 
 bool FocusableWidget::isFocused() const {

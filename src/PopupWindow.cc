@@ -36,7 +36,7 @@ namespace nv {
 
         Logger::get().log("PopupWindow(%llx)::close(): previouslyFocusedWidget_ = %lld", this, previouslyFocusedWidget_.get());
 
-        deFocus();
+        blur();
         previouslyFocusedWidget_->focus();
         return true;
     }

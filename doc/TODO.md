@@ -17,9 +17,9 @@
 * Implement Confirm Box -- DONE;prio-10
 * We need to figure out what to do after FocusableContainer gets removed from parent -- DONE;prio-10
 * Implement Radio Button -- DONE;prio-10
+* Implement Select Box -- DONE;prio-10
 
-* Implement Select Box -- TODO;prio-10
-* Implement Combo Box -- TODO;prio-10
+* Add override declarations whereever appropriate -- TODO;prio-20;cost-3;codestyle
 * Implement Radio Group -- TODO;prio-10
 * Implement Text area -- TODO;prio-10
 * Implement Tabbed Page -- TODO;prio-10
@@ -34,6 +34,7 @@
 * Add onAfterFocus to FocusableXXX -- TODO;prio-10;events
 * focus() and deFocus() should return bool -- TODO;prio-10
 * rename focus() to blur() -- TODO;prio-10
+* figure out at what point we need to paint once over everything (set default colors in terminal emu to see the difference!) -- TODO;prio-10
 * Figure out how to do "Help" items -- TODO;prio-20
 * Merge ContainerFocusManaging into FocusManaging -- TODO;prio-20
 * Create a simple wrapper around ConfirmBox that just returns ok or cancel -- TODO;prio-20
@@ -42,7 +43,6 @@
 * Correctly autoconfigure location of libsigc++ header file -- TODO;prio-20
 * All remaining widgets: figure out how to protected'ize cons but call it from create() -- DONE;prio-10
 * Figure out how to do "Context sensitive" items -- TODO;prio-20
-* Add override declarations whereever appropriate -- TODO;prio-20;cost-3;codestyle
 * Optimize: when refreshing subwidgets, we currently refresh the focused subwidget twice -- TODO;prio-20;cost-3;optimization
 * Optimize: use wnoutrefresh and doupdate... the question is, when do we know to do doupdate()? -- TODO;prio-20;optimization;cost-8; id-0002
 * Possibly use pImpls to speed up builds? -- TODO;REFLECT;prio-20
@@ -66,6 +66,7 @@
 * Reflect and do = delete and = default on special functions -- TODO;prio-30;cost-8
 * Reflect splitting up namespace and directory laoyut -- TODO;prio-30;cost-5
 * Screen - fix ctrl-c/ctrl-w mess; how should it quit? -- REFLECT;TODO;prio-30;cost-2;see-id-0001
+* Implement Combo Box -- TODO;prio-40;id-0003
 * TextBox: size should be obvious when not focused, v.2 -- TODO;prio-40
 * TextBox: add colors? (at what point?) -- TODO;prio-40
 * TextBox: ... implement color pairs -- TODO;prio-40

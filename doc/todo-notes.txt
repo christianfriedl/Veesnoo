@@ -13,6 +13,9 @@
             raw();
             keypad(stdscr, TRUE);
     - implement a ctrl-c/SIGINT handler
+- id-0003 Combo Box
+    - is a Select Box that can add another option on-line
+    - will be implemented as needed
 - reflect class hierarchy
     - merge Container into FocusableContainer?
 - what does a mainwindow have to do?

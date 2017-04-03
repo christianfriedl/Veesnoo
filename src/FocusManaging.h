@@ -9,7 +9,7 @@ public:
 
     virtual bool receiveKey(int ch) = 0;
     virtual void focus() = 0;
-    virtual void deFocus() = 0;
+    virtual void blur() = 0;
     virtual bool isFocused() const = 0;
 
 };
