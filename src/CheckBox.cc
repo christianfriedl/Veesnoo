@@ -4,20 +4,19 @@
 #include <sstream>
 #include <string.h>
 #include "Widget.h"
-#// include "KeyReceiving.h"
-#include "Checkbox.h"
+#include "CheckBox.h"
 
 namespace nv {
 
-    Checkbox::Checkbox(int x, int y): FocusableWidget(Rect(x, y, 3, 1)), state_(CheckboxState_unchecked), frame_("[]") {
+    CheckBox::CheckBox(int x, int y): FocusableWidget(Rect(x, y, 3, 1)), state_(CheckboxState_unchecked), frame_("[]") {
     }
 
-    void Checkbox::setFrame(const std::string& frame) {
+    void CheckBox::setFrame(const std::string& frame) {
         frame_ = frame;
     }
 
-    void Checkbox::refresh() {
-        Logger::get().log("Checkbox(%lld)::refresh()", this);
+    void CheckBox::refresh() {
+        Logger::get().log("CheckBox(%lld)::refresh()", this);
         if ( !getIsVisibleBubbling() )
             return;
         if ( isFocused() )
@@ -31,18 +30,18 @@ namespace nv {
         FocusableWidget::refresh();
     }
 
-    bool Checkbox::push() {
+    bool CheckBox::push() {
         state_ = (state_ == CheckboxState_checked ? CheckboxState_unchecked : CheckboxState_checked);
         // TODO do stuff
         refresh();
         return true;
     }
 
-    bool Checkbox::isChecked() {
+    bool CheckBox::isChecked() {
         return state_ == CheckboxState_checked;
     }
 
-    bool Checkbox::receiveKey(int ch) {
+    bool CheckBox::receiveKey(int ch) {
         if (ch == ' ' || ch == 13) {
             return push();
         }

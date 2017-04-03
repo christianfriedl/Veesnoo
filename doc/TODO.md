@@ -20,8 +20,11 @@
 * Implement Select Box -- DONE;prio-10
 * rename deFocus() to blur() -- DONE;prio-10;#focusblur
 * BUG: Selectbox cannot be opened the 2nd time -- TODO;prio-10;cost-5;BUG
+* (continuous) consistently use LOG macro -- TODO;prio-20;cost-3;codestyle
+* BUG: MesageBox has no create(), so test does not compile -- TODO;prio-20;cost-2;BUG
 
-* Add override declarations whereever appropriate -- TODO;prio-20;cost-3;codestyle
+* Add override declarations whereever appropriate -- TODO;prio-20;cost-3;codestyle;#overridedecls
+* Unify Case: SelectBox vs. Checkbox --> CheckBox -- TODO;prio-30;cost-1;codestyle;#checkboxcase
 * Implement Radio Group -- TODO;prio-10
 * Implement Text area -- TODO;prio-10
 * Implement Tabbed Page -- TODO;prio-10

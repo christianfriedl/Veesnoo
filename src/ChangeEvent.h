@@ -8,8 +8,8 @@ namespace nv {
         public:
             ChangeEvent(std::shared_ptr<Widget> const & target);
             virtual ~ChangeEvent();
-            const std::string& getName();
-            const std::shared_ptr<Widget>& getTarget();
+            const std::string& getName() override;
+            const std::shared_ptr<Widget>& getTarget() override;
 
         private:
             const std::string name_;

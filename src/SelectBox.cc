@@ -100,7 +100,7 @@ namespace nv {
     }
 
     bool SelectBox::receiveKey(int ch) {
-        LOG("SelectBox", "receiveKey", "'%i'", ch);
+        LOGMETHOD("'%i'", ch);
         if ( ch == Key_Enter || ch == ' ' ) { // TODO and not open??
             menu_->open();
             return true;

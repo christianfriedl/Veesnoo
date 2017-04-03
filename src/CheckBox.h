@@ -8,15 +8,14 @@ namespace nv {
 
 typedef enum { CheckboxState_unchecked, CheckboxState_checked } CheckboxState;
 
-class Checkbox: public FocusableWidget { // , public KeyReceiving {
+class CheckBox: public FocusableWidget {
 public:
-    Checkbox(int x, int y);
-    // no need for ~Checkbox(); !, the parent does that
+    CheckBox(int x, int y);
     void setFrame(const std::string& frame);
-    void refresh();
+    void refresh() override;
     bool push(); 
     bool isChecked();
-    bool receiveKey(int ch);
+    bool receiveKey(int ch) override;
 
 private:
     CheckboxState state_;

@@ -11,3 +11,4 @@ testMessageBox
 testConfirmBox
 testRadioButton
 testSelectBox
+testCheckBox

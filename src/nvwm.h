@@ -7,7 +7,7 @@
 #include "Label.h"
 #include "Button.h"
 #include "FocusableWidget.h"
-#include "Checkbox.h"
+#include "CheckBox.h"
 #include "RadioButton.h"
 #include "MenuItem.h"
 #include "HorizontalMenu.h"

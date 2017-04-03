@@ -15,9 +15,9 @@ int main() {
     window->addWidget(tb1);
     auto lcb1(std::make_shared<Label>("Check here:", 0, 2));
     window->addWidget(lcb1);
-    auto cb1(std::make_shared<Checkbox>(20, 2));
+    auto cb1(std::make_shared<CheckBox>(20, 2));
     window->addWidget(cb1);
-    auto cb2(std::make_shared<Checkbox>(24, 2));
+    auto cb2(std::make_shared<CheckBox>(24, 2));
     cb2->setFrame("()");
     auto lrb1(std::make_shared<Label>("Radioi here:", 0, 4));
     window->addWidget(lrb1);

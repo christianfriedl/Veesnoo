@@ -1,3 +1,4 @@
+#include "Logger.h"
 #include "TextBox.h"
 #include <stdio.h>
 #include <string.h>
@@ -30,10 +31,10 @@ namespace nv {
         if ( isFocused() ) {
             cursesWindow_->attrOn(A_REVERSE);
         }
-        LOG("TextBox", "refresh", "fillchar is '%c'", fillChar);
+        LOGMETHOD("fillchar is '%c'", fillChar);
 
         addString(text_.substr(startX_), 0, 0);
-        Logger::get().log("text is %s", text_.c_str());
+        LOGMETHOD("text is %s", text_.c_str());
 
         for ( int i = std::min(rect_.getWidth(), (int)text_.length() - startX_); i < rect_.getWidth(); ++i )
             addCh(fillChar, i, 0);
@@ -47,7 +48,7 @@ namespace nv {
 
     bool
     TextBox::receiveKey(const int ch) {
-        LOG("TextBox", "receiveKey", "'%c' (%i) '%s', isprint: %i, iswprint: %i, mode: %i", ch, ch, keyname(ch), isprint(ch), iswprint(ch), mode_); // should not leak...
+        LOGMETHOD(, "'%c' (%i) '%s', isprint: %i, iswprint: %i, mode: %i", ch, ch, keyname(ch), isprint(ch), iswprint(ch), mode_); // should not leak...
         bool received = false;
         if ( mode_ == Mode_normal ) { // normal mode
             switch ( ch ) {

@@ -5,11 +5,11 @@
 #include "Label.h"
 #include "Button.h"
 #include "BasicEvent.h"
-#include "FocusStealer.h"
+#include "PopupWindow.h"
 
 namespace nv {
 
-    class ConfirmBox: public Window, public FocusStealer {
+    class ConfirmBox: public PopupWindow {
         public:
             ConfirmBox(const std::string& title, const std::string& text);
             virtual ~ConfirmBox();
