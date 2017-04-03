@@ -22,7 +22,7 @@ public:
     virtual void removeWidget(const std::shared_ptr<Widget>& widget);
     auto getSubWidgets() const { return subWidgets_; } // we copy the vector, because in all likelihood this will be like 10 pointers or so
     int getSubWidgetsSize() const { return subWidgets_.size(); }
-    virtual void refresh();
+    virtual void refresh() override;
     
 protected:
     std::vector<std::shared_ptr<Widget> > subWidgets_;

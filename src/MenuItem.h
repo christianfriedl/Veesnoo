@@ -13,8 +13,8 @@ public:
     MenuItem(const std::string& text, const int x, const int y);
     MenuItem(const std::string& text);
     virtual ~MenuItem() {}
-    void refresh();
-    bool receiveKey(int ch);
+    void refresh() override;
+    bool receiveKey(int ch) override;
     bool push();
     const std::string& getText();
     sigc::signal<void, const std::shared_ptr<BasicEvent>&> onAfterPush;

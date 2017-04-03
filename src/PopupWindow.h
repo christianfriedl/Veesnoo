@@ -15,9 +15,9 @@ namespace nv {
         explicit PopupWindow(const Rect& rect, const std::string title = "");
         static std::shared_ptr<PopupWindow> create(const Rect& rect, const std::string title = "") { return std::make_shared<PopupWindow>(rect, title); }
             virtual ~PopupWindow();
-            virtual bool open();
-            virtual bool close();
-            virtual const std::shared_ptr<Focusable>& getPreviouslyFocusedWidget() const;
+            virtual bool open() override;
+            virtual bool close() override;
+            virtual const std::shared_ptr<Focusable>& getPreviouslyFocusedWidget() const override;
         private:
             std::shared_ptr<Focusable> previouslyFocusedWidget_;
     };

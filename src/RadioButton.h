@@ -12,10 +12,10 @@ class RadioButton: public FocusableWidget { // , public KeyReceiving {
 public:
     RadioButton(int x, int y, const std::string& value);
     void setFrame(const std::string& frame);
-    void refresh();
+    bool receiveKey(int ch) override;
+    void refresh() override;
     bool push(); 
     bool isChecked();
-    bool receiveKey(int ch);
 
 private:
     RadioButtonState state_;

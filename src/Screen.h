@@ -5,6 +5,6 @@ namespace nv {
         public:
             Screen();
             static std::shared_ptr<Screen> create();
-            bool receiveKey(int ch);
+            bool receiveKey(int ch) override;
     };
 }

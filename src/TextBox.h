@@ -13,10 +13,10 @@ public:
     typedef enum { Mode_normal, Mode_insert, Mode_replace } Mode;
 
     TextBox(const int x, const int y, const int width);
-    virtual bool receiveKey(const int ch);
+    virtual bool receiveKey(const int ch) override;
+    virtual void refresh() override;
     const std::string& getText();
     void setText(const std::string& text) { text_ = text; }
-    virtual void refresh();
     inline int getCursorPos();
 
     bool cursorTo(int x);

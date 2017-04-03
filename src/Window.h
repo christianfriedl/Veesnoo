@@ -10,7 +10,7 @@ class Window : public FocusableContainer {
 public:
     Window(const Rect& rect, const std::string title = "");
     static std::shared_ptr<Window> create(const Rect& rect, const std::string title = "") { return std::make_shared<Window>(rect, title); }
-    virtual void refresh();
+    virtual void refresh() override;
     void setTitle(const std::string title);
 
 private:

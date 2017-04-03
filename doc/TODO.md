@@ -50,6 +50,7 @@
 * Optimize: when refreshing subwidgets, we currently refresh the focused subwidget twice -- TODO;prio-20;cost-3;optimization
 * Optimize: use wnoutrefresh and doupdate... the question is, when do we know to do doupdate()? -- TODO;prio-20;optimization;cost-8; id-0002
 * Possibly use pImpls to speed up builds? -- TODO;REFLECT;prio-20
+* ContainerFocusManager does not implement an interface -- TODO;prio-20;codestyle;#cfminterface
 * Checkbox: add constructor with frame -- TODO;prio-20
 * Consider whether curses functions in curseswindow should run through cursesmanager -- TODO;prio-20
 * Add scrolling containers -- TODO;prio-20

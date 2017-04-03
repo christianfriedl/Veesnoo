@@ -11,11 +11,8 @@ namespace nv {
         VerticalMenu(const int x, const int y);
         static const std::shared_ptr<VerticalMenu> create(const int x, const int y);
         virtual ~VerticalMenu() {}
-        virtual void addWidget(const std::shared_ptr<Widget>& widget);
-        virtual void refresh();
-
-        // TODO MenuItem& addItem(const std::string& name);
-
+        virtual void addWidget(const std::shared_ptr<Widget>& widget) override;
+        virtual void refresh() override;
 
     private:
         void layout(); // not virtual, because each widget will ahve to know on its own how to do this

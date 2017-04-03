@@ -13,10 +13,9 @@ namespace nv {
             const std::shared_ptr<MenuItem>& addItem(const std::shared_ptr<MenuItem>& mi);
             const std::shared_ptr<MenuItem>& addItem(const std::string& name);
             void setMenu(const std::shared_ptr<VerticalMenu>& menu);
-            void addWidget(const std::shared_ptr<Widget>& widget);
+            void addWidget(const std::shared_ptr<Widget>& widget) override;
             void layout();
-            virtual void refresh();
-            virtual bool close();
+            virtual void refresh() override;
 
         private:
             std::shared_ptr<VerticalMenu> menu_;
