@@ -25,8 +25,10 @@ namespace nv {
             void focusNext() { focusManager_->focusNext(); }
             void focusPrev() { focusManager_->focusPrev(); }
             void focusThis(std::shared_ptr<Focusable>& widget) { focusManager_->focusThis(widget); }
+            std::shared_ptr<Focusable> getFocusedWidget() { return focusManager_->getFocusedWidget(); }
 
             void subWidgetHasFocused(std::shared_ptr<Focusable>& widget);
+            const std::shared_ptr<FocusableContainer> findRootFocusable();
 
         protected:
             ContainerFocusManager *focusManager_;

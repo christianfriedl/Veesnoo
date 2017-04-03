@@ -48,16 +48,16 @@ namespace nv {
         }
     }
 
+    bool ConfirmBox::open() {
+        if ( !FocusStealer::open() )
+            return false;
+        show();
+    }
     bool ConfirmBox::close() {
         Logger::get().log("ConfirmBox(%llx)::close()", this);
         if ( !FocusStealer::close() )
             return false;
-        if ( parent_.use_count() != 0 ) { // we have a parent
-            auto parent = std::static_pointer_cast<Container>(parent_.lock()); // GNARF!
-            if ( parent == nullptr )
-                throw std::runtime_error("Parent found, but not accessible.");
-            parent->removeWidget(shared_from_this());
-        }
+        hide();
         auto ev(std::make_shared<BasicEvent>(shared_from_this()));
         onAfterClose.emit(ev);
         return true;

@@ -1,12 +1,12 @@
 #ifndef NV_POPUP_MENU_H
 #define NV_POPUP_MENU_H
 
-#include "Window.h"
 #include "MenuItem.h"
+#include "PopupWindow.h"
 
 class VerticalMenu;
 namespace nv {
-    class PopupMenu : public Window {
+    class PopupMenu : public PopupWindow {
         public:
             PopupMenu(const int x, const int y); // TODO this is public... figure out how to make it callable ONLY from create()
             static std::shared_ptr<PopupMenu> create(const int x, const int y);
@@ -16,6 +16,7 @@ namespace nv {
             void addWidget(const std::shared_ptr<Widget>& widget);
             void layout();
             virtual void refresh();
+            virtual bool close();
 
         private:
             std::shared_ptr<VerticalMenu> menu_;

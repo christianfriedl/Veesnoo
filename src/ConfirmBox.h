@@ -16,6 +16,7 @@ namespace nv {
             static const std::shared_ptr<ConfirmBox> create(const std::string& title, const std::string& text);
             const std::shared_ptr<Label> getLabel();
             void layout();
+            virtual bool open();
             virtual bool close();
             sigc::signal<void, const std::shared_ptr<BasicEvent>&> onAfterClose;
             sigc::signal<void, const std::shared_ptr<BasicEvent>&> onOkPushed;

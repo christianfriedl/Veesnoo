@@ -54,6 +54,7 @@ namespace nv {
         auto tgt = std::static_pointer_cast<MenuItem>(ev->getTarget());
         Logger::get().log("SelectBox::miPushed(ev) has target %lld", tgt.get());
         selectedItem_ = tgt;
+        menu_->close();
     }
 
     /**
@@ -98,14 +99,13 @@ namespace nv {
         layout();
     }
 
-    void SelectBox::focus() {
-        menu_->show();
-        menu_->focus();
-        menu_->refresh();
-    }
-
-    void SelectBox::deFocus() {
-        menu_->hide();
-        // hmmm....
+    bool SelectBox::receiveKey(int ch) {
+        if ( ch == Key_Enter || ch == ' ' ) { // TODO and not open??
+            menu_->open();
+            menu_->focus();
+            menu_->refresh();
+            return true;
+        } else
+            return false;
     }
 }

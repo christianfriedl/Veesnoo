@@ -32,6 +32,8 @@
 * Move closing code of ConfirmBox into Widget::close() -- TODO;prio-10
 * All widgets need to react to move(); -- TODO;prio-10
 * Add onAfterFocus to FocusableXXX -- TODO;prio-10;events
+* focus() and deFocus() should return bool -- TODO;prio-10
+* rename focus() to blur() -- TODO;prio-10
 * Figure out how to do "Help" items -- TODO;prio-20
 * Merge ContainerFocusManaging into FocusManaging -- TODO;prio-20
 * Create a simple wrapper around ConfirmBox that just returns ok or cancel -- TODO;prio-20

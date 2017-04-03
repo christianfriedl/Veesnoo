@@ -1,3 +1,4 @@
+#include "SelectBox.h"
 #include "nvwm.h"
 
 using namespace nv;
@@ -24,8 +25,20 @@ int main() {
     window->addWidget(rb11);
     auto rb12(std::make_shared<RadioButton>(24, 4, "radio_rb12"));
     window->addWidget(rb12);
-    auto sb1(std::make_shared<SelectBox>(20, 6);
 
-    window->addWidget(rb12);
+    auto lsb1(std::make_shared<Label>("SelectBox here:", 55, 0));
+    window->addWidget(lsb1);
+    auto sb1(SelectBox::create(window, 75, 0));
+
+    auto sbm1 (std::make_shared<MenuItem>("option1"));
+    auto sbm2 (std::make_shared<MenuItem>("option2"));
+    auto sbm3 (std::make_shared<MenuItem>("option3"));
+
+    sb1->addItem(sbm1);
+    sb1->addItem(sbm2);
+    sb1->addItem(sbm3);
+
+    window->addWidget(sb1);
+
     mainLoop->run();
 }

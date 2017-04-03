@@ -4,7 +4,7 @@
 
 namespace nv {
 
-    PopupMenu::PopupMenu(const int x, const int y) : Window(Rect(x, y, 1, 1)), menu_(std::make_shared<VerticalMenu>(0, 0)) {
+    PopupMenu::PopupMenu(const int x, const int y) : PopupWindow(Rect(x, y, 1, 1)), menu_(std::make_shared<VerticalMenu>(0, 0)) {
 		Logger::get().log("new PopupMenu %s", toString().c_str());
     }
 
@@ -60,4 +60,22 @@ namespace nv {
             return;
         Window::refresh(); 
     }
+
+    bool PopupMenu::close() {
+        Logger::get().log("PopupMenu(%llx)::close()", this);
+        if ( !PopupWindow::close() )
+            return false;
+        if ( parent_.use_count() != 0 ) { // we have a parent
+            auto parent = std::static_pointer_cast<Container>(parent_.lock()); // GNARF!
+            if ( parent == nullptr )
+                throw std::runtime_error("Parent found, but not accessible.");
+            parent->removeWidget(shared_from_this());
+        }
+        /* todo
+        auto ev(std::make_shared<BasicEvent>(shared_from_this()));
+        onAfterClose.emit(ev);
+        */
+        return true;
+    }
+
 }

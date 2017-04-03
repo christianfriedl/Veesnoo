@@ -12,6 +12,7 @@ namespace nv {
     class FocusStealing {
         public:
             virtual ~FocusStealing() {}
+            virtual bool open() = 0;
             virtual bool close() = 0;
             virtual const std::shared_ptr<Focusable>& getPreviouslyFocusedWidget() const = 0;
     };

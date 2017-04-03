@@ -16,5 +16,6 @@
 #include "PopupMenu.h"
 #include "MainLoop.h"
 #include "CursesManager.h"
+#include "SelectBox.h"
 
 #endif

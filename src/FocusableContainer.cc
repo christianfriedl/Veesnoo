@@ -40,4 +40,15 @@ namespace nv {
         if ( focusedWidget->getIsVisible() )
             focusedWidget->refresh();
     }
+
+    const std::shared_ptr<FocusableContainer> FocusableContainer::findRootFocusable() {
+        if ( parent_.use_count() == 0 )
+            return std::dynamic_pointer_cast<FocusableContainer>(shared_from_this());
+        auto p = parent_.lock();
+        if ( !p ) throw Exception("cannot lock parent_");
+        auto pp = std::dynamic_pointer_cast<FocusableContainer>(p);
+        if ( !pp ) throw Exception("cannot transform parent_");
+        return pp->findRootFocusable();
+    }
+
 }
