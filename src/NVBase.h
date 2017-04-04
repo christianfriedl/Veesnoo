@@ -23,7 +23,9 @@ namespace nv {
 
     class Exception {
     public:
-        Exception(std::string msg) {}
+        Exception(std::string msg): msg_(msg) { }
+    private:
+        std::string msg_;
     };
 
 }

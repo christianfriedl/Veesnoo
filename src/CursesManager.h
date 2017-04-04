@@ -16,7 +16,7 @@ namespace nv {
             Rect getMaxScreenRect();
             int colorPair(int fg, int bg);
             int getCh();
-            const char * const getKeyName(int ch) const;
+            const char * getKeyName(int ch) const;
         private:
             void initCurses();
             CursesManager(); 

@@ -22,8 +22,10 @@
 * BUG: Selectbox cannot be opened the 2nd time -- TODO;prio-10;cost-5;BUG
 * (continuous) consistently use LOG macro -- TODO;prio-20;cost-3;codestyle
 * BUG: MesageBox has no create(), so test does not compile -- TODO;prio-20;cost-2;BUG
+* Add override declarations whereever appropriate -- DONE;prio-20;cost-3;codestyle;#overridedecls
+* Move closing code of MessageBox into Widget::close() -- REJECTED;prio-10
+* Move closing code of ConfirmBox into Widget::close() -- REJECTED;prio-10
 
-* Add override declarations whereever appropriate -- TODO;prio-20;cost-3;codestyle;#overridedecls
 * Unify Case: SelectBox vs. Checkbox --> CheckBox -- TODO;prio-30;cost-1;codestyle;#checkboxcase
 * Implement Radio Group -- TODO;prio-10
 * Implement Text area -- TODO;prio-10
@@ -33,13 +35,13 @@
 * Implement a Point class and use it for overloaded resize() -- TODO;prio-10
 * Create .so instead of .a, and use it in test/ -- TODO;prio-10
 * Widget::parent\_ needs to be a Container, not a Widget, so we don't have to cast every access -- TODO;prio-10 
-* Move closing code of MessageBox into Widget::close() -- TODO;prio-10
-* Move closing code of ConfirmBox into Widget::close() -- TODO;prio-10
 * All widgets need to react to move(); -- TODO;prio-10
 * Add onAfterFocus to FocusableXXX -- TODO;prio-10;events
 * focus() and deFocus() should return bool -- TODO;prio-10
 * figure out at what point we need to paint once over everything (set default colors in terminal emu to see the difference!) -- TODO;prio-10
 * Figure out how to do "Help" items -- TODO;prio-20
+* TextArea needs to be scrollable -- TODO;prio-20
+* Unify Constructors -- TODO;prio-20;cost-5;#unifyconstructors
 * Merge ContainerFocusManaging into FocusManaging -- TODO;prio-20
 * Create a simple wrapper around ConfirmBox that just returns ok or cancel -- TODO;prio-20
 * Create a simple wrapper around MessageBox that just returns -- TODO;prio-20

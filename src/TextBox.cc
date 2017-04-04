@@ -36,7 +36,7 @@ namespace nv {
         addString(text_.substr(startX_), 0, 0);
         LOGMETHOD("text is %s", text_.c_str());
 
-        for ( int i = std::min(rect_.getWidth(), (int)text_.length() - startX_); i < rect_.getWidth(); ++i )
+        for ( int i = std::min((unsigned long)rect_.getWidth(), text_.length() - startX_); i < rect_.getWidth(); ++i )
             addCh(fillChar, i, 0);
 
         int cur = (getCursorPos() > rect_.getWidth() - 1) ? (rect_.getWidth() - 1) : getCursorPos();
@@ -170,7 +170,7 @@ namespace nv {
         if (cursorX_ == text_.size())
             return false;
         ++cursorX_;
-        if ( cursorX_ > rect_.getWidth() )
+        if ( cursorX_ > (unsigned long)rect_.getWidth() )
             ++startX_;
         return true;
     }
@@ -185,11 +185,11 @@ namespace nv {
     }
 
     bool TextBox::cursorTo(int x) {
-        if ( x > text_.size() )
+        if ( (unsigned long)x > text_.size() )
             return false;
         cursorX_ = x;
-        if ( cursorX_ > rect_.getWidth() )
-            startX_ = cursorX_ - rect_.getWidth();
+        if ( cursorX_ > (unsigned long)rect_.getWidth() )
+            startX_ = cursorX_ - (unsigned long)rect_.getWidth();
         return true;
     }
 

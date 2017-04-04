@@ -12,9 +12,9 @@ HAVEDEFINES=""
 . ./config-defines.sh
 
 if [ "$HAVE_DEBUG_SYMBOLS" == "yes" ]; then 
-    CFLAGS="-g -Wall -std=c++14"
+    CFLAGS="-g -Wall -Wextra -std=c++14"
 else
-    CFLAGS="-Wall -std=c++14"
+    CFLAGS="-Wall -Wextra -std=c++14"
 fi
 
 

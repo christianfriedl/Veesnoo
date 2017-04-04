@@ -15,7 +15,7 @@ STATIC_LIBS=-lnvwm
 LIBOBJS=../libnvwm.a
 
 BINARIES="testOneWidget testWidget testLabel "
-BINARIES="$BINARIES testButton testTextBox testCheckBox "
+BINARIES="$BINARIES testButton testTextBox testTextArea testCheckBox "
 BINARIES="$BINARIES testHorizontalMenu testVerticalMenu testContainer"
 BINARIES="$BINARIES testWindow testPopupMenu "
 BINARIES="$BINARIES testScreen "
@@ -27,7 +27,7 @@ BINARIES="$BINARIES testRadioButton "
 BINARIES="$BINARIES testSelectBox "
 
 TESTOBJECTS="testOneWidget.o testWidget.o testLabel.o "
-TESTOBJECTS="$TESTOBJECTS testButton.o testTextBox.o testCheckBox.o "
+TESTOBJECTS="$TESTOBJECTS testButton.o testTextBox.o testTextArea.o testCheckBox.o "
 TESTOBJECTS="$TESTOBJECTS testHortestConfirmBox.o testVerticalMenu.o testContainer.o"
 TESTOBJECTS="$TESTOBJECTS testWindow.o testPopupMenu.o "
 TESTOBJECTS="$TESTOBJECTS testScreen.o "

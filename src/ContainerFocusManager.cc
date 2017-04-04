@@ -96,7 +96,7 @@ void ContainerFocusManager::focusNext() {
         
     if (focusableSubWidgets.size() != 0) {
         std::shared_ptr<Focusable> res;
-        int i=0;
+        unsigned long i=0;
 
         for (auto widget : focusableSubWidgets) {
             if (widget.get() == focusedWidget_.get()) {

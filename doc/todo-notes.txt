@@ -1,3 +1,5 @@
+- #unifyconstructors
+    - currently, they're all over the place - we should always use Rect or Point or Vector or something...
 - id-0002 wnoutrefresh(), doupdate()
     - by #define? NV_STANDALONE_WIDGETS
     - widgets always only do wnoutrefresh() ? and whomever is responsible for the "App" shall have the hard work of doing doupdate()?

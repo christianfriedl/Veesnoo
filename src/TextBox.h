@@ -34,8 +34,8 @@ private:
     char fillCharForMode(Mode mode);
     std::string text_;
     Mode mode_;
-    int cursorX_;
-    int startX_;
+    unsigned long cursorX_;
+    unsigned long startX_;
 
 };
 

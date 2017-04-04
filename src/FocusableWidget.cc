@@ -5,6 +5,7 @@
 
 namespace nv {
 
+#pragma clang diagnostic ignored "-Wunused-parameter"
 bool FocusableWidget::receiveKey(int ch) {
     return false;
 }
