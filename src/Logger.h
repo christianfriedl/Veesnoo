@@ -5,6 +5,7 @@
 #include<memory>
 #include<stdio.h>
 
+#define LOGMETHODONLY() Logger::get().log("(%s:%i) %s [@%llx] ()", __FILE__, __LINE__, __PRETTY_FUNCTION__, this)
 #define LOGMETHOD(format, args...) Logger::get().log("(%s:%i) %s [@%llx] (" format ")", __FILE__, __LINE__, __PRETTY_FUNCTION__, this, args)
 #define LOG(format, args...) Logger::get().log(format, args) 
 

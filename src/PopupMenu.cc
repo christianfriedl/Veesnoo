@@ -45,11 +45,7 @@ namespace nv {
 
     void 
     PopupMenu::layout() {
-        /*
-        auto vm =  std::dynamic_pointer_cast<Container> (subWidgets_[0]);
-        Logger::get().log("PopupMenu::layout() end has vm %llx, vm subWidgets length %i", vm.get(), vm->getSubWidgetsSize());
-        */
-        Logger::get().log("PopupMenu::layout()");
+        LOGMETHODONLY();
         resize(menu_->getRect().getWidth() + 2, menu_->getRect().getHeight() + 2);
     }
 
