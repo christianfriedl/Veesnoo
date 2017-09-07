@@ -50,7 +50,7 @@ namespace nv {
     }
 
     void PopupMenu::refresh() { 
-        Logger::get().log("PopupMenu(%lld)::refresh()", this);
+        LOGMETHODONLY();
         Logger::get().log("PopupMenu(%lld)::refresh() isVisible_ = %i", this, isVisible_);
         if ( !getIsVisibleBubbling() )
             return;

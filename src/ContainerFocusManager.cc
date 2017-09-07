@@ -155,15 +155,19 @@ bool ContainerFocusManager::isFocused() const {
     return isFocused_;
 }
 
-void ContainerFocusManager::subWidgetHasFocused(std::shared_ptr<Focusable> widget) {
-    std::shared_ptr<Widget> w = widget_->getParent().lock();
-    if ( w ) {
-        auto w2 = std::dynamic_pointer_cast<FocusableContainer>(w);
-        if ( !w2 )
-            throw Exception("could not cast parent to FocusableContainer");
-        w2->subWidgetHasFocused(widget);
-    } else
-        focusedWidget_ = widget;
+void ContainerFocusManager::requestFocus(std::shared_ptr<Focusable> widget) {
+    if ( widget_->getParent().use_count() > 0 ) {
+        std::shared_ptr<Widget> p = widget_->getParent().lock();
+        if ( p ) {
+            auto fcp = std::dynamic_pointer_cast<FocusableContainer>(p);
+            if ( !fcp )
+                throw Exception("could not cast parent to FocusableContainer");
+            fcp->requestFocus(widget);
+            return;
+        } else
+            throw Exception("could not obtain parent lock");
+    } 
+    focusedWidget_ = widget;
 }
 
 }

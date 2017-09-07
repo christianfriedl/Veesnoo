@@ -20,8 +20,9 @@ namespace nv {
     }
 
     void 
-    FocusableContainer::subWidgetHasFocused(std::shared_ptr<Focusable>& widget) {
-        focusManager_->subWidgetHasFocused(widget);
+    FocusableContainer::requestFocus(std::shared_ptr<Focusable>& widget) {
+        LOGMETHOD("%llx", widget.get());
+        focusManager_->requestFocus(widget);
     }
 
     void
@@ -42,8 +43,11 @@ namespace nv {
     }
 
     const std::shared_ptr<FocusableContainer> FocusableContainer::findRootFocusable() {
-        if ( parent_.use_count() == 0 )
-            return std::dynamic_pointer_cast<FocusableContainer>(shared_from_this());
+        if ( parent_.use_count() == 0 ) {
+            auto justForLogging = std::dynamic_pointer_cast<FocusableContainer>(shared_from_this());
+            LOG("returning %llx", justForLogging.get());
+            return justForLogging;
+        }
         auto p = parent_.lock();
         if ( !p ) throw Exception("cannot lock parent_");
         auto pp = std::dynamic_pointer_cast<FocusableContainer>(p);

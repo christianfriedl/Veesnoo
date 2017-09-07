@@ -25,8 +25,8 @@ public:
     void focusNext();
     void focusPrev();
     bool isFocused() const;
-    void focusThis(std::shared_ptr<Focusable>& widget);
-    void subWidgetHasFocused(std::shared_ptr<Focusable> widget);
+    void focusThis(std::shared_ptr<Focusable>& widget); // focus this direct subwidget of ours
+    void requestFocus(std::shared_ptr<Focusable> widget); // subwidget, or sub-subwidget, wants the focus
     std::shared_ptr<Focusable> getFocusedWidget();
 
 private:

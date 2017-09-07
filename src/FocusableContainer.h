@@ -27,7 +27,7 @@ namespace nv {
             void focusThis(std::shared_ptr<Focusable>& widget) { focusManager_->focusThis(widget); }
             std::shared_ptr<Focusable> getFocusedWidget() { return focusManager_->getFocusedWidget(); }
 
-            void subWidgetHasFocused(std::shared_ptr<Focusable>& widget);
+            void requestFocus(std::shared_ptr<Focusable>& widget);
             const std::shared_ptr<FocusableContainer> findRootFocusable();
 
         protected:
