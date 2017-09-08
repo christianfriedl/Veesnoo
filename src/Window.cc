@@ -11,7 +11,7 @@ namespace nv {
     }
 
     void Window::refresh() {
-        Logger::get().log("Window(%lld)::refresh(), isVisible_=%i", this, isVisible_);
+        Logger::get().log("Window(%llx)::refresh(), isVisible_=%i", this, isVisible_);
         if ( !getIsVisibleBubbling() )
             return;
         setCWPosition(); // not necessary until we have a working move(), but what the bloody heck

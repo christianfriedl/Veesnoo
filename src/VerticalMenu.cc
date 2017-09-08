@@ -33,7 +33,7 @@ namespace nv {
     }
 
     void VerticalMenu::refresh() { 
-        Logger::get().log("VerticalMenu(%lld)::refresh()", this);
+        Logger::get().log("VerticalMenu(%llx)::refresh()", this);
         if ( !getIsVisibleBubbling() )
             return;
         FocusableContainer::refresh(); 

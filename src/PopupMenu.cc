@@ -20,8 +20,7 @@ namespace nv {
         menu_ = menu;
     }
 
-    void 
-    PopupMenu::addWidget(const std::shared_ptr<Widget>& widget) {
+    void PopupMenu::addWidget(const std::shared_ptr<Widget>& widget) {
         Logger::get().log("PopupMenu(%llx)::addWidget(%llx)", this, widget.get());
         Window::addWidget(widget);
         layout();
@@ -51,7 +50,7 @@ namespace nv {
 
     void PopupMenu::refresh() { 
         LOGMETHODONLY();
-        Logger::get().log("PopupMenu(%lld)::refresh() isVisible_ = %i", this, isVisible_);
+        Logger::get().log("PopupMenu(%llx)::refresh() isVisible_ = %i", this, isVisible_);
         if ( !getIsVisibleBubbling() )
             return;
         Window::refresh(); 

@@ -16,7 +16,7 @@ namespace nv {
     }
 
     void CheckBox::refresh() {
-        Logger::get().log("CheckBox(%lld)::refresh()", this);
+        Logger::get().log("CheckBox(%llx)::refresh()", this);
         if ( !getIsVisibleBubbling() )
             return;
         if ( isFocused() )

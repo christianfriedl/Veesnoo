@@ -4,7 +4,7 @@
 namespace nv {
     std::shared_ptr<Screen> Screen::create() {
         auto sc = std::make_shared<Screen>();
-        Logger::get().log("Screen::create() -> %lld", sc.get());
+        Logger::get().log("Screen::create() -> %llx", sc.get());
         return sc;
     }
 

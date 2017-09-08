@@ -61,7 +61,7 @@ const std::string Widget::toString() const {
 
 void 
 Widget::resize(const int width, const int height) {
-    Logger::get().log("Widget(%lld)::resize(%i, %i)", this, width, height);
+    Logger::get().log("Widget(%llx)::resize(%i, %i)", this, width, height);
     rect_.resize(width, height);
     contentRect_.resize(width, height);
     cursesWindow_->resize(width, height);

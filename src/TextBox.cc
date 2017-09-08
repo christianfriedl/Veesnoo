@@ -24,7 +24,7 @@ namespace nv {
 
     void
     TextBox::refresh() {
-        Logger::get().log("TextBox(%lld)::refresh()", this);
+        Logger::get().log("TextBox(%llx)::refresh()", this);
         if ( !getIsVisibleBubbling() )
             return;
         char fillChar = fillCharForMode(mode_);

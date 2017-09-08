@@ -10,12 +10,11 @@ namespace nv {
         return previouslyFocusedWidget_;
     }
 
-
     bool PopupWindow::open() {
         Logger::get().log("PopupWindow(%llx)::open()", this);
         auto root = findRootFocusable();
         previouslyFocusedWidget_ = root->getFocusedWidget();
-        Logger::get().log("PopupWindow(%llx)::open(), previouslyFocusedWidget_ = %lld", previouslyFocusedWidget_.get());
+        Logger::get().log("PopupWindow(%llx)::open(), previouslyFocusedWidget_ = %llx", previouslyFocusedWidget_.get());
         show();
         focus();
         refresh();
@@ -34,7 +33,7 @@ namespace nv {
             return false;
         }
 
-        Logger::get().log("PopupWindow(%llx)::close(): previouslyFocusedWidget_ = %lld", this, previouslyFocusedWidget_.get());
+        Logger::get().log("PopupWindow(%llx)::close(): previouslyFocusedWidget_ = %llx", this, previouslyFocusedWidget_.get());
 
         blur();
         previouslyFocusedWidget_->focus();

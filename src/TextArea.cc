@@ -24,7 +24,7 @@ namespace nv {
 
     void
     TextArea::refresh() {
-        Logger::get().log("TextArea(%lld)::refresh()", this);
+        Logger::get().log("TextArea(%llx)::refresh()", this);
         if ( !getIsVisibleBubbling() )
             return;
         char fillChar = fillCharForMode(mode_);

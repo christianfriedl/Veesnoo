@@ -16,7 +16,7 @@ namespace nv {
     }
 
     void RadioButton::refresh() {
-        Logger::get().log("RadioButton(%lld)::refresh()", this);
+        Logger::get().log("RadioButton(%llx)::refresh()", this);
         if ( !getIsVisibleBubbling() )
             return;
         if ( isFocused() )

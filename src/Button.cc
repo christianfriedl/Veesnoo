@@ -12,7 +12,7 @@ namespace nv {
     }
 
     void Button::refresh() {
-        Logger::get().log("Button(%lld)::refresh()", this);
+        Logger::get().log("Button(%llx)::refresh()", this);
         if ( !getIsVisibleBubbling() )
             return;
         if ( isFocused() || state_ == ButtonState_pushed)

@@ -7,7 +7,7 @@ namespace nv {
         resize(text_.length(), 1);
     }
     void Label::refresh() {
-        Logger::get().log("Label(%lld)::refresh()", this);
+        Logger::get().log("Label(%llx)::refresh()", this);
         if ( !getIsVisibleBubbling() )
             return;
         addString(text_, 0, 0);

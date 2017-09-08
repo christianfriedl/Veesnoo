@@ -27,7 +27,7 @@ namespace nv {
 
     void
     FocusableContainer::refresh() {
-        Logger::get().log("FocusableContainer(%lld)::refresh()", this);
+        Logger::get().log("FocusableContainer(%llx)::refresh()", this);
         if ( !getIsVisibleBubbling() )
             return;
         Container::refresh();

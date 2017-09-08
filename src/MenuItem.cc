@@ -14,7 +14,7 @@ MenuItem::MenuItem(const std::string& text) : FocusableWidget(Rect(0, 0, text.si
 }
 
 void MenuItem::refresh() {
-    Logger::get().log("MenuItem(%lld)::refresh(), text: '%s', %s, isFocused=%i", this, text_.c_str(), toString().c_str(), isFocused());
+    Logger::get().log("MenuItem(%llx)::refresh(), text: '%s', %s, isFocused=%i", this, text_.c_str(), toString().c_str(), isFocused());
     if ( !getIsVisibleBubbling() )
         return;
 
@@ -42,7 +42,7 @@ bool MenuItem::push() {
 }
 
 bool MenuItem::receiveKey(int ch) {
-    Logger::get().log("MenuItem(%llx)::receiveKey(%i)", this, ch);
+    LOGMETHOD(ch);
     if (ch == Key_Enter || ch == ' ') {
         return push();
     } else
