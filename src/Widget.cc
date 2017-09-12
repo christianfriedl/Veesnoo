@@ -11,7 +11,7 @@
 
 namespace nv {
 
-Widget::Widget(): rect_(0, 0, 1, 1), contentRect_(0, 0, 1, 1), isVisible_(true), parent_(std::weak_ptr<Widget>()) {}
+Widget::Widget(): rect_(0, 0, 1, 1), contentRect_(0, 0, 1, 1), isVisible_(true), parent_(std::weak_ptr<Widget>()) { LOGMETHODONLY(); }
 
 std::shared_ptr<Widget> 
 Widget::create(const Rect& rect) {
@@ -20,7 +20,7 @@ Widget::create(const Rect& rect) {
 
 // constructor: set parent_ to "null", size from rect and make visible by default
 Widget::Widget(const Rect& rect): rect_(rect), contentRect_(0, 0, rect.getWidth(), rect.getHeight()), isVisible_(true), parent_(std::weak_ptr<Widget>()) {
-    Logger::get().log("new Widget %s", toString().c_str());
+    LOGMETHOD("new Widget %s", toString().c_str());
 
     cursesWindow_ = std::make_unique<CursesWindow>(this->getAbsoluteRect());
 }
@@ -162,6 +162,7 @@ Widget::setCWSize() {
 
 void 
 Widget::refresh() {
+    LOGMETHODONLY();
     Logger::get().log("Widget(%llx)::refresh(), isVisible_=%i", this, isVisible_);
     if ( !getIsVisibleBubbling() )
         return;

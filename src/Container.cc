@@ -24,6 +24,7 @@ namespace nv {
 
 
     void Container::refresh() {
+        LOGMETHODONLY();
         Logger::get().log("Container(%llx)::refresh()  will refresh itself (%s), isVisible=%i", this, toString().c_str(), isVisible_ );
         Logger::get().log("Container(%llx)::refresh() has subWidgets length %i, isVisible_ = %i", this, subWidgets_.size(), isVisible_);
         if ( !getIsVisibleBubbling() )

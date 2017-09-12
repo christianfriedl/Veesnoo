@@ -7,11 +7,12 @@ namespace nv {
 
 #pragma clang diagnostic ignored "-Wunused-parameter"
 bool FocusableWidget::receiveKey(int ch) {
+    LOGMETHOD("%i", ch);
     return false;
 }
 
 void FocusableWidget::focus() {
-    Logger::get().log("FocusableWidget::focus() on %s", toString().c_str());
+    LOGMETHOD("%s", toString().c_str());
     isFocused_ = true;
     auto p = parent_.lock();
     if ( p ) {
@@ -21,12 +22,13 @@ void FocusableWidget::focus() {
         std::shared_ptr<Focusable> fthis = std::dynamic_pointer_cast<Focusable>(shared_from_this());
         if ( !fthis )
             throw Exception("cannot cast this to Focusable");
+        LOGMETHOD("will request focus for %llx from %llx", fthis.get(), fcp.get());
         fcp->requestFocus(fthis); // TODO probably should return bool?
     }
 }
 
 void FocusableWidget::blur() {
-    Logger::get().log("FocusableWidget::blur() on %s", toString().c_str());
+    LOGMETHOD("%s", toString().c_str());
     isFocused_ = false;
 }
 

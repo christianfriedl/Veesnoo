@@ -24,7 +24,7 @@ namespace nv {
 
     void
     TextBox::refresh() {
-        Logger::get().log("TextBox(%llx)::refresh()", this);
+        LOGMETHODONLY();
         if ( !getIsVisibleBubbling() )
             return;
         char fillChar = fillCharForMode(mode_);
@@ -48,7 +48,7 @@ namespace nv {
 
     bool
     TextBox::receiveKey(const int ch) {
-        LOGMETHOD(, "'%c' (%i) '%s', isprint: %i, iswprint: %i, mode: %i", ch, ch, keyname(ch), isprint(ch), iswprint(ch), mode_); // should not leak...
+        LOGMETHOD("'%c' (%i) '%s', isprint: %i, iswprint: %i, mode: %i", ch, ch, keyname(ch), isprint(ch), iswprint(ch), mode_); // should not leak...
         bool received = false;
         if ( mode_ == Mode_normal ) { // normal mode
             switch ( ch ) {

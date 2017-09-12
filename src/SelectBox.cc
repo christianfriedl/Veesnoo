@@ -7,7 +7,7 @@
 namespace nv {
 
     SelectBox::SelectBox(const int x, const int y): FocusableContainer(Rect(x, y, 5, 1)), menu_(PopupMenu::create(x, y + 1)), selectedItem_() { 
-        Logger::get().log("new SelectBox %s", toString().c_str());
+        LOGMETHOD("new SelectBox %s", toString().c_str());
         menu_->hide();
     }
 
@@ -27,7 +27,7 @@ namespace nv {
     }
 
     void SelectBox::refresh() { // TODO what do we output if we don't have anything...
-        Logger::get().log("SelectBox(%llx)::refresh()", this);
+        LOGMETHODONLY();
         if ( !getIsVisibleBubbling() )
             return;
         addCh('\\', 0, 0);
@@ -55,6 +55,7 @@ namespace nv {
         Logger::get().log("SelectBox::miPushed(ev) has target %llx", tgt.get());
         selectedItem_ = tgt;
         menu_->close();
+        blur();
     }
 
     /**
@@ -100,7 +101,7 @@ namespace nv {
     }
 
     bool SelectBox::receiveKey(int ch) {
-        LOGMETHOD("'%i'", ch);
+        LOGMETHOD("%i, isFocused = %i", ch, isFocused());
         if ( ch == Key_Enter || ch == ' ' ) { // TODO and not open??
             menu_->open();
             return true;

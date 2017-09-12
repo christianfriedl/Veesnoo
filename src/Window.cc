@@ -11,6 +11,7 @@ namespace nv {
     }
 
     void Window::refresh() {
+        LOGMETHODONLY();
         Logger::get().log("Window(%llx)::refresh(), isVisible_=%i", this, isVisible_);
         if ( !getIsVisibleBubbling() )
             return;

@@ -4,7 +4,9 @@
 
 namespace nv {
 
-    VerticalMenu::VerticalMenu(const int x, const int y): FocusableContainer(Rect(x, y, 1, 1)) { } 
+    VerticalMenu::VerticalMenu(const int x, const int y): FocusableContainer(Rect(x, y, 1, 1)) { 
+        LOGMETHODONLY();
+    }
 
     const std::shared_ptr<VerticalMenu>
     VerticalMenu::create(const int x, const int y) {
@@ -33,7 +35,7 @@ namespace nv {
     }
 
     void VerticalMenu::refresh() { 
-        Logger::get().log("VerticalMenu(%llx)::refresh()", this);
+        LOGMETHODONLY();
         if ( !getIsVisibleBubbling() )
             return;
         FocusableContainer::refresh(); 

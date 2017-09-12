@@ -17,18 +17,23 @@ namespace nv {
             virtual bool receiveKey(int ch) override;
             virtual void refresh() override;
 
-            virtual bool isFocused() const override { return focusManager_->isFocused(); }
-            virtual void focus() override { focusManager_->focus(); }
-            virtual void blur() override { focusManager_->blur(); }
-
-            void focusFirst() { focusManager_->focusFirst(); }
-            void focusNext() { focusManager_->focusNext(); }
-            void focusPrev() { focusManager_->focusPrev(); }
-            void focusThis(std::shared_ptr<Focusable>& widget) { focusManager_->focusThis(widget); }
-            std::shared_ptr<Focusable> getFocusedWidget() { return focusManager_->getFocusedWidget(); }
-
+            /**
+             * somebody requests the focus for the given widget from us
+             */
             void requestFocus(std::shared_ptr<Focusable>& widget);
             const std::shared_ptr<FocusableContainer> findRootFocusable();
+
+            // delegates to the focusManager_
+
+            virtual bool isFocused() const override;
+            virtual void focus() override;
+            virtual void blur() override;
+
+            void focusFirst();
+            void focusNext();
+            void focusPrev();
+            void focusThis(std::shared_ptr<Focusable>& widget);
+            std::shared_ptr<Focusable> getFocusedWidget();
 
         protected:
             ContainerFocusManager *focusManager_;

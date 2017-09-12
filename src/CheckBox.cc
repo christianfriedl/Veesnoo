@@ -9,6 +9,7 @@
 namespace nv {
 
     CheckBox::CheckBox(int x, int y): FocusableWidget(Rect(x, y, 3, 1)), state_(CheckboxState_unchecked), frame_("[]") {
+        LOGMETHODONLY();
     }
 
     void CheckBox::setFrame(const std::string& frame) {
@@ -16,7 +17,7 @@ namespace nv {
     }
 
     void CheckBox::refresh() {
-        Logger::get().log("CheckBox(%llx)::refresh()", this);
+        LOGMETHODONLY();
         if ( !getIsVisibleBubbling() )
             return;
         if ( isFocused() )
@@ -42,6 +43,7 @@ namespace nv {
     }
 
     bool CheckBox::receiveKey(int ch) {
+        LOGMETHOD("%i, isFocused: %i", ch, isFocused());
         if (ch == ' ' || ch == 13) {
             return push();
         }

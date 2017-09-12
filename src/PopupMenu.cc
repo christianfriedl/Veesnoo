@@ -5,7 +5,7 @@
 namespace nv {
 
     PopupMenu::PopupMenu(const int x, const int y) : PopupWindow(Rect(x, y, 1, 1)), menu_(std::make_shared<VerticalMenu>(0, 0)) {
-		Logger::get().log("new PopupMenu %s", toString().c_str());
+		LOGMETHOD("new PopupMenu %s", toString().c_str());
     }
 
     std::shared_ptr<PopupMenu> PopupMenu::create(const int x, const int y) {

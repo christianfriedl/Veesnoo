@@ -18,6 +18,8 @@ namespace nv {
             virtual bool open() override;
             virtual bool close() override;
             virtual const std::shared_ptr<Focusable>& getPreviouslyFocusedWidget() const override;
+            virtual void refresh() override { LOGMETHODONLY(); Window::refresh(); } // just for debug
+            virtual bool receiveKey(int ch) override { LOGMETHOD("%i", ch); return Window::receiveKey(ch); } // just for debug
         private:
             std::shared_ptr<Focusable> previouslyFocusedWidget_;
     };

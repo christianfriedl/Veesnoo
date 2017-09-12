@@ -22,6 +22,10 @@ namespace nv {
             sigc::signal<void, const std::shared_ptr<BasicEvent>&> onOkPushed;
             sigc::signal<void, const std::shared_ptr<BasicEvent>&> onCancelPushed;
 
+            virtual void refresh() override { LOGMETHODONLY(); PopupWindow::refresh(); } // just for debug
+            virtual bool receiveKey(int ch) override { LOGMETHOD("%i", ch); return PopupWindow::receiveKey(ch); } // just for debug
+
+
         private:
             void okPushed(const std::shared_ptr<BasicEvent>& ev);
             void cancelPushed(const std::shared_ptr<BasicEvent>& ev);

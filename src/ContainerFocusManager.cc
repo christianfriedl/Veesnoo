@@ -8,6 +8,7 @@ namespace nv {
 
 ContainerFocusManager::ContainerFocusManager(FocusableContainer *widget) : 
         widget_(widget), focusedWidget_(nullptr), isFocused_(false) {
+            LOGMETHOD("widget = %llx", widget);
 }
 
 std::shared_ptr<Focusable> 
@@ -17,50 +18,69 @@ ContainerFocusManager::getFocusedWidget() {
 
 
 bool ContainerFocusManager::bubbleReceiveKey(int ch, std::shared_ptr<Widget> w) {
+    LOGMETHOD("%i", ch);
     auto f = std::dynamic_pointer_cast<Focusable> (w);
+
     if ( !f ) throw Exception("w is not focusable");
-    if ( f.get() == dynamic_cast<Focusable*>(widget_) )
+
+    Logger::get().log("ContainerFocusManager(%llx)::bubbleReceiveKey: we are before the if", this);
+    if ( f.get() == dynamic_cast<Focusable*>(widget_) ) { // the widget we are requested to bubble to is our own widget
+        Logger::get().log("ContainerFocusManager(%llx)::bubbleReceiveKey will return false", this);
+        LOGMETHOD("will return false", "");
         return false;
-    else if ( f->receiveKey(ch) )
+    } else if ( f->receiveKey(ch) ) {
+        Logger::get().log("ContainerFocusManager(%llx)::bubbleReceiveKey will return true", this);
+        LOGMETHOD("will return true", "");
         return true;
-    else {
+    } else {
         auto ff = w->getParent().lock();
+        Logger::get().log("ContainerFocusManager(%llx)::bubbleReceiveKey no parent found, will return false", this);
+        LOGMETHOD("no parent found, will return false", "");
         if ( !ff )
             return false;
+        LOGMETHOD("will bubbleReceiveKey(%i, %llx)", ch, ff.get());
         return bubbleReceiveKey(ch, ff);
     }
+    Logger::get().log("ContainerFocusManager(%llx)::bubbleReceiveKey: we are after the if", this);
 }
 
 bool ContainerFocusManager::receiveKey(int ch) {
-    auto fw = focusedWidget_;
+    LOGMETHOD("%i", ch);
+    auto fw = focusedWidget_; // we already have a focusedWidget_, therefore we need to try bubbling the event
     if ( fw )  {
+        LOGMETHOD("will bubbleReceiveKey(%i, %llx)", ch, fw.get());
         if ( bubbleReceiveKey(ch, std::dynamic_pointer_cast<Widget>(fw)) )
             return true;
     } else {
+        LOGMETHOD("will focusFirst()", "");
         focusFirst();
         return true;
     }
         
     if (ch == ' ' || ch == '\t' || ch == KEY_STAB || ch == KEY_DOWN || ch == KEY_RIGHT || ch == 'j' || ch == 'l') {
+        LOGMETHOD("will focusNext()", "");
         focusNext();
         return true;
     }
     else if (ch == KEY_BACKSPACE || ch == KEY_BTAB || ch == KEY_UP || ch == KEY_LEFT || ch == 'k' || ch == 'h') {
+        LOGMETHOD("will focusPrev()", "");
         focusPrev();
         return true;
     }
-    else
+    else {
+        LOGMETHOD("will return false", "");
         return false;
+    }
 }
 
 void ContainerFocusManager::focus() {
-    Logger::get().log("ContainerFocusManager @ %llx is focused, will focusFirst() on subwids length %i, fsw le %i", this, getSubWidgets().size(), getFocusableSubWidgets().size()),
+    LOGMETHODONLY();
     isFocused_ = true;
     focusFirst();
 }
 
 void ContainerFocusManager::blur() {
-    // [app setFocusedWidget: nil];
+    LOGMETHODONLY();
     isFocused_ = false;
 }
 std::vector<std::shared_ptr<Widget>> 
@@ -85,13 +105,17 @@ std::vector<std::shared_ptr<Focusable>> ContainerFocusManager::getFocusableSubWi
 }
 
 void ContainerFocusManager::focusFirst() {
+    LOGMETHODONLY();
     auto focusableSubWidgets = getFocusableSubWidgets();
 
-    if ( focusableSubWidgets.size() != 0 )
+    if ( focusableSubWidgets.size() != 0 ) {
+        LOGMETHOD("will focus %llx", focusableSubWidgets.front().get());
         focusThis(focusableSubWidgets.front());
+    }
 }
 
 void ContainerFocusManager::focusNext() {
+    LOGMETHODONLY();
     auto focusableSubWidgets = getFocusableSubWidgets();
         
     if (focusableSubWidgets.size() != 0) {
@@ -108,8 +132,12 @@ void ContainerFocusManager::focusNext() {
             } 
             ++i;
         }
-        if (res)
+        if (res) {
+            LOGMETHOD("coming from %llx, i have next focusable=%llx", focusedWidget_.get(), res.get());
             focusThis(res);
+        } else {
+            LOGMETHOD("coming from %llx, i have no next focusable", focusedWidget_.get());
+        }
     }
 }
 
@@ -130,13 +158,15 @@ void ContainerFocusManager::focusPrev() {
             } 
             --i;
         }
-        if ( res )
+        if ( res ) {
+            LOGMETHOD("will focus %llx", res.get());
             focusThis(res);
+        }
     }
 }
 
 void ContainerFocusManager::focusThis(std::shared_ptr<Focusable>& widget) {
-    // Logger::get().log("ContainerFocusManager will focus widget: %s", widget->toString().c_str());
+    LOGMETHOD("will focus %llx", widget.get());
     auto focusableSubWidgets = getFocusableSubWidgets();
 
     focusedWidget_ = widget;
@@ -152,17 +182,22 @@ void ContainerFocusManager::focusThis(std::shared_ptr<Focusable>& widget) {
 }
 
 bool ContainerFocusManager::isFocused() const {
+    LOGMETHOD("%i", isFocused_);
     return isFocused_;
 }
 
+/**
+ * we are being requested to focus the widget
+ */
 void ContainerFocusManager::requestFocus(std::shared_ptr<Focusable> widget) {
+    LOGMETHOD("will request focus for widget %llx", widget.get());
     if ( widget_->getParent().use_count() > 0 ) {
         std::shared_ptr<Widget> p = widget_->getParent().lock();
         if ( p ) {
-            auto fcp = std::dynamic_pointer_cast<FocusableContainer>(p);
+            auto fcp = std::dynamic_pointer_cast<FocusableContainer>(p); // widget's parent as focusable container
             if ( !fcp )
                 throw Exception("could not cast parent to FocusableContainer");
-            fcp->requestFocus(widget);
+            fcp->requestFocus(widget); // ask widget's parent to request focus on this widget
             return;
         } else
             throw Exception("could not obtain parent lock");

@@ -16,7 +16,7 @@ namespace nv {
     }
 
     void RadioButton::refresh() {
-        Logger::get().log("RadioButton(%llx)::refresh()", this);
+        LOGMETHODONLY();
         if ( !getIsVisibleBubbling() )
             return;
         if ( isFocused() )
@@ -42,6 +42,7 @@ namespace nv {
     }
 
     bool RadioButton::receiveKey(int ch) {
+        LOGMETHOD("%i", ch);
         if (ch == ' ' || ch == 13) {
             return push();
         }

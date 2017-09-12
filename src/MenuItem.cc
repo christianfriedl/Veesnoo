@@ -6,14 +6,15 @@
 namespace nv {
 
 MenuItem::MenuItem(const std::string& text, const int x, const int y) : FocusableWidget(Rect(x, y, text.size(), 1)), text_{text} {
-    Logger::get().log("MenuItem::MenuItem(%s, %i, %i)", text.c_str(), x, y);
+    LOGMETHOD("MenuItem::MenuItem(%s, %i, %i)", text.c_str(), x, y);
 }
 
 MenuItem::MenuItem(const std::string& text) : FocusableWidget(Rect(0, 0, text.size(), 1)), text_{text} {
-    Logger::get().log("MenuItem::MenuItem(%s)", text.c_str());
+    LOGMETHOD("MenuItem::MenuItem(%s)", text.c_str());
 }
 
 void MenuItem::refresh() {
+    LOGMETHODONLY();
     Logger::get().log("MenuItem(%llx)::refresh(), text: '%s', %s, isFocused=%i", this, text_.c_str(), toString().c_str(), isFocused());
     if ( !getIsVisibleBubbling() )
         return;
@@ -42,7 +43,7 @@ bool MenuItem::push() {
 }
 
 bool MenuItem::receiveKey(int ch) {
-    LOGMETHOD(ch);
+    LOGMETHOD("%i", ch);
     if (ch == Key_Enter || ch == ' ') {
         return push();
     } else

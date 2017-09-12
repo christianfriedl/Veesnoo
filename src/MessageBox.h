@@ -15,6 +15,7 @@ namespace nv {
             const std::shared_ptr<Label> getLabel();
             void layout();
             virtual bool receiveKey(int ch) override;
+            virtual void refresh() override { LOGMETHODONLY(); Window::refresh(); } // just for debug
             sigc::signal<void, const std::shared_ptr<BasicEvent>&> onAfterClose;
 
         private:

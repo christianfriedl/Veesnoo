@@ -13,21 +13,20 @@ namespace nv {
         delete focusManager_; 
     }
 
-    bool 
-    FocusableContainer::receiveKey(int ch) { 
-        Logger::get().log("FocusableContainer(%llx)::receiveKey(%i)", this, ch);
+    bool FocusableContainer::receiveKey(int ch) { 
+        LOGMETHOD("%i, will delegate to focusManager_ %llx", ch, focusManager_);
         return focusManager_->receiveKey(ch); 
     }
 
     void 
     FocusableContainer::requestFocus(std::shared_ptr<Focusable>& widget) {
-        LOGMETHOD("%llx", widget.get());
+        LOGMETHOD("%llx, will delegate to focusManager_ %llx", widget.get(), focusManager_);
         focusManager_->requestFocus(widget);
     }
 
     void
     FocusableContainer::refresh() {
-        Logger::get().log("FocusableContainer(%llx)::refresh()", this);
+        LOGMETHODONLY();
         if ( !getIsVisibleBubbling() )
             return;
         Container::refresh();
@@ -37,7 +36,7 @@ namespace nv {
         auto focusedWidget = std::dynamic_pointer_cast<FocusableWidget>(focusedFocusable);
         if ( !focusedWidget )
             return;
-        Logger::get().log("FocusableContainer(%llx)::refresh() will refresh focusedWidget %llx", this, focusedWidget.get());
+        Logger::get().log("FocusableContainer(%llx)::refresh() will refresh focusedWidget %llx for last refresh", this, focusedWidget.get());
         if ( focusedWidget->getIsVisible() )
             focusedWidget->refresh();
     }
@@ -45,7 +44,7 @@ namespace nv {
     const std::shared_ptr<FocusableContainer> FocusableContainer::findRootFocusable() {
         if ( parent_.use_count() == 0 ) {
             auto justForLogging = std::dynamic_pointer_cast<FocusableContainer>(shared_from_this());
-            LOG("returning %llx", justForLogging.get());
+            LOGMETHOD("returning %llx", justForLogging.get());
             return justForLogging;
         }
         auto p = parent_.lock();
@@ -54,5 +53,16 @@ namespace nv {
         if ( !pp ) throw Exception("cannot transform parent_");
         return pp->findRootFocusable();
     }
+    
+    // delegates to the focusManager_
+    bool FocusableContainer::isFocused() const { return focusManager_->isFocused(); }
+    void FocusableContainer::focus() { focusManager_->focus(); }
+    void FocusableContainer::blur() { focusManager_->blur(); }
+
+    void FocusableContainer::focusFirst() { focusManager_->focusFirst(); }
+    void FocusableContainer::focusNext() { focusManager_->focusNext(); }
+    void FocusableContainer::focusPrev() { focusManager_->focusPrev(); }
+    void FocusableContainer::focusThis(std::shared_ptr<Focusable>& widget) { focusManager_->focusThis(widget); }
+    std::shared_ptr<Focusable> FocusableContainer::getFocusedWidget() { return focusManager_->getFocusedWidget(); }
 
 }

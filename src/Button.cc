@@ -12,7 +12,7 @@ namespace nv {
     }
 
     void Button::refresh() {
-        Logger::get().log("Button(%llx)::refresh()", this);
+        LOGMETHODONLY();
         if ( !getIsVisibleBubbling() )
             return;
         if ( isFocused() || state_ == ButtonState_pushed)
@@ -38,6 +38,7 @@ namespace nv {
     }
 
     bool Button::receiveKey(int ch) {
+        LOGMETHOD("%i", ch);
         if (ch == ' ' || ch == 13) {
             return push();
         }
