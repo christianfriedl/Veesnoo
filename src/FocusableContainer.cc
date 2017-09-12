@@ -56,7 +56,10 @@ namespace nv {
     
     // delegates to the focusManager_
     bool FocusableContainer::isFocused() const { return focusManager_->isFocused(); }
-    void FocusableContainer::focus() { focusManager_->focus(); }
+    void FocusableContainer::focus() { 
+        focusManager_->requestFocus(std::dynamic_pointer_cast<Focusable>(shared_from_this())); 
+        focusManager_->focus(); 
+    }
     void FocusableContainer::blur() { focusManager_->blur(); }
 
     void FocusableContainer::focusFirst() { focusManager_->focusFirst(); }

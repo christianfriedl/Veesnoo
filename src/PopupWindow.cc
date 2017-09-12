@@ -42,7 +42,7 @@ namespace nv {
 
         blur();
 
-        LOGMETHOD("calling focus() on previouslyFocusedWidget_ = %llx", previouslyFocusedWidget_.get());
+        LOGMETHOD("will call focus() on previouslyFocusedWidget_ = %llx", previouslyFocusedWidget_.get());
         previouslyFocusedWidget_->focus();
         return true;
     }

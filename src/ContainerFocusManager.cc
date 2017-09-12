@@ -82,7 +82,11 @@ void ContainerFocusManager::focus() {
 void ContainerFocusManager::blur() {
     LOGMETHODONLY();
     isFocused_ = false;
+    auto fsws = getFocusableSubWidgets();
+    for ( auto w: fsws )
+        w->blur();
 }
+
 std::vector<std::shared_ptr<Widget>> 
 ContainerFocusManager::getSubWidgets() {
     return widget_->getSubWidgets();
@@ -165,6 +169,9 @@ void ContainerFocusManager::focusPrev() {
     }
 }
 
+/**
+ * we are requested to focus this specific widget
+ */
 void ContainerFocusManager::focusThis(std::shared_ptr<Focusable>& widget) {
     LOGMETHOD("will focus %llx", widget.get());
     auto focusableSubWidgets = getFocusableSubWidgets();
@@ -187,7 +194,7 @@ bool ContainerFocusManager::isFocused() const {
 }
 
 /**
- * we are being requested to focus the widget
+ * we are being requested to focus the widget -- recursively
  */
 void ContainerFocusManager::requestFocus(std::shared_ptr<Focusable> widget) {
     LOGMETHOD("will request focus for widget %llx", widget.get());
@@ -197,12 +204,11 @@ void ContainerFocusManager::requestFocus(std::shared_ptr<Focusable> widget) {
             auto fcp = std::dynamic_pointer_cast<FocusableContainer>(p); // widget's parent as focusable container
             if ( !fcp )
                 throw Exception("could not cast parent to FocusableContainer");
-            fcp->requestFocus(widget); // ask widget's parent to request focus on this widget
+            fcp->requestFocus(widget); // ask widget_'s parent to request focus on widget
             return;
         } else
             throw Exception("could not obtain parent lock");
     } 
     focusedWidget_ = widget;
 }
-
 }

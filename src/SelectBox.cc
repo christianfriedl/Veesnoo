@@ -55,7 +55,6 @@ namespace nv {
         Logger::get().log("SelectBox::miPushed(ev) has target %llx", tgt.get());
         selectedItem_ = tgt;
         menu_->close();
-        blur();
     }
 
     /**

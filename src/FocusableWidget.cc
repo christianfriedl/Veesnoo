@@ -14,6 +14,7 @@ bool FocusableWidget::receiveKey(int ch) {
 void FocusableWidget::focus() {
     LOGMETHOD("%s", toString().c_str());
     isFocused_ = true;
+    // we do not have a separate FocusManager, therefore we need to ask our own parent for the focus
     auto p = parent_.lock();
     if ( p ) {
         auto fcp = std::dynamic_pointer_cast<FocusableContainer>(p);
