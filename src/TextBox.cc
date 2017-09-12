@@ -7,7 +7,7 @@
 namespace nv {
 
     TextBox::TextBox(const int x, const int y, const int width) : FocusableWidget(Rect(x, y, width, 1)),
-            mode_(Mode_normal), cursorX_(0), startX_(0) {}
+            mode_(TextBoxMode::normal), cursorX_(0), startX_(0) {}
 
     const std::string& TextBox::getText() { return text_; }
 
@@ -15,8 +15,8 @@ namespace nv {
         return cursorX_ - startX_;
     }
 
-    inline char TextBox::fillCharForMode(Mode mode) {
-        if ( mode == Mode_insert || mode == Mode_replace ) 
+    inline char TextBox::fillCharForMode(TextBoxMode mode) {
+        if ( mode == TextBoxMode::insert || mode == TextBoxMode::replace ) 
             return ' ';
         else
             return '.';
@@ -50,11 +50,11 @@ namespace nv {
     TextBox::receiveKey(const int ch) {
         LOGMETHOD("'%c' (%i) '%s', isprint: %i, iswprint: %i, mode: %i", ch, ch, keyname(ch), isprint(ch), iswprint(ch), mode_); // should not leak...
         bool received = false;
-        if ( mode_ == Mode_normal ) { // normal mode
+        if ( mode_ == TextBoxMode::normal ) { // normal mode
             switch ( ch ) {
                 case KEY_IL: // go to insert mode
                 case 'i':
-                    mode_ = Mode_insert;
+                    mode_ = TextBoxMode::insert;
                     received = true;
                     break;
                 case KEY_DL: // delete char under cursor
@@ -94,7 +94,7 @@ namespace nv {
                     }
                     break;
             }
-        } else if ( mode_ == Mode_insert ) {
+        } else if ( mode_ == TextBoxMode::insert ) {
             if ( isprint(ch) ) { // TODO this prolly won't work with full utf-8 support
                 if ( cursorX_ <= text_.size() ) {
                     text_.insert(cursorX_, 1, ch);
@@ -118,7 +118,7 @@ namespace nv {
                         break;
                     case Key_Esc:
                         {
-                            mode_ = Mode_normal;
+                            mode_ = TextBoxMode::normal;
                             auto ev(std::make_shared<ChangeEvent>(shared_from_this()));
                             onAfterChange.emit(ev);
                             received = true;
@@ -136,7 +136,7 @@ namespace nv {
                         break;
                 }
             }
-        } else if ( mode_ == Mode_replace ) { // TODO this is quite unfinished
+        } else if ( mode_ == TextBoxMode::replace ) { // TODO this is quite unfinished
             if ( iswprint(ch) ) {
                 if ( cursorX_ <= text_.size() ) {
                     char s[2];
@@ -156,7 +156,7 @@ namespace nv {
                         received = true;
                         break;
                     case Key_Esc:
-                        mode_ = Mode_normal;
+                        mode_ = TextBoxMode::normal;
                         received = true;
                         break;
                 }

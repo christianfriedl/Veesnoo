@@ -7,10 +7,10 @@
 
 namespace nv {
     
+enum class TextBoxMode { normal, insert, replace };
 
 class TextBox : public FocusableWidget {
 public:
-    typedef enum { Mode_normal, Mode_insert, Mode_replace } Mode;
 
     TextBox(const int x, const int y, const int width);
     virtual bool receiveKey(const int ch) override;
@@ -25,15 +25,15 @@ public:
     bool cursorToStart();
     bool cursorToEnd();
 
-    Mode getMode() { return mode_; }
-    void setMode(Mode mode) { mode_ = mode; }
+    TextBoxMode getMode() { return mode_; }
+    void setMode(TextBoxMode mode) { mode_ = mode; }
 
     sigc::signal<void, const std::shared_ptr<ChangeEvent>&> onAfterChange;
 
 private:
-    char fillCharForMode(Mode mode);
+    char fillCharForMode(TextBoxMode mode);
     std::string text_;
-    Mode mode_;
+    TextBoxMode mode_;
     unsigned long cursorX_;
     unsigned long startX_;
 

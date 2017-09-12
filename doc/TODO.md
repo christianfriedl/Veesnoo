@@ -1,38 +1,12 @@
-* Figure out additional necessary widgets - see gtk for inspiration ( https://developer.gnome.org/gtk3/stable/ch03.html ) -- TODO;ongoing;prio-0
-* TextBox: size should be obvious when not focused, v.1 -- DONE;prio-10
-* Window: seems to initially print all widgets twice... -- BUG;DONE;prio-10
-* Textbox: needs to look differently when in edit mode -- DONE;prio-10
-* rename all members to have trailing \_s. -- DONE
-* Correctly test for location of curses.h header file -- DONE;prio-10
-* Implement Horizontal Menu -- DONE;prio-10
-* Implement Vertical Menu -- DONE;prio-10
-* Implement Popup Menu -- DONE;prio-10
-* Correctly set the cursor -- BUG;DONE;prio-10
-* Implement MainLoop -- DONE;prio-10
-* Implement additional TextBox features, v.1 -- DONE;prio-10;see todo-notes.txt
-* Implement Message Box -- DONE;prio-10
-* Check all the header gaurds for errors -- DONE;prio-10
-* Rename TextBox::signal\_changed to onAfterChanged or similar -- DONE;prio-10
-* #inlcude system header files from only one location -- REJECTED;prio-10
-* Implement Confirm Box -- DONE;prio-10
-* We need to figure out what to do after FocusableContainer gets removed from parent -- DONE;prio-10
-* Implement Radio Button -- DONE;prio-10
-* Implement Select Box -- DONE;prio-10
-* rename deFocus() to blur() -- DONE;prio-10;#focusblur
-* BUG: Selectbox cannot be opened the 2nd time -- TODO;prio-10;cost-5;BUG
 * (continuous) consistently use LOG macro -- TODO;prio-20;cost-3;codestyle
 * BUG: MesageBox has no create(), so test does not compile -- TODO;prio-20;cost-2;BUG
-* Add override declarations whereever appropriate -- DONE;prio-20;cost-3;codestyle;#overridedecls
-* Move closing code of MessageBox into Widget::close() -- REJECTED;prio-10
-* Move closing code of ConfirmBox into Widget::close() -- REJECTED;prio-10
-
-* Unify Case: SelectBox vs. Checkbox --> CheckBox -- TODO;prio-30;cost-1;codestyle;#checkboxcase
 * Implement Radio Group -- TODO;prio-10
 * Implement Text area -- TODO;prio-10
 * Implement Tabbed Page -- TODO;prio-10
 * Implement Table -- TODO;prio-10
 * Implement a Point class and use it for overloaded move() -- TODO;prio-10
 * Implement a Point class and use it for overloaded resize() -- TODO;prio-10
+* getIsVisibleBubbling() should not be in concrete widgets
 * Create .so instead of .a, and use it in test/ -- TODO;prio-10
 * Widget::parent\_ needs to be a Container, not a Widget, so we don't have to cast every access -- TODO;prio-10 
 * All widgets need to react to move(); -- TODO;prio-10
@@ -58,7 +32,6 @@
 * Add scrolling containers -- TODO;prio-20
 * CursesManager: rename getInstance() to get() -- TODO;prio-20;cost-5
 * CursesManager: add public move cons -- TODO;prio-20;cost-8
-* Implement Focus management -- TODO;prio-20
 * Consistently use scoped enums -- TODO;prio-20
 * Consistently "=default" or "=delete" or create special functions -- TODO;prio-20
 * Use scr\_dump() to make the whole thing testable!! -- TODO;prio-30 (also need to use wborder to set borders that are always printable)
@@ -90,3 +63,31 @@
 * Add scriptability -- REFLECT;prio-60
 * in src/, redo test/NONEXISTANT will try to redo test/NONEXISTANT.cc, then test/NONEXISTANT.cc.o, then test/NONEXISTANT.cc.o.cc, and so on -- BUG;TODO;prio-60
 * Consider if we want a status line (StatusLine widget)? -- TODO;prio-40
+* Figure out additional necessary widgets - see gtk for inspiration ( https://developer.gnome.org/gtk3/stable/ch03.html ) -- TODO;ongoing;prio-0
+
+* TextBox: size should be obvious when not focused, v.1 -- DONE;prio-10
+* Window: seems to initially print all widgets twice... -- BUG;DONE;prio-10
+* Textbox: needs to look differently when in edit mode -- DONE;prio-10
+* rename all members to have trailing \_s. -- DONE
+* Correctly test for location of curses.h header file -- DONE;prio-10
+* Implement Horizontal Menu -- DONE;prio-10
+* Implement Vertical Menu -- DONE;prio-10
+* Implement Popup Menu -- DONE;prio-10
+* Correctly set the cursor -- BUG;DONE;prio-10
+* Implement MainLoop -- DONE;prio-10
+* Implement additional TextBox features, v.1 -- DONE;prio-10;see todo-notes.txt
+* Implement Message Box -- DONE;prio-10
+* Check all the header gaurds for errors -- DONE;prio-10
+* Rename TextBox::signal\_changed to onAfterChanged or similar -- DONE;prio-10
+* #inlcude system header files from only one location -- REJECTED;prio-10
+* Implement Confirm Box -- DONE;prio-10
+* We need to figure out what to do after FocusableContainer gets removed from parent -- DONE;prio-10
+* Implement Radio Button -- DONE;prio-10
+* Implement Select Box -- DONE;prio-10
+* rename deFocus() to blur() -- DONE;prio-10;#focusblur
+* Add override declarations whereever appropriate -- DONE;prio-20;cost-3;codestyle;#overridedecls
+* BUG: Selectbox cannot be opened the 2nd time -- DONE;prio-10;cost-5;BUG
+* Move closing code of MessageBox into Widget::close() -- REJECTED;prio-10
+* Move closing code of ConfirmBox into Widget::close() -- REJECTED;prio-10
+* Unify Case: SelectBox vs. Checkbox --> CheckBox -- DONE;prio-30;cost-1;codestyle;#checkboxcase
+* Implement Focus management -- DONE;prio-20
