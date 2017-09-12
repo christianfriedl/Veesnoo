@@ -22,8 +22,12 @@ namespace nv {
             return '.';
     }
 
-    void
-    TextBox::refresh() {
+    void TextBox::focus() {
+        mode_ = TextBoxMode::insert;
+        FocusableWidget::focus();
+    }
+
+    void TextBox::refresh() {
         LOGMETHODONLY();
         if ( !getIsVisibleBubbling() )
             return;
@@ -110,6 +114,15 @@ namespace nv {
                     case KEY_LEFT:
                         cursorLeft();
                         received = true;
+                        break;
+                    case KEY_DOWN:
+                    case KEY_UP:
+                        {
+                            mode_ = TextBoxMode::normal;
+                            auto ev(std::make_shared<ChangeEvent>(shared_from_this()));
+                            onAfterChange.emit(ev);
+                            received = false;
+                        }
                         break;
                     case KEY_BACKSPACE: // backspace
                         if ( cursorLeft() )

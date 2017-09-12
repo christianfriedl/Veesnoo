@@ -18,6 +18,7 @@ public:
     const std::string& getText();
     void setText(const std::string& text) { text_ = text; }
     inline int getCursorPos();
+    void focus() override;
 
     bool cursorTo(int x);
     bool cursorRight();
