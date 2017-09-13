@@ -6,24 +6,33 @@
 
 namespace nv {
 
-    TextArea::TextArea(const int x, const int y, const int width) : FocusableWidget(Rect(x, y, width, 1)),
-            mode_(Mode_normal), cursorX_(0), startX_(0) {}
+    TextArea::TextArea(const Rect& rect) : FocusableWidget(rect),
+            mode_(TextAreaMode::normal), cursorPos_(0) {}
 
     const std::string& TextArea::getText() { return text_; }
 
-    inline int TextArea::getCursorPos() {
-        return cursorX_ - startX_;
+    void TextArea::focus() {
+        mode_ = TextAreaMode::insert;
+        FocusableWidget::focus();
     }
 
-    inline char TextArea::fillCharForMode(Mode mode) {
-        if ( mode == Mode_insert || mode == Mode_replace ) 
+
+    inline char TextArea::fillCharForMode(TextAreaMode mode) {
+        if ( mode == TextAreaMode::insert || mode == TextAreaMode::replace ) 
             return ' ';
         else
             return '.';
     }
 
-    void
-    TextArea::refresh() {
+    Point TextArea::pointFromPosition(const int pos) const {
+        return Point(pos % getRect().getWidth(), pos / getRect().getWidth());
+    }
+
+    int TextArea::pointToPosition(const Point p) const {
+        return p.getX() + getRect().getWidth() * p.getY();
+    }
+
+    void TextArea::refresh() {
         LOGMETHODONLY();
         if ( !getIsVisibleBubbling() )
             return;
@@ -31,35 +40,46 @@ namespace nv {
         if ( isFocused() ) {
             cursesWindow_->attrOn(A_REVERSE);
         }
-        LOGMETHOD("fillchar is '%c'", fillChar);
+        unsigned i = 0; 
+        int y = 0;
+        const int width = getRect().getWidth();
+        const int height = getRect().getHeight();
+        for ( ; i < text_.size() && y < height; i += width, ++y ) {
+            LOGMETHOD("i %i y %i", i, y);
+            const std::string text = text_.substr(i, width);
+            const std::string fillText = std::string(width - text.size(), fillChar);
+            addString(text + fillText, 0, y);
+        }
+        for ( ; y < height; ++y ) {
+            std::string text = std::string(width, fillChar);
+            addString(text, 0, y);
+        }
 
-        addString(text_.substr(startX_), 0, 0);
-        LOGMETHOD("text is %s", text_.c_str());
-
+        /*
         for ( int i = std::min((unsigned long)rect_.getWidth(), text_.length() - startX_); i < rect_.getWidth(); ++i )
             addCh(fillChar, i, 0);
+            */
 
-        int cur = (getCursorPos() > rect_.getWidth() - 1) ? (rect_.getWidth() - 1) : getCursorPos();
         if ( isFocused() )
             cursesWindow_->attrOff(A_REVERSE);
-        cursesWindow_->setCursorPosition(cur, 0);
+        Point point = pointFromPosition(cursorPos_);
+        cursesWindow_->setCursorPosition(point.getX(), point.getY());
         FocusableWidget::refresh();
     }
 
-    bool
-    TextArea::receiveKey(const int ch) {
+    bool TextArea::receiveKey(const int ch) {
         LOGMETHOD("'%c' (%i) '%s', isprint: %i, iswprint: %i, mode: %i", ch, ch, keyname(ch), isprint(ch), iswprint(ch), mode_); // should not leak...
         bool received = false;
-        if ( mode_ == Mode_normal ) { // normal mode
+        if ( mode_ == TextAreaMode::normal ) { // normal mode
             switch ( ch ) {
                 case KEY_IL: // go to insert mode
                 case 'i':
-                    mode_ = Mode_insert;
+                    mode_ = TextAreaMode::insert;
                     received = true;
                     break;
                 case KEY_DL: // delete char under cursor
                 case 'x':
-                    text_.replace(cursorX_, 1, "");
+                    text_.replace(cursorPos_, 1, "");
                     received = true;
                     break;
                 case 'h': // move left
@@ -71,6 +91,16 @@ namespace nv {
                 case 'l': // move right
                 case KEY_RIGHT:
                     cursorRight();
+                    received = true;
+                    break;
+                case KEY_UP:
+                case 'k':
+                    cursorUp();
+                    received = true;
+                    break;
+                case KEY_DOWN:
+                case 'j':
+                    cursorDown();
                     received = true;
                     break;
                 case '0': // move to start
@@ -94,10 +124,10 @@ namespace nv {
                     }
                     break;
             }
-        } else if ( mode_ == Mode_insert ) {
+        } else if ( mode_ == TextAreaMode::insert ) {
             if ( isprint(ch) ) { // TODO this prolly won't work with full utf-8 support
-                if ( cursorX_ <= text_.size() ) {
-                    text_.insert(cursorX_, 1, ch);
+                if ( (unsigned long)cursorPos_ <= text_.size() ) {
+                    text_.insert(cursorPos_, 1, ch);
                     cursorRight();
                 }
                 received = true;
@@ -111,14 +141,22 @@ namespace nv {
                         cursorLeft();
                         received = true;
                         break;
+                    case KEY_UP:
+                        cursorUp();
+                        received = true;
+                        break;
+                    case KEY_DOWN:
+                        cursorDown();
+                        received = true;
+                        break;
                     case KEY_BACKSPACE: // backspace
                         if ( cursorLeft() )
-                            text_.replace(cursorX_, 1, "");
+                            text_.replace(cursorPos_, 1, "");
                         received = true;
                         break;
                     case Key_Esc:
                         {
-                            mode_ = Mode_normal;
+                            mode_ = TextAreaMode::normal;
                             auto ev(std::make_shared<ChangeEvent>(shared_from_this()));
                             onAfterChange.emit(ev);
                             received = true;
@@ -136,12 +174,12 @@ namespace nv {
                         break;
                 }
             }
-        } else if ( mode_ == Mode_replace ) { // TODO this is quite unfinished
+        } else if ( mode_ == TextAreaMode::replace ) { // TODO this is quite unfinished
             if ( iswprint(ch) ) {
-                if ( cursorX_ <= text_.size() ) {
+                if ( (unsigned long)cursorPos_ <= text_.size() ) {
                     char s[2];
                     sprintf(s, "%c", ch);
-                    text_.replace(cursorX_, 1, s);
+                    text_.replace(cursorPos_, 1, s);
                     cursorRight();
                 }
                 received = true;
@@ -155,8 +193,16 @@ namespace nv {
                         cursorLeft();
                         received = true;
                         break;
+                    case KEY_UP:
+                        cursorUp();
+                        received = true;
+                        break;
+                    case KEY_DOWN:
+                        cursorDown();
+                        received = true;
+                        break;
                     case Key_Esc:
-                        mode_ = Mode_normal;
+                        mode_ = TextAreaMode::normal;
                         received = true;
                         break;
                 }
@@ -167,29 +213,41 @@ namespace nv {
     }
 
     bool TextArea::cursorRight() { 
-        if (cursorX_ == text_.size())
+        if ((unsigned long)cursorPos_ == text_.size())
             return false;
-        ++cursorX_;
-        if ( cursorX_ > (unsigned long)rect_.getWidth() )
-            ++startX_;
+        ++cursorPos_;
         return true;
     }
 
     bool TextArea::cursorLeft() { 
-        if ( cursorX_ == 0 )
+        if ( cursorPos_ == 0 )
             return false;
-        --cursorX_;
-        if ( cursorX_ < startX_ )
-            --startX_;
+        --cursorPos_;
         return true;
     }
 
-    bool TextArea::cursorTo(int x) {
-        if ( (unsigned long)x > text_.size() )
+    bool TextArea::cursorUp() { 
+        Point point(pointFromPosition(cursorPos_));
+        if ( point.getY() == 0 )
             return false;
-        cursorX_ = x;
-        if ( cursorX_ > (unsigned long)rect_.getWidth() )
-            startX_ = cursorX_ - (unsigned long)rect_.getWidth();
+        Point point2(point.getX(), point.getY() - 1);
+        cursorTo(pointToPosition(point2));
+        return true;
+    }
+
+    bool TextArea::cursorDown() { 
+        Point point(pointFromPosition(cursorPos_));
+        if ( point.getY() == rect_.getHeight() - 1 )
+            return false;
+        Point point2(point.getX(), point.getY() + 1);
+        cursorTo(pointToPosition(point2));
+        return true;
+    }
+
+    bool TextArea::cursorTo(const int pos) {
+        if ( (unsigned long)pos > text_.size() )
+            return false;
+        cursorPos_ = pos;
         return true;
     }
 

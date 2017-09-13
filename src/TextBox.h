@@ -20,18 +20,18 @@ public:
     inline int getCursorPos();
     void focus() override;
 
-    bool cursorTo(int x);
-    bool cursorRight();
-    bool cursorLeft();
-    bool cursorToStart();
-    bool cursorToEnd();
-
     TextBoxMode getMode() { return mode_; }
     void setMode(TextBoxMode mode) { mode_ = mode; }
 
     sigc::signal<void, const std::shared_ptr<ChangeEvent>&> onAfterChange;
 
 private:
+    bool cursorTo(int x);
+    bool cursorRight();
+    bool cursorLeft();
+    bool cursorToStart();
+    bool cursorToEnd();
+
     char fillCharForMode(TextBoxMode mode);
     std::string text_;
     TextBoxMode mode_;

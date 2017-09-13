@@ -12,7 +12,7 @@ void is_changed(const std::shared_ptr<ChangeEvent>& ev)
 }
 
 void test1() {
-    TextArea t1(1, 1, 20, 10);
+    TextArea t1(Rect(1, 1, 20, 10));
     t1.refresh();
     getch();
     t1.focus();
@@ -25,7 +25,7 @@ void test1() {
 }
 
 int main() {
-    auto t1(std::make_shared<TextArea>(1, 1, 10));
+    auto t1(std::make_shared<TextArea>(Rect(1, 1, 10, 10)));
     t1->onAfterChange.connect( sigc::ptr_fun(is_changed) );
     t1->setText("abcde");
     t1->focus();
