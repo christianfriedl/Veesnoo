@@ -15,6 +15,13 @@ namespace nv {
         frame_ = frame;
     }
 
+    void RadioButton::setChecked(const bool checked) {
+        if ( checked )
+            state_ = RadioButtonState::checked;
+        else
+            state_ = RadioButtonState::unchecked;
+    }
+
     void RadioButton::refresh() {
         LOGMETHODONLY();
         if ( !getIsVisibleBubbling() )
@@ -32,7 +39,10 @@ namespace nv {
 
     bool RadioButton::push() {
         state_ = (state_ == RadioButtonState::checked ? RadioButtonState::unchecked : RadioButtonState::checked);
-        // TODO do stuff
+        {
+            auto ev(std::make_shared<ChangeEvent>(shared_from_this()));
+            onAfterChange.emit(ev);
+        }
         refresh();
         return true;
     }

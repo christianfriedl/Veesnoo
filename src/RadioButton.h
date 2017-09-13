@@ -3,6 +3,7 @@
 
 #include <string>
 #include "FocusableWidget.h"
+#include "ChangeEvent.h"
 
 namespace nv {
 
@@ -16,6 +17,8 @@ public:
     void refresh() override;
     bool push(); 
     bool isChecked();
+    void setChecked(const bool checked);
+    sigc::signal<void, const std::shared_ptr<ChangeEvent>&> onAfterChange;
 
 private:
     RadioButtonState state_;
