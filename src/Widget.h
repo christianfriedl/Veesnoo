@@ -54,8 +54,9 @@ public:
 protected:
     Widget();
 
-    void setCWPosition();
+    void setCWPosition(const Rect& absoluteRect);
     void setCWSize();
+    Rect getParentAbsoluteContentRect() const;
 
     std::unique_ptr<CursesWindow> cursesWindow_;
     Rect rect_; // the original rect, covering all our area - relative to parent

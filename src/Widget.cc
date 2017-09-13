@@ -134,8 +134,7 @@ Widget::getAbsoluteRect() const {
     }
 }
 
-Rect 
-Widget::getAbsoluteContentRect() const {
+Rect Widget::getAbsoluteContentRect() const {
     if ( parent_.use_count() != 0 ) {
         if ( auto parent = parent_.lock() ) {
             const Rect parentAbsoluteContentRect = parent->getAbsoluteContentRect();
@@ -148,26 +147,34 @@ Widget::getAbsoluteContentRect() const {
     }
 }
 
-void 
-Widget::setCWPosition() {
-    auto absoluteRect = getAbsoluteRect(); 
-    cursesWindow_->move(absoluteRect.getX(), absoluteRect.getY());
+Rect Widget::getParentAbsoluteContentRect() const {
+    if ( parent_.use_count() != 0 ) {
+        if ( auto parent = parent_.lock() ) {
+            return parent->getAbsoluteContentRect();
+        } else
+            throw std::runtime_error("parent should be there, but was not lockable");
+    } else {
+        return Rect(0, 0, 0, 0);
+    }
 }
 
-void 
-Widget::setCWSize() {
+void Widget::setCWPosition(const Rect& absoluteRect) {
+    if ( getParentAbsoluteContentRect().covers(absoluteRect) )
+        cursesWindow_->move(absoluteRect.getX(), absoluteRect.getY());
+}
+
+void Widget::setCWSize() {
     auto absoluteRect = getAbsoluteRect();
     cursesWindow_->resize(absoluteRect.getWidth(), absoluteRect.getHeight());
 }
 
-void 
-Widget::refresh() {
+void Widget::refresh() {
     LOGMETHODONLY();
     Logger::get().log("Widget(%llx)::refresh(), isVisible_=%i", this, isVisible_);
     if ( !getIsVisibleBubbling() )
         return;
-    setCWPosition(); // TODO check if still valid: not necessary until we have a working move(), but what the bloody heck
-        cursesWindow_->refresh();
+    setCWPosition(getAbsoluteRect()); // TODO check if still valid: not necessary until we have a working move(), but what the bloody heck
+    cursesWindow_->refresh();
 }
 
 void 

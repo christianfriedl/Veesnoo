@@ -15,7 +15,7 @@ namespace nv {
         Logger::get().log("Window(%llx)::refresh(), isVisible_=%i", this, isVisible_);
         if ( !getIsVisibleBubbling() )
             return;
-        setCWPosition(); // not necessary until we have a working move(), but what the bloody heck
+        setCWPosition(getAbsoluteRect()); // not necessary until we have a working move(), but what the bloody heck
         cursesWindow_->addBorder();
         cursesWindow_->addString(title_, ( rect_.getWidth() - title_.size() ) / 2, 0);
         FocusableContainer::refresh();

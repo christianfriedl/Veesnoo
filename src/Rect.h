@@ -26,6 +26,14 @@ public:
     int getWidth() const { return width; } 
     int getHeight() const { return height; } 
 
+    int getX2() const { return x + width; } 
+    int getY2() const { return y + height; } 
+
+    /**
+     * return true if THIS Rect completely covers the other
+     */
+    bool covers(const Rect& other);
+
 private:
     int x, y, width, height;
 };
