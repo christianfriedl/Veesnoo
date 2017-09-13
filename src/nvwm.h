@@ -18,5 +18,6 @@
 #include "MainLoop.h"
 #include "CursesManager.h"
 #include "SelectBox.h"
+#include "RadioGroup.h"
 
 #endif

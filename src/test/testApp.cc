@@ -17,12 +17,16 @@ int main() {
     auto cb1(std::make_shared<CheckBox>(20, 2));
     window->addWidget(cb1);
     auto cb2(std::make_shared<CheckBox>(24, 2));
+
     auto lrb1(std::make_shared<Label>("Radioi here:", 0, 4));
     window->addWidget(lrb1);
     auto rb11(std::make_shared<RadioButton>(20, 4, "radio_rb11"));
     window->addWidget(rb11);
     auto rb12(std::make_shared<RadioButton>(24, 4, "radio_rb12"));
     window->addWidget(rb12);
+    auto rg1(std::make_shared<RadioGroup>());
+    rg1->addButton(rb11);
+    rg1->addButton(rb12);
 
     auto lta1(std::make_shared<Label>("Area here:", 0, 6));
     window->addWidget(lta1);
