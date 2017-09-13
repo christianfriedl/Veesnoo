@@ -1,6 +1,6 @@
 * (continuous) consistently use LOG macro -- TODO;prio-20;cost-3;codestyle
 * BUG: MesageBox has no create(), so test does not compile -- TODO;prio-20;cost-2;BUG
-* If we cannot move() the window because it is outside our rect, then don't bail, just don't display it -- TODO;prio-10;cost-5;BUG
+* Better organize source code -- TODO;prio-20
 * Implement Tabbed Page -- TODO;prio-10
 * Implement Table -- TODO;prio-10
 * Implement a Point class and use it for overloaded move() -- TODO;prio-10
@@ -96,3 +96,4 @@
 * Implement Window -- DONE;prio-20
 * Implement App with basic loop (AppWindow??? MainWindow??) -- DONE;prio-20
 * CursesManager: rename getInstance() to get() -- DONE;prio-20;cost-5
+* If we cannot move() the window because it is outside our rect, then don't bail, just don't display it -- DONE;prio-10;cost-5;BUG
