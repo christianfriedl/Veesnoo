@@ -12,8 +12,9 @@ void testVeryMany() {
 
     auto group(std::make_shared<RadioGroup>());
     std::vector<std::shared_ptr<RadioButton>> buttons;
+    // 6400 buttons
     for (int y = 0; y < 60; y += 2) { 
-        for (int x = 0; x < 80; x += 5)
+        for (int x = 0; x < 160; x += 5)
             buttons.emplace_back(std::make_shared<RadioButton>(x, y, "")); 
     }
     std::for_each(buttons.begin(), buttons.end(), [&window, &group](std::shared_ptr<RadioButton> rb) { window->addWidget(rb); group->addButton(rb); });
