@@ -4,6 +4,7 @@
 #include "ChangeEvent.h"
 #include "Screen.h"
 #include "TextBox.h"
+#include "TextArea.h"
 #include "Label.h"
 #include "Button.h"
 #include "FocusableWidget.h"

@@ -1,5 +1,5 @@
-#ifndef NV_TEXT_BOX_H
-#define NV_TEXT_BOX_H
+#ifndef NV_TEXT_AREA_H
+#define NV_TEXT_AREA_H
 
 #include <string>
 #include "FocusableWidget.h"
@@ -26,6 +26,7 @@ public:
     const std::string& getText();
     void setText(const std::string& text) { text_ = text; }
     void focus() override;
+    void blur() override;
 
     TextAreaMode getMode() { return mode_; }
     void setMode(TextAreaMode mode) { mode_ = mode; }

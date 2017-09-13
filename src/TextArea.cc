@@ -16,6 +16,10 @@ namespace nv {
         FocusableWidget::focus();
     }
 
+    void TextArea::blur() {
+        mode_ = TextAreaMode::normal;
+        FocusableWidget::blur();
+    }
 
     inline char TextArea::fillCharForMode(TextAreaMode mode) {
         if ( mode == TextAreaMode::insert || mode == TextAreaMode::replace ) 

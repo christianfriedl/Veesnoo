@@ -1,5 +1,5 @@
-#ifndef NV_VERTICAL_MENU_H
-#define NV_VERTICAL_MENU_H
+#ifndef NV_SELECT_BOX_H
+#define NV_SELECT_BOX_H
 
 #include "Label.h"
 #include "MenuItem.h"
