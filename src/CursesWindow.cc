@@ -51,6 +51,11 @@ namespace nv {
         wrefresh(window_);
     }
 
+    void CursesWindow::noutrefresh() {
+        Logger::get().log("CursesWindow(%llx)::refresh(), window_ %llx", this, window_);
+        ::wnoutrefresh(window_);
+    }
+
     void CursesWindow::addBorder() {
         Logger::get().log("CursesWindow(%llx)::addBorder(), window_ %llx", this, window_);
         box(window_, 0, 0);

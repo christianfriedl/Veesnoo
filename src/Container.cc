@@ -35,7 +35,7 @@ namespace nv {
                 widget->refresh();
         }
         if ( parent_.use_count() == 0 )
-            CursesManager::get().doupdate();
+            CursesManager::get().refresh();
     }
 
 }

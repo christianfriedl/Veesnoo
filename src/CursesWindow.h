@@ -15,6 +15,7 @@ namespace nv {
             void addString(const std::string& text, int x, int y);
             void addCh(int ch, int x, int y);
             void refresh();
+            void noutrefresh();
             void addBorder();
             void addCh(int ch);
             int width();
