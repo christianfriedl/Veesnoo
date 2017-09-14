@@ -33,6 +33,7 @@ void CursesManager::initCurses() {
     }
     if (has_colors())
         start_color();
+    refresh();
 }
 
 CursesManager::~CursesManager() {
@@ -49,7 +50,7 @@ void CursesManager::destroyWindow(WINDOW *window) {
 }
 
 void CursesManager::refresh() {
-    Logger::get().log("CursesManager::refresh()");
+    LOGMETHODONLY();
     ::refresh();
 }
 

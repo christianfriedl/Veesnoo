@@ -47,12 +47,12 @@ namespace nv {
     }
 
     void CursesWindow::refresh() {
-        Logger::get().log("CursesWindow(%llx)::refresh(), window_ %llx", this, window_);
+        LOGMETHOD("window_ %llx", window_);
         wrefresh(window_);
     }
 
     void CursesWindow::noutrefresh() {
-        Logger::get().log("CursesWindow(%llx)::refresh(), window_ %llx", this, window_);
+        LOGMETHOD("window_ %llx", window_);
         ::wnoutrefresh(window_);
     }
 
