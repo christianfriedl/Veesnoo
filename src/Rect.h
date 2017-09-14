@@ -4,6 +4,8 @@
 #include <string>
 #include <memory>
 
+#include "Point.h"
+
 namespace nv {
 
 class Rect {
@@ -28,6 +30,8 @@ public:
 
     int getX2() const { return x + width; } 
     int getY2() const { return y + height; } 
+
+    Point getUpperLeftPoint() { return Point(x, y); }
 
     /**
      * return true if THIS Rect completely covers the other

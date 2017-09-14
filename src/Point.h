@@ -7,6 +7,8 @@ class Point {
         Point(const int x, const int y): x_(x), y_(y) {}
         int getX() const;
         int getY() const;
+        void setX(const int x);
+        void setY(const int y);
 
     private:
 
