@@ -8,6 +8,8 @@
 * Implement a factory for all widgets -- TODO;prio-10
 * getIsVisibleBubbling() should not be in concrete widgets -- TODO;prio-10
 * replace all occurrences of Logger.log() with LOGMETHOD -- TODO;prio-10
+* valgrind shows that SelectBox leaks memory, but only once popup opens -- TODO;prio-10
+** try and remove selectedItem_, probably solving it; otherwise turn menu_ into wek ref?
 * Create .so instead of .a, and use it in test/ -- TODO;prio-10
 * Widget::parent\_ needs to be a Container, not a Widget, so we don't have to cast every access -- TODO;prio-10 
 * All widgets need to react to move(); -- TODO;prio-10
