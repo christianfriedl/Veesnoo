@@ -13,6 +13,7 @@ namespace nv {
             WINDOW *createWindow(int x ,int y ,int width ,int height);
             void destroyWindow(WINDOW *window);
             void refresh();
+            void doupdate();
             Rect getMaxScreenRect();
             int colorPair(int fg, int bg);
             int getCh();

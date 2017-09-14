@@ -167,6 +167,8 @@ namespace nv {
             return;
         setCWPosition(getAbsoluteRect()); // TODO check if still valid: not necessary until we have a working move(), but what the bloody heck
         cursesWindow_->refresh();
+        if ( parent_.use_count() == 0 )
+            CursesManager::get().doupdate();
     }
 
     void Widget::addString(const std::string& text) {

@@ -26,7 +26,7 @@ namespace nv {
 
     void CursesWindow::addString(const std::string& text, int x, int y) {
         Logger::get().log("CursesWindow(%llx)::addString('%s', %i, %i), window_ %llx", this, text.c_str(), x, y, window_);
-        int width, height;
+        int width, height; // warning can be ignored, height is dummy for curses interface
 
         getmaxyx(window_, height, width);
         auto actualLength = std::min((int)text.length(), (int)(width - x));
@@ -48,7 +48,6 @@ namespace nv {
 
     void CursesWindow::refresh() {
         Logger::get().log("CursesWindow(%llx)::refresh(), window_ %llx", this, window_);
-        CursesManager::get().refresh();
         wrefresh(window_);
     }
 
@@ -59,7 +58,7 @@ namespace nv {
 
     int CursesWindow::getWidth() {
         Logger::get().log("CursesWindow(%llx)::getWidth(), window_ %llx", this, window_);
-        int width, height;
+        int width, height; // warning can be ignored, height is dummy for curses interface
 
         getmaxyx(window_, height, width);
         return width;

@@ -34,6 +34,8 @@ namespace nv {
             Logger::get().log("Container(%llx)::refresh() will refresh widget %llx", this, widget.get());
                 widget->refresh();
         }
+        if ( parent_.use_count() == 0 )
+            CursesManager::get().doupdate();
     }
 
 }

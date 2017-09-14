@@ -53,6 +53,11 @@ void CursesManager::refresh() {
     ::refresh();
 }
 
+void CursesManager::doupdate() {
+    LOGMETHODONLY();
+    ::doupdate();
+}
+
 Rect CursesManager::getMaxScreenRect() {
     int x, y;
     getmaxyx(stdscr, y, x);
