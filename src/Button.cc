@@ -32,8 +32,10 @@ namespace nv {
         refresh();
         state_ = ButtonState_normal;
         refresh();
-        auto ev(std::make_shared<BasicEvent>(shared_from_this()));
-        onAfterPush.emit(ev);
+        {
+            auto ev(std::make_shared<BasicEvent>(shared_from_this()));
+            onAfterPush.emit(ev);
+        }
         return true;
     }
 
