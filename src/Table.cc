@@ -32,14 +32,24 @@ namespace nv {
             {   
                 return w1->getRect().getWidth() > w2->getRect().getWidth();
             }   
-        } customLess;
-        auto sorted = subWidgets_;
-        std::sort(sorted.begin(), sorted.end(), customLess);
+        } customLessWidth;
+        struct {
+            bool operator()(std::shared_ptr<Widget> w1, std::shared_ptr<Widget> w2) const
+            {   
+                return w1->getRect().getHeight() > w2->getRect().getHeight();
+            }   
+        } customLessHeight;
+        auto sortedWidth = subWidgets_;
+        std::sort(sortedWidth.begin(), sortedWidth.end(), customLessWidth);
+        auto sortedHeight = subWidgets_;
+        std::sort(sortedHeight.begin(), sortedHeight.end(), customLessHeight);
 
-        int maxWidth = sorted[0]->getRect().getWidth();
+        int maxWidth = sortedWidth[0]->getRect().getWidth();
+        int maxHeight = sortedHeight[0]->getRect().getHeight();
+
         int paddingX = (contentRect_.getWidth() - maxWidth * numCols) / numCols;
         int numRows = subWidgets_.size() / numCols + 1;
-        int paddingY = (contentRect_.getHeight() - numRows) / numRows;
+        int paddingY = (contentRect_.getHeight() - maxHeight * numRows) / numRows;
 
         for ( auto widget: subWidgets_ ) {
             if ( x != 0 )
