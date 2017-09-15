@@ -6,11 +6,10 @@ namespace nv {
     Table::Table(Rect rect): FocusableContainer(rect), numCols_(1) { } 
     Table::Table(Rect rect, int numCols): FocusableContainer(rect), numCols_(numCols) { } 
 
-    /*
-    void Table::addRow(const std::shared_ptr<TableRow>& row) {
-        rows_.emplace_back(row);
+    void Table::addWidgets(const std::vector<std::shared_ptr<Widget>>& widgets) {
+        for ( auto widget: widgets )
+            addWidget(widget);
     }
-    */
 
     void Table::addWidget(const std::shared_ptr<Widget>& widget) {
         if ( cells_.size() == 0 )

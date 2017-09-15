@@ -20,6 +20,7 @@ namespace nv {
             virtual ~Table() {}
             // virtual void addRow(const std::shared_ptr<TableRow>& row);
             virtual void addWidget(const std::shared_ptr<Widget>& widget) override;
+            void addWidgets(const std::vector<std::shared_ptr<Widget>>& widgets);
             // virtual void addWidget(const std::shared_ptr<Widget>& widget, int col, int row);
             virtual void refresh() override { LOGMETHODONLY(); FocusableContainer::refresh(); } // just for debug
             virtual bool receiveKey(int ch) override { LOGMETHOD("%i", ch); return FocusableContainer::receiveKey(ch); } // just for debug
