@@ -49,7 +49,7 @@ int main() {
     auto lt1(std::make_shared<Label>("Table here:", 0, 17));
     window->addWidget(lt1);
 
-    auto t1(std::make_shared<Table>(Rect(20, 17, 50, 20), 3));
+    auto t1(std::make_shared<Table>(Rect(20, 17, 80, 14), 3));
     char cts[5][6] = { "cell1", "cell2", "cell3", "cell4", "cell" };
     for (int i = 1; i <= 5; ++i) {
         auto tc1(std::make_shared<Label>(cts[i-1], 0, 0));
