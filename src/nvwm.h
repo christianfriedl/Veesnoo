@@ -19,5 +19,6 @@
 #include "CursesManager.h"
 #include "SelectBox.h"
 #include "RadioGroup.h"
+#include "Table.h"
 
 #endif

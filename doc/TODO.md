@@ -8,6 +8,7 @@
 * Implement a factory for all widgets -- TODO;prio-10
 * getIsVisibleBubbling() should not be in concrete widgets -- TODO;prio-10
 * replace all occurrences of Logger.log() with LOGMETHOD -- TODO;prio-10
+* BUG: if TableRow is constructed with rect(0,0,1,1), but inside the test app (see test/testTable.cc), then the tableCell will be displayed at 0,0 instead of 1,1 -- TODO;BUG;prio-20
 * valgrind shows that SelectBox leaks memory, but only once popup opens -- TODO;prio-10
 ** try and remove selectedItem_, probably solving it; otherwise turn menu_ into wek ref?
 * Create .so instead of .a, and use it in test/ -- TODO;prio-10
