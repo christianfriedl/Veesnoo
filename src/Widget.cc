@@ -50,10 +50,10 @@ namespace nv {
 
     const std::string Widget::toString() const {
         std::ostringstream ostr;
-        ostr << "<Widget @ " << std::hex << (unsigned long long int)this << std::dec << " rect: " << *(rect_.toString()) << std::endl;
-        ostr << "    contentRect_: " << *(contentRect_.toString()) << std::endl;
-        ostr << "    absoluteRect: " << *(getAbsoluteRect().toString()) << std::endl;
-        ostr << "    absoluteContentRect: " << *(getAbsoluteContentRect().toString()) << std::endl;
+        ostr << "<Widget @ " << std::hex << (unsigned long long int)this << std::dec << " rect: " << rect_.toString() << std::endl;
+        ostr << "    contentRect_: " << contentRect_.toString() << std::endl;
+        ostr << "    absoluteRect: " << getAbsoluteRect().toString() << std::endl;
+        ostr << "    absoluteContentRect: " << getAbsoluteContentRect().toString() << std::endl;
         ostr << ">";
         return ostr.str();
     }
@@ -128,12 +128,12 @@ namespace nv {
         if ( parent_.use_count() != 0 ) {
             if ( auto parent = parent_.lock() ) {
                 const Rect parentAbsoluteContentRect = parent->getAbsoluteContentRect();
-                return Rect(parentAbsoluteContentRect.getX() + rect_.getX() + contentRect_.getX(), parentAbsoluteContentRect.getY() + rect_.getY() + contentRect_.getY(), rect_.getWidth(), contentRect_.getHeight());
+                return Rect(parentAbsoluteContentRect.getX() + rect_.getX() + contentRect_.getX(), parentAbsoluteContentRect.getY() + rect_.getY() + contentRect_.getY(), contentRect_.getWidth(), contentRect_.getHeight());
             } else
                 throw std::runtime_error("parent should be there, but was not lockable");
         } else {
             const Rect parentAbsoluteContentRect(0, 0, 1, 1);
-            return Rect(parentAbsoluteContentRect.getX() + rect_.getX() + contentRect_.getX(), parentAbsoluteContentRect.getY() + rect_.getY() + contentRect_.getY(), rect_.getWidth(), contentRect_.getHeight());
+            return Rect(parentAbsoluteContentRect.getX() + rect_.getX() + contentRect_.getX(), parentAbsoluteContentRect.getY() + rect_.getY() + contentRect_.getY(), contentRect_.getWidth(), contentRect_.getHeight());
         }
     }
 
@@ -149,10 +149,13 @@ namespace nv {
     }
 
     void Widget::setCWPosition(const Rect& absoluteRect) {
-        if ( getParentAbsoluteContentRect().covers(absoluteRect) )
+        if ( getParentAbsoluteContentRect().covers(absoluteRect) ) {
+            LOGMETHOD("absoluteRect %s covered by parentAbsoluteRect %s", absoluteRect.toString().c_str(), getParentAbsoluteContentRect().toString().c_str());
             cursesWindow_->move(absoluteRect.getX(), absoluteRect.getY());
-        else
+        } else {
+            LOGMETHOD("absoluteRect %s NOT covered by parentAbsoluteRect %s", absoluteRect.toString().c_str(), getParentAbsoluteContentRect().toString().c_str());
             LOGMETHOD("unable to move curseswindow to %i, %i", absoluteRect.getX(), absoluteRect.getY());
+        }
     }
 
     void Widget::setCWSize() {

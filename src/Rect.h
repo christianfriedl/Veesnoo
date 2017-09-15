@@ -17,7 +17,6 @@ public:
     Rect(const Rect& other);
     Rect& operator=(const Rect& other);
 
-    std::unique_ptr<const std::string> toString() const;
 
     void move(const int ax, const int ay);
     void resize(const int width, const int height);
@@ -37,6 +36,8 @@ public:
      * return true if THIS Rect completely covers the other
      */
     bool covers(const Rect& other);
+
+    const std::string toString() const;
 
 private:
     int x, y, width, height;

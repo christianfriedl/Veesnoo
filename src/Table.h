@@ -2,7 +2,6 @@
 #define NV_TABLE_H
 
 #include "FocusableContainer.h"
-#include "TableRow.h"
 
 namespace nv {
 

@@ -1,4 +1,5 @@
 #include "Rect.h"
+#include "Logger.h"
 #include <sstream>
 
 namespace nv {
@@ -32,13 +33,15 @@ namespace nv {
         y += other.y;
     }	
 
-    std::unique_ptr<const std::string> Rect::toString() const {
+    const std::string Rect::toString() const {
         std::ostringstream ostr;
         ostr << "<Rect @ " << std::hex << (unsigned long long int)this << std::dec << " <x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << ">>";
-        return std::make_unique<const std::string>(ostr.str());
+        return ostr.str();
     }
 
     bool Rect::covers(const Rect& other) {
+        LOGMETHOD("x %i, width %i, x2 %i, other.x %i, other.width %i, other.x2 %i", x, width, getX2(), other.x, other.width, other.getX2());
+        LOGMETHOD("y %i, height %i, y2 %i, other.y %i, other.height %i, other.y2 %i", y, height, getY2(), other.y, other.height, other.getY2());
         return x <= other.x && y <= other.y && getX2() >= other.getX2() && getY2() >= other.getY2();
     }
 }

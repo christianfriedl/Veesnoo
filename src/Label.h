@@ -11,7 +11,7 @@ namespace nv {
 
 class Label: public Widget {
 public:
-    Label(const std::string& text, const int x, const int y): Widget(Rect(x, y, text.size(), 1)), text_(text) { }
+    Label(const std::string& text, const int x, const int y);
 
     static std::shared_ptr<Label> create(const std::string& text, const int x, const int y) {
         return std::make_shared<Label>(text, x, y);
