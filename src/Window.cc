@@ -17,8 +17,10 @@ namespace nv {
 
     void Window::addContent() {
         LOGMETHODONLY();
+        startColorAttribute(getPrimaryColorAttribute());
         cursesWindow_->addBorder();
         cursesWindow_->addString(title_, ( rect_.getWidth() - title_.size() ) / 2, 0);
+        endColorAttribute(getPrimaryColorAttribute());
     }
 
 
