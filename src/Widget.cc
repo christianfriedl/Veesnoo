@@ -9,42 +9,18 @@
 
 namespace nv {
 
-    Widget::Widget(): rect_(0, 0, 1, 1), contentRect_(0, 0, 1, 1), isVisible_(true), parent_(std::weak_ptr<Widget>()) { LOGMETHODONLY(); }
+    Widget::Widget(): rect_(0, 0, 1, 1), contentRect_(0, 0, 1, 1), isVisible_(true), parent_(std::weak_ptr<Widget>()), primaryColorAttribute_(std::make_shared<ColorAttribute>()) { LOGMETHODONLY(); }
 
     std::shared_ptr<Widget> Widget::create(const Rect& rect) {
         return std::make_shared<Widget>(rect);
     }
 
     // constructor: set parent_ to "null", size from rect and make visible by default
-    Widget::Widget(const Rect& rect): rect_(rect), contentRect_(0, 0, rect.getWidth(), rect.getHeight()), isVisible_(true), parent_(std::weak_ptr<Widget>()) {
+    Widget::Widget(const Rect& rect): rect_(rect), contentRect_(0, 0, rect.getWidth(), rect.getHeight()), isVisible_(true), parent_(std::weak_ptr<Widget>()), primaryColorAttribute_(std::make_shared<ColorAttribute>()) {
         LOGMETHOD("new Widget %s", toString().c_str());
 
         cursesWindow_ = std::make_unique<CursesWindow>(this->getAbsoluteRect());
     }
-
-    // it seems we don't need special cons' after all
-    /*
-    Widget::Widget(Widget&& other) : cw(nullptr), rect(0, 0, 0, 0), contentRect_(0, 0, 0, 0), parent_(std::weak_ptr<Widget>()) {
-        std::swap(cw, other.cw);
-        std::swap(rect, other.rect);
-        std::swap(contentRect_, other.contentRect_);
-        std::swap(parent_, other.parent_);
-    }
-
-    Widget& Widget::operator=(Widget&& other) {
-        rect = Rect(0, 0, 0, 0);
-        contentRect_ = Rect(0, 0, 0, 0);
-        parent_ = nullptr;
-        cw = nullptr;
-
-        std::swap(cw, other.cw);
-        std::swap(rect, other.rect);
-        std::swap(contentRect_, other.contentRect_);
-        std::swap(parent_, other.parent_);
-
-        return *this;
-    }
-    */
 
     const std::string Widget::toString() const {
         std::ostringstream ostr;
@@ -165,7 +141,6 @@ namespace nv {
 
     void Widget::refresh() {
         LOGMETHODONLY();
-        Logger::get().log("Widget(%llx)::refresh(), isVisible_=%i", this, isVisible_);
         if ( !getIsVisibleBubbling() )
             return;
         setCWPosition(getAbsoluteRect()); // TODO check if still valid: not necessary until we have a working move(), but what the bloody heck
@@ -173,6 +148,15 @@ namespace nv {
         if ( parent_.use_count() == 0 ) {
             CursesManager::get().refresh();
         }
+    }
+
+    std::shared_ptr<ColorAttribute> Widget::getPrimaryColorAttribute() {
+        auto colAttr = primaryColorAttribute_;
+        if ( colAttr.use_count() == 0 && parent_.use_count() > 0 )
+            colAttr = parent_.lock()->getPrimaryColorAttribute();
+        if ( colAttr.use_count() == 0 )
+            colAttr = std::make_shared<ColorAttribute>(COLOR_WHITE, COLOR_BLACK);
+        return colAttr;
     }
 
     void Widget::addString(const std::string& text) {

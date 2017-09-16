@@ -51,6 +51,7 @@ public:
     virtual Rect getAbsoluteContentRect() const;
 
     virtual const std::string toString() const;
+    std::shared_ptr<ColorAttribute> getPrimaryColorAttribute();
 
 
 protected:
@@ -65,6 +66,7 @@ protected:
     Rect contentRect_; // the rect clients can paint on - in RELATIVE coords ===> relative to rect
     bool isVisible_;
     std::weak_ptr<Widget> parent_;
+    std::shared_ptr<ColorAttribute> primaryColorAttribute_;
 
 private:
 
