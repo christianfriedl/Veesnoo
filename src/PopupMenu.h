@@ -15,7 +15,6 @@ namespace nv {
             void setMenu(const std::shared_ptr<VerticalMenu>& menu);
             void addWidget(const std::shared_ptr<Widget>& widget) override;
             void layout();
-            virtual void refresh() override;
             virtual bool receiveKey(int ch) override { LOGMETHOD("%i", ch); return PopupWindow::receiveKey(ch); } // just for debug
 
         private:

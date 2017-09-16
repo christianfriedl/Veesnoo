@@ -13,7 +13,7 @@ public:
     MenuItem(const std::string& text, const int x, const int y);
     MenuItem(const std::string& text);
     virtual ~MenuItem() {}
-    void refresh() override;
+    void addContent() override;
     bool receiveKey(int ch) override;
     bool push();
     const std::string& getText();

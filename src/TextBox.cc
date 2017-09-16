@@ -27,10 +27,8 @@ namespace nv {
         FocusableWidget::focus();
     }
 
-    void TextBox::refresh() {
+    void TextBox::addContent() {
         LOGMETHODONLY();
-        if ( !getIsVisibleBubbling() )
-            return;
         char fillChar = fillCharForMode(mode_);
         if ( isFocused() ) {
             cursesWindow_->attrOn(A_REVERSE);
@@ -47,11 +45,9 @@ namespace nv {
         if ( isFocused() )
             cursesWindow_->attrOff(A_REVERSE);
         cursesWindow_->setCursorPosition(cur, 0);
-        FocusableWidget::refresh();
     }
 
-    bool
-    TextBox::receiveKey(const int ch) {
+    bool TextBox::receiveKey(const int ch) {
         LOGMETHOD("'%c' (%i) '%s', isprint: %i, iswprint: %i, mode: %i", ch, ch, keyname(ch), isprint(ch), iswprint(ch), mode_); // should not leak...
         bool received = false;
         if ( mode_ == TextBoxMode::normal ) { // normal mode

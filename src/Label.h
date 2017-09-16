@@ -22,7 +22,7 @@ public:
     Label(Label&& other);
     Label& operator=(Label&& other);
     */
-    virtual void refresh() override;
+    virtual void addContent() override;
 private:
     std::string text_;
 };

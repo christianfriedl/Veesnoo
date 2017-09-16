@@ -22,10 +22,8 @@ namespace nv {
             state_ = RadioButtonState::unchecked;
     }
 
-    void RadioButton::refresh() {
+    void RadioButton::addContent() {
         LOGMETHODONLY();
-        if ( !getIsVisibleBubbling() )
-            return;
         if ( isFocused() )
             cursesWindow_->attrOn(A_REVERSE);
         char c = (state_ == RadioButtonState::checked ? '+' : ' ');
@@ -34,7 +32,6 @@ namespace nv {
         addString(s.str(), 0, 0);
         if ( isFocused() )
             cursesWindow_->attrOff(A_REVERSE);
-        FocusableWidget::refresh();
     }
 
     bool RadioButton::push() {

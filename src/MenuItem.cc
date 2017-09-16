@@ -13,12 +13,9 @@ MenuItem::MenuItem(const std::string& text) : FocusableWidget(Rect(0, 0, text.si
     LOGMETHOD("MenuItem::MenuItem(%s)", text.c_str());
 }
 
-void MenuItem::refresh() {
+void MenuItem::addContent() {
     LOGMETHODONLY();
-    Logger::get().log("MenuItem(%llx)::refresh(), text: '%s', %s, isFocused=%i", this, text_.c_str(), toString().c_str(), isFocused());
-    if ( !getIsVisibleBubbling() )
-        return;
-
+    Logger::get().log("MenuItem(%llx)::addContent(), text: '%s', %s, isFocused=%i", this, text_.c_str(), toString().c_str(), isFocused());
     char fillChar = ' ';
     if ( isFocused() ) {
         Logger::get().log("is focused! ");
@@ -32,8 +29,6 @@ void MenuItem::refresh() {
 
     if ( isFocused() )
         cursesWindow_->attrOff(A_REVERSE);
-
-    Widget::refresh();
 }
 
 bool MenuItem::push() {

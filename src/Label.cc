@@ -10,12 +10,9 @@ namespace nv {
         text_ = text;
         resize(text_.length(), 1);
     }
-    void Label::refresh() {
+    void Label::addContent() {
         LOGMETHODONLY();
-        if ( !getIsVisibleBubbling() )
-            return;
         addString(text_, 0, 0);
-        Widget::refresh();
     }
 
 }

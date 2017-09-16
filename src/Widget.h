@@ -30,6 +30,7 @@ public:
 
     void setParent(const std::weak_ptr<Widget>& parent); 
     virtual void refresh();
+    virtual void addContent();
     virtual void resize(const int width, const int height);
     virtual void move(const int x, const int y);
     virtual void addString(const std::string& text);

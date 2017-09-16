@@ -48,11 +48,4 @@ namespace nv {
         resize(menu_->getRect().getWidth() + 2, menu_->getRect().getHeight() + 2);
     }
 
-    void PopupMenu::refresh() { 
-        LOGMETHODONLY();
-        Logger::get().log("PopupMenu(%llx)::refresh() isVisible_ = %i", this, isVisible_);
-        if ( !getIsVisibleBubbling() )
-            return;
-        Window::refresh(); 
-    }
 }

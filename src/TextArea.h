@@ -22,7 +22,7 @@ public:
 
     TextArea(const Rect& rect);
     virtual bool receiveKey(const int ch) override;
-    virtual void refresh() override;
+    virtual void addContent() override;
     const std::string& getText();
     void setText(const std::string& text) { text_ = text; }
     void focus() override;

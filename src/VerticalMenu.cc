@@ -34,11 +34,4 @@ namespace nv {
         Logger::get().log("VerticalMenu::layout() end has subWidgets length %i", subWidgets_.size());
     }
 
-    void VerticalMenu::refresh() { 
-        LOGMETHODONLY();
-        if ( !getIsVisibleBubbling() )
-            return;
-        FocusableContainer::refresh(); 
-    }
-
 }

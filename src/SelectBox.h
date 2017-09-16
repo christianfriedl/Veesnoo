@@ -19,7 +19,7 @@ namespace nv {
         const std::shared_ptr<PopupMenu>& getMenu() const;
         void miPushed(const std::shared_ptr<BasicEvent>& ev);
         void miHover(const std::shared_ptr<BasicEvent>& ev);
-        virtual void refresh() override;
+        virtual void addContent() override;
         virtual bool receiveKey(int ch) override;
 
     private:

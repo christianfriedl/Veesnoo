@@ -26,10 +26,8 @@ namespace nv {
         resize(menu_->getRect().getWidth() + 2, 1);
     }
 
-    void SelectBox::refresh() { // TODO what do we output if we don't have anything...
+    void SelectBox::addContent() {
         LOGMETHODONLY();
-        if ( !getIsVisibleBubbling() )
-            return;
         addCh('\\', 0, 0);
 
         std::string text("...");
@@ -46,7 +44,6 @@ namespace nv {
         if ( isFocused() || menu_->isFocused() )
             cursesWindow_->attrOff(A_REVERSE);
         addCh('/', text.size() + 1, 0);
-        FocusableContainer::refresh();
     }
 
     void 

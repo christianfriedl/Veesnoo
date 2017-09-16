@@ -29,7 +29,9 @@ namespace nv {
         Logger::get().log("Container(%llx)::refresh() has subWidgets length %i, isVisible_ = %i", this, subWidgets_.size(), isVisible_);
         if ( !getIsVisibleBubbling() )
             return;
-        Widget::refresh();
+        addContent();
+        setCWPosition(getAbsoluteRect()); // TODO check if still valid: not necessary until we have a working move(), but what the bloody heck
+        cursesWindow_->noutrefresh();
         for ( auto widget: subWidgets_ ) {
             Logger::get().log("Container(%llx)::refresh() will refresh widget %llx", this, widget.get());
                 widget->refresh();

@@ -155,11 +155,16 @@ namespace nv {
         LOGMETHODONLY();
         if ( !getIsVisibleBubbling() )
             return;
+        addContent();
         setCWPosition(getAbsoluteRect()); // TODO check if still valid: not necessary until we have a working move(), but what the bloody heck
         cursesWindow_->noutrefresh();
         if ( parent_.use_count() == 0 ) {
             CursesManager::get().refresh();
         }
+    }
+
+    void Widget::addContent() {
+        LOGMETHOD("stub in widget base class called", "");
     }
 
     std::shared_ptr<ColorAttribute> Widget::getPrimaryColorAttribute() {

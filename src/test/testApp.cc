@@ -7,6 +7,8 @@ int main() {
     auto screenRect = CursesManager::get().getMaxScreenRect();
     auto window(std::make_shared<Window>(screenRect));
     screen->addWidget(window);
+    // TODO add Vertical Menu
+    
     auto mainLoop(std::make_shared<MainLoop>(screen));
     auto ltb1(std::make_shared<Label>("Text here:", 0, 0));
     window->addWidget(ltb1);

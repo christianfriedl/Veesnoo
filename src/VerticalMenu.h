@@ -12,7 +12,6 @@ namespace nv {
         static const std::shared_ptr<VerticalMenu> create(const int x, const int y);
         virtual ~VerticalMenu() {}
         virtual void addWidget(const std::shared_ptr<Widget>& widget) override;
-        virtual void refresh() override;
         virtual bool receiveKey(int ch) override { LOGMETHOD("%i", ch); return FocusableContainer::receiveKey(ch); } // just for debug
 
     private:

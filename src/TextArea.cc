@@ -36,10 +36,8 @@ namespace nv {
         return p.getX() + getRect().getWidth() * p.getY();
     }
 
-    void TextArea::refresh() {
+    void TextArea::addContent() {
         LOGMETHODONLY();
-        if ( !getIsVisibleBubbling() )
-            return;
         char fillChar = fillCharForMode(mode_);
         if ( isFocused() ) {
             cursesWindow_->attrOn(A_REVERSE);
@@ -68,7 +66,6 @@ namespace nv {
             cursesWindow_->attrOff(A_REVERSE);
         Point point = pointFromPosition(cursorPos_);
         cursesWindow_->setCursorPosition(point.getX(), point.getY());
-        FocusableWidget::refresh();
     }
 
     bool TextArea::receiveKey(const int ch) {
