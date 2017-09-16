@@ -37,6 +37,7 @@ private:
     void bubbleFocusNext();
     void bubbleFocusPrev();
     bool getIsFocusStealing();
+    std::vector<std::shared_ptr<Focusable>> getFocusableSubWidgetsOrdered();
 
     FocusableContainer *widget_;
     std::shared_ptr<Focusable> focusedWidget_;

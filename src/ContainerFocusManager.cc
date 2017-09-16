@@ -108,6 +108,31 @@ std::vector<std::shared_ptr<Focusable>> ContainerFocusManager::getFocusableSubWi
     return focusableSubWidgets;
 }
 
+/** order the widgets:
+ * - by index (not yet implemented)
+ * - by y
+ * - by x
+ */
+std::vector<std::shared_ptr<Focusable>> ContainerFocusManager::getFocusableSubWidgetsOrdered() {
+        
+    struct {
+        bool operator()(std::shared_ptr<Focusable> w1, std::shared_ptr<Focusable> w2) const {   
+            auto ww1 = std::dynamic_pointer_cast<Widget>(w1);
+            auto ww2 = std::dynamic_pointer_cast<Widget>(w2);
+            if ( ww1.get() == nullptr || ww2.get() == nullptr )
+                return false;
+            if ( ww1->getRect().getY() < ww2->getRect().getY() )
+                return true;
+            else if ( ww1->getRect().getY() > ww2->getRect().getY() )
+                return false;
+            else return ww1->getRect().getX() < ww2->getRect().getX();
+        }   
+    } orderByYX;
+    auto subWidgets = getFocusableSubWidgets();
+    std::sort(subWidgets.begin(), subWidgets.end(), orderByYX);
+    return subWidgets;
+}
+
 void ContainerFocusManager::focusFirst() {
     LOGMETHODONLY();
     auto focusableSubWidgets = getFocusableSubWidgets();
@@ -120,8 +145,8 @@ void ContainerFocusManager::focusFirst() {
 
 void ContainerFocusManager::focusNext() {
     LOGMETHODONLY();
-    auto focusableSubWidgets = getFocusableSubWidgets();
-        
+    auto focusableSubWidgets = getFocusableSubWidgetsOrdered();
+
     if (focusableSubWidgets.size() != 0) {
         std::shared_ptr<Focusable> res;
         unsigned long i=0;
@@ -149,7 +174,7 @@ void ContainerFocusManager::focusNext() {
 }
 
 void ContainerFocusManager::focusPrev() {
-    auto focusableSubWidgets = getFocusableSubWidgets();
+    auto focusableSubWidgets = getFocusableSubWidgetsOrdered();
 
     if (focusableSubWidgets.size() != 0) {
         std::shared_ptr<Focusable> res;
