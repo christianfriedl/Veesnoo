@@ -198,4 +198,14 @@ namespace nv {
         endColorAttribute(getPrimaryColorAttribute());
     }
 
+    void Widget::fillBackground(const int ch, std::shared_ptr<ColorAttribute> attribute) {
+        startColorAttribute(attribute);
+        cursesWindow_->fillBackground(ch);
+        endColorAttribute(attribute);
+    }
+
+    void Widget::addBorder() {
+        cursesWindow_->addBorder();
+    }
+
 }

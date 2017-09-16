@@ -70,6 +70,8 @@ protected:
     bool isVisible_;
     std::weak_ptr<Widget> parent_;
     std::shared_ptr<ColorAttribute> primaryColorAttribute_;
+    void fillBackground(const int ch, std::shared_ptr<ColorAttribute> attribute);
+    void addBorder();
 
 private:
 
