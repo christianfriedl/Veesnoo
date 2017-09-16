@@ -8,6 +8,7 @@
 #include "Logger.h"
 #include "Rect.h"
 #include "CursesWindow.h"
+#include "ColorAttribute.h"
 
 namespace nv {
 
@@ -35,6 +36,7 @@ public:
     virtual void addString(const std::string& text, const int x, const int y);
     virtual void addCh(const int ch);
     virtual void addCh(const int ch, const int x, const int y);
+    virtual void startColorAttribute(const ColorAttribute& attribute);
 
     const std::weak_ptr<Widget>& getParent() const;
     bool getIsVisible() const;
@@ -66,13 +68,6 @@ protected:
 
 private:
 
-    /*
-    @property(weak) ColorAttribute* contentColAttr;
-    @property(weak) ColorAttribute* borderColAttr;
-    @property(weak) ColorAttribute* focusedColAttr;
-    @property(weak) ColorAttribute* focusedBorderColAttr;
-    @property(weak) ColorAttribute* activeColAttr;
-    */
     void moveRect(const int ax, const int ay);
 
 

@@ -2,6 +2,7 @@
 #define NVWM_H
 
 #include "ChangeEvent.h"
+#include "ColorAttribute.h"
 #include "Screen.h"
 #include "TextBox.h"
 #include "TextArea.h"

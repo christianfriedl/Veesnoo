@@ -1,6 +1,3 @@
-* BUG: Focused element inside Table will never yield focus, because parent focusable will just keep its focus -- TODO;prio-10;BUG
-* We need a better default focus order -- TODO;prio-10
-* Be able to define custom focus order -- TODO;prio-20
 * Start with colors 
 * (continuous) consistently use LOG macro -- TODO;prio-20;cost-3;codestyle
 * BUG: MesageBox has no create(), so test does not compile -- TODO;prio-20;cost-2;BUG
@@ -10,8 +7,10 @@
 * Implement a Point class and use it for overloaded move() -- TODO;prio-10
 * Implement a Point class and use it for overloaded resize() -- TODO;prio-10
 * Implement a factory for all widgets -- TODO;prio-10
+* focus order needs to be optionally determined by a tabIndex -- TODO;prio-20
 * getIsVisibleBubbling() should not be in concrete widgets -- TODO;prio-10
 * replace all occurrences of Logger.log() with LOGMETHOD -- TODO;prio-10
+* Be able to define custom focus order -- TODO;prio-20
 * BUG: if TableRow is constructed with rect(0,0,1,1), but inside the test app (see test/testTable.cc), then the tableCell will be displayed at 0,0 instead of 1,1 -- TODO;BUG;prio-20
 * valgrind shows that SelectBox leaks memory, but only once popup opens -- TODO;prio-10
 ** try and remove selectedItem_, probably solving it; otherwise turn menu_ into wek ref?
@@ -42,8 +41,8 @@
 * Consistently "=default" or "=delete" or create special functions -- TODO;prio-20
 * Use scr\_dump() to make the whole thing testable!! -- TODO;prio-30 (also need to use wborder to set borders that are always printable)
 * ^L should refresh everytthing -- TODO;prio-30
+* Rename setCWSize etc to something better -- TODO;prio-30
 * Use curs_set() to hide the cursor -- TODO;prio-30
-* Reflect the basic class hierarchy -- TODO;prio-20;see-notes
 * Implement multi-level undo -- TODO;prio-30
 * Use mvvline() and mvwvline to create panes/areas -- TODO;prio-30
 * Class hierarchy: Create a common base class for Focusable Widget and FocusableContainer? -- TODO;REFLECT;prio-30;cost-13
@@ -72,6 +71,9 @@
 
 ## DONE TASKS
 
+* Reflect the basic class hierarchy -- DONE;prio-20;see-notes
+* BUG: Focused element inside Table will never yield focus, because parent focusable will just keep its focus -- DONE;prio-10;BUG
+* We need a better default focus order -- DONE;prio-10
 * TextBox: size should be obvious when not focused, v.1 -- DONE;prio-10
 * Window: seems to initially print all widgets twice... -- BUG;DONE;prio-10
 * Textbox: needs to look differently when in edit mode -- DONE;prio-10

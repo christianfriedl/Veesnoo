@@ -1,5 +1,3 @@
-// #include "ColorAttribute.h"
-// #include "App.h"
 #include <memory>
 #include <iostream>
 #include <sstream>
@@ -72,6 +70,10 @@ namespace nv {
 
     const std::weak_ptr<Widget>& Widget::getParent() const {
         return parent_;
+    }
+
+    void Widget::startColorAttribute(const ColorAttribute& attribute) {
+        cursesWindow_->startColorAttribute(attribute);
     }
 
     bool Widget::getIsVisible() const {
@@ -150,11 +152,9 @@ namespace nv {
 
     void Widget::setCWPosition(const Rect& absoluteRect) {
         if ( getParentAbsoluteContentRect().covers(absoluteRect) ) {
-            LOGMETHOD("absoluteRect %s covered by parentAbsoluteRect %s", absoluteRect.toString().c_str(), getParentAbsoluteContentRect().toString().c_str());
             cursesWindow_->move(absoluteRect.getX(), absoluteRect.getY());
         } else {
-            LOGMETHOD("absoluteRect %s NOT covered by parentAbsoluteRect %s", absoluteRect.toString().c_str(), getParentAbsoluteContentRect().toString().c_str());
-            LOGMETHOD("unable to move curseswindow to %i, %i", absoluteRect.getX(), absoluteRect.getY());
+            LOGMETHOD("absoluteRect %s NOT covered by parentAbsoluteRect %s - unable to move curseswindow to %i, %i", absoluteRect.toString().c_str(), getParentAbsoluteContentRect().toString().c_str(), absoluteRect.getX(), absoluteRect.getY());
         }
     }
 

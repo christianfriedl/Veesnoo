@@ -6,6 +6,8 @@
 
 namespace nv {
 
+    class ColorAttribute;
+
     class CursesWindow {
 
         public:
@@ -31,12 +33,15 @@ namespace nv {
             int getWidth();
             int getHeight();
             void setCursorPosition(const int x, const int y);
+            void startColorAttribute(const ColorAttribute& attribute);
+            void endColorAttribute(const ColorAttribute& attribute);
 
             // just for testing
             WINDOW *getWin() { return window_; }
 
         private:
             WINDOW *window_;
+            static int getCursAttr(const ColorAttribute& attribute);
 
     };
 

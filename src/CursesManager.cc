@@ -9,7 +9,7 @@ CursesManager& CursesManager::get() {
     return instance;
 }
 
-CursesManager::CursesManager() : bufferedMode_(false), cBreak_(false), echo_(false), keypadAvailable_(true), width_(0), height_(0), nextPair_(1) { 
+CursesManager::CursesManager() : bufferedMode_(false), cBreak_(false), echo_(false), keypadAvailable_(true), width_(0), height_(0), numPairs_(0) { 
     Logger::get().log("new CursesManager()");
 	initCurses();
 }
@@ -65,14 +65,28 @@ Rect CursesManager::getMaxScreenRect() {
     return Rect(0, 0, x, y);
 }
 
-int CursesManager::colorPair(int fg, int bg) {
+int CursesManager::colorPair(short int fg, short int bg) {
     int pair = 0;
     if (!has_colors())
         throw new Exception("this terminal has no colors.");
-    pair = nextPair_++;
+    pair = ++numPairs_;
     if (init_pair(pair, fg, bg) != OK)
         throw new Exception("could not init color");
     return pair;
+}
+
+int CursesManager::numPairs() {
+    return numPairs_;
+}
+
+int CursesManager::findPair(short int fg, short int bg) {
+    for ( int num = 0; num < numPairs_; ++num ) {
+        short int xfg = 0, xbg = 0;
+        ::pair_content(num, &xfg, &xbg);
+        if ( xfg == fg && xbg == bg )
+            return num;
+    }
+    return 0;
 }
 
 int CursesManager::getCh() {

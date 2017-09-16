@@ -15,7 +15,9 @@ namespace nv {
             void refresh();
             void doupdate();
             Rect getMaxScreenRect();
-            int colorPair(int fg, int bg);
+            int colorPair(short int fg, short int bg);
+            int numPairs();
+            int findPair(short int fg, short int bg);
             int getCh();
             const char * getKeyName(int ch) const;
         private:
@@ -31,7 +33,7 @@ namespace nv {
             bool echo_;
             bool keypadAvailable_;
             int width_, height_;
-            int nextPair_;
+            int numPairs_;
     };
 
 }

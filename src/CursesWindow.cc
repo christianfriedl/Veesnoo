@@ -2,6 +2,7 @@
 #include "Logger.h"
 #include "CursesWindow.h"
 #include "CursesException.h"
+#include "ColorAttribute.h"
 
 namespace nv {
 
@@ -128,6 +129,28 @@ namespace nv {
         Logger::get().log("CursesWindow(%llx)::setCursorPosition(%i, %i), window_ %llx", this, x, y, window_);
         if ( wmove(window_, y, x) != OK )
             throw CursesException("unable to set cursor");
+    }
+
+    int CursesWindow::getCursAttr(const ColorAttribute& attribute) {
+        int cursAttr = COLOR_PAIR(attribute.getPairNumber());
+        if ( attribute.getInverse() )
+            cursAttr |= A_REVERSE;
+        if ( attribute.getBold() )
+            cursAttr |= A_BOLD;
+        if ( attribute.getUnderline() )
+            cursAttr |= A_UNDERLINE;
+        if ( attribute.getBlink() )
+            cursAttr |= A_BLINK;
+        return cursAttr;
+    }
+    void CursesWindow::startColorAttribute(const ColorAttribute& attribute) {
+        LOGMETHOD("will start color pair %s", attribute.toString().c_str());
+
+        wattron(window_, getCursAttr(attribute));
+    }
+    void CursesWindow::endColorAttribute(const ColorAttribute& attribute) {
+        LOGMETHOD("will end color pair %s", attribute.toString().c_str());
+        wattroff(window_, getCursAttr(attribute));
     }
 
 }
