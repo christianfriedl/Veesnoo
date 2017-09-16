@@ -155,6 +155,7 @@ namespace nv {
         LOGMETHODONLY();
         if ( !getIsVisibleBubbling() )
             return;
+        fillBackground(' ', getPrimaryColorAttribute());
         addContent();
         setCWPosition(getAbsoluteRect()); // TODO check if still valid: not necessary until we have a working move(), but what the bloody heck
         cursesWindow_->noutrefresh();

@@ -6,6 +6,7 @@ int main() {
     auto screen(std::make_shared<Screen>());
     auto screenRect = CursesManager::get().getMaxScreenRect();
     auto window(std::make_shared<Window>(screenRect));
+    window->setTitle("Main Window");
     screen->addWidget(window);
     // TODO add Vertical Menu
     

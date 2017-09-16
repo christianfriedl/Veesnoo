@@ -16,10 +16,8 @@ namespace nv {
         frame_ = frame;
     }
 
-    void CheckBox::refresh() {
+    void CheckBox::addContent() {
         LOGMETHODONLY();
-        if ( !getIsVisibleBubbling() )
-            return;
         if ( isFocused() )
             cursesWindow_->attrOn(A_REVERSE);
         char c = (state_ == CheckboxState_checked ? 'x' : ' ');
@@ -28,7 +26,6 @@ namespace nv {
         addString(s.str(), 0, 0);
         if ( isFocused() )
             cursesWindow_->attrOff(A_REVERSE);
-        FocusableWidget::refresh();
     }
 
     bool CheckBox::push() {

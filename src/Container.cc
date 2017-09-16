@@ -29,6 +29,7 @@ namespace nv {
         Logger::get().log("Container(%llx)::refresh() has subWidgets length %i, isVisible_ = %i", this, subWidgets_.size(), isVisible_);
         if ( !getIsVisibleBubbling() )
             return;
+        fillBackground(' ', getPrimaryColorAttribute());
         addContent();
         setCWPosition(getAbsoluteRect()); // TODO check if still valid: not necessary until we have a working move(), but what the bloody heck
         cursesWindow_->noutrefresh();

@@ -12,7 +12,7 @@ class CheckBox: public FocusableWidget {
 public:
     CheckBox(int x, int y);
     void setFrame(const std::string& frame);
-    void refresh() override;
+    void addContent() override;
     bool push(); 
     bool isChecked();
     bool receiveKey(int ch) override;
