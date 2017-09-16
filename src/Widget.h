@@ -37,6 +37,9 @@ public:
     virtual void addCh(const int ch);
     virtual void addCh(const int ch, const int x, const int y);
     virtual void startColorAttribute(const ColorAttribute& attribute);
+    virtual void endColorAttribute(const ColorAttribute& attribute);
+    virtual void startColorAttribute(std::shared_ptr<ColorAttribute> attribute);
+    virtual void endColorAttribute(std::shared_ptr<ColorAttribute> attribute);
 
     const std::weak_ptr<Widget>& getParent() const;
     bool getIsVisible() const;

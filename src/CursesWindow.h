@@ -34,7 +34,9 @@ namespace nv {
             int getHeight();
             void setCursorPosition(const int x, const int y);
             void startColorAttribute(const ColorAttribute& attribute);
+            void startColorAttribute(std::shared_ptr<ColorAttribute> attribute);
             void endColorAttribute(const ColorAttribute& attribute);
+            void endColorAttribute(std::shared_ptr<ColorAttribute> attribute);
 
             // just for testing
             WINDOW *getWin() { return window_; }

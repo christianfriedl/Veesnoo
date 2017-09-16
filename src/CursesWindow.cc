@@ -153,4 +153,13 @@ namespace nv {
         wattroff(window_, getCursAttr(attribute));
     }
 
+    void CursesWindow::startColorAttribute(std::shared_ptr<ColorAttribute> attribute) {
+        auto attr = attribute.get();
+        startColorAttribute(*attr);
+    }
+    void CursesWindow::endColorAttribute(std::shared_ptr<ColorAttribute> attribute) {
+        auto attr = attribute.get();
+        endColorAttribute(*attr);
+    }
+
 }
