@@ -1,4 +1,5 @@
 #include "nvwm.h"
+#include <algorithm>
 
 using namespace nv;
 
@@ -14,7 +15,7 @@ int main() {
             window->addWidget(sb);
         }
     }
-    // std::for_each(buttons.begin(), buttons.end(), [&window, &group](std::shared_ptr<SelectBox> sb) { window->addWidget(sb); group->addButton(rb); });
+    std::for_each(boxes.begin(), boxes.end(), [](auto box) { box->receiveKey(' '); box->getMenu()->close(); });
     boxes[0]->focus();
     window->refresh();
     getch();

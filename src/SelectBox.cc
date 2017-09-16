@@ -35,8 +35,8 @@ namespace nv {
         std::string text("...");
 
         if ( selectedItem_.use_count() > 0) {
-            addString(selectedItem_->getText(), 1, 0);
-            text = selectedItem_->getText();
+            addString(selectedItem_.lock()->getText(), 1, 0);
+            text = selectedItem_.lock()->getText();
         }
 
         if ( isFocused() || menu_->isFocused() )
@@ -86,9 +86,12 @@ namespace nv {
 
     // TODO remove old menu first
     // TODO resize myself
-    void 
-    SelectBox::setMenu(const std::shared_ptr<PopupMenu>& menu) {
+    void SelectBox::setMenu(const std::shared_ptr<PopupMenu>& menu) {
         menu_ = menu;
+    }
+
+    const std::shared_ptr<PopupMenu>& SelectBox::getMenu() const {
+        return menu_; 
     }
 
     // Do not confuse this with addItem!

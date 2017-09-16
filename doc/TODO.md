@@ -1,4 +1,6 @@
 * BUG: Focused element inside Table will never yield focus, because parent focusable will just keep its focus -- TODO;prio-10;BUG
+* We need a better default focus order -- TODO;prio-10
+* Be able to define custom focus order -- TODO;prio-20
 * Start with colors 
 * (continuous) consistently use LOG macro -- TODO;prio-20;cost-3;codestyle
 * BUG: MesageBox has no create(), so test does not compile -- TODO;prio-20;cost-2;BUG
