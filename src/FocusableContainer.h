@@ -14,6 +14,9 @@ namespace nv {
             static const std::shared_ptr<FocusableContainer> create(const Rect& rect);
             virtual ~FocusableContainer();
 
+            bool getIsFocusStealing();
+            void setIsFocusStealing(bool isFocusStealing);
+
             virtual bool receiveKey(int ch) override;
             virtual void refresh() override;
 
@@ -37,6 +40,7 @@ namespace nv {
 
         protected:
             ContainerFocusManager *focusManager_;
+            bool isFocusStealing_;
         private:
     };
 

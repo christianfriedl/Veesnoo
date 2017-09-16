@@ -128,9 +128,12 @@ void ContainerFocusManager::focusNext() {
 
         for (auto widget : focusableSubWidgets) {
             if (widget.get() == focusedWidget_.get()) {
-                if (i == focusableSubWidgets.size() - 1)
-                    res = focusableSubWidgets[0];
-                else
+                if (i == focusableSubWidgets.size() - 1) {
+                    if ( getIsFocusStealing() || widget_->getParent().use_count() == 0 )
+                        res = focusableSubWidgets[0];
+                    else
+                        bubbleFocusNext();
+                } else
                     res = focusableSubWidgets[i+1];
                 break;
             } 
@@ -154,9 +157,12 @@ void ContainerFocusManager::focusPrev() {
         for (std::vector<std::shared_ptr<Focusable> >::reverse_iterator iter = focusableSubWidgets.rbegin(); 
                 iter != focusableSubWidgets.rend(); ++iter) {
             if ((*iter) == focusedWidget_) {
-                if (i == 0)
-                    res = focusableSubWidgets[focusableSubWidgets.size() - 1];
-                else
+                if (i == 0) {
+                    if ( getIsFocusStealing() || widget_->getParent().use_count() == 0 )
+                        res = focusableSubWidgets[focusableSubWidgets.size() - 1];
+                    else
+                        bubbleFocusPrev();
+                } else
                     res = focusableSubWidgets[i-1];
                 break;
             } 
@@ -167,6 +173,28 @@ void ContainerFocusManager::focusPrev() {
             focusThis(res);
         }
     }
+}
+
+void ContainerFocusManager::bubbleFocusNext() {
+    std::shared_ptr<Widget> p = widget_->getParent().lock();
+    if ( p ) {
+        auto fcp = std::dynamic_pointer_cast<FocusableContainer>(p); // widget's parent as focusable container
+        fcp->focusNext();
+    } else
+        throw Exception("could not cast parent to FocusableContainer");
+}
+
+void ContainerFocusManager::bubbleFocusPrev() {
+    std::shared_ptr<Widget> p = widget_->getParent().lock();
+    if ( p ) {
+        auto fcp = std::dynamic_pointer_cast<FocusableContainer>(p); // widget's parent as focusable container
+        fcp->focusPrev();
+    } else
+        throw Exception("could not cast parent to FocusableContainer");
+}
+
+bool ContainerFocusManager::getIsFocusStealing() {
+    return widget_->getIsFocusStealing();
 }
 
 /**

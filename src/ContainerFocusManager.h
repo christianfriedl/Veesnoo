@@ -34,6 +34,9 @@ private:
     std::vector<std::shared_ptr<Widget>> getSubWidgets();
     std::vector<std::shared_ptr<Focusable>> getFocusableSubWidgets();
     bool bubbleReceiveKey(int ch, std::shared_ptr<Widget> w);
+    void bubbleFocusNext();
+    void bubbleFocusPrev();
+    bool getIsFocusStealing();
 
     FocusableContainer *widget_;
     std::shared_ptr<Focusable> focusedWidget_;

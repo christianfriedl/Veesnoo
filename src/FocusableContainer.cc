@@ -3,7 +3,7 @@
 
 namespace nv {
     FocusableContainer::FocusableContainer(const Rect& rect): 
-        Focusable(), Container(rect), focusManager_(new ContainerFocusManager(this)) { } 
+        Focusable(), Container(rect), focusManager_(new ContainerFocusManager(this)), isFocusStealing_(false) { } 
 
     const std::shared_ptr<FocusableContainer> FocusableContainer::create(const Rect& rect) {
         return std::make_shared<FocusableContainer>(rect);
@@ -13,19 +13,25 @@ namespace nv {
         delete focusManager_; 
     }
 
+    void FocusableContainer::setIsFocusStealing(bool isFocusStealing) {
+        isFocusStealing_ = isFocusStealing;
+    }
+
+    bool FocusableContainer::getIsFocusStealing() {
+        return isFocusStealing_;
+    }
+
     bool FocusableContainer::receiveKey(int ch) { 
         LOGMETHOD("%i, will delegate to focusManager_ %llx", ch, focusManager_);
         return focusManager_->receiveKey(ch); 
     }
 
-    void 
-    FocusableContainer::requestFocus(std::shared_ptr<Focusable>& widget) {
+    void FocusableContainer::requestFocus(std::shared_ptr<Focusable>& widget) {
         LOGMETHOD("%llx, will delegate to focusManager_ %llx", widget.get(), focusManager_);
         focusManager_->requestFocus(widget);
     }
 
-    void
-    FocusableContainer::refresh() {
+    void FocusableContainer::refresh() {
         LOGMETHODONLY();
         if ( !getIsVisibleBubbling() )
             return;
