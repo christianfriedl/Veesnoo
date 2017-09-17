@@ -173,7 +173,7 @@ namespace nv {
         if ( colAttr.use_count() == 0 && parent_.use_count() > 0 )
             colAttr = parent_.lock()->getPrimaryColorAttribute();
         if ( colAttr.use_count() == 0 )
-            colAttr = std::make_shared<ColorAttribute>(COLOR_YELLOW, COLOR_BLUE);
+            colAttr = std::make_shared<ColorAttribute>(COLOR_CYAN, COLOR_BLACK);
         LOGMETHOD("colAttr = %s", colAttr->toString().c_str());
         return colAttr;
     }
