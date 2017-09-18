@@ -32,8 +32,8 @@ class TextBox : public FocusableWidget {
 public:
 
     TextBox(const int x, const int y, const int width);
-    virtual bool receiveKey(const int ch) override;
-    virtual void addContent() override;
+    bool receiveKey(const int ch) override;
+    void addContent() override;
     const std::string& getText();
     void setText(const std::string& text) { text_ = text; }
     inline int getCursorPos();

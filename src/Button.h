@@ -33,7 +33,7 @@ namespace nv {
             Button(const std::string& text, int x, int y);
             void refresh() override;
             bool push(); 
-            virtual bool receiveKey(int ch) override;
+            bool receiveKey(int ch) override;
             sigc::signal<void, const std::shared_ptr<BasicEvent>&> onAfterPush;
 
         private:

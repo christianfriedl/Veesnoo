@@ -36,8 +36,8 @@ namespace nv {
             bool getIsFocusStealing();
             void setIsFocusStealing(bool isFocusStealing);
 
-            virtual bool receiveKey(int ch) override;
-            virtual void refresh() override;
+            bool receiveKey(int ch) override;
+            void refresh() override;
 
             /**
              * somebody requests the focus for the given widget from us
@@ -47,9 +47,9 @@ namespace nv {
 
             // delegates to the focusManager_
 
-            virtual bool isFocused() const override;
-            virtual void focus() override;
-            virtual void blur() override;
+            bool isFocused() const override;
+            void focus() override;
+            void blur() override;
 
             void focusFirst();
             void focusNext();

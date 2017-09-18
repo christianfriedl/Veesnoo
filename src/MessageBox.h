@@ -33,8 +33,8 @@ namespace nv {
             static const std::shared_ptr<MessageBox> create(const std::string& title, const std::string& text);
             const std::shared_ptr<Label> getLabel();
             void layout();
-            virtual bool receiveKey(int ch) override;
-            virtual void refresh() override { LOGMETHODONLY(); Window::refresh(); } // just for debug
+            bool receiveKey(int ch) override;
+            void refresh() override { LOGMETHODONLY(); Window::refresh(); } // just for debug
             sigc::signal<void, const std::shared_ptr<BasicEvent>&> onAfterClose;
 
         private:

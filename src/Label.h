@@ -37,11 +37,7 @@ public:
     }
 
     void setText(const std::string& text);
-    /*
-    Label(Label&& other);
-    Label& operator=(Label&& other);
-    */
-    virtual void addContent() override;
+    void addContent() override;
 private:
     std::string text_;
 };

@@ -27,8 +27,8 @@ namespace nv {
         public:
             BasicEvent(std::shared_ptr<Widget> const & target);
             virtual ~BasicEvent();
-            virtual const std::string& getName() override;
-            virtual const std::shared_ptr<Widget>& getTarget() override;
+            const std::string& getName() override;
+            const std::shared_ptr<Widget>& getTarget() override;
 
         private:
             const std::string name_;

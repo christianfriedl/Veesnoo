@@ -40,8 +40,8 @@ class TextArea : public FocusableWidget {
 public:
 
     TextArea(const Rect& rect);
-    virtual bool receiveKey(const int ch) override;
-    virtual void addContent() override;
+    bool receiveKey(const int ch) override;
+    void addContent() override;
     const std::string& getText();
     void setText(const std::string& text) { text_ = text; }
     void focus() override;
