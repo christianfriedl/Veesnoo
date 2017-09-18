@@ -23,7 +23,7 @@
 #include <string.h>
 
 
-namespace nv {
+namespace veesnoo {
 
     TextArea::TextArea(const Rect& rect) : FocusableWidget(rect),
             mode_(TextAreaMode::normal), cursorPos_(0) {}

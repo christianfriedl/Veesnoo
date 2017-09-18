@@ -20,7 +20,7 @@
 #ifndef NV_FOCUSABLE_H
 #define NV_FOCUSABLE_H
 
-namespace nv {
+namespace veesnoo {
 
 class Focusable {
 

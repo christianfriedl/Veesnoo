@@ -23,7 +23,7 @@
 #include "Focusable.h"
 #include "Widget.h"
 
-namespace nv {
+namespace veesnoo {
 
     class FocusableWidget: public Focusable, public Widget {
         public:

@@ -26,7 +26,7 @@
 #include "Widget.h"
 #include "Logger.h"
 
-using namespace nv;
+using namespace veesnoo;
 
 int main() {
     Widget w(Rect(0, 0, 20, 1));

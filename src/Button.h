@@ -24,7 +24,7 @@
 #include "FocusableWidget.h"
 #include "BasicEvent.h"
 
-namespace nv {
+namespace veesnoo {
 
     typedef enum { ButtonState_normal, ButtonState_pushed } ButtonState;
 

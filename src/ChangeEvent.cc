@@ -20,7 +20,7 @@
 #include "Widget.h"
 #include "ChangeEvent.h"
 
-namespace nv {
+namespace veesnoo {
     ChangeEvent::ChangeEvent(std::shared_ptr<Widget> const & target):
         Event(), name_("change"), target_(target) {}
     ChangeEvent::~ChangeEvent() {}

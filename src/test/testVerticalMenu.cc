@@ -21,7 +21,7 @@
 #include "VerticalMenu.h"
 #include "MainLoop.h"
 
-using namespace nv;
+using namespace veesnoo;
 
 int main() {
     auto m1 (std::make_shared<MenuItem>("menuitem1"));

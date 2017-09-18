@@ -26,7 +26,7 @@
 #include "CursesWindow.h"
 #include "Widget.h"
 
-namespace nv {
+namespace veesnoo {
 
 class Label: public Widget {
 public:

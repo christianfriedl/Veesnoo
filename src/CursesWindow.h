@@ -23,7 +23,7 @@
 #include "NVBase.h"
 #include "CursesManager.h"
 
-namespace nv {
+namespace veesnoo {
 
     class ColorAttribute;
 

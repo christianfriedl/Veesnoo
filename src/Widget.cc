@@ -26,7 +26,7 @@
 #include "Logger.h"
 #include "CursesException.h"
 
-namespace nv {
+namespace veesnoo {
 
     Widget::Widget(): rect_(0, 0, 1, 1), contentRect_(0, 0, 1, 1), isVisible_(true), parent_(std::weak_ptr<Widget>()), primaryColorAttribute_(std::shared_ptr<ColorAttribute>()) { LOGMETHODONLY(); }
 

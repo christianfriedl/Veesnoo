@@ -22,7 +22,7 @@
 
 
 class Focusable;
-namespace nv {
+namespace veesnoo {
     /**
      * interface for things that will steal the focus,
      * and thus need to give it back on close

@@ -20,7 +20,7 @@
 #include "CursesWindow.h"
 #include "RadioButton.h"
 
-using namespace nv;
+using namespace veesnoo;
 
 int main() {
     RadioButton c1(2, 2, "1");

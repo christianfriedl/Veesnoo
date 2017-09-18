@@ -21,7 +21,7 @@
 #include "ChangeEvent.h"
 #include "RadioButton.h"
 
-namespace nv {
+namespace veesnoo {
 
     /**
      * basic RadioGroup.

@@ -22,7 +22,7 @@
 
 #include <exception>
 
-namespace nv {
+namespace veesnoo {
 
 class CursesException: public std::exception {
 public:

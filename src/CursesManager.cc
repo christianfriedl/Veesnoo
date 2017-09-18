@@ -20,7 +20,7 @@
 #include "CursesManager.h"
 #include "Logger.h"
 
-namespace nv {
+namespace veesnoo {
 
 CursesManager& CursesManager::get() {
     static CursesManager instance = CursesManager();

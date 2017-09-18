@@ -20,7 +20,7 @@
 #include "CursesWindow.h"
 #include "CheckBox.h"
 
-using namespace nv;
+using namespace veesnoo;
 
 int main() {
     CheckBox c1(2, 2);

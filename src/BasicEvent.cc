@@ -20,7 +20,7 @@
 #include "Widget.h"
 #include "BasicEvent.h"
 
-namespace nv {
+namespace veesnoo {
     BasicEvent::BasicEvent(std::shared_ptr<Widget> const & target):
         Event(), name_("basic"), target_(target) {}
     BasicEvent::~BasicEvent() {}

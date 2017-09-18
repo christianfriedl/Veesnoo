@@ -24,7 +24,7 @@
 #include "Label.h"
 #include "BasicEvent.h"
 
-namespace nv {
+namespace veesnoo {
 
     class MessageBox: public Window {
         public:

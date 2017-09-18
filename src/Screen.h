@@ -19,7 +19,7 @@
 
 #include "FocusableContainer.h"
 
-namespace nv {
+namespace veesnoo {
     class Screen: public FocusableContainer {
         public:
             Screen();

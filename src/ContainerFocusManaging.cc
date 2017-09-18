@@ -19,7 +19,7 @@
 
 #include "ContainerFocusManaging.h"
 
-namespace nv {
+namespace veesnoo {
 ContainerFocusManaging::~ContainerFocusManaging() {}
 }
 

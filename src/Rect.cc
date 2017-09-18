@@ -21,7 +21,7 @@
 #include "Logger.h"
 #include <sstream>
 
-namespace nv {
+namespace veesnoo {
     Rect::Rect(const int x, const int y, const int width, const int height): x(x), y(y), width(width), height(height) { }
 
     Rect::Rect(const Rect& other): x(other.x), y(other.y), width(other.width), height(other.height) { }

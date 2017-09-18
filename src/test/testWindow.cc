@@ -21,7 +21,7 @@
 #include "CursesWindow.h"
 #include "Window.h"
 
-using namespace nv;
+using namespace veesnoo;
 
 int main() {
     Window w1(Rect(2, 2, 10, 10), std::string("abcde"));

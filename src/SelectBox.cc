@@ -23,7 +23,7 @@
 #include "Logger.h"
 #include "BasicEvent.h"
 
-namespace nv {
+namespace veesnoo {
 
     SelectBox::SelectBox(const int x, const int y): FocusableContainer(Rect(x, y, 5, 1)), menu_(PopupMenu::create(x, y + 1)), selectedItem_() { 
         LOGMETHOD("new SelectBox %s", toString().c_str());

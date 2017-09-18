@@ -19,7 +19,7 @@
 
 #include "MainLoop.h"
 
-namespace nv {
+namespace veesnoo {
 
     MainLoop::MainLoop(std::shared_ptr<FocusableContainer> mainContainer): mainContainer_(mainContainer) {
         Logger::get().log("MainLoop::MainLoop(...), has subWidgets length %i", mainContainer->getSubWidgets().size());

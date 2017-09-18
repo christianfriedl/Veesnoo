@@ -26,7 +26,7 @@
 #include "Container.h"
 #include "Logger.h"
 
-using namespace nv;
+using namespace veesnoo;
 
 int main() {
      Container c(Rect(0, 0, 20, 1));

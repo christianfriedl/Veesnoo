@@ -21,7 +21,7 @@
 #include "Screen.h"
 #include "MainLoop.h"
 
-using namespace nv;
+using namespace veesnoo;
 
 int main() {
     auto s1(Screen::create());

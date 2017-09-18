@@ -20,7 +20,7 @@
 #include "Logger.h"
 #include "MessageBox.h"
 
-namespace nv {
+namespace veesnoo {
 
     MessageBox::MessageBox(const std::string& title, const std::string& text): Window(Rect(0, 0, 1, 1), title) {
         label_ = std::make_shared<Label>(text, 1, 1);

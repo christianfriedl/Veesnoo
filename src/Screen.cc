@@ -20,7 +20,7 @@
 #include <string.h>
 #include "Screen.h"
 
-namespace nv {
+namespace veesnoo {
     std::shared_ptr<Screen> Screen::create() {
         auto sc = std::make_shared<Screen>();
         Logger::get().log("Screen::create() -> %llx", sc.get());

@@ -24,7 +24,7 @@
 #include "FocusableWidget.h"
 #include "ChangeEvent.h"
 
-namespace nv {
+namespace veesnoo {
     
 enum class TextBoxMode { normal, insert, replace };
 

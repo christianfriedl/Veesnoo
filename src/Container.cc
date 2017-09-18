@@ -21,7 +21,7 @@
 #include "Container.h"
 #include "Logger.h"
 
-namespace nv {
+namespace veesnoo {
     std::shared_ptr<Container> 
     Container::create(const Rect& rect) {
         return std::make_shared<Container>(rect);

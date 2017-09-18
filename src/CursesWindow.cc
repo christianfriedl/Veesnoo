@@ -23,7 +23,7 @@
 #include "CursesException.h"
 #include "ColorAttribute.h"
 
-namespace nv {
+namespace veesnoo {
 
     CursesWindow::CursesWindow(const Rect& rect) {
         window_ = CursesManager::get().createWindow(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());

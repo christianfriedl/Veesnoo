@@ -35,7 +35,7 @@
 #include <memory>
 
 
-namespace nv {
+namespace veesnoo {
 
     const int Key_Esc = 27;
     const int Key_Enter = 10;

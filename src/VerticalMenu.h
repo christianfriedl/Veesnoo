@@ -23,7 +23,7 @@
 #include "MenuItem.h"
 #include "FocusableContainer.h"
 
-namespace nv {
+namespace veesnoo {
 
     class VerticalMenu: public FocusableContainer {
     public:

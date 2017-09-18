@@ -22,7 +22,7 @@
 
 #include "CursesWindow.h"
 
-namespace nv {
+namespace veesnoo {
 
     class ColorAttribute {
         public:

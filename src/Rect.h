@@ -25,7 +25,7 @@
 
 #include "Point.h"
 
-namespace nv {
+namespace veesnoo {
 
 class Rect {
 

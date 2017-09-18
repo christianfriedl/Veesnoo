@@ -20,7 +20,7 @@
 #include "Logger.h"
 #include "ConfirmBox.h"
 
-namespace nv {
+namespace veesnoo {
 
     ConfirmBox::ConfirmBox(const std::string& title, const std::string& text): Window(Rect(0, 0, 1, 1), title) {
         label_ = std::make_shared<Label>(text, 1, 1);

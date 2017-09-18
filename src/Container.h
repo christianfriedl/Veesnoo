@@ -25,7 +25,7 @@
 #include "Widget.h"
 #include "Logger.h"
 
-namespace nv {
+namespace veesnoo {
 
 class Container: public Widget {
 public:

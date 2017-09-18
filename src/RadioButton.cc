@@ -25,7 +25,7 @@
 #include "Widget.h"
 #include "RadioButton.h"
 
-namespace nv {
+namespace veesnoo {
 
     RadioButton::RadioButton(int x, int y, const std::string& value): FocusableWidget(Rect(x, y, 3, 1)), state_(RadioButtonState::unchecked), frame_("{}"), value_(value) {
     }

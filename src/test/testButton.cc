@@ -20,7 +20,7 @@
 #include "CursesWindow.h"
 #include "Button.h"
 
-using namespace nv;
+using namespace veesnoo;
 
 void is_pushed(const std::shared_ptr<BasicEvent>& ev) // ignore 
 {

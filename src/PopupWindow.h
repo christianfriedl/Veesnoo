@@ -24,7 +24,7 @@
 #include "FocusStealing.h"
 
 class Focusable;
-namespace nv {
+namespace veesnoo {
     /**
      * we derive from Window because all stealers will be windows
      */

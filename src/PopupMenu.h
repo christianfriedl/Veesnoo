@@ -24,7 +24,7 @@
 #include "PopupWindow.h"
 
 class VerticalMenu;
-namespace nv {
+namespace veesnoo {
     class PopupMenu : public PopupWindow {
         public:
             PopupMenu(const int x, const int y); // TODO this is public... figure out how to make it callable ONLY from create()

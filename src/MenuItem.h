@@ -22,7 +22,7 @@
 
 #include "FocusableWidget.h"
 
-namespace nv {
+namespace veesnoo {
 
 typedef enum { MenuItemState_normal, MenuItemState_pushed } MenuItemState;
 

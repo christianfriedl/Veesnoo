@@ -19,7 +19,7 @@
 
 #include "Event.h"
 
-namespace nv {
+namespace veesnoo {
     Event::Event() {}
     Event::~Event() {}
 }

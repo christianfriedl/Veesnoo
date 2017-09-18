@@ -23,7 +23,7 @@
 #include "FocusableContainer.h"
 #include "FocusableWidget.h"
 
-namespace nv {
+namespace veesnoo {
 
 ContainerFocusManager::ContainerFocusManager(FocusableContainer *widget) : 
         widget_(widget), focusedWidget_(nullptr), isFocused_(false) {

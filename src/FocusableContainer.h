@@ -26,7 +26,7 @@
 #include "Container.h"
 #include "ContainerFocusManager.h"
 
-namespace nv {
+namespace veesnoo {
     class FocusableContainer: public Focusable, public Container {
         public:
             explicit FocusableContainer(const Rect& rect);

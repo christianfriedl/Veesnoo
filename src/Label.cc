@@ -19,7 +19,7 @@
 
 #include "Label.h"
 
-namespace nv {
+namespace veesnoo {
 
     Label::Label(const std::string& text, const int x, const int y): Widget(Rect(x, y, text.size(), 1)), text_(text) { 
         LOGMETHOD("%s %s", toString().c_str(), text_.c_str()); 

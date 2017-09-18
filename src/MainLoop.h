@@ -20,7 +20,7 @@
 #include <memory>
 #include "FocusableContainer.h"
 
-namespace nv {
+namespace veesnoo {
 
     class MainLoop {
         public:

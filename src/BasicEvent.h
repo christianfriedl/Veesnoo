@@ -22,7 +22,7 @@
 
 #include "Event.h"
 
-namespace nv {
+namespace veesnoo {
     class BasicEvent: public Event {
         public:
             BasicEvent(std::shared_ptr<Widget> const & target);

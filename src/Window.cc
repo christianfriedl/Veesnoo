@@ -22,7 +22,7 @@
 #include "Widget.h"
 #include "Window.h"
 
-namespace nv {
+namespace veesnoo {
 
     Window::Window(const Rect& rect, const std::string title) : FocusableContainer(rect), title_(title) {
         isFocusStealing_ = true;

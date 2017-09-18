@@ -21,7 +21,7 @@
 #include "HorizontalMenu.h"
 #include "ContainerFocusManager.h"
 
-namespace nv {
+namespace veesnoo {
 
 HorizontalMenu::HorizontalMenu(const int x, const int y): FocusableContainer(Rect(x, y, 1, 1)) { } 
 

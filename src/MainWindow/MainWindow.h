@@ -22,7 +22,7 @@
 
 #include "Window.h"
 
-namespace nv {
+namespace veesnoo {
     class MainWindow: public Window {
         public:
             MainWindow(const Rect& rect, const std::string title = "");

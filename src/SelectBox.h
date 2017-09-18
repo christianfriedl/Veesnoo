@@ -24,7 +24,7 @@
 #include "MenuItem.h"
 #include "PopupMenu.h"
 
-namespace nv {
+namespace veesnoo {
 
     class SelectBox: public FocusableContainer {
     public:

@@ -21,7 +21,7 @@
 #include "PopupMenu.h"
 #include"Logger.h"
 
-namespace nv {
+namespace veesnoo {
 
     PopupMenu::PopupMenu(const int x, const int y) : PopupWindow(Rect(x, y, 1, 1)), menu_(std::make_shared<VerticalMenu>(0, 0)) {
 		LOGMETHOD("new PopupMenu %s", toString().c_str());

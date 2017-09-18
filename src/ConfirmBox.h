@@ -26,7 +26,7 @@
 #include "BasicEvent.h"
 #include "PopupWindow.h"
 
-namespace nv {
+namespace veesnoo {
 
     class ConfirmBox: public PopupWindow {
         public:

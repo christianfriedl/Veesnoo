@@ -20,7 +20,7 @@
 #include "Label.h"
 #include "Logger.h"
 
-using namespace nv;
+using namespace veesnoo;
 
 int main() {
     Label l("abcde", 1, 1);

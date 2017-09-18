@@ -24,7 +24,7 @@
 #include "FocusManaging.h"
 #include "FocusableContainer.h"
 
-namespace nv {
+namespace veesnoo {
 
 class FocusableContainer;
 

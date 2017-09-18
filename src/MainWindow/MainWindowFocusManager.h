@@ -23,7 +23,7 @@
 #include "ContainerFocusManager.h"
 #include "MainWindow.h"
 
-namespace nv {
+namespace veesnoo {
     class MainWindowFocusManager: public ContainerFocusManager {
         public:
             explicit MainWindowFocusManager(MainWindow *widget);

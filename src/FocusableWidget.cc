@@ -22,7 +22,7 @@
 #include <iostream>
 #include <sstream>
 
-namespace nv {
+namespace veesnoo {
 
 #pragma clang diagnostic ignored "-Wunused-parameter"
 bool FocusableWidget::receiveKey(int ch) {

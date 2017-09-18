@@ -20,7 +20,7 @@
 #include "Window.h"
 #include "ConfirmBox.h"
 
-using namespace nv;
+using namespace veesnoo;
 
 void isClosed(const std::shared_ptr<BasicEvent>& ev)
 {

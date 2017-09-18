@@ -19,6 +19,6 @@
 
 #include "MainWindowFocusManager.h"
 
-namespace nv {
+namespace veesnoo {
     MainWindowFocusManager::MainWindowFocusManager(MainWindow *widget): ContainerFocusManager(widget) {}
 }

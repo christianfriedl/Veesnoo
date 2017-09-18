@@ -19,7 +19,7 @@
 
 #include "nvwm.h"
 
-using namespace nv;
+using namespace veesnoo;
 
 int main() {
     auto t1(std::make_shared<Table>(Rect(0, 0, 10, 10), 3));

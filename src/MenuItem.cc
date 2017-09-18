@@ -22,7 +22,7 @@
 #include "BasicEvent.h"
 
 
-namespace nv {
+namespace veesnoo {
 
 MenuItem::MenuItem(const std::string& text, const int x, const int y) : FocusableWidget(Rect(x, y, text.size(), 1)), text_{text} {
     LOGMETHOD("MenuItem::MenuItem(%s, %i, %i)", text.c_str(), x, y);

@@ -21,7 +21,7 @@
 #include "TextArea.h"
 #include "Logger.h"
 
-using namespace nv;
+using namespace veesnoo;
 
 void is_changed(const std::shared_ptr<ChangeEvent>& ev)
 {

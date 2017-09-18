@@ -23,7 +23,7 @@
 #include <string>
 #include "FocusableWidget.h"
 
-namespace nv {
+namespace veesnoo {
 
 typedef enum { CheckboxState_unchecked, CheckboxState_checked } CheckboxState;
 

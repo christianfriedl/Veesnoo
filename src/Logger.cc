@@ -20,7 +20,7 @@
 #include<stdarg.h>
 #include "Logger.h"
 
-namespace nv {
+namespace veesnoo {
 
 Logger& Logger::get() {
     static Logger instance = Logger("test.log");

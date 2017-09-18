@@ -20,7 +20,7 @@
 #include <memory>
 #include "nvwm.h"
 
-using namespace nv;
+using namespace veesnoo;
 
 int main() {
     Widget w(Rect(0, 0, 20, 20));

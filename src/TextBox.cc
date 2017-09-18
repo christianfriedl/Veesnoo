@@ -23,7 +23,7 @@
 #include <string.h>
 
 
-namespace nv {
+namespace veesnoo {
 
     TextBox::TextBox(const int x, const int y, const int width) : FocusableWidget(Rect(x, y, width, 1)),
             mode_(TextBoxMode::normal), cursorX_(0), startX_(0) {}

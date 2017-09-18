@@ -23,7 +23,7 @@
 #include <string>
 #include "Widget.h"
 
-namespace nv {
+namespace veesnoo {
     class Event {
         public:
             Event();

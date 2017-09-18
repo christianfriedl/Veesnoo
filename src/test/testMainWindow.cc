@@ -20,7 +20,7 @@
 #include <string>
 #include "MainWindow.h"
 
-using namespace nv;
+using namespace veesnoo;
 
 int main() {
     MainWindow w1(Rect(2, 2, 10, 10), std::string("abcde"));

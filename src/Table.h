@@ -22,7 +22,7 @@
 
 #include "FocusableContainer.h"
 
-namespace nv {
+namespace veesnoo {
 
     /*
      * table

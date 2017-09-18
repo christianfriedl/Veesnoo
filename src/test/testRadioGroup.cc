@@ -20,7 +20,7 @@
 #include<algorithm>
 #include "nvwm.h"
 
-using namespace nv;
+using namespace veesnoo;
 
 void testVeryMany() {
     auto screen(std::make_shared<Screen>());

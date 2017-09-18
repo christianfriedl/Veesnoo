@@ -19,7 +19,7 @@
 
 #include "nvwm.h"
 
-using namespace nv;
+using namespace veesnoo;
 
 int main() {
     auto screen(std::make_shared<Screen>());

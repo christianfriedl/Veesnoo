@@ -19,7 +19,7 @@
 
 #include "ScrollPane.h"
 
-namespace nv {
+namespace veesnoo {
 
     ScrollPane::ScrollPane(Rect rect): FocusableContainer(rect), viewPort_(Point(0, 0)) { }
 

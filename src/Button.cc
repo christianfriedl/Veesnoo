@@ -25,7 +25,7 @@
 #// include "KeyReceiving.h"
 #include "Button.h"
 
-namespace nv {
+namespace veesnoo {
 
     Button::Button(const std::string& text, int x, int y): FocusableWidget(Rect(x, y, text.size() + 4, 1)), text_(text), state_(ButtonState_normal) {
     }

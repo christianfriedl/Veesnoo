@@ -19,7 +19,7 @@
 
 #include "nvwm.h"
 
-using namespace nv;
+using namespace veesnoo;
 
 int main() {
     auto widget = std::make_shared<Widget>(Rect(0, 0, 0, 0));

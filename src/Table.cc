@@ -21,7 +21,7 @@
 #include "Table.h"
 #include <algorithm>
 
-namespace nv {
+namespace veesnoo {
 
     Table::Table(Rect rect): FocusableContainer(rect), numCols_(1) { } 
     Table::Table(Rect rect, int numCols): FocusableContainer(rect), numCols_(numCols) { } 

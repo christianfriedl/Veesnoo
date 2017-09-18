@@ -25,7 +25,7 @@
 #include "ChangeEvent.h"
 #include "Point.h"
 
-namespace nv {
+namespace veesnoo {
     
 enum class TextAreaMode { normal, insert, replace };
 

@@ -22,7 +22,7 @@
 #include "Logger.h"
 #include "ColorAttribute.h"
 
-namespace nv {
+namespace veesnoo {
 
     ColorAttribute::ColorAttribute():
             fg_(COLOR_WHITE), bg_(COLOR_BLACK), inverse_(false), bold_(false), underline_(false), blink_(false), pairNumber_(0)

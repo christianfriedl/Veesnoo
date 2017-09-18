@@ -23,7 +23,7 @@
 #include "NVBase.h"
 #include "Rect.h"
 
-namespace nv {
+namespace veesnoo {
 
     class CursesManager {
         public:

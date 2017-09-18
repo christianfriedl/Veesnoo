@@ -20,7 +20,7 @@
 #include "FocusableWidget.h"
 #include "FocusableContainer.h"
 
-namespace nv {
+namespace veesnoo {
     FocusableContainer::FocusableContainer(const Rect& rect): 
         Focusable(), Container(rect), focusManager_(new ContainerFocusManager(this)), isFocusStealing_(false) { } 
 

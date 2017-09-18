@@ -34,7 +34,7 @@
 
 */
 
-namespace nv {
+namespace veesnoo {
 
     class ScrollPane: public FocusableContainer {
         public:

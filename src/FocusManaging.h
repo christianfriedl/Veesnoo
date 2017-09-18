@@ -20,7 +20,7 @@
 #ifndef NV_FOCUS_MANAGING_H
 #define NV_FOCUS_MANAGING_H
 
-namespace nv {
+namespace veesnoo {
 
 class FocusManaging {
 public:

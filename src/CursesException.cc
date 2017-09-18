@@ -19,7 +19,7 @@
 
 #include "CursesException.h"
 
-namespace nv {
+namespace veesnoo {
 
 const char *CursesException::what() const _GLIBCXX_USE_NOEXCEPT {
     return _what; 

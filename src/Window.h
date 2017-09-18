@@ -23,7 +23,7 @@
 #include <memory>
 #include "FocusableContainer.h"
 
-namespace nv {
+namespace veesnoo {
 
 class Window : public FocusableContainer {
 public:

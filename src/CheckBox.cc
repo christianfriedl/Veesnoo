@@ -25,7 +25,7 @@
 #include "Widget.h"
 #include "CheckBox.h"
 
-namespace nv {
+namespace veesnoo {
 
     CheckBox::CheckBox(int x, int y): FocusableWidget(Rect(x, y, 3, 1)), state_(CheckboxState_unchecked), frame_("[]") {
         LOGMETHODONLY();

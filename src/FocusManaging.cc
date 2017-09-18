@@ -19,5 +19,5 @@
 
 #include "FocusManaging.h"
 
-namespace nv {
+namespace veesnoo {
 }

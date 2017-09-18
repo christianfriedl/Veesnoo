@@ -20,7 +20,7 @@
 #include "Logger.h"
 #include "PopupWindow.h"
 
-namespace nv {
+namespace veesnoo {
 
     PopupWindow::PopupWindow(const Rect& rect, const std::string title): Window(rect, title), FocusStealing() {
         LOGMETHODONLY();

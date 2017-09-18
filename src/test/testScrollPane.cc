@@ -20,7 +20,7 @@
 #include <ncursesw/ncurses.h>
 #include "ScrollPane.h"
 
-using namespace nv;
+using namespace veesnoo;
 
 int main() {
     auto s1(std::make_shared<ScrollPane>(Rect(1, 1, 10, 10)));
