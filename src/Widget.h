@@ -33,7 +33,6 @@ namespace nv {
 
 // class ColorAttribute;
 
-// TODO check whether we should derive from NonCopyable
 class Widget: public std::enable_shared_from_this<Widget>, public sigc::trackable {
 public:
     explicit Widget(const Rect& rect); // from a rectangle
