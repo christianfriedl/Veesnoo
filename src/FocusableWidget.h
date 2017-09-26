@@ -27,17 +27,31 @@ namespace veesnoo {
 
     class FocusableWidget: public Focusable, public Widget {
         public:
-            explicit FocusableWidget(const Rect& rect): Focusable(), Widget(rect), isFocused_(false) { }
+            explicit FocusableWidget(const Rect& rect);
             virtual ~FocusableWidget() {}
 
             bool receiveKey(int ch) override;
             bool isFocused() const override;
             void focus() override;
             void blur() override;
+
+            virtual std::shared_ptr<ColorAttribute> getContentColorAttribute() override;
+            virtual std::shared_ptr<ColorAttribute> getContentColorAttribute(bool focused);
+            virtual std::shared_ptr<ColorAttribute> getBorderColorAttribute() override;
+            virtual std::shared_ptr<ColorAttribute> getBorderColorAttribute(bool focused);
+
+            void setContentFocusedColorAttribute(std::shared_ptr<ColorAttribute> colorAttribute);
+            void setBorderFocusedColorAttribute(std::shared_ptr<ColorAttribute> colorAttribute);
+
             const std::string toString() const override;
 
-        private:
+        protected:
+            FocusableWidget();
+
             bool isFocused_;
+
+            std::shared_ptr<ColorAttribute> contentFocusedColorAttribute_;
+            std::shared_ptr<ColorAttribute> borderFocusedColorAttribute_;
     };
 
 }

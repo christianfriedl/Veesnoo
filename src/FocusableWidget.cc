@@ -23,6 +23,17 @@
 #include <sstream>
 
 namespace veesnoo {
+FocusableWidget::FocusableWidget(const Rect& rect): Focusable(), Widget(rect), isFocused_(false),
+    contentFocusedColorAttribute_(std::shared_ptr<ColorAttribute>(nullptr)),
+    borderFocusedColorAttribute_(std::shared_ptr<ColorAttribute>(nullptr))
+    {
+    }
+
+FocusableWidget::FocusableWidget(): Focusable(), Widget(), isFocused_(false),
+    contentFocusedColorAttribute_(std::shared_ptr<ColorAttribute>(nullptr)),
+    borderFocusedColorAttribute_(std::shared_ptr<ColorAttribute>(nullptr))
+    {
+    }
 
 #pragma clang diagnostic ignored "-Wunused-parameter"
 bool FocusableWidget::receiveKey(int ch) {
@@ -56,12 +67,90 @@ bool FocusableWidget::isFocused() const {
     return isFocused_;
 }
 
+std::shared_ptr<ColorAttribute> FocusableWidget::getContentColorAttribute(bool focused) {
+    if ( focused ) {
+        if ( contentFocusedColorAttribute_.use_count() == 0 && parent_.use_count() > 0 ) {
+            auto p = parent_.lock();
+            if ( !p )
+                throw Exception("unable to lock parent");
+            auto fwp = std::dynamic_pointer_cast<FocusableContainer>(p);
+            if ( !fwp )
+                throw Exception("unable to cast parent");
+            contentFocusedColorAttribute_ = fwp->getContentColorAttribute(focused);
+        }
+        if ( contentFocusedColorAttribute_.use_count() == 0 ) {
+            contentFocusedColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_RED, COLOR_BLUE);
+        }
+        return contentFocusedColorAttribute_;
+    } else {
+        if ( contentColorAttribute_.use_count() == 0 && parent_.use_count() > 0 ) {
+            auto p = parent_.lock();
+            if ( !p )
+                throw Exception("unable to lock parent");
+            auto fwp = std::dynamic_pointer_cast<FocusableContainer>(p);
+            if ( !fwp )
+                throw Exception("unable to cast parent");
+            contentColorAttribute_ = fwp->getContentColorAttribute(focused);
+        }
+        if ( contentColorAttribute_.use_count() == 0 ) {
+            contentColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_RED, COLOR_BLUE);
+        }
+        return contentColorAttribute_;
+    }
+}
+
+std::shared_ptr<ColorAttribute> FocusableWidget::getBorderColorAttribute(bool focused) {
+    if ( focused ) {
+        if ( borderFocusedColorAttribute_.use_count() == 0 && parent_.use_count() > 0 ) {
+            auto p = parent_.lock();
+            if ( !p )
+                throw Exception("unable to lock parent");
+            auto fwp = std::dynamic_pointer_cast<FocusableContainer>(p);
+            if ( !fwp )
+                throw Exception("unable to cast parent");
+            borderFocusedColorAttribute_ = fwp->getBorderColorAttribute(focused);
+        }
+        if ( borderFocusedColorAttribute_.use_count() == 0 ) {
+            borderFocusedColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_RED, COLOR_BLUE);
+        }
+        return borderFocusedColorAttribute_;
+    } else {
+        if ( borderColorAttribute_.use_count() == 0 && parent_.use_count() > 0 ) {
+            auto p = parent_.lock();
+            if ( !p )
+                throw Exception("unable to lock parent");
+            auto fwp = std::dynamic_pointer_cast<FocusableContainer>(p);
+            if ( !fwp )
+                throw Exception("unable to cast parent");
+            borderColorAttribute_ = fwp->getBorderColorAttribute(focused);
+        }
+        if ( borderColorAttribute_.use_count() == 0 ) {
+            borderColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_RED, COLOR_BLUE);
+        }
+        return borderColorAttribute_;
+    }
+}
+
+std::shared_ptr<ColorAttribute> FocusableWidget::getContentColorAttribute() {
+    return getContentColorAttribute(isFocused());
+}
+
+std::shared_ptr<ColorAttribute> FocusableWidget::getBorderColorAttribute() {
+    return getBorderColorAttribute(isFocused());
+}
+
+void FocusableWidget::setContentFocusedColorAttribute(std::shared_ptr<ColorAttribute> colorAttribute) {
+    contentFocusedColorAttribute_ = colorAttribute;
+}
+void FocusableWidget::setBorderFocusedColorAttribute(std::shared_ptr<ColorAttribute> colorAttribute) {
+    borderFocusedColorAttribute_ = colorAttribute;
+}
+
 const std::string FocusableWidget::toString() const {
     std::ostringstream ostr;
     ostr << "<FocusableWidget " << Widget::toString();
     ostr << "isFocused=" << isFocused_ << ">";
     return ostr.str();
 }
-
 
 }

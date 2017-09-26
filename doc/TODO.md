@@ -61,7 +61,7 @@
 * Add validators -- TODO;prio-40
 * Check out thread safety -- REFLECT;prio-40
 * Add a json description language -- REFLECT;prio-40
-* Add pImpl idiom (see https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c129-when-designing-a-class-hierarchy-distinguish-between-implementation-inheritance-and-interface-inheritance) -- REFLECT;prio-40
+* Add pImpl or dual class hierarchy idiom (see https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c129-when-designing-a-class-hierarchy-distinguish-between-implementation-inheritance-and-interface-inheritance AND https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Ri-pimpl) -- REFLECT;prio-40
 * Think about real life applications -- REFLECT;prio-50
 * Add more configure/autoconf tests -- TODO;prio-50
 * Add scriptability -- REFLECT;prio-60

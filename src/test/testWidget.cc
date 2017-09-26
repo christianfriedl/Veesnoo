@@ -38,7 +38,6 @@ int main() {
     Logger::get().log("should be at 10, 2 size 20, 1");
     w2.addString("2.2 string");
     w2.refresh();
-    getch();
     auto w3 = std::make_shared<Widget>(Rect(1, 1, 20, 20));
     Logger::get().log("w3: ");
     Logger::get().log(w3->toString());

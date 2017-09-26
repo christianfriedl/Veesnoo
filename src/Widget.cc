@@ -28,17 +28,31 @@
 
 namespace veesnoo {
 
-    Widget::Widget(): rect_(0, 0, 1, 1), contentRect_(0, 0, 1, 1), isVisible_(true), parent_(std::weak_ptr<Widget>()), primaryColorAttribute_(std::shared_ptr<ColorAttribute>()) { LOGMETHODONLY(); }
-
-    std::shared_ptr<Widget> Widget::create(const Rect& rect) {
-        return std::make_shared<Widget>(rect);
+    Widget::Widget(): 
+        rect_(0, 0, 1, 1), contentRect_(0, 0, 1, 1), 
+        isVisible_(true), 
+        parent_(std::weak_ptr<Widget>()), 
+        contentColorAttribute_(std::shared_ptr<ColorAttribute>(nullptr)),
+        borderColorAttribute_(std::shared_ptr<ColorAttribute>(nullptr))
+    {
+        LOGMETHODONLY(); 
     }
 
     // constructor: set parent_ to "null", size from rect and make visible by default
-    Widget::Widget(const Rect& rect): rect_(rect), contentRect_(0, 0, rect.getWidth(), rect.getHeight()), isVisible_(true), parent_(std::weak_ptr<Widget>()), primaryColorAttribute_(std::shared_ptr<ColorAttribute>()) {
+    Widget::Widget(const Rect& rect): 
+        rect_(rect), contentRect_(0, 0, rect.getWidth(), rect.getHeight()), 
+        isVisible_(true), 
+        parent_(std::weak_ptr<Widget>()), 
+        contentColorAttribute_(std::shared_ptr<ColorAttribute>(nullptr)),
+        borderColorAttribute_(std::shared_ptr<ColorAttribute>(nullptr))
+    {
         LOGMETHOD("new Widget %s", toString().c_str());
 
         cursesWindow_ = std::make_unique<CursesWindow>(this->getAbsoluteRect());
+    }
+
+    std::shared_ptr<Widget> Widget::create(const Rect& rect) {
+        return std::make_shared<Widget>(rect);
     }
 
     const std::string Widget::toString() const {
@@ -174,7 +188,7 @@ namespace veesnoo {
         LOGMETHODONLY();
         if ( !getIsVisibleBubbling() )
             return;
-        fillBackground(' ', getPrimaryColorAttribute());
+        fillBackground(' ', getContentColorAttribute());
         addContent();
         setCWPosition(getAbsoluteRect()); // TODO check if still valid: not necessary until we have a working move(), but what the bloody heck
         cursesWindow_->noutrefresh();
@@ -187,40 +201,46 @@ namespace veesnoo {
         LOGMETHOD("stub in widget base class called", "");
     }
 
-    std::shared_ptr<ColorAttribute> Widget::getPrimaryColorAttribute() {
-        auto colAttr = primaryColorAttribute_;
-        if ( colAttr.use_count() == 0 && parent_.use_count() > 0 )
-            colAttr = parent_.lock()->getPrimaryColorAttribute();
-        if ( colAttr.use_count() == 0 )
-            colAttr = std::make_shared<ColorAttribute>(COLOR_CYAN, COLOR_BLACK);
-        LOGMETHOD("colAttr = %s", colAttr->toString().c_str());
-        return colAttr;
+    std::shared_ptr<ColorAttribute> Widget::getContentColorAttribute() {
+        if ( contentColorAttribute_.use_count() == 0 && parent_.use_count() > 0 )
+            contentColorAttribute_ = parent_.lock()->getContentColorAttribute();
+        if ( contentColorAttribute_.use_count() == 0 )
+            contentColorAttribute_ = std::make_shared<ColorAttribute>();
+        return contentColorAttribute_;
+    }
+
+    std::shared_ptr<ColorAttribute> Widget::getBorderColorAttribute() {
+        if ( borderColorAttribute_.use_count() == 0 && parent_.use_count() > 0 )
+            borderColorAttribute_ = parent_.lock()->getBorderColorAttribute();
+        if ( borderColorAttribute_.use_count() == 0 )
+            borderColorAttribute_ = std::make_shared<ColorAttribute>();
+        return borderColorAttribute_;
     }
 
     void Widget::addString(const std::string& text) {
         Logger::get().log("Widget::addString(%s)", text.c_str());
-        startColorAttribute(getPrimaryColorAttribute());
+        startColorAttribute(getContentColorAttribute());
         cursesWindow_->addString(text, contentRect_.getX(), contentRect_.getY());
-        endColorAttribute(getPrimaryColorAttribute());
+        endColorAttribute(getContentColorAttribute());
     }
 
     void Widget::addString(const std::string& text, const int x, const int y) {
         Logger::get().log("Widget::addString(%s, %i, %i) adding text to contentRect_: (%i %i, %i, %i)", text.c_str(), x, y, contentRect_.getX(), contentRect_.getY(), contentRect_.getWidth(), contentRect_.getHeight());
-        startColorAttribute(getPrimaryColorAttribute());
+        startColorAttribute(getContentColorAttribute());
         cursesWindow_->addString(text, contentRect_.getX() + x, contentRect_.getY() + y);
-        endColorAttribute(getPrimaryColorAttribute());
+        endColorAttribute(getContentColorAttribute());
     }
 
     void Widget::addCh(int ch) {
-        startColorAttribute(getPrimaryColorAttribute());
+        startColorAttribute(getContentColorAttribute());
         cursesWindow_->addCh(ch, contentRect_.getX(), contentRect_.getY());
-        endColorAttribute(getPrimaryColorAttribute());
+        endColorAttribute(getContentColorAttribute());
     }
 
     void Widget::addCh(const int ch, const int x, const int y) {
-        startColorAttribute(getPrimaryColorAttribute());
+        startColorAttribute(getContentColorAttribute());
         cursesWindow_->addCh(ch, contentRect_.getX() + x, contentRect_.getY() + y);
-        endColorAttribute(getPrimaryColorAttribute());
+        endColorAttribute(getContentColorAttribute());
     }
 
     void Widget::fillBackground(const int ch, std::shared_ptr<ColorAttribute> attribute) {

@@ -36,7 +36,7 @@ namespace veesnoo {
     }
 
     void CursesWindow::addString(const std::string& text) {
-        Logger::get().log("CursesWindow(%llx)::addSring('%s'), (window_ %llx)", text.c_str(), window_);
+        LOGMETHOD("%llx, %s", window_, text.c_str());
         int x, y;
 
         getyx(window_, y, x);
@@ -45,7 +45,7 @@ namespace veesnoo {
     }
 
     void CursesWindow::addString(const std::string& text, int x, int y) {
-        Logger::get().log("CursesWindow(%llx)::addString('%s', %i, %i), window_ %llx", this, text.c_str(), x, y, window_);
+        LOGMETHOD("%llx, %s, %i, %i", window_, text.c_str(), x, y);
         int width, height; // warning can be ignored, height is dummy for curses interface
 
         getmaxyx(window_, height, width);
@@ -54,7 +54,7 @@ namespace veesnoo {
     }
 
     void CursesWindow::addCh(int ch) {
-        Logger::get().log("CursesWindow(%llx)::addCh(%i), window_ %llx", this, ch, window_);
+        LOGMETHOD("%llx, %i", window_, ch);
         int x, y;
 
         getyx(window_, y, x);
@@ -62,7 +62,7 @@ namespace veesnoo {
     }
 
     void CursesWindow::addCh(int ch, int x, int y) {
-        Logger::get().log("CursesWindow(%llx)::addCh(%i, %i, %i), window_ %llx", this, ch, x, y, window_);
+        LOGMETHOD("%llx, %i, %i, %i", window_, ch, x, y);
         mvwaddch(window_, y, x, ch);
     }
 
@@ -77,12 +77,12 @@ namespace veesnoo {
     }
 
     void CursesWindow::addBorder() {
-        Logger::get().log("CursesWindow(%llx)::addBorder(), window_ %llx", this, window_);
+        LOGMETHOD("%llx", window_);
         box(window_, 0, 0);
     }
 
     int CursesWindow::getWidth() {
-        Logger::get().log("CursesWindow(%llx)::getWidth(), window_ %llx", this, window_);
+        LOGMETHOD("%llx", window_);
         int width, height; // warning can be ignored, height is dummy for curses interface
 
         getmaxyx(window_, height, width);
@@ -90,7 +90,7 @@ namespace veesnoo {
     }
 
     int CursesWindow::getHeight() {
-        Logger::get().log("CursesWindow(%llx)::getHeight(), window_ %llx", this, window_);
+        LOGMETHOD("%llx", window_);
         int width, height;
 
         getmaxyx(window_, height, width);
@@ -98,30 +98,30 @@ namespace veesnoo {
     }
 
     void CursesWindow::attrOn(int attr) {
-        Logger::get().log("CursesWindow(%llx)::attrOn(%i), window_ %llx", this, attr, window_);
+        LOGMETHOD("%llx %i", window_, attr);
         wattron(window_, attr);
     }
 
     void CursesWindow::attrOff(int attr) {
-        Logger::get().log("CursesWindow(%llx)::attrOff(%i), window_ %llx", this, attr, window_);
+        LOGMETHOD("%llx %i", window_, attr);
         wattroff(window_, attr);
     }
 
     void CursesWindow::resize(int width, int height) {
-        Logger::get().log("CursesWindow(%llx)::resize(%i, %i), window_ %llx", this, width, height, window_);
+        LOGMETHOD("%llx %i, %i", window_, width, height);
         if ((wresize(window_, height, width)) != OK)
             throw new Exception("unable to resize window_");
     }
 
     void CursesWindow::move(int x, int y) {
-        Logger::get().log("CursesWindow(%llx)::move(%i, %i), window_ %llx", this, x, y, window_);
+        LOGMETHOD("%llx %i, %i", window_, x, y);
         if ((mvwin(window_, y, x)) != OK) {
             throw CursesException("unable to move window_");
         }
     }
 
     void CursesWindow::fillBackground(int ch) {
-        Logger::get().log("CursesWindow(%llx)::fillBackground(%i), window_ %llx", this, ch, window_);
+        LOGMETHOD("%llx %i", window_, ch);
         int x, y, maxx, maxy;
         getmaxyx(window_, maxy, maxx);
         for (y = 0; y < maxy; ++y)
@@ -130,22 +130,22 @@ namespace veesnoo {
     }
 
     void CursesWindow::pairOn(int pair) {
-        Logger::get().log("CursesWindow(%llx)::pairOn(%i), window_ %llx", this, pair, window_);
+        LOGMETHOD("%llx %i", window_, pair);
         wattron(window_, COLOR_PAIR(pair));
     }
 
     void CursesWindow::pairOff(int pair) {
-        Logger::get().log("CursesWindow(%llx)::pairOff(%i), window_ %llx", this, pair, window_);
+        LOGMETHOD("%llx %i", window_, pair);
         wattroff(window_, COLOR_PAIR(pair));
     }
 
     void CursesWindow::resetColors() {
-        Logger::get().log("CursesWindow(%llx)::resetColors(), window_ %llx", this);
+        LOGMETHOD("%llx", window_);
         wattrset(window_, 0);
     }
 
     void CursesWindow::setCursorPosition(const int x, const int y) {
-        Logger::get().log("CursesWindow(%llx)::setCursorPosition(%i, %i), window_ %llx", this, x, y, window_);
+        LOGMETHOD("%llx %i, %i", window_, x, y);
         if ( wmove(window_, y, x) != OK )
             throw CursesException("unable to set cursor");
     }
@@ -163,20 +163,21 @@ namespace veesnoo {
         return cursAttr;
     }
     void CursesWindow::startColorAttribute(const ColorAttribute& attribute) {
-        LOGMETHOD("will start color pair %s", attribute.toString().c_str());
-
+        LOGMETHOD("%llx %s", window_, attribute.toString().c_str());
         wattron(window_, getCursAttr(attribute));
     }
     void CursesWindow::endColorAttribute(const ColorAttribute& attribute) {
-        LOGMETHOD("will end color pair %s", attribute.toString().c_str());
+        LOGMETHOD("%llx %s", window_, attribute.toString().c_str());
         wattroff(window_, getCursAttr(attribute));
     }
 
     void CursesWindow::startColorAttribute(std::shared_ptr<ColorAttribute> attribute) {
+        LOGMETHOD("%llx %s", window_, attribute->toString().c_str());
         auto attr = attribute.get();
         startColorAttribute(*attr);
     }
     void CursesWindow::endColorAttribute(std::shared_ptr<ColorAttribute> attribute) {
+        LOGMETHOD("%llx %s", window_, attribute->toString().c_str());
         auto attr = attribute.get();
         endColorAttribute(*attr);
     }

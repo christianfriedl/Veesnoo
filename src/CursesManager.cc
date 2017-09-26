@@ -89,8 +89,10 @@ int CursesManager::colorPair(short int fg, short int bg) {
     if (!has_colors())
         throw new Exception("this terminal has no colors.");
     pair = ++numPairs_;
-    if (init_pair(pair, fg, bg) != OK)
+    if (init_pair(pair, fg, bg) != OK) {
+        LOGMETHOD("could not init color fg=%i, bg=%i", fg, bg);
         throw new Exception("could not init color");
+    }
     return pair;
 }
 

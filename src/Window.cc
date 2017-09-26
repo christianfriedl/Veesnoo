@@ -36,10 +36,10 @@ namespace veesnoo {
 
     void Window::addContent() {
         LOGMETHODONLY();
-        startColorAttribute(getPrimaryColorAttribute());
+        startColorAttribute(getContentColorAttribute());
         cursesWindow_->addBorder();
         cursesWindow_->addString(title_, ( rect_.getWidth() - title_.size() ) / 2, 0);
-        endColorAttribute(getPrimaryColorAttribute());
+        endColorAttribute(getContentColorAttribute());
     }
 
 

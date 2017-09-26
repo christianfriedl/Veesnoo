@@ -73,7 +73,8 @@ public:
     virtual Rect getAbsoluteContentRect() const;
 
     virtual const std::string toString() const;
-    std::shared_ptr<ColorAttribute> getPrimaryColorAttribute();
+    virtual std::shared_ptr<ColorAttribute> getContentColorAttribute();
+    virtual std::shared_ptr<ColorAttribute> getBorderColorAttribute();
 
 
 protected:
@@ -83,14 +84,17 @@ protected:
     void setCWSize();
     Rect getParentAbsoluteContentRect() const;
 
+    void fillBackground(const int ch, std::shared_ptr<ColorAttribute> attribute);
+    void addBorder();
+
     std::unique_ptr<CursesWindow> cursesWindow_;
     Rect rect_; // the original rect, covering all our area - relative to parent
     Rect contentRect_; // the rect clients can paint on - in RELATIVE coords ===> relative to rect
     bool isVisible_;
     std::weak_ptr<Widget> parent_;
-    std::shared_ptr<ColorAttribute> primaryColorAttribute_;
-    void fillBackground(const int ch, std::shared_ptr<ColorAttribute> attribute);
-    void addBorder();
+    std::shared_ptr<ColorAttribute> contentColorAttribute_;
+    std::shared_ptr<ColorAttribute> borderColorAttribute_;
+
 
 private:
 

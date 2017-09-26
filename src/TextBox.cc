@@ -49,9 +49,7 @@ namespace veesnoo {
     void TextBox::addContent() {
         LOGMETHODONLY();
         char fillChar = fillCharForMode(mode_);
-        if ( isFocused() ) {
-            cursesWindow_->attrOn(A_REVERSE);
-        }
+        startColorAttribute(getContentColorAttribute());
         LOGMETHOD("fillchar is '%c'", fillChar);
 
         addString(text_.substr(startX_), 0, 0);
@@ -61,8 +59,7 @@ namespace veesnoo {
             addCh(fillChar, i, 0);
 
         int cur = (getCursorPos() > rect_.getWidth() - 1) ? (rect_.getWidth() - 1) : getCursorPos();
-        if ( isFocused() )
-            cursesWindow_->attrOff(A_REVERSE);
+        endColorAttribute(getContentColorAttribute());
         cursesWindow_->setCursorPosition(cur, 0);
     }
 
