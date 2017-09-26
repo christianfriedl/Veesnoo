@@ -25,6 +25,7 @@
 namespace veesnoo {
 
     Window::Window(const Rect& rect, const std::string title) : FocusableContainer(rect), title_(title) {
+        contentFocusedColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_WHITE, COLOR_BLACK);
         isFocusStealing_ = true;
         contentRect_ = Rect(1, 1, rect.getWidth() - 2, rect.getHeight() - 2);
         Logger::get().log("new Window @ %ld %s", toString().c_str());

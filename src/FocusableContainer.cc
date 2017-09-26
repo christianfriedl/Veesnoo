@@ -67,7 +67,7 @@ namespace veesnoo {
                 contentFocusedColorAttribute_ = fwp->getContentColorAttribute(focused);
             }
             if ( contentFocusedColorAttribute_.use_count() == 0 ) {
-                contentFocusedColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_RED, COLOR_BLUE);
+                contentFocusedColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_WHITE, COLOR_BLACK, true);
             }
             return contentFocusedColorAttribute_;
         } else {
@@ -81,7 +81,7 @@ namespace veesnoo {
                 contentColorAttribute_ = fwp->getContentColorAttribute(focused);
             }
             if ( contentColorAttribute_.use_count() == 0 ) {
-                contentColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_RED, COLOR_BLUE);
+                contentColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_WHITE, COLOR_BLACK);
             }
             return contentColorAttribute_;
         }
@@ -99,7 +99,7 @@ namespace veesnoo {
                 borderFocusedColorAttribute_ = fwp->getBorderColorAttribute(focused);
             }
             if ( borderFocusedColorAttribute_.use_count() == 0 ) {
-                borderFocusedColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_RED, COLOR_BLUE);
+                borderFocusedColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_WHITE, COLOR_BLACK, true);
             }
             return borderFocusedColorAttribute_;
         } else {
@@ -113,7 +113,7 @@ namespace veesnoo {
                 borderColorAttribute_ = fwp->getBorderColorAttribute(focused);
             }
             if ( borderColorAttribute_.use_count() == 0 ) {
-                borderColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_RED, COLOR_BLUE);
+                borderColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_WHITE, COLOR_BLACK);
             }
             return borderColorAttribute_;
         }
