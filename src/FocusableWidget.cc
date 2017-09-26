@@ -23,17 +23,15 @@
 #include <sstream>
 
 namespace veesnoo {
-FocusableWidget::FocusableWidget(const Rect& rect): Focusable(), Widget(rect), isFocused_(false),
-    contentFocusedColorAttribute_(std::shared_ptr<ColorAttribute>(nullptr)),
-    borderFocusedColorAttribute_(std::shared_ptr<ColorAttribute>(nullptr))
-    {
-    }
+FocusableWidget::FocusableWidget(const Rect& rect): Focusable(), Widget(rect), isFocused_(false) {
+        contentFocusedColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_WHITE, COLOR_BLACK, true);
+        borderFocusedColorAttribute_ = std::make_shared<ColorAttribute>();
+}
 
-FocusableWidget::FocusableWidget(): Focusable(), Widget(), isFocused_(false),
-    contentFocusedColorAttribute_(std::shared_ptr<ColorAttribute>(nullptr)),
-    borderFocusedColorAttribute_(std::shared_ptr<ColorAttribute>(nullptr))
-    {
-    }
+FocusableWidget::FocusableWidget(): Focusable(), Widget(), isFocused_(false) {
+    contentFocusedColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_WHITE, COLOR_BLACK, true);
+    borderFocusedColorAttribute_ = std::make_shared<ColorAttribute>();
+}
 
 #pragma clang diagnostic ignored "-Wunused-parameter"
 bool FocusableWidget::receiveKey(int ch) {
