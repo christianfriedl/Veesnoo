@@ -19,6 +19,7 @@
 
 #include "Logger.h"
 #include "TextBox.h"
+#include "ColorSet.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -26,7 +27,10 @@
 namespace veesnoo {
 
     TextBox::TextBox(const int x, const int y, const int width) : FocusableWidget(Rect(x, y, width, 1)),
-            mode_(TextBoxMode::normal), cursorX_(0), startX_(0) {}
+            mode_(TextBoxMode::normal), cursorX_(0), startX_(0) 
+    {
+        contentFocusedColorAttribute_ = ColorSet::getColorAttribute(WidgetClass::TEXTBOX, ColorClass::CONTENT_FOCUSED);
+    }
 
     const std::string& TextBox::getText() { return text_; }
 

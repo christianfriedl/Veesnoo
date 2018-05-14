@@ -26,6 +26,7 @@ namespace veesnoo {
 
     class ColorAttribute {
         public:
+    static ColorAttribute *defaultColorAttributes;
             ColorAttribute();
             ColorAttribute(short int fg, short int bg, bool inverse = false, bool bold = false, bool underline = false, bool blink = false);
             ColorAttribute(const ColorAttribute& other);
