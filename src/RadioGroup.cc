@@ -20,6 +20,9 @@
 #include "RadioGroup.h"
 
 namespace veesnoo {
+    std::shared_ptr<RadioGroup> RadioGroup::create() {
+        return std::make_shared<RadioGroup>();
+    }
 
     void RadioGroup::addButton(std::shared_ptr<RadioButton> button) {
         buttons_.emplace_back(button);

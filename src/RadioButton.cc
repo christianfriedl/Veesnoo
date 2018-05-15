@@ -30,6 +30,10 @@ namespace veesnoo {
     RadioButton::RadioButton(int x, int y, const std::string& value): FocusableWidget(Rect(x, y, 3, 1)), state_(RadioButtonState::unchecked), frame_("{}"), value_(value) {
     }
 
+    std::shared_ptr<RadioButton> RadioButton::create(int x, int y, const std::string& value) {
+        return std::make_shared<RadioButton>(x, y, value);
+    }
+
     void RadioButton::setFrame(const std::string& frame) {
         frame_ = frame;
     }

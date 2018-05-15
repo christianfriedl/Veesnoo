@@ -32,6 +32,14 @@ MenuItem::MenuItem(const std::string& text) : FocusableWidget(Rect(0, 0, text.si
     LOGMETHOD("MenuItem::MenuItem(%s)", text.c_str());
 }
 
+std::shared_ptr<MenuItem> MenuItem::create(const std::string& text, const int x, const int y) {
+    return std::make_shared<MenuItem>(text, x, y);
+}
+
+std::shared_ptr<MenuItem> MenuItem::create(const std::string& text) {
+    return std::make_shared<MenuItem>(text);
+}
+
 void MenuItem::addContent() {
     LOGMETHODONLY();
     Logger::get().log("MenuItem(%llx)::addContent(), text: '%s', %s, isFocused=%i", this, text_.c_str(), toString().c_str(), isFocused());

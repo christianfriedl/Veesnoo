@@ -32,6 +32,7 @@ class TextBox : public FocusableWidget {
 public:
 
     TextBox(const int x, const int y, const int width);
+    static std::shared_ptr<TextBox> create(const int x, const int y, const int width);
     bool receiveKey(const int ch) override;
     void addContent() override;
     const std::string& getText();

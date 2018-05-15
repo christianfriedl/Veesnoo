@@ -35,6 +35,10 @@ namespace veesnoo {
         public:
             Table(Rect rect);
             Table(Rect rect, int numCols);
+
+            static std::shared_ptr<Table> create(Rect rect);
+            static std::shared_ptr<Table> create(Rect rect, int numCols);
+
             virtual ~Table() {}
             // virtual void addRow(const std::shared_ptr<TableRow>& row);
             void addWidget(const std::shared_ptr<Widget>& widget) override;

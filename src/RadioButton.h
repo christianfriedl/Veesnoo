@@ -31,6 +31,7 @@ enum class RadioButtonState { unchecked, checked };
 class RadioButton: public FocusableWidget { // , public KeyReceiving {
 public:
     RadioButton(int x, int y, const std::string& value);
+    static std::shared_ptr<RadioButton> create(int x, int y, const std::string& value);
     void setFrame(const std::string& frame);
     bool receiveKey(int ch) override;
     void addContent() override;

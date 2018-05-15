@@ -26,6 +26,14 @@ namespace veesnoo {
     Table::Table(Rect rect): FocusableContainer(rect), numCols_(1) { } 
     Table::Table(Rect rect, int numCols): FocusableContainer(rect), numCols_(numCols) { } 
 
+    std::shared_ptr<Table> Table::create(Rect rect) {
+        return std::make_shared<Table>(rect);
+    }
+
+    std::shared_ptr<Table> Table::create(Rect rect, int numCols) {
+        return std::make_shared<Table>(rect, numCols);
+    }
+
     void Table::addWidgets(const std::vector<std::shared_ptr<Widget>>& widgets) {
         for ( auto widget: widgets )
             addWidget(widget);

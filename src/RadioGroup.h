@@ -31,6 +31,7 @@ namespace veesnoo {
      */
     class RadioGroup {
         public:
+            static std::shared_ptr<RadioGroup> create();
             void addButton(std::shared_ptr<RadioButton> button);
             void buttonChanged(const std::shared_ptr<ChangeEvent>& ev);
                 // TODO removeButton

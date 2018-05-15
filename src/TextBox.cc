@@ -32,6 +32,12 @@ namespace veesnoo {
         contentFocusedColorAttribute_ = ColorSet::getColorAttribute(WidgetClass::TEXTBOX, ColorClass::CONTENT_FOCUSED);
     }
 
+    std::shared_ptr<TextBox> TextBox::create(const int x, const int y, const int width) {
+        LOGSTATICMETHOD("TextBox::create(%i, %i, %i)", x, y, width);
+        return std::make_shared<TextBox>(x, y, width);
+    }
+
+
     const std::string& TextBox::getText() { return text_; }
 
     inline int TextBox::getCursorPos() {

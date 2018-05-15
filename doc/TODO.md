@@ -1,12 +1,14 @@
 * Start with colors 
 * (continuous) consistently use LOG macro -- TODO;prio-20;cost-3;codestyle
 * BUG: MesageBox has no create(), so test does not compile -- TODO;prio-20;cost-2;BUG
+* every widget needs a create() method -- TODO;prio-10
 * Better organize source code -- TODO;prio-20
 * Implement Tabbed Page -- TODO;prio-10
 * Implement Table -- TODO;prio-10
 * Implement a Point class and use it for overloaded move() -- TODO;prio-10
 * Implement a Point class and use it for overloaded resize() -- TODO;prio-10
 * Implement a factory for all widgets -- TODO;prio-10
+* find a way to deal with keymaps etc -- TODO;prio-10
 * focus order needs to be optionally determined by a tabIndex -- TODO;prio-20
 * getIsVisibleBubbling() should not be in concrete widgets -- TODO;prio-10
 * replace all occurrences of Logger.log() with LOGMETHOD -- TODO;prio-10
@@ -19,6 +21,7 @@
 * All widgets need to react to move(); -- TODO;prio-10
 * Add onAfterFocus to FocusableXXX -- TODO;prio-10;events
 * focus() and deFocus() should return bool -- TODO;prio-10
+* deFocus() should be aliased to blur() -- TODO;prio-10
 * figure out at what point we need to paint once over everything (set default colors in terminal emu to see the difference!) -- TODO;prio-10
 * Figure out how to do "Help" items -- TODO;prio-20
 * TextArea needs to be scrollable -- TODO;prio-20
@@ -57,10 +60,7 @@
 * Add flexible Color management -- TODO;prio-40
 * Add sizing and layouting -- TODO;prio-40
 * The whole bloody thing needs to be utf-8 -- TODO;prio-40 -- add_wch(); see ...tests.../getcharcode.c
-* Work with actual models -- TODO;prio-40
-* Add validators -- TODO;prio-40
-* Check out thread safety -- REFLECT;prio-40
-* Add a json description language -- REFLECT;prio-40
+* Add a json description language -- REFLECT: alternatively, a json based command language to use with a tiny http server;prio-40
 * Add pImpl or dual class hierarchy idiom (see https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c129-when-designing-a-class-hierarchy-distinguish-between-implementation-inheritance-and-interface-inheritance AND https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Ri-pimpl) -- REFLECT;prio-40
 * Think about real life applications -- REFLECT;prio-50
 * Add more configure/autoconf tests -- TODO;prio-50
@@ -70,7 +70,7 @@
 * Add an on("string"...) method like jquery -- TODO;prio-30
 * Figure out additional necessary widgets - see gtk for inspiration ( https://developer.gnome.org/gtk3/stable/ch03.html ) -- TODO;ongoing;prio-0
 
-## DONE TASKS
+## DONE/REJECTED TASKS
 
 * Reflect the basic class hierarchy -- DONE;prio-20;see-notes
 * BUG: Focused element inside Table will never yield focus, because parent focusable will just keep its focus -- DONE;prio-10;BUG
@@ -108,3 +108,6 @@
 * Implement App with basic loop (AppWindow??? MainWindow??) -- DONE;prio-20
 * CursesManager: rename getInstance() to get() -- DONE;prio-20;cost-5
 * If we cannot move() the window because it is outside our rect, then don't bail, just don't display it -- DONE;prio-10;cost-5;BUG
+* Check out thread safety -- REJECTED:we will always assume full control of the terminal;prio-40
+* Add validators -- REJECTED: this is not part of a widget set;prio-40
+* Work with actual models -- REJECTED:not part of a widget set;prio-40

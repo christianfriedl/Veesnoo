@@ -32,9 +32,7 @@ class Label: public Widget {
 public:
     Label(const std::string& text, const int x, const int y);
 
-    static std::shared_ptr<Label> create(const std::string& text, const int x, const int y) {
-        return std::make_shared<Label>(text, x, y);
-    }
+    static std::shared_ptr<Label> create(const std::string& text, const int x, const int y);
 
     void setText(const std::string& text);
     void addContent() override;

@@ -26,6 +26,10 @@ namespace veesnoo {
         // contentColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_YELLOW, COLOR_BLUE);
     }
 
+    std::shared_ptr<Label> Label::create(const std::string& text, const int x, const int y) {
+        return std::make_shared<Label>(text, x, y);
+    }
+
     void Label::setText(const std::string& text) {
         text_ = text;
         resize(text_.length(), 1);

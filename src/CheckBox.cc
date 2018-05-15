@@ -31,6 +31,10 @@ namespace veesnoo {
         LOGMETHODONLY();
     }
 
+    std::shared_ptr<CheckBox> CheckBox::create(int x, int y) {
+        return std::make_shared<CheckBox>(x, y);
+    }
+
     void CheckBox::setFrame(const std::string& frame) {
         frame_ = frame;
     }

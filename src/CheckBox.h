@@ -30,6 +30,7 @@ typedef enum { CheckboxState_unchecked, CheckboxState_checked } CheckboxState;
 class CheckBox: public FocusableWidget {
 public:
     CheckBox(int x, int y);
+    static std::shared_ptr<CheckBox> create(int x, int y);
     void setFrame(const std::string& frame);
     void addContent() override;
     bool push(); 
