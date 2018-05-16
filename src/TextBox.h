@@ -45,6 +45,8 @@ public:
 
     sigc::signal<void, const std::shared_ptr<ChangeEvent>&> onAfterChange;
 
+    virtual std::shared_ptr<ColorAttribute> getContentColorAttribute() override;
+
 private:
     bool cursorTo(int x);
     bool cursorRight();
@@ -57,6 +59,7 @@ private:
     TextBoxMode mode_;
     unsigned long cursorX_;
     unsigned long startX_;
+    std::shared_ptr<ColorAttribute> contentEditColorAttribute_;
 
 };
 

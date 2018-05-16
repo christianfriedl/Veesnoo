@@ -30,6 +30,7 @@ namespace veesnoo {
             mode_(TextBoxMode::normal), cursorX_(0), startX_(0) 
     {
         contentFocusedColorAttribute_ = ColorSet::getColorAttribute(WidgetClass::TEXTBOX, ColorClass::CONTENT_FOCUSED);
+        contentEditColorAttribute_ = ColorSet::getColorAttribute(WidgetClass::TEXTBOX, ColorClass::CONTENT_EDIT);
     }
 
     std::shared_ptr<TextBox> TextBox::create(const int x, const int y, const int width) {
@@ -55,6 +56,14 @@ namespace veesnoo {
         mode_ = TextBoxMode::insert;
         FocusableWidget::focus();
     }
+
+    std::shared_ptr<ColorAttribute> TextBox::getContentColorAttribute() {
+        if ( isFocused() && ( mode_ == TextBoxMode::insert || mode_ == TextBoxMode::replace ) )
+            return contentEditColorAttribute_;
+        else
+            return FocusableWidget::getContentColorAttribute(isFocused());
+    }
+
 
     void TextBox::addContent() {
         LOGMETHODONLY();

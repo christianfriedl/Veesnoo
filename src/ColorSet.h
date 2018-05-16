@@ -6,7 +6,7 @@
 namespace veesnoo {
 
     enum class WidgetClass { WIDGET, TEXTBOX };
-    enum class ColorClass { CONTENT_FOCUSED };
+    enum class ColorClass { CONTENT_FOCUSED, CONTENT_EDIT };
 
     class ColorSet {
         public:
@@ -14,13 +14,17 @@ namespace veesnoo {
                 const ColorAttribute& contentColorAttribute, 
                 const ColorAttribute& borderColorAttribute, 
                 const ColorAttribute& contentFocusedColorAttribute,
-                const ColorAttribute& borderFocusedColorAttribute
+                const ColorAttribute& borderFocusedColorAttribute,
+                const ColorAttribute& contentEditColorAttribute,
+                const ColorAttribute& borderEditColorAttribute
             );
 
             ColorAttribute contentColorAttribute,
                            borderColorAttribute,
                            contentFocusedColorAttribute,
-                           borderFocusedColorAttribute;
+                           borderFocusedColorAttribute,
+                           contentEditColorAttribute,
+                           borderEditColorAttribute;
 
             static std::shared_ptr<ColorAttribute> getColorAttribute(WidgetClass clazz, ColorClass which);
             static ColorSet defaultColorSets[];

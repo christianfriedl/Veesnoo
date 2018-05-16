@@ -27,6 +27,10 @@ namespace veesnoo {
 
     TextArea::TextArea(const Rect& rect) : FocusableWidget(rect),
             mode_(TextAreaMode::normal), cursorPos_(0) {}
+    
+    std::shared_ptr<TextArea> TextArea::create(const Rect& rect) {
+        return std::make_shared<TextArea>(rect);
+    }
 
     const std::string& TextArea::getText() { return text_; }
 

@@ -74,6 +74,7 @@ int main() {
     window->addWidget(lt1);
 
     auto ta2(TextArea::create(Rect(0, 0, 3, 3)));
+
     auto t1(Table::create(Rect(20, 17, 80, 28), 3));
     char cts[5][6] = { "cell1", "cell2", "cell3", "cell4", "cell" };
     for (int i = 1; i <= 5; ++i) {

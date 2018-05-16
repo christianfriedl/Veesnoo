@@ -40,6 +40,7 @@ class TextArea : public FocusableWidget {
 public:
 
     TextArea(const Rect& rect);
+    static std::shared_ptr<TextArea> create(const Rect& rect);
     bool receiveKey(const int ch) override;
     void addContent() override;
     const std::string& getText();
