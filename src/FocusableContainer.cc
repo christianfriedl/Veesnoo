@@ -140,8 +140,10 @@ namespace veesnoo {
         if ( !focusedWidget )
             return;
         Logger::get().log("FocusableContainer(%llx)::refresh() will refresh focusedWidget %llx for last refresh", this, focusedWidget.get());
-        if ( focusedWidget->getIsVisible() )
+        if ( focusedWidget->getIsVisible() ) {
             focusedWidget->refresh();
+            CursesManager::get().doupdate();
+        }
     }
 
     const std::shared_ptr<FocusableContainer> FocusableContainer::findRootFocusable() {
