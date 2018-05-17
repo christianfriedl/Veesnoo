@@ -24,16 +24,16 @@ namespace veesnoo {
 
 CursesManager& CursesManager::get() {
     static CursesManager instance = CursesManager();
-    Logger::get().log("CursesManager::get(): %llx", (void*)&instance);
     return instance;
 }
 
 CursesManager::CursesManager() : bufferedMode_(false), cBreak_(false), echo_(false), keypadAvailable_(true), width_(0), height_(0), numPairs_(0) { 
-    Logger::get().log("new CursesManager()");
+    LOGMETHODONLY();
 	initCurses();
 }
 
 void CursesManager::initCurses() {
+    LOGMETHODONLY();
     setlocale(LC_ALL, "");
     initscr();
     getmaxyx(stdscr, height_, width_);
@@ -56,7 +56,7 @@ void CursesManager::initCurses() {
 }
 
 CursesManager::~CursesManager() {
-    Logger::get().log("~CursesManager()");
+    LOGMETHODONLY();
     endwin();
 }
 
@@ -111,13 +111,11 @@ int CursesManager::findPair(short int fg, short int bg) {
 }
 
 int CursesManager::getCh() {
-    Logger::get().log("CursesManager::getCh()");
     return getch();
 }
 
 const char * CursesManager::getKeyName(int ch) const {
     const char * const name = keyname(ch); // TODO do we need to delete()???
-    Logger::get().log("CursesManager::getKeyName(%i): %s", ch, name);
     return name;
 }
 

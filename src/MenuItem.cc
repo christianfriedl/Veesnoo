@@ -42,10 +42,8 @@ std::shared_ptr<MenuItem> MenuItem::create(const std::string& text) {
 
 void MenuItem::addContent() {
     LOGMETHODONLY();
-    Logger::get().log("MenuItem(%llx)::addContent(), text: '%s', %s, isFocused=%i", this, text_.c_str(), toString().c_str(), isFocused());
     char fillChar = ' ';
     if ( isFocused() ) {
-        Logger::get().log("is focused! ");
         cursesWindow_->attrOn(A_REVERSE);
     }
 

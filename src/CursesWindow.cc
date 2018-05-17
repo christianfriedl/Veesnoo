@@ -27,11 +27,9 @@ namespace veesnoo {
 
     CursesWindow::CursesWindow(const Rect& rect) {
         window_ = CursesManager::get().createWindow(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
-        Logger::get().log("new CursesWindow from rect @ %llx (x: %i, y: %i, window_: %llx)", this, rect.getX(), rect.getY(), window_);
     }
 
     CursesWindow::~CursesWindow() {
-        Logger::get().log("~ CursesWindow @ %llx (window_: %llx)", this, window_);
         CursesManager::get().destroyWindow(window_);
     }
 

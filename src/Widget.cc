@@ -66,7 +66,7 @@ namespace veesnoo {
     }
 
     void Widget::resize(const int width, const int height) {
-        Logger::get().log("Widget(%llx)::resize(%i, %i)", this, width, height);
+        LOGMETHOD("%i, %i", width, height);
         rect_.resize(width, height);
         contentRect_.resize(width, height);
         cursesWindow_->resize(width, height);
@@ -218,14 +218,14 @@ namespace veesnoo {
     }
 
     void Widget::addString(const std::string& text) {
-        Logger::get().log("Widget::addString(%s)", text.c_str());
+        LOGMETHOD("%s", text.c_str());
         startColorAttribute(getContentColorAttribute());
         cursesWindow_->addString(text, contentRect_.getX(), contentRect_.getY());
         endColorAttribute(getContentColorAttribute());
     }
 
     void Widget::addString(const std::string& text, const int x, const int y) {
-        Logger::get().log("Widget::addString(%s, %i, %i) adding text to contentRect_: (%i %i, %i, %i)", text.c_str(), x, y, contentRect_.getX(), contentRect_.getY(), contentRect_.getWidth(), contentRect_.getHeight());
+        LOGMETHOD("Widget::addString(%s, %i, %i) adding text to contentRect_: (%i %i, %i, %i)", text.c_str(), x, y, contentRect_.getX(), contentRect_.getY(), contentRect_.getWidth(), contentRect_.getHeight());
         startColorAttribute(getContentColorAttribute());
         cursesWindow_->addString(text, contentRect_.getX() + x, contentRect_.getY() + y);
         endColorAttribute(getContentColorAttribute());

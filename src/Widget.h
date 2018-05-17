@@ -43,7 +43,6 @@ public:
     */
 
     virtual ~Widget() {
-        Logger::get().log("~Widget() %s", toString().c_str());
     }
 
     void setParent(const std::weak_ptr<Widget>& parent); 

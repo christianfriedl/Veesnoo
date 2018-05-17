@@ -53,15 +53,11 @@ namespace veesnoo {
         LOGMETHODONLY();
         hide();
         if ( previouslyFocusedWidget_.use_count() == 0 ) {
-            Logger::get().log("PopupWindow(%llx)::close(): no previouslyFocusedWidget_ ", this);
             return false;
         }
 
-        Logger::get().log("PopupWindow(%llx)::close(): previouslyFocusedWidget_ = %llx", this, previouslyFocusedWidget_.get());
-
         blur();
 
-        LOGMETHOD("will call focus() on previouslyFocusedWidget_ = %llx", previouslyFocusedWidget_.get());
         previouslyFocusedWidget_->focus();
         return true;
     }

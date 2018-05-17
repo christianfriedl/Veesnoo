@@ -48,7 +48,6 @@ namespace veesnoo {
     }
 
     bool Button::push() {
-        Logger::get().log("Button(%llx)::push()", this);
         state_ = ButtonState_pushed;
         // TODO do stuff
         refresh();

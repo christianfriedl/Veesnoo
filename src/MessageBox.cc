@@ -45,7 +45,6 @@ namespace veesnoo {
         int labelX = std::max(rect_.getWidth() / 2 - maxTextLen / 2 - 1, 0);
         int labelY = std::max(rect_.getHeight() / 2 - 1, 0);
         label_->move(labelX, labelY);
-        Logger::get().log("MB2 contentRect_ %s", contentRect_.toString()->c_str());
         if ( parent_.use_count() != 0 ) { // we have a parent
             auto parent = parent_.lock();
             if ( parent == nullptr )

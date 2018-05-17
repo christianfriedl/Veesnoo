@@ -42,25 +42,16 @@ bool ContainerFocusManager::bubbleReceiveKey(int ch, std::shared_ptr<Widget> w) 
 
     if ( !f ) throw Exception("w is not focusable");
 
-    Logger::get().log("ContainerFocusManager(%llx)::bubbleReceiveKey: we are before the if", this);
     if ( f.get() == dynamic_cast<Focusable*>(widget_) ) { // the widget we are requested to bubble to is our own widget
-        Logger::get().log("ContainerFocusManager(%llx)::bubbleReceiveKey will return false", this);
-        LOGMETHOD("will return false", "");
         return false;
     } else if ( f->receiveKey(ch) ) {
-        Logger::get().log("ContainerFocusManager(%llx)::bubbleReceiveKey will return true", this);
-        LOGMETHOD("will return true", "");
         return true;
     } else {
         auto ff = w->getParent().lock();
-        Logger::get().log("ContainerFocusManager(%llx)::bubbleReceiveKey no parent found, will return false", this);
-        LOGMETHOD("no parent found, will return false", "");
         if ( !ff )
             return false;
-        LOGMETHOD("will bubbleReceiveKey(%i, %llx)", ch, ff.get());
         return bubbleReceiveKey(ch, ff);
     }
-    Logger::get().log("ContainerFocusManager(%llx)::bubbleReceiveKey: we are after the if", this);
 }
 
 bool ContainerFocusManager::receiveKey(int ch) {

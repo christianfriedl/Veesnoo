@@ -139,7 +139,6 @@ namespace veesnoo {
         auto focusedWidget = std::dynamic_pointer_cast<FocusableWidget>(focusedFocusable);
         if ( !focusedWidget )
             return;
-        Logger::get().log("FocusableContainer(%llx)::refresh() will refresh focusedWidget %llx for last refresh", this, focusedWidget.get());
         if ( focusedWidget->getIsVisible() ) {
             focusedWidget->refresh();
             CursesManager::get().doupdate();

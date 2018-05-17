@@ -8,6 +8,7 @@
 * Implement a Point class and use it for overloaded move() -- TODO;prio-10
 * Implement a Point class and use it for overloaded resize() -- TODO;prio-10
 * Implement a factory for all widgets -- TODO;prio-10
+* SelectBox should correctly manage options with name/value pairs
 * find a way to deal with keymaps etc -- TODO;prio-10
 * focus order needs to be optionally determined by a tabIndex -- TODO;prio-20
 * getIsVisibleBubbling() should not be in concrete widgets -- TODO;prio-10

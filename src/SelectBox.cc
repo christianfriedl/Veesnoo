@@ -20,7 +20,6 @@
 #include "Logger.h"
 #include "SelectBox.h"
 #include "FocusableContainer.h"
-#include "Logger.h"
 #include "BasicEvent.h"
 
 namespace veesnoo {
@@ -39,9 +38,7 @@ namespace veesnoo {
 
     void 
     SelectBox::layout() {
-        Logger::get().log("SelectBox::layout()");
         menu_->layout();
-        Logger::get().log("SelectBox::layout() will resize to: %i %i", menu_->getRect().getWidth() + 2, 1);
         resize(menu_->getRect().getWidth() + 2, 1);
     }
 
@@ -65,10 +62,8 @@ namespace veesnoo {
         addCh('/', text.size() + 1, 0);
     }
 
-    void 
-    SelectBox::miPushed(const std::shared_ptr<BasicEvent>& ev) {
+    void SelectBox::miPushed(const std::shared_ptr<BasicEvent>& ev) {
         auto tgt = std::static_pointer_cast<MenuItem>(ev->getTarget());
-        Logger::get().log("SelectBox::miPushed(ev) has target %llx", tgt.get());
         selectedItem_ = tgt;
         menu_->close();
     }
@@ -76,26 +71,20 @@ namespace veesnoo {
     /**
      * unused, TODO needs onAfterFocus event
      */
-    void 
-    SelectBox::miHover(const std::shared_ptr<BasicEvent>& ev) {
+    void SelectBox::miHover(const std::shared_ptr<BasicEvent>& ev) {
         auto tgt = std::static_pointer_cast<MenuItem>(ev->getTarget());
-        Logger::get().log("SelectBox::miHover(ev) has target %llx", tgt.get());
         selectedItem_ = tgt;
     }
 
 
-    const std::shared_ptr<MenuItem>& 
-    SelectBox::addItem(const std::shared_ptr<MenuItem>& mi) {
-        Logger::get().log("SelectBox(%llx)::addItem(%llx)", this, mi.get());
+    const std::shared_ptr<MenuItem>& SelectBox::addItem(const std::shared_ptr<MenuItem>& mi) {
         mi->onAfterPush.connect(sigc::mem_fun(this, &SelectBox::miPushed) );
         menu_->addItem(mi);
         layout();
         return mi;
     }
 
-    const std::shared_ptr<MenuItem>& 
-    SelectBox::addOption(const std::string& name, const std::string& value) {
-        Logger::get().log("SelectBox(%llx)::addOption('%s', '%s')", this, name.c_str(), value.c_str());
+    const std::shared_ptr<MenuItem>& SelectBox::addOption(const std::string& name, const std::string& value) {
         auto mi = std::make_shared<MenuItem>(name);
         return addItem(mi);
     }
@@ -113,7 +102,6 @@ namespace veesnoo {
     // Do not confuse this with addItem!
     void 
     SelectBox::addWidget(const std::shared_ptr<Widget>& widget) {
-        Logger::get().log("SelectBox(%llx)::addWidget(%llx)", this, widget.get());
         FocusableContainer::addWidget(widget);
         layout();
     }

@@ -28,7 +28,6 @@ namespace veesnoo {
         contentFocusedColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_WHITE, COLOR_BLACK);
         isFocusStealing_ = true;
         contentRect_ = Rect(1, 1, rect.getWidth() - 2, rect.getHeight() - 2);
-        Logger::get().log("new Window @ %ld %s", this, toString().c_str());
     }
 
     void Window::setTitle(const std::string title) {

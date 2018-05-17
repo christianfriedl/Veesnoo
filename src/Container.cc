@@ -28,24 +28,18 @@ namespace veesnoo {
     }
 
     void Container::addWidget(const std::shared_ptr<Widget>& widget) {
-        Logger::get().log("Container(%llx)::addWidget(%llx)", this, widget.get());
         auto weakThis = std::weak_ptr<Widget>(shared_from_this());
         widget->setParent(weakThis);
         subWidgets_.emplace_back(widget);
-        Logger::get().log("Container(%llx)::addWidget after adding, has subWidgets length %i", this, subWidgets_.size());
     }
 
     void Container::removeWidget(const std::shared_ptr<Widget>& widget) {
-        Logger::get().log("Container(%llx)::removeWidget before removing, has subWidgets length %i", this, subWidgets_.size());
         subWidgets_.erase(std::remove(subWidgets_.begin(), subWidgets_.end(), widget));
-        Logger::get().log("Container(%llx)::removeWidget after removing, has subWidgets length %i", this, subWidgets_.size());
     }
 
 
     void Container::refresh() {
         LOGMETHODONLY();
-        Logger::get().log("Container(%llx)::refresh()  will refresh itself (%s), isVisible=%i", this, toString().c_str(), isVisible_ );
-        Logger::get().log("Container(%llx)::refresh() has subWidgets length %i, isVisible_ = %i", this, subWidgets_.size(), isVisible_);
         if ( !getIsVisibleBubbling() )
             return;
         fillBackground(' ', getContentColorAttribute());
@@ -53,8 +47,7 @@ namespace veesnoo {
         setCWPosition(getAbsoluteRect()); // TODO check if still valid: not necessary until we have a working move(), but what the bloody heck
         cursesWindow_->noutrefresh();
         for ( auto widget: subWidgets_ ) {
-            Logger::get().log("Container(%llx)::refresh() will refresh widget %llx", this, widget.get());
-                widget->refresh();
+            widget->refresh();
         }
         if ( parent_.use_count() == 0 )
             CursesManager::get().refresh();

@@ -31,7 +31,6 @@ void HorizontalMenu::addWidget(const std::shared_ptr<Widget>& widget) {
 }
 
 void HorizontalMenu::layout() {
-    Logger::get().log("HorizontalMenu @%llx layouting", this);
     int width = 0, i = 0;
 
     for ( auto widget: subWidgets_ ) {
@@ -40,10 +39,8 @@ void HorizontalMenu::layout() {
         ++i;
         widget->move(width, 0);
         width += widget->getRect().getWidth();
-    Logger::get().log("HorizontalMenu width is %i, i is %i", width, i);
     }
     rect_.resize(width, rect_.getHeight());
-    Logger::get().log("HorizontalMenu layouting done");
 }
 
 }

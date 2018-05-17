@@ -28,7 +28,6 @@ namespace veesnoo {
     }
 
     std::shared_ptr<PopupMenu> PopupMenu::create(const int x, const int y) {
-        Logger::get().log("PopupMenu::create(%i, %i)", x, y);
         auto widget(std::make_shared<PopupMenu>(x, y));
         widget->addWidget(widget->menu_);
         return widget;
@@ -40,7 +39,6 @@ namespace veesnoo {
     }
 
     void PopupMenu::addWidget(const std::shared_ptr<Widget>& widget) {
-        Logger::get().log("PopupMenu(%llx)::addWidget(%llx)", this, widget.get());
         Window::addWidget(widget);
         layout();
     }
@@ -48,7 +46,6 @@ namespace veesnoo {
 
     const std::shared_ptr<MenuItem>& 
     PopupMenu::addItem(const std::shared_ptr<MenuItem>& mi) {
-        Logger::get().log("PopupMenu(%llx)::addItem(%llx)", this, mi.get());
         menu_->addWidget(mi);
         layout();
         return mi;
@@ -56,7 +53,6 @@ namespace veesnoo {
 
     const std::shared_ptr<MenuItem>& 
     PopupMenu::addItem(const std::string& name) {
-        Logger::get().log("PopupMenu(%llx)::addItem('%s')", this, name.c_str());
         auto mi = std::make_shared<MenuItem>(name);
         return addItem(mi);
     }
