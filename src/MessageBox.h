@@ -31,6 +31,7 @@ namespace veesnoo {
             MessageBox(const std::string& title, const std::string& text);
             virtual ~MessageBox();
             static const std::shared_ptr<MessageBox> create(const std::string& title, const std::string& text);
+
             const std::shared_ptr<Label> getLabel();
             void layout();
             bool receiveKey(int ch) override;

@@ -30,7 +30,11 @@ namespace veesnoo {
     Button::Button(const std::string& text, int x, int y): FocusableWidget(Rect(x, y, text.size() + 4, 1)), text_(text), state_(ButtonState_normal) {
     }
 
-    void Button::refresh() {
+    std::shared_ptr<Button> Button::create(const std::string& text, int x, int y) {
+        return std::make_shared<Button>(text, x, y);
+    }
+
+    void Button::addContent() {
         LOGMETHODONLY();
         if ( !getIsVisibleBubbling() )
             return;
@@ -41,7 +45,6 @@ namespace veesnoo {
         addString(s.str(), 0, 0);
         if ( isFocused() || state_ == ButtonState_pushed)
             cursesWindow_->attrOff(A_REVERSE);
-        FocusableWidget::refresh();
     }
 
     bool Button::push() {

@@ -1,6 +1,6 @@
-* Start with colors 
+* Start with colors -- TODO;prio-10
+* We need color schemes, and a better way for ColorSets -- TODO;prio-10
 * (continuous) consistently use LOG macro -- TODO;prio-20;cost-3;codestyle
-* BUG: MesageBox has no create(), so test does not compile -- TODO;prio-20;cost-2;BUG
 * every widget needs a create() method -- TODO;prio-10
 * Better organize source code -- TODO;prio-20
 * Implement Tabbed Page -- TODO;prio-10
@@ -111,3 +111,5 @@
 * Check out thread safety -- REJECTED:we will always assume full control of the terminal;prio-40
 * Add validators -- REJECTED: this is not part of a widget set;prio-40
 * Work with actual models -- REJECTED:not part of a widget set;prio-40
+* test/testButton is disabled now because it calls refresh(); update to new standards -- DONE;prio-30; actually, redo all does the trick!
+* BUG: MesageBox has no create(), so test does not compile -- DONE;prio-20;cost-2;BUG

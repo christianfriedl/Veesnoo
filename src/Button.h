@@ -31,7 +31,8 @@ namespace veesnoo {
     class Button: public FocusableWidget { // , public KeyReceiving {
         public:
             Button(const std::string& text, int x, int y);
-            void refresh() override;
+            static std::shared_ptr<Button> create(const std::string& text, int x, int y);
+            void addContent() override;
             bool push(); 
             bool receiveKey(int ch) override;
             sigc::signal<void, const std::shared_ptr<BasicEvent>&> onAfterPush;

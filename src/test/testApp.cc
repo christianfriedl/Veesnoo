@@ -42,6 +42,11 @@ int main() {
     window->addWidget(cb1);
     auto cb2(CheckBox::create(24, 2));
 
+    auto lbtn1(Label::create("Button here:", 40, 2));
+    window->addWidget(lbtn1);
+    auto btn1(Button::create("Push me!", 70, 2));
+    window->addWidget(btn1);
+
     auto lrb1(Label::create("Radioi here:", 0, 4));
     window->addWidget(lrb1);
     auto rb11(RadioButton::create(20, 4, "radio_rb11"));
