@@ -1,0 +1,27 @@
+>> create:Screen
+<< ok:1
+>> create:MainLoop
+<< ok:6
+>> getMaxScreenRect
+<< ok:0,0,200,100
+>> create:Window:0,0,200,100
+<< ok:2
+>> 2:setTitle:"Main Window"
+<< ok
+>> 1:addWidget:2
+>> create:mainLoop:1
+<< ok:3
+>> create:Label:"Text here:",0,0
+<< ok:4
+>> 2:addWidget:4
+<< ok
+>> create:TextBox:20,0,20
+<< ok:5
+>> 5:setText:"textbox"
+<< ok
+>> 2:addWidget:5
+
+...
+
+>> 6:run
+<< ok

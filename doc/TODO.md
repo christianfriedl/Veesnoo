@@ -21,7 +21,7 @@
 * All widgets need to react to move(); -- TODO;prio-10
 * Add onAfterFocus to FocusableXXX -- TODO;prio-10;events
 * focus() and deFocus() should return bool -- TODO;prio-10
-* deFocus() should be aliased to blur() -- TODO;prio-10
+* deFocus() should be aliased to blur() -- REJECTED;prio-10
 * figure out at what point we need to paint once over everything (set default colors in terminal emu to see the difference!) -- TODO;prio-10
 * Figure out how to do "Help" items -- TODO;prio-20
 * TextArea needs to be scrollable -- TODO;prio-20
