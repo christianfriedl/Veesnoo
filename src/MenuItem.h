@@ -31,8 +31,10 @@ class MenuItem: public FocusableWidget {
 public:
     MenuItem(const std::string& text, const int x, const int y);
     MenuItem(const std::string& text);
+    MenuItem(const std::string& text, const Rect& rect);
     static std::shared_ptr<MenuItem> create(const std::string& text, const int x, const int y);
     static std::shared_ptr<MenuItem> create(const std::string& text);
+    static std::shared_ptr<MenuItem> create(const std::string& text, const Rect& rect);
     virtual ~MenuItem() {}
     void addContent() override;
     bool receiveKey(int ch) override;

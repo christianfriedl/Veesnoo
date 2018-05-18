@@ -30,11 +30,18 @@ namespace veesnoo {
     {
     }
 
+    TextBox::TextBox(const Rect& rect) : TextBox(rect.getX(), rect.getY(), rect.getWidth(), 1)
+    {
+    }
+
     std::shared_ptr<TextBox> TextBox::create(const int x, const int y, const int width) {
         LOGSTATICMETHOD("TextBox::create(%i, %i, %i)", x, y, width);
         return std::make_shared<TextBox>(x, y, width);
     }
 
+    std::shared_ptr<TextBox> TextBox::create(const Rect& rect) {
+        return std::make_shared<TextBox>(rect);
+    }
 
     const std::string& TextBox::getText() { return text_; }
 
