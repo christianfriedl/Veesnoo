@@ -1,9 +1,16 @@
+* find a way to deal with keymaps etc -- TODO;prio-01
+* we need a method for every edit action
+* Create a layout engine -- TODO;prio-01
+* Create access via a simple json-based language -- TODO;prio-01
+* Create a test app for interactive use of json language -- TODO;prio-01
+* Create access via a simple display server -- TODO;prio-05
 * Window does not heed focused border color -- TODO;BUG;prio-10
 * Table should not use focused content color -- TODO;BUG;prio-10
 * We should abstract-away the concrete colors in the color scheme -- TODO;BUG;prio-10
 * We should use some function instead of the direct map access for the color scheme -- TODO;BUG;prio-10
 * Selectbox fills all space available -- TODO;BUG;prio-10
-* Better organize source code -- TODO;prio-20
+* Better organize source code -- TODO;prio-10
+* The whole bloody thing needs to be utf-8 -- TODO;prio-10 -- add_wch(); see ...tests.../getcharcode.c
 * Implement Tabbed Page -- TODO;prio-30
 * Implement Table -- TODO;prio-10
 * Implement ComboBox -- TODO;prio-30
@@ -11,16 +18,12 @@
 * Implement a Point class and use it for overloaded resize() -- TODO;prio-10
 * Implement a factory for all widgets -- TODO;prio-10
 * SelectBox should correctly manage options with name/value pairs
-* find a way to deal with keymaps etc -- TODO;prio-10
 * focus order needs to be optionally determined by a tabIndex -- TODO;prio-20
-* getIsVisibleBubbling() should not be in concrete widgets -- TODO;prio-10
-* replace all occurrences of Logger.log() with LOGMETHOD -- TODO;prio-10
 * Be able to define custom focus order -- TODO;prio-20
 * BUG: if TableRow is constructed with rect(0,0,1,1), but inside the test app (see test/testTable.cc), then the tableCell will be displayed at 0,0 instead of 1,1 -- TODO;BUG;prio-20
 * valgrind shows that SelectBox leaks memory, but only once popup opens -- TODO;prio-10
 ** try and remove selectedItem_, probably solving it; otherwise turn menu_ into wek ref?
 * Create .so instead of .a, and use it in test/ -- TODO;prio-10
-* Widget::parent\_ needs to be a Container, not a Widget, so we don't have to cast every access -- TODO;prio-10 
 * All widgets need to react to move(); -- TODO;prio-10
 * Add onAfterFocus to FocusableXXX -- TODO;prio-10;events
 * focus() and deFocus() should return bool -- TODO;prio-10
@@ -61,8 +64,6 @@
 * TextBox: ... implement color pairs -- TODO;prio-40
 * Add flexible keyboard interface -- TODO;prio-40
 * Add flexible Color management -- TODO;prio-40
-* Add sizing and layouting -- TODO;prio-40
-* The whole bloody thing needs to be utf-8 -- TODO;prio-40 -- add_wch(); see ...tests.../getcharcode.c
 * Add a json description language -- REFLECT: alternatively, a json based command language to use with a tiny http server;prio-40
 * Add pImpl or dual class hierarchy idiom (see https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#c129-when-designing-a-class-hierarchy-distinguish-between-implementation-inheritance-and-interface-inheritance AND https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Ri-pimpl) -- REFLECT;prio-40
 * Think about real life applications -- REFLECT;prio-50
@@ -72,6 +73,7 @@
 * Consider if we want a status line (StatusLine widget)? -- TODO;prio-40
 * Add an on("string"...) method like jquery -- TODO;prio-30
 * Figure out additional necessary widgets - see gtk for inspiration ( https://developer.gnome.org/gtk3/stable/ch03.html ) -- TODO;ongoing;prio-0
+* Widget::parent\_ needs to be a Container, not a Widget, so we don't have to cast every access -- TODO;prio-99 
 
 ## DONE/REJECTED TASKS
 
@@ -120,3 +122,5 @@
 * (continuous) consistently use LOG macro -- DONE;prio-20;cost-3;codestyle
 * every widget needs a create() method -- DONE;prio-10
 * Start with colors -- DONE;prio-10
+* getIsVisibleBubbling() should not be in concrete widgets -- DONE;prio-10
+* replace all occurrences of Logger.log() with LOGMETHOD -- DONE;prio-10
