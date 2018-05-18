@@ -17,14 +17,13 @@
  */
 
 
+#include "Globals.h"
 #include "FocusableWidget.h"
 #include "FocusableContainer.h"
 
 namespace veesnoo {
     FocusableContainer::FocusableContainer(const Rect& rect): 
-        Focusable(), Container(rect), focusManager_(new ContainerFocusManager(this)), isFocusStealing_(false),
-        contentFocusedColorAttribute_(std::shared_ptr<ColorAttribute>(nullptr)),
-        borderFocusedColorAttribute_(std::shared_ptr<ColorAttribute>(nullptr))
+        Focusable(), Container(rect), focusManager_(new ContainerFocusManager(this)), isFocusStealing_(false)
     { 
     } 
 
@@ -55,75 +54,27 @@ namespace veesnoo {
         focusManager_->requestFocus(widget);
     }
 
-    std::shared_ptr<ColorAttribute> FocusableContainer::getContentColorAttribute(bool focused) {
-        if ( focused ) {
-            if ( contentFocusedColorAttribute_.use_count() == 0 && parent_.use_count() > 0 ) {
-                auto p = parent_.lock();
-                if ( !p )
-                    throw Exception("unable to lock parent");
-                auto fwp = std::dynamic_pointer_cast<FocusableContainer>(p);
-                if ( !fwp )
-                    throw Exception("unable to cast parent");
-                contentFocusedColorAttribute_ = fwp->getContentColorAttribute(focused);
-            }
-            if ( contentFocusedColorAttribute_.use_count() == 0 ) {
-                contentFocusedColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_WHITE, COLOR_BLACK, true);
-            }
-            return contentFocusedColorAttribute_;
-        } else {
-            if ( contentColorAttribute_.use_count() == 0 && parent_.use_count() > 0 ) {
-                auto p = parent_.lock();
-                if ( !p )
-                    throw Exception("unable to lock parent");
-                auto fwp = std::dynamic_pointer_cast<FocusableContainer>(p);
-                if ( !fwp )
-                    throw Exception("unable to cast parent");
-                contentColorAttribute_ = fwp->getContentColorAttribute(focused);
-            }
-            if ( contentColorAttribute_.use_count() == 0 ) {
-                contentColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_WHITE, COLOR_BLACK);
-            }
-            return contentColorAttribute_;
-        }
+    const ColorAttribute& FocusableContainer::getContentColorAttribute(bool focused) {
+        LOGMETHOD("focused %i, colorTag %s, rv %i", focused, colorTag_.c_str(), Globals::get().colorTheme.colors[colorTag_]["content"].getFg());
+        if ( focused )
+            return Globals::get().colorTheme.colors[colorTag_]["focusedContent"];
+        else
+            return Globals::get().colorTheme.colors[colorTag_]["content"];
     }
 
-    std::shared_ptr<ColorAttribute> FocusableContainer::getBorderColorAttribute(bool focused) {
-        if ( focused ) {
-            if ( borderFocusedColorAttribute_.use_count() == 0 && parent_.use_count() > 0 ) {
-                auto p = parent_.lock();
-                if ( !p )
-                    throw Exception("unable to lock parent");
-                auto fwp = std::dynamic_pointer_cast<FocusableContainer>(p);
-                if ( !fwp )
-                    throw Exception("unable to cast parent");
-                borderFocusedColorAttribute_ = fwp->getBorderColorAttribute(focused);
-            }
-            if ( borderFocusedColorAttribute_.use_count() == 0 ) {
-                borderFocusedColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_WHITE, COLOR_BLACK, true);
-            }
-            return borderFocusedColorAttribute_;
-        } else {
-            if ( borderColorAttribute_.use_count() == 0 && parent_.use_count() > 0 ) {
-                auto p = parent_.lock();
-                if ( !p )
-                    throw Exception("unable to lock parent");
-                auto fwp = std::dynamic_pointer_cast<FocusableContainer>(p);
-                if ( !fwp )
-                    throw Exception("unable to cast parent");
-                borderColorAttribute_ = fwp->getBorderColorAttribute(focused);
-            }
-            if ( borderColorAttribute_.use_count() == 0 ) {
-                borderColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_WHITE, COLOR_BLACK);
-            }
-            return borderColorAttribute_;
-        }
+    const ColorAttribute& FocusableContainer::getBorderColorAttribute(bool focused) {
+        LOGMETHOD("focused %i, colorTag %s, rv %i", focused, colorTag_.c_str(), Globals::get().colorTheme.colors[colorTag_]["border"].getFg());
+        if ( focused )
+            return Globals::get().colorTheme.colors[colorTag_]["focusedBorder"];
+        else
+            return Globals::get().colorTheme.colors[colorTag_]["border"];
     }
 
-    std::shared_ptr<ColorAttribute> FocusableContainer::getContentColorAttribute() {
+    const ColorAttribute& FocusableContainer::getContentColorAttribute() {
         return getContentColorAttribute(isFocused());
     }
 
-    std::shared_ptr<ColorAttribute> FocusableContainer::getBorderColorAttribute() {
+    const ColorAttribute& FocusableContainer::getBorderColorAttribute() {
         return getBorderColorAttribute(isFocused());
     }
 
@@ -171,12 +122,5 @@ namespace veesnoo {
     void FocusableContainer::focusPrev() { focusManager_->focusPrev(); }
     void FocusableContainer::focusThis(std::shared_ptr<Focusable>& widget) { focusManager_->focusThis(widget); }
     std::shared_ptr<Focusable> FocusableContainer::getFocusedWidget() { return focusManager_->getFocusedWidget(); }
-
-    void FocusableContainer::setContentFocusedColorAttribute(std::shared_ptr<ColorAttribute> colorAttribute) {
-        contentFocusedColorAttribute_ = colorAttribute;
-    }
-    void FocusableContainer::setBorderFocusedColorAttribute(std::shared_ptr<ColorAttribute> colorAttribute) {
-        borderFocusedColorAttribute_ = colorAttribute;
-    }
 
 }

@@ -23,7 +23,6 @@ namespace veesnoo {
 
     Label::Label(const std::string& text, const int x, const int y): Widget(Rect(x, y, text.size(), 1)), text_(text) { 
         LOGMETHOD("%s %s", toString().c_str(), text_.c_str()); 
-        // contentColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_YELLOW, COLOR_BLUE);
     }
 
     std::shared_ptr<Label> Label::create(const std::string& text, const int x, const int y) {
@@ -36,7 +35,9 @@ namespace veesnoo {
     }
     void Label::addContent() {
         LOGMETHODONLY();
+        startColorAttribute(getContentColorAttribute());
         addString(text_, 0, 0);
+        endColorAttribute(getContentColorAttribute());
     }
 
 }

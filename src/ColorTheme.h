@@ -12,6 +12,8 @@ namespace veesnoo {
         public:
             explicit ColorTheme(const std::map<std::string, std::map<std::string, ColorAttribute>>& pColors);
             static ColorTheme defaultColorTheme();
+            static ColorTheme greenColorTheme();
+            static ColorTheme redColorTheme();
 
             std::map<std::string, std::map<std::string, ColorAttribute>> colors;
     };

@@ -19,7 +19,6 @@
 
 #include "Logger.h"
 #include "TextBox.h"
-#include "ColorSet.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -59,7 +58,7 @@ namespace veesnoo {
         LOGMETHODONLY();
         char fillChar = fillCharForMode(mode_);
         startColorAttribute(getContentColorAttribute());
-        LOGMETHOD("fillchar is '%c'", fillChar);
+        LOGMETHOD("fillchar is '%c', colattr fg %i, bg %i", fillChar, getContentColorAttribute().getFg(), getContentColorAttribute().getBg());
 
         addString(text_.substr(startX_), 0, 0);
         LOGMETHOD("text is %s", text_.c_str());

@@ -169,15 +169,4 @@ namespace veesnoo {
         wattroff(window_, getCursAttr(attribute));
     }
 
-    void CursesWindow::startColorAttribute(std::shared_ptr<ColorAttribute> attribute) {
-        LOGMETHOD("%llx %s", window_, attribute->toString().c_str());
-        auto attr = attribute.get();
-        startColorAttribute(*attr);
-    }
-    void CursesWindow::endColorAttribute(std::shared_ptr<ColorAttribute> attribute) {
-        LOGMETHOD("%llx %s", window_, attribute->toString().c_str());
-        auto attr = attribute.get();
-        endColorAttribute(*attr);
-    }
-
 }

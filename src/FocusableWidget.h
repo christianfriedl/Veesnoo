@@ -35,13 +35,10 @@ namespace veesnoo {
             void focus() override;
             void blur() override;
 
-            virtual std::shared_ptr<ColorAttribute> getContentColorAttribute() override;
-            virtual std::shared_ptr<ColorAttribute> getContentColorAttribute(bool focused);
-            virtual std::shared_ptr<ColorAttribute> getBorderColorAttribute() override;
-            virtual std::shared_ptr<ColorAttribute> getBorderColorAttribute(bool focused);
-
-            void setContentFocusedColorAttribute(std::shared_ptr<ColorAttribute> colorAttribute);
-            void setBorderFocusedColorAttribute(std::shared_ptr<ColorAttribute> colorAttribute);
+            virtual const ColorAttribute& getContentColorAttribute() override;
+            virtual const ColorAttribute& getContentColorAttribute(bool focused);
+            virtual const ColorAttribute& getBorderColorAttribute() override;
+            virtual const ColorAttribute& getBorderColorAttribute(bool focused);
 
             const std::string toString() const override;
 
@@ -49,9 +46,6 @@ namespace veesnoo {
             FocusableWidget();
 
             bool isFocused_;
-
-            std::shared_ptr<ColorAttribute> contentFocusedColorAttribute_;
-            std::shared_ptr<ColorAttribute> borderFocusedColorAttribute_;
     };
 
 }

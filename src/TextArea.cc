@@ -62,9 +62,7 @@ namespace veesnoo {
     void TextArea::addContent() {
         LOGMETHODONLY();
         char fillChar = fillCharForMode(mode_);
-        if ( isFocused() ) {
-            cursesWindow_->attrOn(A_REVERSE);
-        }
+        startColorAttribute(getContentColorAttribute());
         unsigned i = 0; 
         int y = 0;
         const int width = getRect().getWidth();
@@ -85,8 +83,7 @@ namespace veesnoo {
             addCh(fillChar, i, 0);
             */
 
-        if ( isFocused() )
-            cursesWindow_->attrOff(A_REVERSE);
+        endColorAttribute(getContentColorAttribute());
         Point point = pointFromPosition(cursorPos_);
         cursesWindow_->setCursorPosition(point.getX(), point.getY());
     }

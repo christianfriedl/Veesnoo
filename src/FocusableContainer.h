@@ -58,21 +58,14 @@ namespace veesnoo {
             void focusThis(std::shared_ptr<Focusable>& widget);
             std::shared_ptr<Focusable> getFocusedWidget();
 
-            virtual std::shared_ptr<ColorAttribute> getContentColorAttribute() override;
-            virtual std::shared_ptr<ColorAttribute> getContentColorAttribute(bool focused);
-            virtual std::shared_ptr<ColorAttribute> getBorderColorAttribute() override;
-            virtual std::shared_ptr<ColorAttribute> getBorderColorAttribute(bool focused);
-
-            void setContentFocusedColorAttribute(std::shared_ptr<ColorAttribute> colorAttribute);
-            void setBorderFocusedColorAttribute(std::shared_ptr<ColorAttribute> colorAttribute);
-
+            virtual const ColorAttribute& getContentColorAttribute() override;
+            virtual const ColorAttribute& getContentColorAttribute(bool focused);
+            virtual const ColorAttribute& getBorderColorAttribute() override;
+            virtual const ColorAttribute& getBorderColorAttribute(bool focused);
 
         protected:
             ContainerFocusManager *focusManager_;
             bool isFocusStealing_;
-
-            std::shared_ptr<ColorAttribute> contentFocusedColorAttribute_;
-            std::shared_ptr<ColorAttribute> borderFocusedColorAttribute_;
         private:
     };
 

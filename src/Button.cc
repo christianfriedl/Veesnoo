@@ -36,15 +36,11 @@ namespace veesnoo {
 
     void Button::addContent() {
         LOGMETHODONLY();
-        if ( !getIsVisibleBubbling() )
-            return;
-        if ( isFocused() || state_ == ButtonState_pushed)
-            cursesWindow_->attrOn(A_REVERSE);
+        startColorAttribute(getContentColorAttribute(isFocused() || state_ == ButtonState_pushed));
         std::stringstream s; 
         s << "[ " << text_ << " ]";
         addString(s.str(), 0, 0);
-        if ( isFocused() || state_ == ButtonState_pushed)
-            cursesWindow_->attrOff(A_REVERSE);
+        endColorAttribute(getContentColorAttribute(isFocused() || state_ == ButtonState_pushed));
     }
 
     bool Button::push() {

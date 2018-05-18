@@ -25,15 +25,15 @@
 #include "Widget.h"
 #include "Logger.h"
 #include "CursesException.h"
+#include "Globals.h"
 
 namespace veesnoo {
 
     Widget::Widget(): 
         rect_(0, 0, 1, 1), contentRect_(0, 0, 1, 1), 
         isVisible_(true), 
-        parent_(std::weak_ptr<Widget>()), 
-        contentColorAttribute_(std::shared_ptr<ColorAttribute>(nullptr)),
-        borderColorAttribute_(std::shared_ptr<ColorAttribute>(nullptr))
+        parent_(std::weak_ptr<Widget>()),
+        colorTag_("Widget")
     {
         LOGMETHODONLY(); 
     }
@@ -42,9 +42,8 @@ namespace veesnoo {
     Widget::Widget(const Rect& rect): 
         rect_(rect), contentRect_(0, 0, rect.getWidth(), rect.getHeight()), 
         isVisible_(true), 
-        parent_(std::weak_ptr<Widget>()), 
-        contentColorAttribute_(std::shared_ptr<ColorAttribute>(nullptr)),
-        borderColorAttribute_(std::shared_ptr<ColorAttribute>(nullptr))
+        parent_(std::weak_ptr<Widget>()),
+        colorTag_("Widget")
     {
         LOGMETHOD("new Widget %s", toString().c_str());
 
@@ -86,14 +85,6 @@ namespace veesnoo {
     }
 
     void Widget::endColorAttribute(const ColorAttribute& attribute) {
-        cursesWindow_->endColorAttribute(attribute);
-    }
-
-    void Widget::startColorAttribute(std::shared_ptr<ColorAttribute> attribute) {
-        cursesWindow_->startColorAttribute(attribute);
-    }
-
-    void Widget::endColorAttribute(std::shared_ptr<ColorAttribute> attribute) {
         cursesWindow_->endColorAttribute(attribute);
     }
 
@@ -201,20 +192,12 @@ namespace veesnoo {
         LOGMETHOD("stub in widget base class called", "");
     }
 
-    std::shared_ptr<ColorAttribute> Widget::getContentColorAttribute() {
-        if ( contentColorAttribute_.use_count() == 0 && parent_.use_count() > 0 )
-            contentColorAttribute_ = parent_.lock()->getContentColorAttribute();
-        if ( contentColorAttribute_.use_count() == 0 )
-            contentColorAttribute_ = std::make_shared<ColorAttribute>();
-        return contentColorAttribute_;
+    const ColorAttribute& Widget::getContentColorAttribute() {
+        return Globals::get().colorTheme.colors[colorTag_]["content"];
     }
 
-    std::shared_ptr<ColorAttribute> Widget::getBorderColorAttribute() {
-        if ( borderColorAttribute_.use_count() == 0 && parent_.use_count() > 0 )
-            borderColorAttribute_ = parent_.lock()->getBorderColorAttribute();
-        if ( borderColorAttribute_.use_count() == 0 )
-            borderColorAttribute_ = std::make_shared<ColorAttribute>();
-        return borderColorAttribute_;
+    const ColorAttribute& Widget::getBorderColorAttribute() {
+        return Globals::get().colorTheme.colors[colorTag_]["border"];
     }
 
     void Widget::addString(const std::string& text) {
@@ -243,7 +226,7 @@ namespace veesnoo {
         endColorAttribute(getContentColorAttribute());
     }
 
-    void Widget::fillBackground(const int ch, std::shared_ptr<ColorAttribute> attribute) {
+    void Widget::fillBackground(const int ch, const ColorAttribute& attribute) {
         startColorAttribute(attribute);
         cursesWindow_->fillBackground(ch);
         endColorAttribute(attribute);

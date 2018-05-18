@@ -43,17 +43,15 @@ std::shared_ptr<MenuItem> MenuItem::create(const std::string& text) {
 void MenuItem::addContent() {
     LOGMETHODONLY();
     char fillChar = ' ';
-    if ( isFocused() ) {
-        cursesWindow_->attrOn(A_REVERSE);
-    }
+
+    startColorAttribute(getContentColorAttribute());
 
     addString(text_, 0, 0); 
 
     for ( int i = std::min(rect_.getWidth(), (int)text_.length()); i < rect_.getWidth(); ++i )
         addCh(fillChar, i, 0);
 
-    if ( isFocused() )
-        cursesWindow_->attrOff(A_REVERSE);
+    endColorAttribute(getContentColorAttribute());
 }
 
 bool MenuItem::push() {

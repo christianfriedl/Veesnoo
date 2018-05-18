@@ -25,7 +25,7 @@
 namespace veesnoo {
 
     Window::Window(const Rect& rect, const std::string title) : FocusableContainer(rect), title_(title) {
-        contentFocusedColorAttribute_ = std::make_shared<ColorAttribute>(COLOR_WHITE, COLOR_BLACK);
+        colorTag_ = "Window";
         isFocusStealing_ = true;
         contentRect_ = Rect(1, 1, rect.getWidth() - 2, rect.getHeight() - 2);
     }
@@ -37,6 +37,8 @@ namespace veesnoo {
     void Window::addContent() {
         LOGMETHODONLY();
         startColorAttribute(getContentColorAttribute());
+        LOGMETHOD("content colattr fg %i, bg %i", getContentColorAttribute().getFg(), getContentColorAttribute().getBg());
+        LOGMETHOD("border colattr fg %i, bg %i", getBorderColorAttribute().getFg(), getBorderColorAttribute().getBg());
         cursesWindow_->addBorder();
         cursesWindow_->addString(title_, ( rect_.getWidth() - title_.size() ) / 2, 0);
         endColorAttribute(getContentColorAttribute());

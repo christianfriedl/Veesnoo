@@ -23,7 +23,6 @@ using namespace veesnoo;
 
 int main() {
     auto screen(std::make_shared<Screen>());
-    // screen->setContentFocusedColorAttribute(std::make_shared<ColorAttribute>(COLOR_YELLOW, COLOR_BLUE));
     auto screenRect = CursesManager::get().getMaxScreenRect();
     auto window(std::make_shared<Window>(screenRect));
     window->setTitle("Main Window");

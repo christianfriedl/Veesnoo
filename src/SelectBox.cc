@@ -53,12 +53,9 @@ namespace veesnoo {
             text = selectedItem_.lock()->getText();
         }
 
-        if ( isFocused() || menu_->isFocused() )
-            cursesWindow_->attrOn(A_REVERSE);
-
+        startColorAttribute(getContentColorAttribute());
         addString(text, 1, 0);
-        if ( isFocused() || menu_->isFocused() )
-            cursesWindow_->attrOff(A_REVERSE);
+        endColorAttribute(getContentColorAttribute());
         addCh('/', text.size() + 1, 0);
     }
 

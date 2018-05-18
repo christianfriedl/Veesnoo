@@ -56,8 +56,6 @@ public:
     virtual void addCh(const int ch, const int x, const int y);
     virtual void startColorAttribute(const ColorAttribute& attribute);
     virtual void endColorAttribute(const ColorAttribute& attribute);
-    virtual void startColorAttribute(std::shared_ptr<ColorAttribute> attribute);
-    virtual void endColorAttribute(std::shared_ptr<ColorAttribute> attribute);
 
     const std::weak_ptr<Widget>& getParent() const;
     bool getIsVisible() const;
@@ -72,8 +70,8 @@ public:
     virtual Rect getAbsoluteContentRect() const;
 
     virtual const std::string toString() const;
-    virtual std::shared_ptr<ColorAttribute> getContentColorAttribute();
-    virtual std::shared_ptr<ColorAttribute> getBorderColorAttribute();
+    virtual const ColorAttribute& getContentColorAttribute();
+    virtual const ColorAttribute& getBorderColorAttribute();
 
 
 protected:
@@ -83,7 +81,7 @@ protected:
     void setCWSize();
     Rect getParentAbsoluteContentRect() const;
 
-    void fillBackground(const int ch, std::shared_ptr<ColorAttribute> attribute);
+    void fillBackground(const int ch, const ColorAttribute& attribute);
     void addBorder();
 
     std::unique_ptr<CursesWindow> cursesWindow_;
@@ -91,8 +89,7 @@ protected:
     Rect contentRect_; // the rect clients can paint on - in RELATIVE coords ===> relative to rect
     bool isVisible_;
     std::weak_ptr<Widget> parent_;
-    std::shared_ptr<ColorAttribute> contentColorAttribute_;
-    std::shared_ptr<ColorAttribute> borderColorAttribute_;
+    std::string colorTag_;
 
 
 private:

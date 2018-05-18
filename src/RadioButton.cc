@@ -47,14 +47,12 @@ namespace veesnoo {
 
     void RadioButton::addContent() {
         LOGMETHODONLY();
-        if ( isFocused() )
-            cursesWindow_->attrOn(A_REVERSE);
+        startColorAttribute(getContentColorAttribute());
         char c = (state_ == RadioButtonState::checked ? '+' : ' ');
         std::stringstream s; 
         s << frame_[0] << c << frame_[1];
         addString(s.str(), 0, 0);
-        if ( isFocused() )
-            cursesWindow_->attrOff(A_REVERSE);
+        endColorAttribute(getContentColorAttribute());
     }
 
     bool RadioButton::push() {
