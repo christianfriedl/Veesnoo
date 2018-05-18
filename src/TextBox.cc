@@ -83,15 +83,19 @@ namespace veesnoo {
     }
 
     void TextBox::insertChar(int ch) {
-        text_.insert(cursorX_, 1, ch);
-        cursorRight();
+        if ( cursorX_ <= text_.size() ) {
+            text_.insert(cursorX_, 1, ch);
+            cursorRight();
+        }
     }
 
     void TextBox::replaceChar(int ch) {
-        char s[2];
-        sprintf(s, "%c", ch);
-        text_.replace(cursorX_, 1, s);
-        cursorRight();
+        if ( cursorX_ <= text_.size() ) {
+            char s[2];
+            sprintf(s, "%c", ch);
+            text_.replace(cursorX_, 1, s);
+            cursorRight();
+        }
     }
 
     /* /edit functions */
@@ -192,9 +196,7 @@ namespace veesnoo {
             }
         } else if ( mode_ == TextBoxMode::replace ) { // TODO this is quite unfinished
             if ( iswprint(ch) ) {
-                if ( cursorX_ <= text_.size() ) {
-                    replaceChar(ch);
-                }
+                replaceChar(ch);
                 received = true;
             } else {
                 switch ( ch ) {
