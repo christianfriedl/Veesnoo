@@ -38,9 +38,13 @@ namespace veesnoo {
             short int getFg() const { return fg_; }
             short int getBg() const { return bg_; }
             bool getInverse() const { return inverse_; }
+            void setInverse(bool inverse = true) { inverse_ = inverse; }
             bool getBold() const { return bold_; }
+            void setBold(bool bold = true) { bold_ = bold; }
             bool getUnderline() const { return underline_; }
+            void setUnderline(bool underline = true) { underline_ = underline; }
             bool getBlink() const { return blink_; }
+            void setBlink(bool blink = true) { blink_ = blink; }
 
             const std::string toString() const;
 
