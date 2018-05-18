@@ -71,6 +71,31 @@ namespace veesnoo {
         cursesWindow_->setCursorPosition(cur, 0);
     }
 
+    /* edit functions */
+
+    void TextBox::deleteChar() {
+        text_.replace(cursorX_, 1, "");
+    }
+
+    void TextBox::deleteCharLeft() {
+        if ( cursorLeft() )
+            text_.replace(cursorX_, 1, "");
+    }
+
+    void TextBox::insertChar(int ch) {
+        text_.insert(cursorX_, 1, ch);
+        cursorRight();
+    }
+
+    void TextBox::replaceChar(int ch) {
+        char s[2];
+        sprintf(s, "%c", ch);
+        text_.replace(cursorX_, 1, s);
+        cursorRight();
+    }
+
+    /* /edit functions */
+
     bool TextBox::receiveKey(const int ch) {
         LOGMETHOD("'%c' (%i) '%s', isprint: %i, iswprint: %i, mode: %i", ch, ch, keyname(ch), isprint(ch), iswprint(ch), mode_); // should not leak...
         bool received = false;
@@ -78,12 +103,12 @@ namespace veesnoo {
             switch ( ch ) {
                 case KEY_IL: // go to insert mode
                 case 'i':
-                    mode_ = TextBoxMode::insert;
+                    setMode(TextBoxMode::insert);
                     received = true;
                     break;
                 case KEY_DL: // delete char under cursor
                 case 'x':
-                    text_.replace(cursorX_, 1, "");
+                    deleteChar();
                     received = true;
                     break;
                 case 'h': // move left
@@ -120,10 +145,7 @@ namespace veesnoo {
             }
         } else if ( mode_ == TextBoxMode::insert ) {
             if ( isprint(ch) ) { // TODO this prolly won't work with full utf-8 support
-                if ( cursorX_ <= text_.size() ) {
-                    text_.insert(cursorX_, 1, ch);
-                    cursorRight();
-                }
+                insertChar(ch);
                 received = true;
             } else {
                 switch ( ch ) {
@@ -145,13 +167,12 @@ namespace veesnoo {
                         }
                         break;
                     case KEY_BACKSPACE: // backspace
-                        if ( cursorLeft() )
-                            text_.replace(cursorX_, 1, "");
+                        deleteCharLeft();
                         received = true;
                         break;
                     case Key_Esc:
                         {
-                            mode_ = TextBoxMode::normal;
+                            setMode(TextBoxMode::normal);
                             auto ev(std::make_shared<ChangeEvent>(shared_from_this()));
                             onAfterChange.emit(ev);
                             received = true;
@@ -172,10 +193,7 @@ namespace veesnoo {
         } else if ( mode_ == TextBoxMode::replace ) { // TODO this is quite unfinished
             if ( iswprint(ch) ) {
                 if ( cursorX_ <= text_.size() ) {
-                    char s[2];
-                    sprintf(s, "%c", ch);
-                    text_.replace(cursorX_, 1, s);
-                    cursorRight();
+                    replaceChar(ch);
                 }
                 received = true;
             } else {
@@ -189,7 +207,7 @@ namespace veesnoo {
                         received = true;
                         break;
                     case Key_Esc:
-                        mode_ = TextBoxMode::normal;
+                        setMode(TextBoxMode::normal);
                         received = true;
                         break;
                 }

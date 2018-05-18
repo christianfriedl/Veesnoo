@@ -39,6 +39,10 @@ public:
     void setText(const std::string& text) { text_ = text; }
     inline int getCursorPos();
     void focus() override;
+    void deleteChar();
+    void deleteCharLeft();
+    void insertChar(int ch);
+    void replaceChar(int ch);
 
     TextBoxMode getMode() { return mode_; }
     void setMode(TextBoxMode mode) { mode_ = mode; }
