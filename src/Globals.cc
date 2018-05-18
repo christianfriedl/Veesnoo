@@ -27,7 +27,7 @@ namespace veesnoo {
         return instance;
     }
 
-    Globals::Globals() : colorTheme(ColorTheme::greenColorTheme()) {
+    Globals::Globals() : colorTheme(ColorTheme::yellowColorTheme()) {
         LOGMETHODONLY();
     }
 

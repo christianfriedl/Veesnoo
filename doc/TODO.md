@@ -1,7 +1,12 @@
-* Start with colors -- TODO;prio-10
+* Window does not heed focused border color -- TODO;BUG;prio-10
+* Table should not use focused content color -- TODO;BUG;prio-10
+* We should abstract-away the concrete colors in the color scheme -- TODO;BUG;prio-10
+* We should use some function instead of the direct map access for the color scheme -- TODO;BUG;prio-10
+* Selectbox fills all space available -- TODO;BUG;prio-10
 * Better organize source code -- TODO;prio-20
-* Implement Tabbed Page -- TODO;prio-10
+* Implement Tabbed Page -- TODO;prio-30
 * Implement Table -- TODO;prio-10
+* Implement ComboBox -- TODO;prio-30
 * Implement a Point class and use it for overloaded move() -- TODO;prio-10
 * Implement a Point class and use it for overloaded resize() -- TODO;prio-10
 * Implement a factory for all widgets -- TODO;prio-10
@@ -114,3 +119,4 @@
 * We need color schemes, and a better way for ColorSets -- DONE;prio-10
 * (continuous) consistently use LOG macro -- DONE;prio-20;cost-3;codestyle
 * every widget needs a create() method -- DONE;prio-10
+* Start with colors -- DONE;prio-10

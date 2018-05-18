@@ -5,7 +5,7 @@ namespace veesnoo {
     ColorTheme::ColorTheme(const std::map<std::string, std::map<std::string, ColorAttribute>>& pColors): colors(pColors) {
     }
 
-    ColorTheme ColorTheme::defaultColorTheme() {
+    ColorTheme ColorTheme::whiteColorTheme() {
         const std::map<std::string, std::map<std::string, ColorAttribute>> colorMap = 
         {
             { "Widget", { 
@@ -59,6 +59,66 @@ namespace veesnoo {
                 { "border", ColorAttribute(COLOR_RED, COLOR_BLACK) },
                 { "focusedContent", ColorAttribute(COLOR_RED, COLOR_BLACK) },
                 { "focusedBorder", ColorAttribute(COLOR_RED, COLOR_BLACK) },
+            } },
+        }
+        ;
+        return ColorTheme(colorMap);
+    }
+
+    ColorTheme ColorTheme::yellowColorTheme() {
+        const std::map<std::string, std::map<std::string, ColorAttribute>> colorMap = 
+        {
+            { "Widget", { 
+                { "content", ColorAttribute(COLOR_YELLOW, COLOR_BLACK) },
+                { "border", ColorAttribute(COLOR_YELLOW, COLOR_BLACK) },
+                { "focusedContent", ColorAttribute(COLOR_BLACK, COLOR_YELLOW) },
+                { "focusedBorder", ColorAttribute(COLOR_BLACK, COLOR_YELLOW) },
+            } },
+            { "Window", { 
+                { "content", ColorAttribute(COLOR_YELLOW, COLOR_BLACK) },
+                { "border", ColorAttribute(COLOR_YELLOW, COLOR_BLACK) },
+                { "focusedContent", ColorAttribute(COLOR_YELLOW, COLOR_BLACK) },
+                { "focusedBorder", ColorAttribute(COLOR_YELLOW, COLOR_BLACK) },
+            } },
+        }
+        ;
+        return ColorTheme(colorMap);
+    }
+
+    ColorTheme ColorTheme::blueColorTheme() {
+        const std::map<std::string, std::map<std::string, ColorAttribute>> colorMap = 
+        {
+            { "Widget", { 
+                { "content", ColorAttribute(COLOR_BLUE, COLOR_BLACK) },
+                { "border", ColorAttribute(COLOR_BLUE, COLOR_BLACK) },
+                { "focusedContent", ColorAttribute(COLOR_YELLOW, COLOR_BLUE) },
+                { "focusedBorder", ColorAttribute(COLOR_YELLOW, COLOR_BLUE) },
+            } },
+            { "Window", { 
+                { "content", ColorAttribute(COLOR_BLUE, COLOR_BLACK) },
+                { "border", ColorAttribute(COLOR_BLUE, COLOR_BLACK) },
+                { "focusedContent", ColorAttribute(COLOR_BLUE, COLOR_BLACK) },
+                { "focusedBorder", ColorAttribute(COLOR_YELLOW, COLOR_BLACK) },
+            } },
+        }
+        ;
+        return ColorTheme(colorMap);
+    }
+
+    ColorTheme ColorTheme::experimentalColorTheme() {
+        const std::map<std::string, std::map<std::string, ColorAttribute>> colorMap = 
+        {
+            { "Widget", { 
+                { "content", ColorAttribute(COLOR_YELLOW, COLOR_MAGENTA) },
+                { "border", ColorAttribute(COLOR_YELLOW, COLOR_MAGENTA) },
+                { "focusedContent", ColorAttribute(COLOR_MAGENTA, COLOR_CYAN) },
+                { "focusedBorder", ColorAttribute(COLOR_MAGENTA, COLOR_BLACK) },
+            } },
+            { "Window", { 
+                { "content", ColorAttribute(COLOR_BLUE, COLOR_BLACK) },
+                { "border", ColorAttribute(COLOR_BLUE, COLOR_BLACK) },
+                { "focusedContent", ColorAttribute(COLOR_BLUE, COLOR_BLACK) },
+                { "focusedBorder", ColorAttribute(COLOR_YELLOW, COLOR_BLACK) },
             } },
         }
         ;
