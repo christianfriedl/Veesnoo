@@ -27,6 +27,7 @@ namespace veesnoo {
     class Globals {
         public:
             static Globals& get();
+            int nextObjectId();
 
             ColorTheme colorTheme;
             
@@ -36,6 +37,7 @@ namespace veesnoo {
 
             Globals(const Globals&);
             Globals& operator=(const Globals&);
+            int objectId_;
     };
 
 }

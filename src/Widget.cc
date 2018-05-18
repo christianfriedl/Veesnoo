@@ -30,6 +30,7 @@
 namespace veesnoo {
 
     Widget::Widget(): 
+        objectId_(Globals::get().nextObjectId()),
         rect_(0, 0, 1, 1), contentRect_(0, 0, 1, 1), 
         isVisible_(true), 
         parent_(std::weak_ptr<Widget>()),
@@ -40,6 +41,7 @@ namespace veesnoo {
 
     // constructor: set parent_ to "null", size from rect and make visible by default
     Widget::Widget(const Rect& rect): 
+        objectId_(Globals::get().nextObjectId()),
         rect_(rect), contentRect_(0, 0, rect.getWidth(), rect.getHeight()), 
         isVisible_(true), 
         parent_(std::weak_ptr<Widget>()),
@@ -56,7 +58,7 @@ namespace veesnoo {
 
     const std::string Widget::toString() const {
         std::ostringstream ostr;
-        ostr << "<Widget @ " << std::hex << (unsigned long long int)this << std::dec << " rect: " << rect_.toString() << std::endl;
+        ostr << "<Widget id " << objectId_ << " @ " << std::hex << (unsigned long long int)this << std::dec << " rect: " << rect_.toString() << std::endl;
         ostr << "    contentRect_: " << contentRect_.toString() << std::endl;
         ostr << "    absoluteRect: " << getAbsoluteRect().toString() << std::endl;
         ostr << "    absoluteContentRect: " << getAbsoluteContentRect().toString() << std::endl;

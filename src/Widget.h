@@ -84,6 +84,7 @@ protected:
     void fillBackground(const int ch, const ColorAttribute& attribute);
     void addBorder();
 
+    int objectId_;
     std::unique_ptr<CursesWindow> cursesWindow_;
     Rect rect_; // the original rect, covering all our area - relative to parent
     Rect contentRect_; // the rect clients can paint on - in RELATIVE coords ===> relative to rect
